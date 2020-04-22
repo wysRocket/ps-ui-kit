@@ -21,8 +21,10 @@ export default class Filter extends React.Component<IProps> {
       <TextField
         id="outlined-margin-dense"
         placeholder={'Search'}
-        style={{width: 160, height: 32, marginTop: 0, marginBottom: 0}}
-        margin="normal"
+        style={{width: 160, height: 32, maxHeight: 32, marginTop: 0, marginBottom: 0}}
+        inputProps={{style: {paddingTop: 0, paddingBottom: 0, height: 32}}}
+        InputProps={{style: {paddingTop: 0, paddingBottom: 0, height: 32}}}
+        margin={'normal'}
         variant="outlined"
       />
     );

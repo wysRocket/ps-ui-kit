@@ -1,9 +1,6 @@
 import * as React from 'react';
 import {CSSProperties} from "react";
-
-function removeNullChildren(children: any) {
-  return React.Children.toArray(children).filter((c) => c);
-}
+import {removeNullChildren} from "../utils/ReactUtil";
 
 interface ISplitProps {
   style?: CSSProperties;

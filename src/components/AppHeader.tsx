@@ -24,7 +24,7 @@ export default class AppHeader extends React.Component<IProps> {
           color="inherit"
           aria-label="open drawer"
         >
-          <MenuIcon />
+          <MenuIcon style={{color: '#A7A7A7'}}/>
         </IconButton>
         <Typography variant="h6" noWrap>
           Material-UI
@@ -34,7 +34,7 @@ export default class AppHeader extends React.Component<IProps> {
         <div style={{paddingLeft: 100}}/>
         <IconButton aria-label="show 17 new notifications" color="inherit">
           <Badge badgeContent={17} color="secondary">
-            <NotificationsIcon />
+            <NotificationsIcon style={{color: '#A7A7A7'}}/>
           </Badge>
         </IconButton>
         {this.props.user.login}
@@ -44,7 +44,7 @@ export default class AppHeader extends React.Component<IProps> {
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          <AccountCircle style={{color: '#A7A7A7'}}/>
         </IconButton>
       </Toolbar>
     );

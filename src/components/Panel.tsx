@@ -49,7 +49,7 @@ export default class Panel extends React.Component<IProps> {
 
   renderContent() {
     const style: CSSProperties = this.props.style || {};
-    let height;
+    let height: number|string = '100%';
     if (style && style.height) {
       if (typeof style.height === 'number') {
         height = style.height - this.toolsHeight;
@@ -57,6 +57,7 @@ export default class Panel extends React.Component<IProps> {
         height = `calc(${style.height}-${this.toolsHeight})`;
       }
     }
+    console.log('height', height);
     return (
       <div style={{...style,
         overflow: 'auto',

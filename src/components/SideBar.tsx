@@ -62,7 +62,7 @@ export default class SideBar extends React.Component<IProps> {
     const {items, selected} = this.props;
     return (
       <Panel style={{backgroundColor: '#F0F0F0'}}>
-        <div style={{borderRight: '1px solid rgba(199, 199, 199, 1.0'}}>
+        <div style={{borderRight: '1px solid rgba(199, 199, 199, 1.0', height: '100%'}}>
         <div style={{height: 94, paddingLeft: 16, paddingTop: 16, color: '#6C6C6C'}}>
           <div style={{float: 'left', minWidth: 48}}>
             <div style={{width: 40, height: 40, backgroundColor: '#E7E7E7', border: '1px solid rgba(199, 199, 199, 1.0)', borderRadius: 3}}>

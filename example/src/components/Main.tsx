@@ -1,5 +1,5 @@
 import React, {CSSProperties} from "react";
-import {Service, SideBar, HSplit, VSplit, AppHeader, UserRole} from "frontend-common";
+import {Service, SideBar, HSplit, VSplit, AppHeader, UserRole, Panel, ContentHeader, DashboardFilter} from "frontend-common";
 
 const service: Service = {
   identity: 'myService',
@@ -28,6 +28,17 @@ const items = [
   {label: 'Pin', value: 'Pin'},
 ];
 
+const topItems = [
+  {value: 'onboard', label: 'Onboarding', selected: true},
+  {value: 'interacts', label: 'Interactions', selected: false},
+  {value: 'creds', label: 'Issued credentials', selected: true},
+];
+const bottomItems = [
+  {value: 'su', label: 'Sign Up', selected: true},
+  {value: 'dip', label: 'Issue diploma', selected: false},
+  {value: 'lec', label: 'Lectures', selected: true},
+];
+
 interface IProps {
   style?: CSSProperties
 }
@@ -35,13 +46,23 @@ interface IProps {
 export class Main extends React.Component<IProps> {
   render() {
     return (
-      <VSplit size={200}>
+      <VSplit size={200} style={{height: '100%'}}>
         <SideBar service={service} onSelect={onSideSelect} items={items} selected={'Dashboard'}/>
         <HSplit size={64}>
           <AppHeader user={{login: 'admin', role: UserRole.SERVICE_OWNER}}/>
-          <div>
-            Hello
-          </div>
+          <Panel>
+            <div style={{paddingLeft: 24, paddingRight: 24}}>
+            <ContentHeader>
+              <h3>Text</h3>
+              Here
+              <div>Hell hello</div>
+              <DashboardFilter topList={topItems} bottomList={bottomItems}/>
+            </ContentHeader>
+            <div>
+              Hello
+            </div>
+            </div>
+          </Panel>
         </HSplit>
       </VSplit>
     );

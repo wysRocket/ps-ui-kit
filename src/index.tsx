@@ -9,6 +9,10 @@ import AppHeader from "./components/AppHeader";
 import ContentHeader from "./components/ContentHeader";
 import Panel from "./components/Panel";
 import DashboardFilter from "./components/DashboardFilter";
+import DateFilter from "./components/DateFilter";
+import DashboardChart from "./components/DashboardChart";
+import DonutChart from "./components/DonutChart";
+import Paginator from "./components/Paginator";
 
 export type Service = IService;
 export type Identity = IIdentity;
@@ -17,7 +21,11 @@ export type User = IUser;
 export {
   ContentHeader,
   DashboardFilter,
+  DateFilter,
+  DashboardChart,
+  DonutChart,
   Panel,
+  Paginator,
   UserRole,
   AppHeader,
   ServiceActionProps,

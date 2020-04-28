@@ -1,5 +1,6 @@
 import React, {CSSProperties} from "react";
-import {Service, SideBar, HSplit, VSplit, AppHeader, UserRole, Panel, ContentHeader, DashboardFilter} from "frontend-common";
+import {Service, SideBar, HSplit, VSplit, AppHeader, UserRole, Panel, ContentHeader, DashboardFilter,
+  DateFilter, DashboardChart, DonutChart, Paginator} from "frontend-common";
 
 const service: Service = {
   identity: 'myService',
@@ -56,10 +57,16 @@ export class Main extends React.Component<IProps> {
               <h3>Text</h3>
               Here
               <div>Hell hello</div>
+              <DateFilter/>
               <DashboardFilter topList={topItems} bottomList={bottomItems}/>
             </ContentHeader>
             <div>
+              <DashboardChart/>
+              <DonutChart/>
               Hello
+            </div>
+            <div>
+              <Paginator/>
             </div>
             </div>
           </Panel>

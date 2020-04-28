@@ -73,21 +73,20 @@ export default class DashboardFilter extends React.Component<IProps> {
 
   renderItem(item: FilterItem, key: any) {
     return (
-      <div>
-      <FormControlLabel
-        key={key}
-        control={
-          <Checkbox
-            checked={item.selected}
-            onChange={this.createSelectedChangeHandler(item.value)}
-            name={item.value}
-            style={{padding: 0, width: 32, height: 32}}
-            icon={<CheckBoxOutlineBlankIcon style={{ fontSize: 20, color: 'rgba(158, 158, 158, 1)'}} />}
-            checkedIcon={<CheckBoxIcon style={{ fontSize: 20, color: 'rgba(158, 158, 158, 1)'}} />}
-          />
-        }
-        label={item.label}
-      />
+      <div key={key}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={item.selected}
+              onChange={this.createSelectedChangeHandler(item.value)}
+              name={item.value}
+              style={{padding: 0, width: 32, height: 32}}
+              icon={<CheckBoxOutlineBlankIcon style={{ fontSize: 20, color: 'rgba(158, 158, 158, 1)'}} />}
+              checkedIcon={<CheckBoxIcon style={{ fontSize: 20, color: 'rgba(158, 158, 158, 1)'}} />}
+            />
+          }
+          label={item.label}
+        />
       </div>
     );
   }

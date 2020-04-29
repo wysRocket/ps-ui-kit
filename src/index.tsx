@@ -13,18 +13,23 @@ import DateFilter from "./components/DateFilter";
 import DashboardChart from "./components/DashboardChart";
 import DonutChart from "./components/DonutChart";
 import Paginator from "./components/Paginator";
+import SearchBar from "./components/SearchBar";
+import TableLegend from "./components/TableLegend";
 
 export type Service = IService;
 export type Identity = IIdentity;
 export type ServiceAction = IServiceAction;
 export type User = IUser;
+
 export {
   ContentHeader,
   DashboardFilter,
   DateFilter,
   DashboardChart,
   DonutChart,
+  TableLegend,
   Panel,
+  SearchBar,
   Paginator,
   UserRole,
   AppHeader,

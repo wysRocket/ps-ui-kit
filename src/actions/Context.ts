@@ -14,4 +14,8 @@ export class Context<T extends Identity> {
   isSelected(item: T) {
     return this.selected && item.identity === this.selected.identity;
   }
+
+  selection() {
+    return this.selected;
+  }
 }

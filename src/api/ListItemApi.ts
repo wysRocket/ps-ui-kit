@@ -59,6 +59,10 @@ export abstract class ListItemApi<T extends Identity, A, P = undefined> {
     return [...this.cache.values()];
   }
 
+  getParent() {
+    return this.parent;
+  }
+
   protected abstract fetchList(): Promise<A[]>;
   protected abstract fetchSave(item: A): Promise<void>;
   protected abstract fetchCreate(item: A): Promise<A>;

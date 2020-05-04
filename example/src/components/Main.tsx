@@ -1,6 +1,7 @@
 import React, {CSSProperties} from "react";
 import {Service, SideBar, HSplit, VSplit, AppHeader, UserRole, Panel, ContentHeader, DashboardFilter,
-  DateFilter, DashboardChart, DonutChart, Paginator, SearchBar, TableLegend} from "frontend-common";
+  DateFilter, DashboardChart, DonutChart, Paginator, SearchBar, TableLegend, DataTable,
+  deleteColumn, editColumn, idColumn, RendererProps, SelectRenderer, SortDirection} from "frontend-common";
 
 const service: Service = {
   identity: 'myService',
@@ -40,6 +41,16 @@ const bottomItems = [
   {value: 'lec', label: 'Lectures', selected: true},
 ];
 
+const actions = [
+  {identity: 'onboard', status: 'Active'},
+  {identity: 'checkin', status: 'Active'},
+  {identity: 'signIn', status: 'Archived'},
+];
+
+const onSort = (s: any) => {
+  console.log('sorted', s);
+};
+
 interface IProps {
   style?: CSSProperties
 }
@@ -77,6 +88,22 @@ export class Main extends React.Component<IProps> {
                   {id: 'interactions', items: [{label: 'All', value: 'all'}, {label: 'Success', value: 'success'}, {label: 'Fail', value: 'fail'}]},
                 ]}
                 rightHint={'Total: 267'}
+              />
+              <DataTable
+                columns={[
+                  idColumn('name'),
+                  {
+                    fieldId: 'status',
+                    enumValues: ['Active', 'Archived', 'Stopped', 'Paused'],
+                    header: {title: 'Status', sortable: true},
+                    renderer: (props: RendererProps) => (<SelectRenderer value={props.value} enumValues={props.enumValues} onChange={props.onChange}/>)
+                  },
+                  editColumn(),
+                  deleteColumn(),
+                ]}
+                data={actions}
+                onSort={onSort}
+                sort={{direction: SortDirection.ASC, field: 'identity'}}
               />
             </div>
           </Panel>

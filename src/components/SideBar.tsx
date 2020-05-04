@@ -7,6 +7,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import List from "@material-ui/core/List";
 import Panel from "./Panel";
 import {Service} from "../domain/Service";
+import IconPreview from "./IconPreview";
 
 export interface SideBarItem {
   label: string;
@@ -59,18 +60,18 @@ interface IProps {
 
 export default class SideBar extends React.Component<IProps> {
   render() {
-    const {items, selected} = this.props;
+    const {items, selected, service} = this.props;
     return (
       <Panel style={{backgroundColor: '#F0F0F0'}}>
         <div style={{borderRight: '1px solid rgba(199, 199, 199, 1.0', height: '100%'}}>
         <div style={{height: 94, paddingLeft: 16, paddingTop: 16, color: '#6C6C6C'}}>
           <div style={{float: 'left', minWidth: 48}}>
             <div style={{width: 40, height: 40, backgroundColor: '#E7E7E7', border: '1px solid rgba(199, 199, 199, 1.0)', borderRadius: 3}}>
-              <DefaultIcon style={{width: 40, height: 40}}/>
+              {this.renderLogo(service.logo)}
             </div>
           </div>
           <div style={{paddingTop: 10}}>
-            {this.props.service.identity}
+            {service.identity}
           </div>
         </div>
         <List>
@@ -80,6 +81,17 @@ export default class SideBar extends React.Component<IProps> {
         </List>
         </div>
       </Panel>
+    );
+  }
+
+  renderLogo(logo?: string) {
+    if (!logo) {
+      return (
+        <DefaultIcon style={{width: 40, height: 40}}/>
+      );
+    }
+    return (
+      <IconPreview icon={`${logo}`} minSize={40} maxSize={40}/>
     );
   }
 }

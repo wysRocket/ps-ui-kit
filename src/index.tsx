@@ -40,6 +40,7 @@ import {
   ListActionDispatch as TListActionDispatch,
   ListActionTypes as IListActionTypes
 } from "./actions/ActionCreator";
+import IconPreview from "./components/IconPreview";
 
 export type Service = IService;
 export type Identity = IIdentity;
@@ -62,6 +63,7 @@ export {
   Panel,
   SearchBar,
   Paginator,
+  IconPreview,
   Context,
   StubbedListApi,
   ListItemApi,

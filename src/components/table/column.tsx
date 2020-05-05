@@ -26,6 +26,7 @@ export const textColumn = (title: string, fieldId: string, sortDirection?: SortD
   return {
     header: {title, sortable: true, sortDirection},
     fieldId,
+    valueToView: (value: any) => value ? value.toString() : '',
     renderer: (props: RendererProps) => (<StaticRenderer value={props.value}/>)
   };
 };

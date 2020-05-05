@@ -41,6 +41,7 @@ import {
   ListActionTypes as IListActionTypes
 } from "./actions/ActionCreator";
 import IconPreview from "./components/IconPreview";
+import TabbedPanel, {TabItem as ITabItem} from "./components/TabbedPanel";
 
 export type Service = IService;
 export type Identity = IIdentity;
@@ -52,6 +53,7 @@ export type RendererProps = IRendererProps;
 export type ListActionDispatch<T extends Identity> = TListActionDispatch<T>;
 export type ListActionTypes = IListActionTypes;
 export type ListAction<T extends Identity> = IListAction<T>;
+export type TabItem = ITabItem;
 
 export {
   ContentHeader,
@@ -64,6 +66,7 @@ export {
   SearchBar,
   Paginator,
   IconPreview,
+  TabbedPanel,
   Context,
   StubbedListApi,
   ListItemApi,

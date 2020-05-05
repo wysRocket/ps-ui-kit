@@ -1,7 +1,7 @@
 import React, {CSSProperties} from "react";
 import {Service, SideBar, HSplit, VSplit, AppHeader, UserRole, Panel, ContentHeader, DashboardFilter,
   DateFilter, DashboardChart, DonutChart, Paginator, SearchBar, TableLegend, DataTable,
-  deleteColumn, editColumn, idColumn, RendererProps, SelectRenderer, SortDirection} from "frontend-common";
+  deleteColumn, editColumn, idColumn, RendererProps, SelectRenderer, SortDirection, TabbedPanel} from "frontend-common";
 
 const service: Service = {
   identity: 'myService',
@@ -51,11 +51,20 @@ const onSort = (s: any) => {
   console.log('sorted', s);
 };
 
+
 interface IProps {
   style?: CSSProperties
 }
 
 export class Main extends React.Component<IProps> {
+  state = {
+    tab: 1
+  };
+  onTabChange = (v: any) => {
+    console.log('tab change', v);
+    this.setState({tab: v});
+  };
+
   render() {
     const height = document.documentElement.clientHeight - 65;
     return (
@@ -80,6 +89,13 @@ export class Main extends React.Component<IProps> {
               <div>
                 <Paginator/>
               </div>
+              <TabbedPanel
+                tabItems={[{label: 'One Credentials', value: 1}, {label: 'Two Schemas', value: 2}, {label: 'Tree', value: 3}]}
+                selectedTabValue={this.state.tab}
+                onTabChange={this.onTabChange}
+              >
+                Content
+              </TabbedPanel>
               <TableLegend items={[{name: 'Total', value: '68'}, {name: 'Issued', value: '14'}, {name: 'Draft', value: '14'}]}/>
               <SearchBar
                 style={{paddingLeft: 16, paddingRight: 16, paddingTop: 32, paddingBottom: 32, border: '1px solid rgba(199, 199, 199, 1.0'}}

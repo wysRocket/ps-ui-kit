@@ -10,8 +10,10 @@ export default class ContentHeader extends React.Component<IProps> {
   render() {
     const children = removeNullChildren(this.props.children);
     const first = children.shift();
+    const style = this.props.style;
+    const height = style && style.height ? style.height : 92;
     return(
-      <div style={{height: 92}}>
+      <div style={{height}}>
       <div style={{display: 'flex', position: 'relative', alignItems: 'center', height: 'auto'}}>
         <div style={{display: 'inline-flex', position: 'relative', flexDirection: 'column', alignItems: 'center'}}>
           {first}

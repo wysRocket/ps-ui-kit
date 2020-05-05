@@ -12,7 +12,7 @@ export default class IconPreview extends React.Component<IProps> {
     const minSize = this.props.minSize || 100;
     const maxSize = this.props.maxSize || 200;
     return (
-      <div style={{minWidth: minSize, minHeight: minSize, backgroundColor: '#e3e3e3'}}>
+      <div style={{minWidth: minSize, minHeight: minSize, maxWidth: maxSize, maxHeight: maxSize, backgroundColor: '#e3e3e3'}}>
         {this.renderIcon(minSize, maxSize)}
       </div>
     );

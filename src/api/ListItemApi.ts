@@ -4,7 +4,7 @@ import {Converter, StubConverter} from "./Converter";
 import {Limit, Sort} from "../domain/Sort";
 import {Attribute} from "../domain/Attribute";
 
-export interface GetCondition<P> {
+export interface GetCondition<P = undefined> {
   parent?: P;
   sort?: Sort;
   filters?: Attribute[];
@@ -12,7 +12,7 @@ export interface GetCondition<P> {
   limit?: Limit;
 }
 
-export interface ChangeOptions<P> {
+export interface ChangeOptions<P = undefined> {
   parent?: P;
   prevIdentity?: string | number;
 }

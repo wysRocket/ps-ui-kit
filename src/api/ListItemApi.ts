@@ -5,6 +5,7 @@ import {Limit, Sort} from "../domain/Sort";
 import {Attribute} from "../domain/Attribute";
 
 export interface GetCondition<P = undefined> {
+  identity?: string|number;
   parent?: P;
   sort?: Sort;
   filters?: Attribute[];

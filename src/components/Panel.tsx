@@ -23,6 +23,7 @@ export default class Panel extends React.Component<IProps> {
   toolsHeight = 0;
 
   render(): React.ReactNode {
+    this.toolsHeight = 0;
     return (
       <div id={this.props.panelId} style={{overflow: 'hidden', height: '100%', width: '100%'}}>
         {this.renderToolbar()}

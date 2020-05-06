@@ -59,6 +59,10 @@ export type GetCondition<T> = IGetCondition<T>;
 export type ChangeOptions<T> = IChangeOptions<T>;
 export type Attribute = IAttribute;
 
+const Constants = {
+  H_PADDING: 32
+};
+
 export {
   ContentHeader,
   DashboardFilter,
@@ -96,4 +100,5 @@ export {
   VSplit,
   HSplit,
   isUserApproved,
+  Constants,
 };

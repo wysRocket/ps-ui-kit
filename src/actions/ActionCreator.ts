@@ -13,6 +13,9 @@ export interface ListActionTypes {
 export interface ListAction<T extends Identity> extends Action {
   list?: T[];
   selected?: T;
+  currentPage?: number;
+  itemsTotal?: number;
+  itemsPerPage?: number;
 }
 /*interface SelectItemAction<T extends Identity> extends Action {}
 interface ItemSelectedAction<T extends Identity> extends Action {

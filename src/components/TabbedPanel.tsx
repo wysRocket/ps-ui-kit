@@ -1,10 +1,12 @@
 import {CSSProperties, default as React} from "react";
 import Panel from "./Panel";
 import {Tab, Tabs} from "@material-ui/core";
+import {Link} from "react-router-dom";
 
 export interface TabItem {
   label: string;
   value: any;
+  link: string;
 }
 
 interface IProps {
@@ -35,6 +37,8 @@ export default class TabbedPanel extends React.Component<IProps> {
               return (
                 <Tab
                   key={index}
+                  component={Link}
+                  to={item.link}
                   value={item.value}
                   label={item.label}
                   style={{minWidth: 10, padding: 0, minHeight: 32, marginRight: 32, textTransform: 'none'}}

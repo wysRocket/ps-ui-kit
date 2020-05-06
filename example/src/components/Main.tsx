@@ -21,13 +21,13 @@ const onSideSelect = (value: any) => {
 };
 
 const items = [
-  {label: 'Dashboard', value: 'Dashboard'},
-  {label: 'Actions', value: 'Actions'},
-  {label: 'Clients', value: 'Clients'},
-  {label: 'Schemas', value: 'Schemas'},
-  {label: 'Archive', value: 'Archive'},
-  {label: 'Service Info', value: 'Service Info'},
-  {label: 'Pin', value: 'Pin'},
+  {label: 'Dashboard', value: 'Dashboard', link: 'db'},
+  {label: 'Actions', value: 'Actions', link: 'act'},
+  {label: 'Clients', value: 'Clients', link: 'cl'},
+  {label: 'Schemas', value: 'Schemas', link: 'sc'},
+  {label: 'Archive', value: 'Archive', link: 'ar'},
+  {label: 'Service Info', value: 'Service Info', link: 'si'},
+  {label: 'Pin', value: 'Pin', link: 'pin'},
 ];
 
 const topItems = [
@@ -90,7 +90,7 @@ export class Main extends React.Component<IProps> {
                 <Paginator/>
               </div>
               <TabbedPanel
-                tabItems={[{label: 'One Credentials', value: 1}, {label: 'Two Schemas', value: 2}, {label: 'Tree', value: 3}]}
+                tabItems={[{label: 'One Credentials', value: 1, link: 'one'}, {label: 'Two Schemas', value: 2, link: 'two'}, {label: 'Tree', value: 3, link: 'tree'}]}
                 selectedTabValue={this.state.tab}
                 onTabChange={this.onTabChange}
               >

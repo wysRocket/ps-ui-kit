@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
 import {Main} from "./components/Main";
-import {SideBar} from "frontend-common";
+import {BrowserRouter as Router, Route, Switch, useLocation, useParams} from "react-router-dom";
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <MainContent/>
+      <Router>
+        <MainContent/>
+      </Router>
     </div>
   );
 };

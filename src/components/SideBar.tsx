@@ -8,28 +8,33 @@ import List from "@material-ui/core/List";
 import Panel from "./Panel";
 import {Service} from "../domain/Service";
 import IconPreview from "./IconPreview";
+import {Link} from "react-router-dom";
 
 export interface SideBarItem {
   label: string;
   icon?: any;
   value: any;
+  link: string;
 }
 
 interface ItemComponentProps {
   item: SideBarItem;
   selected?: boolean;
-  onClick: (value: any) => void;
+  onClick?: (value: any) => void;
 }
 
 class ItemComponent extends React.Component<ItemComponentProps> {
   onClick = () => {
-    this.props.onClick(this.props.item.value);
+    const handler = this.props.onClick;
+    if (handler !== undefined) {
+      handler(this.props.item.value);
+    }
   }
 
   render() {
     const item = this.props.item;
     return (
-      <ListItem button={true} selected={this.props.selected} onClick={this.onClick}>
+      <ListItem button={true} selected={this.props.selected} onClick={this.onClick} component={Link} to={item.link}>
         <ListItemIcon style={{minWidth: 40}}>
           <div style={{width: 24, height: 24, backgroundColor: '#E7E7E7', border: '1px solid rgba(199, 199, 199, 1.0)', borderRadius: 3}}>
           {this.renderIcon()}

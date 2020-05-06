@@ -1,5 +1,5 @@
 import {Identity} from "./Identity";
-import {Attribute} from "./ZakaCredential";
+import {Attribute} from "./Attribute";
 
 export enum InitiationType {
   QR = "QR",

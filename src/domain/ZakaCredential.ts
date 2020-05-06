@@ -1,9 +1,5 @@
 import {Identity} from "./Identity";
-
-export interface Attribute {
-  name: string;
-  value: string;
-}
+import {Attribute} from "./Attribute";
 
 export enum TrustLevel {
   SELF_ATTESTED = 0,

@@ -1,10 +1,7 @@
 import * as React from 'react';
 import {DeleteActionRenderer, EditActionRenderer, RendererProps, StaticRenderer} from "../Renderers";
+import {SortDirection} from "../../domain/Sort";
 
-export enum SortDirection {
-  ASC = 'asc',
-  DESC = 'desc',
-}
 export interface HeaderProps {
   title?: string;
   icon?: any;

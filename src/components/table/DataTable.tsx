@@ -1,13 +1,9 @@
 import {CSSProperties, default as React} from "react";
 import {Diff} from "../../domain/Diff";
-import {ColumnInfo, SortDirection} from "./column";
+import {ColumnInfo} from "./column";
 import {Table, TableBody, TableCell, TableHead, TableRow, TableSortLabel} from "@material-ui/core";
 import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
-
-export interface Sort {
-  field: string;
-  direction: SortDirection;
-}
+import {Sort} from "../../domain/Sort";
 
 interface IProps<T> {
   style?: CSSProperties;

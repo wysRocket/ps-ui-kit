@@ -15,13 +15,12 @@ import DonutChart from "./components/DonutChart";
 import Paginator from "./components/Paginator";
 import SearchBar from "./components/SearchBar";
 import TableLegend from "./components/TableLegend";
-import DataTable, {Sort} from "./components/table/DataTable";
+import DataTable from "./components/table/DataTable";
 import {
   ColumnInfo as IColumnInfo,
   deleteColumn,
   editColumn,
   idColumn,
-  SortDirection,
   textColumn
 } from "./components/table/column";
 import {
@@ -32,7 +31,7 @@ import {
 } from "./components/Renderers";
 import {Context} from "./actions/Context";
 import {Converter} from "./api/Converter";
-import {ListItemApi, StubbedListApi} from "./api/ListItemApi";
+import {ChangeOptions as IChangeOptions, GetCondition as IGetCondition, ListItemApi, StubbedListApi} from "./api/ListItemApi";
 import {createReducer} from "./reducers/ReducerFactory";
 import {
   ActionCreator,
@@ -42,6 +41,8 @@ import {
 } from "./actions/ActionCreator";
 import IconPreview from "./components/IconPreview";
 import TabbedPanel, {TabItem as ITabItem} from "./components/TabbedPanel";
+import {Sort, SortDirection} from "./domain/Sort";
+import {Attribute as IAttribute} from "./domain/Attribute";
 
 export type Service = IService;
 export type Identity = IIdentity;
@@ -54,6 +55,9 @@ export type ListActionDispatch<T extends Identity> = TListActionDispatch<T>;
 export type ListActionTypes = IListActionTypes;
 export type ListAction<T extends Identity> = IListAction<T>;
 export type TabItem = ITabItem;
+export type GetCondition<T> = IGetCondition<T>;
+export type ChangeOptions<T> = IChangeOptions<T>;
+export type Attribute = IAttribute;
 
 export {
   ContentHeader,

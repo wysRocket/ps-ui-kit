@@ -55,8 +55,8 @@ export type ListActionDispatch<T extends Identity> = TListActionDispatch<T>;
 export type ListActionTypes = IListActionTypes;
 export type ListAction<T extends Identity> = IListAction<T>;
 export type TabItem = ITabItem;
-export type GetCondition<T> = IGetCondition<T>;
-export type ChangeOptions<T> = IChangeOptions<T>;
+export type GetCondition<T = undefined> = IGetCondition<T>;
+export type ChangeOptions<T = undefined> = IChangeOptions<T>;
 export type Attribute = IAttribute;
 
 const Constants = {

@@ -24,6 +24,13 @@ interface ItemSelectedAction<T extends Identity> extends Action {
 
 export type ListAction<T extends Identity> = GetListAction<T> | ListUpdatedAction<T> | SelectItemAction<T> | ItemSelectedAction <T>;*/
 
+export interface ListState<T extends Identity> {
+  list: T[];
+  itemsTotal: number;
+  currentPage: number;
+  itemsPerPage: number;
+}
+
 export type ListActionDispatch<T extends Identity> = ThunkDispatch<{}, undefined, ListAction<T>>;
 
 export class ActionCreator<T extends Identity> implements ListActionTypes {
@@ -43,8 +50,8 @@ export class ActionCreator<T extends Identity> implements ListActionTypes {
     return {type: this.GET_LIST};
   }
 
-  updateList(list: T[]): ListAction<T> {
-    return {type: this.LIST_UPDATED, list};
+  updateList(state: ListState<T>): ListAction<T> {
+    return {type: this.LIST_UPDATED, ...state};
   }
 
   selectItem(): ListAction<T> {

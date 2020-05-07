@@ -43,6 +43,7 @@ import IconPreview from "./components/IconPreview";
 import TabbedPanel, {TabItem as ITabItem} from "./components/TabbedPanel";
 import {Sort, SortDirection} from "./domain/Sort";
 import {Attribute as IAttribute} from "./domain/Attribute";
+import {HGroup} from "./components/Group";
 
 export type Service = IService;
 export type Identity = IIdentity;
@@ -75,6 +76,7 @@ export {
   Paginator,
   IconPreview,
   TabbedPanel,
+  HGroup,
   Context,
   StubbedListApi,
   ListItemApi,

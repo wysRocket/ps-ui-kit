@@ -27,11 +27,14 @@ export abstract class ListItemApi<T extends Identity, A, P = undefined> {
     const resp = await this.fetchList(condition);
     this.cache = new Map<string|number, T>();
     const parent = condition ? condition.parent : undefined;
-    resp.forEach((obj) => {
+    resp.items.forEach((obj) => {
       const item = this.converter.apiObjectToItem(obj, parent);
       this.cache.set(item.identity, item);
     });
-    return this.listFromCache();
+    return {
+      itemsTotal: resp.itemsTotal,
+      list: this.listFromCache()
+    };
   }
 
   async one(condition?: GetCondition<P>) {
@@ -85,7 +88,7 @@ export abstract class ListItemApi<T extends Identity, A, P = undefined> {
   }
 
   protected abstract fetchOne(condition?: GetCondition<P>): Promise<A>;
-  protected abstract fetchList(condition?: GetCondition<P>): Promise<A[]>;
+  protected abstract fetchList(condition?: GetCondition<P>): Promise<{items: A[], itemsTotal: number}>;
   protected abstract fetchSave(item: A, opt?: ChangeOptions<P>): Promise<void>;
   protected abstract fetchCreate(item: A, opt?: ChangeOptions<P>): Promise<A>;
   protected abstract fetchDelete(item: A, opt?: ChangeOptions<P>): Promise<void>;

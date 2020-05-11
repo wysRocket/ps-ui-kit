@@ -44,6 +44,7 @@ import TabbedPanel, {TabItem as ITabItem} from "./components/TabbedPanel";
 import {Sort, SortDirection, DataRange as IDataRange} from "./domain/Sort";
 import {Attribute as IAttribute} from "./domain/Attribute";
 import {HGroup} from "./components/Group";
+import PopUp from "./components/PopUp";
 
 export type Service = IService;
 export type Identity = IIdentity;
@@ -77,6 +78,7 @@ export {
   Paginator,
   IconPreview,
   TabbedPanel,
+  PopUp,
   HGroup,
   Context,
   StubbedListApi,

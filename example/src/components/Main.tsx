@@ -1,7 +1,8 @@
 import React, {CSSProperties} from "react";
 import {Service, SideBar, HSplit, VSplit, AppHeader, UserRole, Panel, ContentHeader, DashboardFilter,
   DateFilter, DashboardChart, DonutChart, Paginator, SearchBar, TableLegend, DataTable,
-  deleteColumn, editColumn, idColumn, RendererProps, SelectRenderer, SortDirection, TabbedPanel} from "frontend-common";
+  deleteColumn, editColumn, idColumn, RendererProps, SelectRenderer, SortDirection, TabbedPanel, PopUp} from "frontend-common";
+import {Button} from "@material-ui/core";
 
 const service: Service = {
   identity: 'myService',
@@ -61,6 +62,7 @@ export class Main extends React.Component<IProps> {
     tab: 1,
     currentPage: 4,
     itemsPerPage: 10,
+    popupOpened: false,
   };
   onTabChange = (v: any) => {
     console.log('tab change', v);
@@ -74,6 +76,14 @@ export class Main extends React.Component<IProps> {
     this.setState({itemsPerPage: v});
   };
 
+  onPopupOpen = () => {
+    this.setState({popupOpened: true});
+  };
+
+  onPopupClose = () => {
+    this.setState({popupOpened: false});
+  };
+
   render() {
     const height = document.documentElement.clientHeight - 65;
     return (
@@ -82,6 +92,9 @@ export class Main extends React.Component<IProps> {
         <HSplit size={64}>
           <AppHeader user={{login: 'admin', role: UserRole.SERVICE_OWNER}}/>
           <Panel style={{height}}>
+            <PopUp title={'Parameters and instances'} opened={this.state.popupOpened} onClose={this.onPopupClose}>
+              Content
+            </PopUp>
             <div style={{paddingLeft: 24, paddingRight: 24}}>
               <ContentHeader>
                 <h3>Text</h3>
@@ -104,6 +117,9 @@ export class Main extends React.Component<IProps> {
                   onPageChange={this.onPageChange}
                   onPageSizeChange={this.onPageSizeChange}
                 />
+              </div>
+              <div>
+                <Button onClick={this.onPopupOpen}>Open popup</Button>
               </div>
               <TabbedPanel
                 tabItems={[{label: 'One Credentials', value: 1, link: 'one'}, {label: 'Two Schemas', value: 2, link: 'two'}, {label: 'Tree', value: 3, link: 'tree'}]}

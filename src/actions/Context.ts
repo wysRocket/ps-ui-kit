@@ -6,6 +6,7 @@ export class Context<T extends Identity> {
   private itemsTotal = 0;
   private itemsPerPage = 0;
   private currentPage = 0;
+  private filter?: string;
 
   setSelection(item?: T) {
     if (this.selected) {
@@ -54,5 +55,13 @@ export class Context<T extends Identity> {
     if ((p - 1) * this.itemsPerPage < this.itemsTotal) {
       this.currentPage = p;
     }
+  }
+
+  getFilter() {
+    return this.filter;
+  }
+
+  setFilter(value: string) {
+    this.filter = value;
   }
 }

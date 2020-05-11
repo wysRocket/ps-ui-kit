@@ -41,7 +41,7 @@ import {
 } from "./actions/ActionCreator";
 import IconPreview from "./components/IconPreview";
 import TabbedPanel, {TabItem as ITabItem} from "./components/TabbedPanel";
-import {Sort, SortDirection} from "./domain/Sort";
+import {Sort, SortDirection, DataRange as IDataRange} from "./domain/Sort";
 import {Attribute as IAttribute} from "./domain/Attribute";
 import {HGroup} from "./components/Group";
 
@@ -50,6 +50,7 @@ export type Identity = IIdentity;
 export type ServiceAction = IServiceAction;
 export type User = IUser;
 export type DataSort = Sort;
+export type DataRange = IDataRange;
 export type ColumnInfo = IColumnInfo;
 export type RendererProps = IRendererProps;
 export type ListActionDispatch<T extends Identity> = TListActionDispatch<T>;

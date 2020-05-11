@@ -1,7 +1,7 @@
 import {Identity} from "../domain/Identity";
 import {wait} from "../utils/TimeUtils";
 import {Converter, StubConverter} from "./Converter";
-import {Limit, Sort} from "../domain/Sort";
+import {DataRange, Sort} from "../domain/Sort";
 import {Attribute} from "../domain/Attribute";
 
 export interface GetCondition<P = undefined> {
@@ -10,7 +10,7 @@ export interface GetCondition<P = undefined> {
   sort?: Sort;
   filters?: Attribute[];
   commonFilter?: string;
-  limit?: Limit;
+  limit?: DataRange;
 }
 
 export interface ChangeOptions<P = undefined> {

@@ -8,7 +8,7 @@ export interface Sort {
   direction: SortDirection;
 }
 
-export interface Limit {
-  from?: number;
-  to?: number;
+export interface DataRange {
+  limit?: number;
+  offset?: number;
 }

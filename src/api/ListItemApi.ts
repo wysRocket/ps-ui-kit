@@ -10,7 +10,7 @@ export interface GetCondition<P = undefined> {
   sort?: Sort;
   filters?: Attribute[];
   commonFilter?: string;
-  limit?: DataRange;
+  range?: DataRange;
 }
 
 export interface ChangeOptions<P = undefined> {

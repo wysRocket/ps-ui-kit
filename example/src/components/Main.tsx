@@ -58,11 +58,20 @@ interface IProps {
 
 export class Main extends React.Component<IProps> {
   state = {
-    tab: 1
+    tab: 1,
+    currentPage: 4,
+    itemsPerPage: 10,
   };
   onTabChange = (v: any) => {
     console.log('tab change', v);
     this.setState({tab: v});
+  };
+  onPageChange = (v: number) => {
+    this.setState({currentPage: v})
+  };
+
+  onPageSizeChange = (v: number) => {
+    this.setState({itemsPerPage: v});
   };
 
   render() {
@@ -87,7 +96,14 @@ export class Main extends React.Component<IProps> {
                 Hello
               </div>
               <div>
-                <Paginator/>
+                <Paginator
+                  currentPage={this.state.currentPage}
+                  itemsPerPage={this.state.itemsPerPage}
+                  ranges={[10, 20, 30]}
+                  itemsTotal={168}
+                  onPageChange={this.onPageChange}
+                  onPageSizeChange={this.onPageSizeChange}
+                />
               </div>
               <TabbedPanel
                 tabItems={[{label: 'One Credentials', value: 1, link: 'one'}, {label: 'Two Schemas', value: 2, link: 'two'}, {label: 'Tree', value: 3, link: 'tree'}]}

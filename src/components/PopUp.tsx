@@ -15,16 +15,16 @@ export default class PopUp extends React.Component<IProps> {
   render() {
     return (
       <Dialog maxWidth={false} PaperProps={{style: {borderRadius: 0}}} onClose={this.props.onClose} open={this.props.opened}>
-        <div style={{paddingLeft: 32, paddingRight: 32, paddingBottom: 32}}>
+        <div style={{paddingLeft: 32, paddingRight: 32}}>
           <ContentHeader style={{minWidth: 700}}>
             <Typography variant="h6">{this.props.title}</Typography>
             <IconButton onClick={this.props.onClose}>
               <CloseIcon />
             </IconButton>
           </ContentHeader>
-          <div>
-            {this.props.children}
-          </div>
+        </div>
+        <div>
+          {this.props.children}
         </div>
       </Dialog>
     );

@@ -160,6 +160,14 @@ export class Main extends React.Component<IProps> {
               >
                 Content
               </TabbedPanel>
+              <TabbedPanel
+                tabItems={[{label: 'One Credentials', value: 1, link: 'one'}, {label: 'Two Schemas', value: 2, link: 'two'}, {label: 'Tree', value: 3, link: 'tree'}]}
+                selectedTabValue={this.state.tab}
+                disableLinks={true}
+                onTabChange={this.onTabChange}
+              >
+                Content
+              </TabbedPanel>
               <TableLegend items={[{name: 'Total', value: '68'}, {name: 'Issued', value: '14'}, {name: 'Draft', value: '14'}]}/>
               <SearchBar
                 style={{paddingLeft: 16, paddingRight: 16, paddingTop: 32, paddingBottom: 32, border: '1px solid rgba(199, 199, 199, 1.0'}}

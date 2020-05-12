@@ -12,6 +12,7 @@ export interface TabItem {
 interface IProps {
   style?: CSSProperties;
   children?: any;
+  disableLinks?: boolean;
   tabItems: TabItem[];
   selectedTabValue: any;
   onTabChange: (newTabValue: any) => void;
@@ -34,16 +35,7 @@ export default class TabbedPanel extends React.Component<IProps> {
             onChange={this.onChange}
           >
             {this.props.tabItems.map((item, index) => {
-              return (
-                <Tab
-                  key={index}
-                  component={Link}
-                  to={item.link}
-                  value={item.value}
-                  label={item.label}
-                  style={{minWidth: 10, padding: 0, minHeight: 32, marginRight: 32, textTransform: 'none'}}
-                />
-              );
+              return this.renderTab(item, index);
             })}
           </Tabs>
         )],
@@ -51,6 +43,30 @@ export default class TabbedPanel extends React.Component<IProps> {
       }}>
         {this.props.children}
       </Panel>
+    );
+  }
+
+  renderTab(item: TabItem, key: any) {
+    if (this.props.disableLinks) {
+      return (
+        <Tab
+          key={key}
+          value={item.value}
+          label={item.label}
+          style={{minWidth: 10, padding: 0, minHeight: 32, marginRight: 32, textTransform: 'none'}}
+        />
+      );
+    }
+
+    return (
+      <Tab
+        key={key}
+        component={Link}
+        to={item.link}
+        value={item.value}
+        label={item.label}
+        style={{minWidth: 10, padding: 0, minHeight: 32, marginRight: 32, textTransform: 'none'}}
+      />
     );
   }
 }

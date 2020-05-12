@@ -1,7 +1,8 @@
 import React, {CSSProperties} from "react";
 import {Service, SideBar, HSplit, VSplit, AppHeader, UserRole, Panel, ContentHeader, DashboardFilter,
   DateFilter, DashboardChart, DonutChart, Paginator, SearchBar, TableLegend, DataTable,
-  deleteColumn, editColumn, idColumn, RendererProps, SelectRenderer, SortDirection, TabbedPanel, PopUp} from "frontend-common";
+  deleteColumn, editColumn, idColumn, RendererProps, SelectRenderer, SortDirection, TabbedPanel, PopUp,
+  Tree} from "frontend-common";
 import {Button} from "@material-ui/core";
 
 const service: Service = {
@@ -84,6 +85,10 @@ export class Main extends React.Component<IProps> {
     this.setState({popupOpened: false});
   };
 
+  onTreeSelect = (selected: any) => {
+    console.log('selected', selected);
+  };
+
   render() {
     const height = document.documentElement.clientHeight - 65;
     return (
@@ -93,7 +98,34 @@ export class Main extends React.Component<IProps> {
           <AppHeader user={{login: 'admin', role: UserRole.SERVICE_OWNER}}/>
           <Panel style={{height}}>
             <PopUp title={'Parameters and instances'} opened={this.state.popupOpened} onClose={this.onPopupClose}>
-              Content
+              <Tree elements={[
+                {
+                  content: {label: "rssh-ts", value: 'rssh-t4'},
+                  children: [
+                    {
+                      content: {label: "Schema1", value: 's1'},
+                      children: [{content: {label: 'v1', value: 'v1'}}]
+                    },
+                    {
+                      content: {label: "Schema2", value: 's2'},
+                      children: [{content: {label: 'v2', value: 'v2'}}]
+                    },
+                  ]
+                },
+                {
+                  content: {label: "Zaka Service", value: 'zaka'},
+                  children: [
+                    {
+                      content: {label: "Push Notification", value: 'p1'},
+                      children: [{content: {label: '1.0', value: 'pv1'}}]
+                    },
+                    {
+                      content: {label: "Profile", value: 'p2'},
+                      children: [{content: {label: '1.2', value: 'pv2'}}]
+                    },
+                  ]
+                }
+              ]} onSelect={this.onTreeSelect}/>
             </PopUp>
             <div style={{paddingLeft: 24, paddingRight: 24}}>
               <ContentHeader>

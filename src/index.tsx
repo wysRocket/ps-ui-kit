@@ -45,6 +45,7 @@ import {Sort, SortDirection, DataRange as IDataRange} from "./domain/Sort";
 import {Attribute as IAttribute} from "./domain/Attribute";
 import {HGroup} from "./components/Group";
 import PopUp from "./components/PopUp";
+import {Tree, TreeContent as ITreeContent, TreeElement as ITreeElement} from "./components/tree/Tree";
 
 export type Service = IService;
 export type Identity = IIdentity;
@@ -61,6 +62,8 @@ export type TabItem = ITabItem;
 export type GetCondition<T = undefined> = IGetCondition<T>;
 export type ChangeOptions<T = undefined> = IChangeOptions<T>;
 export type Attribute = IAttribute;
+export type TreeElement = ITreeElement;
+export type TreeContent = ITreeContent;
 
 const Constants = {
   H_PADDING: 32
@@ -79,6 +82,7 @@ export {
   IconPreview,
   TabbedPanel,
   PopUp,
+  Tree,
   HGroup,
   Context,
   StubbedListApi,

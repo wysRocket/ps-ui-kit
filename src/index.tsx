@@ -46,6 +46,7 @@ import {Attribute as IAttribute} from "./domain/Attribute";
 import {HGroup} from "./components/Group";
 import PopUp from "./components/PopUp";
 import {Tree, TreeContent as ITreeContent, TreeElement as ITreeElement} from "./components/tree/Tree";
+import Filter from "./components/Filter";
 
 export type Service = IService;
 export type Identity = IIdentity;
@@ -81,6 +82,7 @@ export {
   Paginator,
   IconPreview,
   TabbedPanel,
+  Filter,
   PopUp,
   Tree,
   HGroup,

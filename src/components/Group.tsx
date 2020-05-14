@@ -19,7 +19,7 @@ export class HGroup extends React.Component<IProps> {
 
   renderChild(child: any, key: any) {
     return (
-      <div key={key} style={{display: 'inline-block'}}>{child}</div>
+      <div key={key} style={{display: 'inline-block', whiteSpace: 'normal'}}>{child}</div>
     );
   }
 }

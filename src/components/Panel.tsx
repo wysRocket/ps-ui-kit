@@ -58,7 +58,6 @@ export default class Panel extends React.Component<IProps> {
         height = `calc(${style.height}-${this.toolsHeight})`;
       }
     }
-    console.log('height', height);
     return (
       <div style={{...style,
         overflow: 'auto',

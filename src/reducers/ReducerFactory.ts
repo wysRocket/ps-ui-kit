@@ -4,6 +4,7 @@ import {ListAction, ListActionTypes} from "../actions/ActionCreator";
 export interface IListState<T extends Identity> {
   list: T[];
   isLoading?: boolean;
+  isSelecting?: boolean;
   selected?: T;
   currentPage?: number;
   itemsTotal?: number;
@@ -21,9 +22,9 @@ export const createReducer = <T extends Identity>(types: ListActionTypes) => (st
     case types.LIST_UPDATED:
       return {...state, isLoading: false, list: action.list, currentPage: action.currentPage, itemsPerPage: action.itemsPerPage, itemsTotal: action.itemsTotal};
     case types.SELECT_ITEM:
-      return {...state, selected: undefined};
+      return {...state, isSelecting: true, selected: undefined};
     case types.ITEM_SELECTED:
-      return {...state, selected: action.selected};
+      return {...state, isSelecting: false, selected: action.selected};
   }
   return state;
 };

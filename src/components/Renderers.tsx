@@ -63,7 +63,7 @@ export class StaticRenderer extends AbstractRenderer {
 export class LinkRenderer extends AbstractRenderer {
   render() {
     return (
-      <Link to={this.props.link || ''} style={{ textDecoration: 'none' }}>
+      <Link to={this.props.link || ''} style={{ textDecoration: 'none', color: 'inherit' }}>
         <div>
           <strong>{convert(this.props.value, this.props.valueToView)}</strong>
         </div>

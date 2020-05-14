@@ -3,12 +3,14 @@ import {CSSProperties} from "react";
 import {FormControl, IconButton, NativeSelect} from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import {Link} from "react-router-dom";
 
 export interface RendererProps {
   value: any;
   enumValues?: any[];
   onChange?: (newValue: any) => void;
   onClick?: () => void;
+  link?: string;
 }
 
 interface IProps extends RendererProps {
@@ -55,6 +57,18 @@ export class SelectRenderer extends AbstractRenderer {
 export class StaticRenderer extends AbstractRenderer {
   render() {
     return convert(this.props.value, this.props.valueToView);
+  }
+}
+
+export class LinkRenderer extends AbstractRenderer {
+  render() {
+    return (
+      <Link to={this.props.link || ''} style={{ textDecoration: 'none' }}>
+        <div>
+          <strong>{convert(this.props.value, this.props.valueToView)}</strong>
+        </div>
+      </Link>
+    );
   }
 }
 

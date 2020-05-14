@@ -20,11 +20,11 @@ import {
   ColumnInfo as IColumnInfo,
   deleteColumn,
   editColumn,
-  idColumn,
-  textColumn
+  idColumn, idLink,
+  textColumn, textLink
 } from "./components/table/column";
 import {
-  AbstractRenderer, DeleteActionRenderer, EditActionRenderer,
+  AbstractRenderer, DeleteActionRenderer, EditActionRenderer, LinkRenderer,
   RendererProps as IRendererProps,
   SelectRenderer,
   StaticRenderer
@@ -97,9 +97,12 @@ export {
   SelectRenderer,
   EditActionRenderer,
   DeleteActionRenderer,
+  LinkRenderer,
   SortDirection,
   textColumn,
   idColumn,
+  idLink,
+  textLink,
   editColumn,
   deleteColumn,
   DataTable,

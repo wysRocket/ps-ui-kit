@@ -10,7 +10,7 @@
     "no-console": [false, "log"],
     "object-literal-sort-keys": [false],
     "max-line-length": false,
-    "max-classes-per-file": [true, 5, "exclude-class-expressions"],
+    "max-classes-per-file": [true, 10, "exclude-class-expressions"],
     "member-access": [true, "no-public"],
     "object-literal-key-quotes": [true, "consistent-as-needed"],
     "interface-name": false,

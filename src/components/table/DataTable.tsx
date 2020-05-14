@@ -103,7 +103,8 @@ export default class DataTable<T> extends React.Component<IProps<T>> {
       value: (item as any)[column.fieldId],
       onClick: this.createClickHandler(item, column),
       enumValues: column.enumValues,
-      onChange: this.createChangeHandler(item, column)
+      onChange: this.createChangeHandler(item, column),
+      link: column.linkSource !== undefined ? column.linkSource(item) : undefined,
     });
   }
 }

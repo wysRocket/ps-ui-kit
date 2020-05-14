@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {DeleteActionRenderer, EditActionRenderer, RendererProps, StaticRenderer} from "../Renderers";
+import {DeleteActionRenderer, EditActionRenderer, LinkRenderer, RendererProps, StaticRenderer} from "../Renderers";
 import {SortDirection} from "../../domain/Sort";
 
 export interface HeaderProps {
@@ -14,6 +14,7 @@ export interface ColumnInfo {
   fieldId: string;
   enumValues?: any[];
   renderer: (props: RendererProps) => React.ReactElement<RendererProps>;
+  linkSource?: (item: any) => string;
   valueToView?: (value: any) => any;
   isEdit?: boolean;
   isRemove?: boolean;
@@ -28,8 +29,22 @@ export const textColumn = (title: string, fieldId: string, sortDirection?: SortD
   };
 };
 
+export const textLink = (linkSource: (item: any) => string, title: string, fieldId: string, sortDirection?: SortDirection): ColumnInfo => {
+  return {
+    header: {title, sortable: true, sortDirection},
+    fieldId,
+    linkSource,
+    valueToView: (value: any) => value ? value.toString() : '',
+    renderer: (props: RendererProps) => (<LinkRenderer value={props.value} link={props.link}/>)
+  };
+};
+
 export const idColumn = (title: string, sortDirection?: SortDirection): ColumnInfo => {
   return textColumn(title, 'identity', sortDirection);
+};
+
+export const idLink = (linkSource: (item: any) => string, title: string, sortDirection?: SortDirection): ColumnInfo => {
+  return textLink(linkSource, title, 'identity', sortDirection);
 };
 
 export const editColumn = (): ColumnInfo => {

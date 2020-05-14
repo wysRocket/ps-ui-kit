@@ -2,7 +2,7 @@ import React, {CSSProperties} from "react";
 import {Service, SideBar, HSplit, VSplit, AppHeader, UserRole, Panel, ContentHeader, DashboardFilter,
   DateFilter, DashboardChart, DonutChart, Paginator, SearchBar, TableLegend, DataTable,
   deleteColumn, editColumn, idColumn, RendererProps, SelectRenderer, SortDirection, TabbedPanel, PopUp,
-  Tree} from "frontend-common";
+  Tree, idLink} from "frontend-common";
 import {Button} from "@material-ui/core";
 
 const service: Service = {
@@ -179,6 +179,7 @@ export class Main extends React.Component<IProps> {
               />
               <DataTable
                 columns={[
+                  idLink((item: any)=> item.identity, 'name'),
                   idColumn('name'),
                   {
                     fieldId: 'status',

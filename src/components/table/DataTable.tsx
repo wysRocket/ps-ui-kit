@@ -60,18 +60,22 @@ export default class DataTable<T> extends React.Component<IProps<T>> {
   }
 
   renderHeaderCell(column: ColumnInfo) {
-    if (column.header !== undefined && column.header.sortable) {
-      const {sort} = this.props;
-      return (
-        <TableSortLabel
-          IconComponent={ArrowDropDown}
-          active={sort && sort.field === column.fieldId}
-          direction={sort ? sort.direction : 'asc'}
-          onClick={this.createSortHandler(column)}
-        >
-          {column.header.title}
-        </TableSortLabel>
-      );
+    if (column.header !== undefined) {
+      if (column.header.sortable) {
+        const {sort} = this.props;
+        return (
+          <TableSortLabel
+            IconComponent={ArrowDropDown}
+            active={sort && sort.field === column.fieldId}
+            direction={sort ? sort.direction : 'asc'}
+            onClick={this.createSortHandler(column)}
+          >
+            {column.header.title}
+          </TableSortLabel>
+        );
+      } else {
+        return column.header.title || '';
+      }
     }
 
     return ('');

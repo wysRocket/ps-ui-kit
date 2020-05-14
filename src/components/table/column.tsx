@@ -25,7 +25,9 @@ export const textColumn = (title: string, fieldId: string, sortDirection?: SortD
     header: {title, sortable: true, sortDirection},
     fieldId,
     valueToView: (value: any) => value ? value.toString() : '',
-    renderer: (props: RendererProps) => (<StaticRenderer value={props.value}/>)
+    renderer: (props: RendererProps) => (
+      <StaticRenderer value={props.value} valueToView={(value: any) => value ? value.toString() : ''}/>
+    )
   };
 };
 
@@ -35,7 +37,9 @@ export const textLink = (linkSource: (item: any) => string, title: string, field
     fieldId,
     linkSource,
     valueToView: (value: any) => value ? value.toString() : '',
-    renderer: (props: RendererProps) => (<LinkRenderer value={props.value} link={props.link}/>)
+    renderer: (props: RendererProps) => (
+      <LinkRenderer value={props.value} link={props.link} valueToView={(value: any) => value ? value.toString() : ''}/>
+    )
   };
 };
 

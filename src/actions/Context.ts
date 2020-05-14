@@ -52,9 +52,7 @@ export class Context<T extends Identity> {
   }
 
   setPage(p: number) {
-    if ((p - 1) * this.itemsPerPage < this.itemsTotal) {
-      this.currentPage = p;
-    }
+    this.currentPage = p;
   }
 
   getFilter() {

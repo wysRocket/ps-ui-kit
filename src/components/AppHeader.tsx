@@ -26,9 +26,6 @@ export default class AppHeader extends React.Component<IProps> {
         >
           <MenuIcon style={{color: '#A7A7A7'}}/>
         </IconButton>
-        <Typography variant="h6" noWrap>
-          Material-UI
-        </Typography>
         <div style={{flexGrow: 1}} />
         <Filter filter={(f: string) => console.log('f')}/>
         <div style={{paddingLeft: 100}}/>

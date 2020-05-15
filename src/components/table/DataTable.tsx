@@ -3,7 +3,7 @@ import {Diff} from "../../domain/Diff";
 import {ColumnInfo} from "./column";
 import {Table, TableBody, TableCell, TableHead, TableRow, TableSortLabel} from "@material-ui/core";
 import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
-import {Sort} from "../../domain/Sort";
+import {invertDirection, Sort, SortDirection} from "../../domain/Sort";
 
 interface IProps<T> {
   style?: CSSProperties;
@@ -57,6 +57,13 @@ export default class DataTable<T> extends React.Component<IProps<T>> {
 
   createSortHandler = (column: ColumnInfo) => () => {
     const {sort, onSort} = this.props;
+    if  (onSort !== undefined) {
+      let newSort: Sort = {field: column.fieldId, direction: SortDirection.ASC};
+      if (sort && sort.field === column.fieldId) {
+        newSort = {field: sort.field, direction: invertDirection(sort.direction)};
+      }
+      onSort(newSort);
+    }
   }
 
   renderHeaderCell(column: ColumnInfo) {

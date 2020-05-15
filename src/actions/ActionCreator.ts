@@ -1,6 +1,8 @@
 import {Identity} from "../domain/Identity";
 import {Action} from "redux";
 import {ThunkDispatch} from "redux-thunk";
+import {Sort} from "../domain/Sort";
+import {Attribute} from "../domain/Attribute";
 
 export interface ListActionTypes {
   GET_LIST: string;
@@ -16,6 +18,9 @@ export interface ListAction<T extends Identity> extends Action {
   currentPage?: number;
   itemsTotal?: number;
   itemsPerPage?: number;
+  sort?: Sort;
+  filter?: string;
+  extendedFilters?: Attribute[];
 }
 /*interface SelectItemAction<T extends Identity> extends Action {}
 interface ItemSelectedAction<T extends Identity> extends Action {
@@ -29,6 +34,9 @@ export interface ListState<T extends Identity> {
   itemsTotal: number;
   currentPage: number;
   itemsPerPage: number;
+  sort?: Sort;
+  filter?: string;
+  extendedFilters?: Attribute[];
 }
 
 export type ListActionDispatch<T extends Identity> = ThunkDispatch<{}, undefined, ListAction<T>>;

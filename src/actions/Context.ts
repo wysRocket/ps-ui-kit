@@ -1,4 +1,6 @@
 import {Identity} from "../domain/Identity";
+import {Sort} from "../domain/Sort";
+import {Attribute} from "../domain/Attribute";
 
 export class Context<T extends Identity> {
   private selected?: T;
@@ -7,6 +9,8 @@ export class Context<T extends Identity> {
   private itemsPerPage = 0;
   private currentPage = 0;
   private filter?: string;
+  private sort?: Sort;
+  private extendedFilters?: Attribute[];
 
   setSelection(item?: T) {
     if (this.selected) {
@@ -59,7 +63,23 @@ export class Context<T extends Identity> {
     return this.filter;
   }
 
-  setFilter(value: string) {
+  setFilter(value?: string) {
     this.filter = value;
+  }
+
+  getSort() {
+    return this.sort;
+  }
+
+  setSort(sort?: Sort) {
+    this.sort = sort;
+  }
+
+  getExtendedFilters() {
+    return this.extendedFilters;
+  }
+
+  setExtendedFilters(f?: Attribute[]) {
+    this.extendedFilters = f;
   }
 }

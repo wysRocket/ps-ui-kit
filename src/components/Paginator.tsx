@@ -22,7 +22,7 @@ export default class Paginator extends React.Component<IProps> {
   }
 
   render() {
-    const ranges = this.props.ranges || [this.props.itemsPerPage, 2 * this.props.itemsPerPage, 3 * this.props.itemsPerPage];
+    const ranges = this.props.ranges || [10, 20, 30];
     const numPages = Math.ceil(this.props.itemsTotal / this.props.itemsPerPage);
     const from = (this.props.currentPage - 1) * this.props.itemsPerPage + 1;
     const to = Math.min(this.props.itemsTotal, this.props.currentPage * this.props.itemsPerPage);

@@ -41,12 +41,13 @@ import {
 } from "./actions/ActionCreator";
 import IconPreview from "./components/IconPreview";
 import TabbedPanel, {TabItem as ITabItem} from "./components/TabbedPanel";
-import {Sort, SortDirection, DataRange as IDataRange} from "./domain/Sort";
+import {Sort, SortDirection, DataRange as IDataRange, invertDirection} from "./domain/Sort";
 import {Attribute as IAttribute} from "./domain/Attribute";
 import {HGroup} from "./components/Group";
 import PopUp from "./components/PopUp";
 import {Tree, TreeContent as ITreeContent, TreeElement as ITreeElement} from "./components/tree/Tree";
 import Filter from "./components/Filter";
+import {ActionWrapper} from "./actions/ActionWrapper";
 
 export type Service = IService;
 export type Identity = IIdentity;
@@ -92,6 +93,7 @@ export {
   Converter,
   createReducer,
   ActionCreator,
+  ActionWrapper,
   AbstractRenderer,
   StaticRenderer,
   SelectRenderer,
@@ -99,6 +101,7 @@ export {
   DeleteActionRenderer,
   LinkRenderer,
   SortDirection,
+  invertDirection,
   textColumn,
   idColumn,
   idLink,

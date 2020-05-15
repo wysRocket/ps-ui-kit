@@ -1,3 +1,4 @@
+import {isEqual} from "lodash";
 import {CSSProperties, default as React} from "react";
 import {TreeItem, TreeView} from "@material-ui/lab";
 import {Checkbox, Collapse, SvgIcon, SvgIconProps} from "@material-ui/core";
@@ -74,7 +75,6 @@ export interface TreeContent {
 
 interface ITreeItemProps {
   key?: any;
-  expanded?: boolean;
   element: TreeElement;
   selected: boolean;
   onSelectionChange?: (value: TValue, selected: boolean) => void;
@@ -102,9 +102,32 @@ class TreeNodeItem extends React.Component<ITreeItemProps> {
   }
 }
 
+function getExpandedValues(elements: TreeElement[], selectedSet: Set<TValue>): TValue[] {
+  const resultSet: Set<TValue> = new Set<TValue>();
+  const findExpanded = (e: TreeElement) => {
+    let r = false;
+    if (selectedSet.has(e.content.value)) {
+      r = true;
+    }
+    if (!e.children) {
+      return r;
+    }
+    e.children.forEach((c) => {
+      if (findExpanded(c)) {
+        resultSet.add(e.content.value);
+        r = true;
+      }
+    });
+    return r;
+  };
+  elements.forEach(findExpanded);
+  return [...resultSet.keys()];
+}
+
 interface IProps {
   style?: CSSProperties;
   selected?: TValue[];
+  expandSelected?: boolean;
   elements: TreeElement[];
   isLoading?: boolean;
   onSelect: (terminalIds: TValue[]) => void;
@@ -112,12 +135,14 @@ interface IProps {
 
 interface IState {
   selected?: TValue[];
+  defaultExpanded: string[];
 }
 
 export class Tree extends React.Component<IProps, IState> {
 
   state = {
-    selected: []
+    selected: [],
+    defaultExpanded: []
   };
 
   createMapFromProps = (props: IProps) => {
@@ -140,7 +165,13 @@ export class Tree extends React.Component<IProps, IState> {
         selectedSet.delete(c);
       }
     });
-    this.setState({selected: [...selectedSet.keys()]});
+    const newState: any = {selected: [...selectedSet.keys()]};
+    if (!isEqual(this.state.selected, props.selected)) {
+      const defaultExpanded = props.expandSelected ?
+        getExpandedValues(props.elements, selectedSet).map((v) => v.toString()) : [];
+      newState.defaultExpanded = defaultExpanded;
+    }
+    this.setState(newState);
   }
 
   componentWillMount(): void {
@@ -157,7 +188,7 @@ export class Tree extends React.Component<IProps, IState> {
     return (
       <TreeView
         style={{textAlign: 'left'}}
-        defaultExpanded={['1']}
+        defaultExpanded={this.state.defaultExpanded}
         defaultCollapseIcon={<MinusSquare />}
         defaultExpandIcon={<PlusSquare />}
       >
@@ -169,7 +200,6 @@ export class Tree extends React.Component<IProps, IState> {
   }
 
   onSelectionChange = (value: TValue, s: boolean) => {
-    console.log('i select', value, s);
     const selectedSet = new Set<TValue>(this.state.selected);
     if (s) {
       selectedSet.add(value);

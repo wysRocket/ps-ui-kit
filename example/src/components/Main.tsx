@@ -64,6 +64,7 @@ export class Main extends React.Component<IProps> {
     currentPage: 4,
     itemsPerPage: 10,
     popupOpened: false,
+    selected: ['pv2'],
   };
   onTabChange = (v: any) => {
     console.log('tab change', v);
@@ -87,6 +88,7 @@ export class Main extends React.Component<IProps> {
 
   onTreeSelect = (selected: any) => {
     console.log('selected', selected);
+    this.setState({selected});
   };
 
   render() {
@@ -125,7 +127,7 @@ export class Main extends React.Component<IProps> {
                     },
                   ]
                 }
-              ]} onSelect={this.onTreeSelect}/>
+              ]} onSelect={this.onTreeSelect} expandSelected={true} selected={this.state.selected}/>
             </PopUp>
             <div style={{paddingLeft: 24, paddingRight: 24}}>
               <ContentHeader>

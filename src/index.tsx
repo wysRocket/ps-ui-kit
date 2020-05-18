@@ -48,6 +48,7 @@ import PopUp from "./components/PopUp";
 import {Tree, TreeContent as ITreeContent, TreeElement as ITreeElement} from "./components/tree/Tree";
 import Filter from "./components/Filter";
 import {ActionWrapper} from "./actions/ActionWrapper";
+import DropSelector from "./components/DropSelector";
 
 export type Service = IService;
 export type Identity = IIdentity;
@@ -94,6 +95,7 @@ export {
   createReducer,
   ActionCreator,
   ActionWrapper,
+  DropSelector,
   AbstractRenderer,
   StaticRenderer,
   SelectRenderer,

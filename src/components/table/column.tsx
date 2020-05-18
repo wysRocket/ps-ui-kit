@@ -18,6 +18,7 @@ export interface ColumnInfo {
   valueToView?: (value: any) => any;
   isEdit?: boolean;
   isRemove?: boolean;
+  onClick?: (item: any) => void;
 }
 
 export const textColumn = (title: string, fieldId: string, sortDirection?: SortDirection): ColumnInfo => {

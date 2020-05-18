@@ -99,6 +99,8 @@ export default class DataTable<T> extends React.Component<IProps<T>> {
       if (onDelete !== undefined) {
         onDelete(item);
       }
+    } else if (column.onClick !== undefined) {
+      column.onClick(item);
     }
   }
 

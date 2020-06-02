@@ -2,8 +2,11 @@ import React, {CSSProperties} from "react";
 import {Service, SideBar, HSplit, VSplit, AppHeader, UserRole, Panel, ContentHeader, DashboardFilter,
   DateFilter, DashboardChart, DonutChart, Paginator, SearchBar, TableLegend, DataTable,
   deleteColumn, editColumn, idColumn, RendererProps, SelectRenderer, SortDirection, TabbedPanel, PopUp,
-  Tree, idLink} from "frontend-common";
+  Tree, idLink, ConfirmButton, DonutChartItem, ButtonMenuItem, HGroup} from "frontend-common";
 import {Button} from "@material-ui/core";
+import EyeIcon from "@material-ui/icons/Visibility";
+import HideIcon from "@material-ui/icons/VisibilityOff";
+import MoveIcon from "@material-ui/icons/OpenWith";
 
 const service: Service = {
   identity: 'myService',
@@ -49,6 +52,18 @@ const actions = [
   {identity: 'signIn', status: 'Archived'},
 ];
 
+const chartItems: DonutChartItem[] = [
+  {label: 'Failed', value: 3, color: '#FF0000'},
+  {label: 'Complete', value: 47, color: '#26C446'},
+  {label: 'Pending', value: 15, color: '#359EDE'},
+];
+
+const changeMenuItems: ButtonMenuItem[] = [
+  {label: 'View action', icon: (<EyeIcon/>), onClick: () => console.log('view click')},
+  {label: 'Hide chart', icon: (<HideIcon/>), onClick: () => console.log('hide click')},
+  {label: 'Move chart', icon: (<MoveIcon/>), onClick: () => console.log('move click')},
+];
+
 const onSort = (s: any) => {
   console.log('sorted', s);
 };
@@ -89,6 +104,14 @@ export class Main extends React.Component<IProps> {
   onTreeSelect = (selected: any) => {
     console.log('selected', selected);
     this.setState({selected});
+  };
+
+  onSave = () => {
+    console.log('save')
+  };
+
+  onPublish = () => {
+    console.log('publish')
   };
 
   render() {
@@ -136,10 +159,16 @@ export class Main extends React.Component<IProps> {
                 <div>Hell hello</div>
                 <DateFilter/>
                 <DashboardFilter topList={topItems} bottomList={bottomItems}/>
+                <ConfirmButton items={[
+                  {label: 'Save', onClick: this.onSave},
+                  {label: 'Publish', onClick: this.onPublish, confirm: {warning: 'Are you shure?', actionText: 'Of course, shure!'}},
+                ]} label={'Done'}/>
               </ContentHeader>
               <div>
-                <DashboardChart/>
-                <DonutChart/>
+                <HGroup>
+                  <DashboardChart/>
+                  <DonutChart totalLabel={'Interactions'} items={chartItems} menuItems={changeMenuItems} title={'Sign Up'} subtitle={'Button'}/>
+                </HGroup>
                 Hello
               </div>
               <div>

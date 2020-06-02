@@ -11,7 +11,7 @@ import Panel from "./components/Panel";
 import DashboardFilter from "./components/DashboardFilter";
 import DateFilter from "./components/DateFilter";
 import DashboardChart from "./components/DashboardChart";
-import DonutChart from "./components/DonutChart";
+import DonutChart, {DonutChartItem as IDonutChartItem} from "./components/DonutChart";
 import Paginator from "./components/Paginator";
 import SearchBar from "./components/SearchBar";
 import TableLegend from "./components/TableLegend";
@@ -49,6 +49,8 @@ import {Tree, TreeContent as ITreeContent, TreeElement as ITreeElement} from "./
 import Filter from "./components/Filter";
 import {ActionWrapper} from "./actions/ActionWrapper";
 import DropSelector from "./components/DropSelector";
+import {ConfirmButton, ConfirmButtonItem as IConfirmButtonItem} from "./components/ConfirmButton";
+import {ButtonWithMenu, ButtonMenuItem as IButtonMenuItem} from "./components/ButtonWithMenu";
 
 export type Service = IService;
 export type Identity = IIdentity;
@@ -67,11 +69,13 @@ export type ChangeOptions<T = undefined> = IChangeOptions<T>;
 export type Attribute = IAttribute;
 export type TreeElement = ITreeElement;
 export type TreeContent = ITreeContent;
+export type ConfirmButtonItem = IConfirmButtonItem;
+export type ButtonMenuItem = IButtonMenuItem;
+export type DonutChartItem = IDonutChartItem;
 
 const Constants = {
   H_PADDING: 32
 };
-
 export {
   ContentHeader,
   DashboardFilter,
@@ -96,6 +100,8 @@ export {
   ActionCreator,
   ActionWrapper,
   DropSelector,
+  ConfirmButton,
+  ButtonWithMenu,
   AbstractRenderer,
   StaticRenderer,
   SelectRenderer,

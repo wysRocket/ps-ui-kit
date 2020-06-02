@@ -1,5 +1,27 @@
 import {CSSProperties, default as React} from "react";
 import Chart from 'react-apexcharts';
+import {Card, CardContent, CardHeader} from "@material-ui/core";
+import {ButtonWithMenu} from "./ButtonWithMenu";
+import MoreVertIcon from "@material-ui/core/SvgIcon/SvgIcon";
+
+const randomizeArray = (arg: any[]) => {
+  const array = arg.slice();
+  let currentIndex = array.length;
+  let temporaryValue;
+  let randomIndex;
+
+  while (0 !== currentIndex) {
+
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+};
 
 interface IProps {
   style?: CSSProperties;
@@ -7,10 +29,59 @@ interface IProps {
 
 export default class DashboardChart extends React.Component<IProps> {
   render() {
+    const sparklineData = [47, 45, 54, 38, 56, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46];
+
+    const colorPalette = ['#00D8B6', '#008FFB', '#FEB019', '#FF4560', '#775DD0'];
+
+    const spark1 = {
+      chart: {
+        id: 'sparkline1',
+        group: 'sparklines',
+        type: 'area',
+        height: 160,
+        sparkline: {
+          enabled: true
+        },
+      },
+      stroke: {
+        curve: 'straight'
+      },
+      fill: {
+        opacity: 1,
+      },
+      series: [{
+        name: 'Sales',
+        data: randomizeArray(sparklineData)
+      }],
+      labels: [...Array(24).keys()].map((n) => `2018-09-0${n + 1}`),
+      yaxis: {
+        min: 0
+      },
+      xaxis: {
+        type: 'datetime',
+      },
+      colors: ['#DCE6EC'],
+      title: {
+        text: '$424,652',
+        offsetX: 30,
+        style: {
+          fontSize: '24px',
+          cssClass: 'apexcharts-yaxis-title'
+        }
+      },
+      subtitle: {
+        text: 'Sales',
+        offsetX: 30,
+        style: {
+          fontSize: '14px',
+          cssClass: 'apexcharts-yaxis-title'
+        }
+      }
+    };
     const options = {
       chart: {
         height: 350,
-        type: 'line',
+        type: 'area',
         zoom: {
           enabled: false
         }
@@ -21,9 +92,11 @@ export default class DashboardChart extends React.Component<IProps> {
       stroke: {
         curve: 'straight'
       },
-      title: {
-        text: 'Product Trends by Month',
-        align: 'left'
+      menubar: {
+        show: false,
+      },
+      toolbar: {
+        show: false,
       },
       grid: {
         row: {
@@ -47,7 +120,12 @@ export default class DashboardChart extends React.Component<IProps> {
     }
 
     return (
-      <Chart type={'line'} options={options} series={series} width={width}/>
+      <Card style={{boxShadow: 'none', border: '1px solid #C7C7C7'}}>
+        <CardHeader/>
+        <CardContent>
+          <Chart type={'area'} options={spark1} series={spark1.series} width={width}/>
+        </CardContent>
+      </Card>
     );
   }
 }

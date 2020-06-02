@@ -2,15 +2,60 @@ import {CSSProperties, default as React} from "react";
 import Chart from 'react-apexcharts';
 import {Button, Card, CardContent, CardHeader, IconButton} from "@material-ui/core";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import {ButtonMenuItem, ButtonWithMenu} from "./ButtonWithMenu";
+
+export interface DonutChartItem {
+  label: string;
+  value: number;
+  color: string;
+}
 
 interface IProps {
   style?: CSSProperties;
+  totalLabel?: string;
+  items: DonutChartItem[];
+  title: string;
+  subtitle?: string;
+  menuItems: ButtonMenuItem[];
 }
 
 export default class DonutChart extends React.Component<IProps> {
   render() {
+    const series: number[] = [];
+    const labels: string[] = [];
+    const colors: string[] = [];
+    this.props.items.forEach((item) => {
+      series.push(item.value);
+      labels.push(item.label);
+      colors.push(item.color);
+    });
     const options = {
-      series: [0, 17, 56],
+      plotOptions: {
+        pie: {
+          donut: {
+            labels: {
+              show: true,
+              total: {
+                show: true,
+                showAlways: true,
+                label: this.props.totalLabel || 'Total'
+              }
+            }
+          }
+        }
+      },
+      series,
+      labels,
+      colors,
+      dataLabels: {
+        enabled: true,
+        formatter: (val: number, opt: { seriesIndex: number, dataPointIndex: number, w: any }) => {
+          return opt.w.config.series[opt.seriesIndex];
+        },
+        dropShadow: {
+          enabled: false
+        }
+      },
       chart: {
         type: 'donut',
       },
@@ -32,18 +77,18 @@ export default class DonutChart extends React.Component<IProps> {
       width = style.width;
     }
     return (
-      <Card>
+      <Card style={{boxShadow: 'none', border: '1px solid #C7C7C7'}}>
         <CardHeader
           action={
-            <Button variant={'outlined'} style={{width: 32, height: 32, minWidth: 32}}>
+            <ButtonWithMenu items={this.props.menuItems}>
               <MoreVertIcon />
-            </Button>
+            </ButtonWithMenu>
           }
-          title="Sign up"
-          subheader="Button"
+          title={this.props.title}
+          subheader={this.props.subtitle}
         />
         <CardContent>
-          <Chart type={'donut'} width={width} options={options} series={[0, 17, 15]}/>
+          <Chart type={'donut'} width={width} options={options} series={options.series}/>
         </CardContent>
       </Card>
     );

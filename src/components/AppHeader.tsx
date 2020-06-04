@@ -8,10 +8,13 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import {User} from "../domain/User";
 import {Badge, IconButton, InputBase, Toolbar, Typography} from "@material-ui/core";
 import Filter from "./Filter";
+import {ButtonMenuItem} from "./ButtonWithMenu";
+import {IconButtonWithMenu} from "./IconButtonWithMenu";
 
 interface IProps {
   style?: CSSProperties;
   user: User;
+  menuItems: ButtonMenuItem[];
 }
 
 export default class AppHeader extends React.Component<IProps> {
@@ -35,14 +38,9 @@ export default class AppHeader extends React.Component<IProps> {
           </Badge>
         </IconButton>
         {this.props.user.login}
-        <IconButton
-          edge="end"
-          aria-label="account of current user"
-          aria-haspopup="true"
-          color="inherit"
-        >
+        <IconButtonWithMenu items={this.props.menuItems}>
           <AccountCircle style={{color: '#A7A7A7'}}/>
-        </IconButton>
+        </IconButtonWithMenu>
       </Toolbar>
     );
   }

@@ -51,6 +51,7 @@ import {ActionWrapper} from "./actions/ActionWrapper";
 import DropSelector from "./components/DropSelector";
 import {ConfirmButton, ConfirmButtonItem as IConfirmButtonItem} from "./components/ConfirmButton";
 import {ButtonWithMenu, ButtonMenuItem as IButtonMenuItem} from "./components/ButtonWithMenu";
+import {IconButtonWithMenu} from "./components/IconButtonWithMenu";
 
 export type Service = IService;
 export type Identity = IIdentity;
@@ -101,6 +102,7 @@ export {
   ActionWrapper,
   DropSelector,
   ConfirmButton,
+  IconButtonWithMenu,
   ButtonWithMenu,
   AbstractRenderer,
   StaticRenderer,

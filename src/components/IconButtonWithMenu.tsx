@@ -2,7 +2,7 @@ import {CSSProperties, default as React} from "react";
 import {
   Button,
   ClickAwayListener,
-  Fade,
+  Fade, IconButton,
   List,
   ListItem,
   ListItemIcon,
@@ -10,20 +10,16 @@ import {
   Paper,
   Popper
 } from "@material-ui/core";
-
-export interface ButtonMenuItem {
-  onClick: () => void;
-  label: string;
-  icon?: any;
-}
+import {ButtonMenuItem} from "./ButtonWithMenu";
 
 interface IProps {
+  edge?: 'start' |'end';
   style?: CSSProperties;
   items: ButtonMenuItem[];
   children: any;
 }
 
-export class ButtonWithMenu extends React.Component<IProps> {
+export class IconButtonWithMenu extends React.Component<IProps> {
   state = {
     opened: false,
     anchorEl: undefined
@@ -43,7 +39,6 @@ export class ButtonWithMenu extends React.Component<IProps> {
   }
 
   render() {
-    const style: CSSProperties = this.props.style || {width: 32, height: 32, minWidth: 32};
     return (
       <ClickAwayListener onClickAway={this.onClickAway}>
         <div>
@@ -70,13 +65,13 @@ export class ButtonWithMenu extends React.Component<IProps> {
               </Fade>
             )}
           </Popper>
-          <Button
-            variant={'outlined'}
-            style={style}
+          <IconButton
+            edge={this.props.edge || false}
+            style={this.props.style}
             onClick={this.onButtonClick}
           >
             {this.props.children}
-          </Button>
+          </IconButton>
         </div>
       </ClickAwayListener>
     );

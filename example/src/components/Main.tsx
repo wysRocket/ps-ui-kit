@@ -58,6 +58,12 @@ const chartItems: DonutChartItem[] = [
   {label: 'Pending', value: 15, color: '#359EDE'},
 ];
 
+const appMenuItems: ButtonMenuItem[] = [
+  {label: 'Admin view', onClick: () => console.log('view click')},
+  {label: 'Settings', onClick: () => console.log('settings click')},
+  {label: 'Sign out', onClick: () => console.log('sign out click')},
+];
+
 const changeMenuItems: ButtonMenuItem[] = [
   {label: 'View action', icon: (<EyeIcon/>), onClick: () => console.log('view click')},
   {label: 'Hide chart', icon: (<HideIcon/>), onClick: () => console.log('hide click')},
@@ -120,7 +126,7 @@ export class Main extends React.Component<IProps> {
       <VSplit size={200} style={{height: '100%'}}>
         <SideBar service={service} onSelect={onSideSelect} items={items} selected={'Dashboard'}/>
         <HSplit size={64}>
-          <AppHeader user={{login: 'admin', role: UserRole.SERVICE_OWNER}}/>
+          <AppHeader user={{login: 'admin', role: UserRole.SERVICE_OWNER}} menuItems={appMenuItems}/>
           <Panel style={{height}}>
             <PopUp title={'Parameters and instances'} opened={this.state.popupOpened} onClose={this.onPopupClose}>
               <Tree elements={[

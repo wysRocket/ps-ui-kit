@@ -19,72 +19,36 @@ export interface ChangeOptions<P = undefined> {
 }
 
 export abstract class ListItemApi<T extends Identity, A, P = undefined> {
-  protected cache = new Map<string|number, T>();
-
   protected constructor(protected converter: Converter<T, A, P>) {}
 
   async list(condition?: GetCondition<P>) {
     const resp = await this.fetchList(condition);
-    this.cache = new Map<string|number, T>();
     const parent = condition ? condition.parent : undefined;
-    resp.items.forEach((obj) => {
-      const item = this.converter.apiObjectToItem(obj, parent);
-      this.cache.set(item.identity, item);
-    });
     return {
       itemsTotal: resp.itemsTotal,
-      list: this.listFromCache()
+      list: resp.items.map((obj) => this.converter.apiObjectToItem(obj, parent))
     };
   }
 
   async one(condition?: GetCondition<P>) {
     const obj = await this.fetchOne(condition);
     const parent = condition ? condition.parent : undefined;
-    const item = this.converter.apiObjectToItem(obj, parent);
-    this.cache.set(item.identity, item);
-    return item;
+    return this.converter.apiObjectToItem(obj, parent);
   }
 
   async save(item: T, opt?: ChangeOptions<P>) {
     const id = opt && opt.prevIdentity ? opt.prevIdentity : item.identity;
-    const cached = this.cache.get(id);
-    if (!cached) {
-      throw new Error('Item is not found in list');
-    }
     await this.fetchSave(this.converter.itemToApiObject(item), opt);
-    if (id !== item.identity) {
-      this.cache.delete(id);
-    }
-    this.cache.set(item.identity, item);
   }
 
   async create(item: T, opt?: ChangeOptions<P>) {
-    const cached = this.cache.get(item.identity);
-    if (cached) {
-      throw new Error('Item with that identity already exists');
-    }
     const createdObj = await this.fetchCreate(this.converter.itemToApiObject(item), opt);
     const parent = opt ? opt.parent : undefined;
-    const created = this.converter.apiObjectToItem(createdObj, parent);
-    this.cache.set(created.identity, created);
-    return created;
+    return this.converter.apiObjectToItem(createdObj, parent);
   }
 
   async delete(item: T, opt?: ChangeOptions<P>) {
-    const cached = this.cache.get(item.identity);
-    if (!cached) {
-      throw new Error('item is not found in list');
-    }
     await this.fetchDelete(this.converter.itemToApiObject(item), opt);
-    this.cache.delete(cached.identity);
-  }
-
-  listFromCache() {
-    return [...this.cache.values()];
-  }
-
-  getByIdentity(identity: string|number) {
-    return this.cache.get(identity);
   }
 
   protected abstract fetchOne(condition?: GetCondition<P>): Promise<A>;

@@ -16,6 +16,7 @@ export interface RendererProps {
 
 interface IProps extends RendererProps {
   style?: CSSProperties;
+  disabled?: boolean;
   valueToView?: (value: any) => any;
 }
 
@@ -76,7 +77,7 @@ export class LinkRenderer extends AbstractRenderer {
 export class EditActionRenderer extends AbstractRenderer {
   render() {
     return (
-      <IconButton onClick={this.props.onClick}>
+      <IconButton onClick={this.props.onClick} disabled={this.props.disabled}>
         <EditIcon />
       </IconButton>
     );
@@ -86,7 +87,7 @@ export class EditActionRenderer extends AbstractRenderer {
 export class DeleteActionRenderer extends AbstractRenderer {
   render() {
     return (
-      <IconButton onClick={this.props.onClick}>
+      <IconButton onClick={this.props.onClick} disabled={this.props.disabled}>
         <DeleteIcon />
       </IconButton>
     );

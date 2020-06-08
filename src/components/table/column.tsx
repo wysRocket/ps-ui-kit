@@ -27,7 +27,7 @@ export const textColumn = (title: string, fieldId: string, sortDirection?: SortD
     fieldId,
     valueToView: (value: any) => value ? value.toString() : '',
     renderer: (props: RendererProps) => (
-      <StaticRenderer value={props.value} valueToView={(value: any) => value ? value.toString() : ''}/>
+      <StaticRenderer item={props.item} value={props.value} valueToView={(value: any) => value ? value.toString() : ''}/>
     )
   };
 };
@@ -39,7 +39,7 @@ export const textLink = (linkSource: (item: any) => string, title: string, field
     linkSource,
     valueToView: (value: any) => value ? value.toString() : '',
     renderer: (props: RendererProps) => (
-      <LinkRenderer value={props.value} link={props.link} valueToView={(value: any) => value ? value.toString() : ''}/>
+      <LinkRenderer item={props.item} value={props.value} link={props.link} valueToView={(value: any) => value ? value.toString() : ''}/>
     )
   };
 };
@@ -57,7 +57,7 @@ export const editColumn = (): ColumnInfo => {
     header: {},
     fieldId: 'identity',
     isEdit: true,
-    renderer: (props: RendererProps) => (<EditActionRenderer value={props.value} onClick={props.onClick}/>),
+    renderer: (props: RendererProps) => (<EditActionRenderer item={props.item} value={props.value} onClick={props.onClick}/>),
   };
 };
 
@@ -66,6 +66,6 @@ export const deleteColumn = (): ColumnInfo => {
     header: {},
     fieldId: 'identity',
     isRemove: true,
-    renderer: (props: RendererProps) => (<DeleteActionRenderer value={props.value} onClick={props.onClick}/>),
+    renderer: (props: RendererProps) => (<DeleteActionRenderer item={props.item} value={props.value} onClick={props.onClick}/>),
   };
 };

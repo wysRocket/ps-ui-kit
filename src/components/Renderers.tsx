@@ -6,6 +6,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import {Link} from "react-router-dom";
 
 export interface RendererProps {
+  item: any;
   value: any;
   enumValues?: any[];
   onChange?: (newValue: any) => void;

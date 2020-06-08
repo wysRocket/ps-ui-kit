@@ -113,6 +113,7 @@ export default class DataTable<T> extends React.Component<IProps<T>> {
 
   renderCell(item: T, column: ColumnInfo) {
     return column.renderer({
+      item,
       value: (item as any)[column.fieldId],
       onClick: this.createClickHandler(item, column),
       enumValues: column.enumValues,

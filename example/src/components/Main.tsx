@@ -222,7 +222,7 @@ export class Main extends React.Component<IProps> {
                     fieldId: 'status',
                     enumValues: ['Active', 'Archived', 'Stopped', 'Paused'],
                     header: {title: 'Status', sortable: true},
-                    renderer: (props: RendererProps) => (<SelectRenderer value={props.value} enumValues={props.enumValues} onChange={props.onChange}/>)
+                    renderer: (props: RendererProps) => (<SelectRenderer {...props}/>)
                   },
                   editColumn(),
                   deleteColumn(),

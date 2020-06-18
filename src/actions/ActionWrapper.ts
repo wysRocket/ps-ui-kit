@@ -128,7 +128,7 @@ export class ActionWrapper<T extends Identity, P = undefined> {
     // extend
   }
 
-  protected async doSave(item: T|undefined, changes: any, parent?: P) {
+  protected async doSave(item: T|undefined, changes: any, parent?: P): Promise<T> {
     const id = item ? item.identity : undefined;
     const updated: any = item || {};
     Object.keys(changes).forEach((k) => updated[k] = changes[k]);
@@ -139,6 +139,7 @@ export class ActionWrapper<T extends Identity, P = undefined> {
       await this.api.save(updated, {prevIdentity: id, parent});
     }
     this.context.setSelection(newItem);
+    return newItem;
   }
 
   protected async doDelete(item: T, parent?: P) {

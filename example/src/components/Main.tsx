@@ -86,6 +86,7 @@ export class Main extends React.Component<IProps> {
     itemsPerPage: 10,
     popupOpened: false,
     selected: ['pv2'],
+    textFilter: '',
   };
   onTabChange = (v: any) => {
     console.log('tab change', v);
@@ -119,6 +120,11 @@ export class Main extends React.Component<IProps> {
   onPublish = () => {
     console.log('publish')
   };
+
+  onTextFilterChange = (f: string) => {
+    console.log('filter', f);
+    this.setState({textFilter: f});
+}
 
   render() {
     const height = document.documentElement.clientHeight - 65;
@@ -213,6 +219,8 @@ export class Main extends React.Component<IProps> {
                   {id: 'interactions', items: [{label: 'All', value: 'all'}, {label: 'Success', value: 'success'}, {label: 'Fail', value: 'fail'}]},
                 ]}
                 rightHint={'Total: 267'}
+                textFilter={this.state.textFilter}
+                onTextFilterChange={this.onTextFilterChange}
               />
               <DataTable
                 columns={[

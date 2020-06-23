@@ -2,6 +2,9 @@ import {CSSProperties, default as React} from "react";
 import {TextField} from "@material-ui/core";
 import DropSelector, {DropSelectorItem} from "./DropSelector";
 
+const ENTER = 13;
+const ESC = 27;
+
 export interface SearchFilter {
   id: string;
   items: DropSelectorItem[];
@@ -11,14 +14,32 @@ export interface SearchFilter {
 interface IProps {
   style?: CSSProperties;
   showBorder?: boolean;
+  textFilter?: string;
   filters?: SearchFilter[];
   rightHint?: string;
+  onSearchFilterChange?: (id: string, value: any) => void;
+  onTextFilterChange: (filter: string) => void;
 }
 
 export default class SearchBar extends React.Component<IProps> {
+  state = {
+    textFilter: ''
+  };
+
+  componentWillMount() {
+    this.setState({textFilter: this.props.textFilter || ''});
+  }
+
+  componentWillReceiveProps(nextProps: Readonly<IProps>, nextContext: any): void {
+    if (nextProps.textFilter !== this.props.textFilter && nextProps.textFilter !== this.state.textFilter) {
+      this.setState({textFilter: nextProps.textFilter || ''});
+    }
+  }
 
   createFilterHandler = (id: string) => (value: any) => {
-    console.log('filter', id, value);
+    if (this.props.onSearchFilterChange !== undefined) {
+      this.props.onSearchFilterChange(id, value);
+    }
   }
 
   render() {
@@ -48,6 +69,18 @@ export default class SearchBar extends React.Component<IProps> {
     );
   }
 
+  onFilterKeyUp = (evt: any) => {
+    if (evt.keyCode === ENTER) {
+      if (this.state.textFilter) {
+        this.props.onTextFilterChange(this.state.textFilter);
+      }
+    }// else if (evt.keyCode === ESC) {}
+  }
+
+  onTextFilterChange = (evt: any) => {
+    this.setState({textFilter: evt.target.value});
+  }
+
   renderSearchField() {
     return (
       <TextField
@@ -55,6 +88,9 @@ export default class SearchBar extends React.Component<IProps> {
         style={{width: 270, height: 32, maxHeight: 32, marginTop: 0, marginBottom: 0}}
         inputProps={{style: {paddingTop: 0, paddingBottom: 0, height: 32}}}
         InputProps={{style: {paddingTop: 0, paddingBottom: 0, height: 32}}}
+        value={this.state.textFilter}
+        onKeyUp={this.onFilterKeyUp}
+        onChange={this.onTextFilterChange}
         margin={'normal'}
         variant="outlined"
       />

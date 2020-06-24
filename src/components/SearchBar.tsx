@@ -1,6 +1,7 @@
 import {CSSProperties, default as React} from "react";
-import {TextField} from "@material-ui/core";
+import {IconButton, InputAdornment, TextField} from "@material-ui/core";
 import DropSelector, {DropSelectorItem} from "./DropSelector";
+import ClearIcon from "@material-ui/icons/Clear";
 
 const ENTER = 13;
 const ESC = 27;
@@ -71,14 +72,16 @@ export default class SearchBar extends React.Component<IProps> {
 
   onFilterKeyUp = (evt: any) => {
     if (evt.keyCode === ENTER) {
-      if (this.state.textFilter) {
-        this.props.onTextFilterChange(this.state.textFilter);
-      }
+      this.props.onTextFilterChange(this.state.textFilter);
     }// else if (evt.keyCode === ESC) {}
   }
 
   onTextFilterChange = (evt: any) => {
     this.setState({textFilter: evt.target.value});
+  }
+
+  onDropTextFilter = () => {
+    this.setState({textFilter: ''}, () => this.props.onTextFilterChange(''));
   }
 
   renderSearchField() {
@@ -87,7 +90,16 @@ export default class SearchBar extends React.Component<IProps> {
         placeholder={'Search'}
         style={{width: 270, height: 32, maxHeight: 32, marginTop: 0, marginBottom: 0}}
         inputProps={{style: {paddingTop: 0, paddingBottom: 0, height: 32}}}
-        InputProps={{style: {paddingTop: 0, paddingBottom: 0, height: 32}}}
+        InputProps={{
+          style: {paddingTop: 0, paddingBottom: 0, height: 32},
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton onClick={this.onDropTextFilter} disabled={!this.state.textFilter}>
+                <ClearIcon/>
+              </IconButton>
+            </InputAdornment>
+          )
+        }}
         value={this.state.textFilter}
         onKeyUp={this.onFilterKeyUp}
         onChange={this.onTextFilterChange}

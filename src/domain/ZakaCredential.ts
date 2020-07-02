@@ -27,11 +27,12 @@ export const trustLevelToString = (trustLevel: TrustLevel) => {
 };
 
 export interface ZakaCredential extends Identity<string> {
-  ownerDid?: string;
+  ownerDid: string;
   schemaId: string;
   schemaName: string;
   supportRevocation?: boolean;
   trustLevel?: TrustLevel;
+  verificationHook: string;
 }
 
 export interface ZakaCredentialValue {

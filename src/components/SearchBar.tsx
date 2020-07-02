@@ -91,10 +91,10 @@ export default class SearchBar extends React.Component<IProps> {
         style={{width: 270, height: 32, maxHeight: 32, marginTop: 0, marginBottom: 0}}
         inputProps={{style: {paddingTop: 0, paddingBottom: 0, height: 32}}}
         InputProps={{
-          style: {paddingTop: 0, paddingBottom: 0, height: 32},
+          style: {paddingTop: 0, paddingBottom: 0, height: 32, paddingRight: 8},
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton onClick={this.onDropTextFilter} disabled={!this.state.textFilter}>
+              <IconButton onClick={this.onDropTextFilter} disabled={!this.state.textFilter} style={{padding: 0, borderRadius: 'none'}}>
                 <ClearIcon/>
               </IconButton>
             </InputAdornment>

@@ -84,6 +84,7 @@ export enum ServiceActionProps {
   ENABLED = 'enabled',
   PARAMETERS = 'parameters',
   ICON = 'icon',
+  USE_VERIFICATION_HOOK = 'useVerificationHook',
 }
 
 export const SERVICE_ACTION_PROPS_LIST = [
@@ -91,7 +92,7 @@ export const SERVICE_ACTION_PROPS_LIST = [
   ServiceActionProps.ONCE_PAER_USER, ServiceActionProps.INTERACTION_FLOW, ServiceActionProps.FLOW_MESSAGES,
   ServiceActionProps.MEDIA_DETAILS, ServiceActionProps.CREDENTIALS_REQUIRED, ServiceActionProps.CREDENTIALS_ISSUED,
   ServiceActionProps.WEBHOOK_URL_TEMPLATE, ServiceActionProps.ENABLED, ServiceActionProps.PARAMETERS,
-  ServiceActionProps.ICON,
+  ServiceActionProps.ICON, ServiceActionProps.USE_VERIFICATION_HOOK,
 ];
 
 export enum FlowMessageType {
@@ -128,6 +129,27 @@ export interface InitiationDetails {
   PHONE_CALL?: PhoneInitiation;*/
 }
 
+export enum PredicateType {
+  GREATER_OR_EQUALS = '>=',
+  GREATER = '>',
+  LESS_OR_EQUALS = '<=',
+  LESS = '<'
+}
+
+export const PREDICATE_TYPES = [PredicateType.GREATER_OR_EQUALS, PredicateType.GREATER, PredicateType.LESS_OR_EQUALS,
+  PredicateType.LESS];
+
+export interface Predicate {
+  attribute: string;
+  type: PredicateType;
+  value: string;
+}
+
+export interface RequiredCredential extends Identity<string> {
+  attributes?: string[];
+  predicates?: Predicate[];
+}
+
 export interface ServiceAction extends Identity<string> {
   actionName: string;
   description: string;
@@ -141,13 +163,14 @@ export interface ServiceAction extends Identity<string> {
     pending?: Message;
   };
   mediaDetails: InitiationDetails;
-  credentialsRequired: string[];
+  credentialsRequired: RequiredCredential[];
   credentialsIssued: string[];
   webhookUrlTemplate?: string; // what is template for web hook url?
   enabled: boolean;
   parameters: Parameter[];
   icon?: any;
   iconFile?: File;
+  useVerificationHook: boolean;
   /*versioned?: {
     generationTime: number,
     cacheHexString: boolean

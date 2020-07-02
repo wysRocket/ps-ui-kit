@@ -222,6 +222,7 @@ export class Main extends React.Component<IProps> {
                 textFilter={this.state.textFilter}
                 onTextFilterChange={this.onTextFilterChange}
               />
+              <SearchBar onTextFilterChange={this.onTextFilterChange} textFilter={this.state.textFilter}/>
               <DataTable
                 columns={[
                   idLink((item: any)=> item.identity, 'name'),

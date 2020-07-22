@@ -14,6 +14,7 @@ export interface IListState<T extends Identity> {
   sort?: Sort;
   filter?: string;
   extendedFilters?: Attribute[];
+  hasNewUnloadedItems?: boolean;
 }
 
 const defaultState: <T extends Identity>() => IListState<T> = () => ({
@@ -32,6 +33,10 @@ export const createReducer = <T extends Identity>(types: ListActionTypes) => (st
       return {...state, isSelecting: true, selected: undefined};
     case types.ITEM_SELECTED:
       return {...state, isSelecting: false, selected: action.selected};
+    case types.ON_NEW_ITEMS:
+      return {...state, hasNewUnloadedItems: true};
+    case types.NEW_ITEMS_SHOWED:
+      return {...state, hasNewUnloadedItems: false};
   }
   return state;
 };

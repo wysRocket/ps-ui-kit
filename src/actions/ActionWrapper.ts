@@ -115,6 +115,25 @@ export class ActionWrapper<T extends Identity, P = undefined> {
     };
   }
 
+  notifyAboutNewItems() {
+    return async (dispatch: any) => {
+      dispatch(this.ACTIONS.onNewItems());
+    };
+  }
+
+  goToBegin(dropFilters: boolean = true, parent?: P) {
+    return async (dispatch: any) => {
+      this.context.setPage(1);
+      this.context.setSort();
+      if (dropFilters) {
+        this.context.setFilter();
+        this.context.setExtendedFilters();
+      }
+      await this.getList(parent)(dispatch);
+      dispatch(this.ACTIONS.newItemsShowed());
+    };
+  }
+
   protected extendCondition(action: string, condition?: GetCondition<P>) {
     // extend if needed
     return condition;

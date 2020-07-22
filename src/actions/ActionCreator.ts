@@ -9,6 +9,8 @@ export interface ListActionTypes {
   LIST_UPDATED: string;
   SELECT_ITEM: string;
   ITEM_SELECTED: string;
+  ON_NEW_ITEMS: string;
+  NEW_ITEMS_SHOWED: string;
 }
 
 // interface GetListAction <T extends Identity> extends Action {}
@@ -46,12 +48,16 @@ export class ActionCreator<T extends Identity> implements ListActionTypes {
   readonly LIST_UPDATED: string;
   readonly SELECT_ITEM: string;
   readonly ITEM_SELECTED: string;
+  readonly ON_NEW_ITEMS: string;
+  readonly NEW_ITEMS_SHOWED: string;
 
   constructor(prefix: string) {
     this.GET_LIST = `GET_${prefix}S_LIST`;
     this.LIST_UPDATED = `${prefix}S_LIST_UPDATED`;
     this.SELECT_ITEM = `SELECT_${prefix}_ITEM`;
     this.ITEM_SELECTED = `${prefix}_ITEM_SELECTED`;
+    this.ON_NEW_ITEMS = `${prefix}_ON_NEW_ITEMS`;
+    this.NEW_ITEMS_SHOWED = `${prefix}_NEW_ITEMS_SHOWED`;
   }
 
   getList(): ListAction<T> {
@@ -68,5 +74,13 @@ export class ActionCreator<T extends Identity> implements ListActionTypes {
 
   itemSelected(selected?: T): ListAction<T> {
     return {type: this.ITEM_SELECTED, selected};
+  }
+
+  onNewItems(): ListAction<T> {
+    return {type: this.ON_NEW_ITEMS};
+  }
+
+  newItemsShowed(): ListAction<T> {
+    return {type: this.NEW_ITEMS_SHOWED};
   }
 }

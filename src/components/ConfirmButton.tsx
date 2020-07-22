@@ -16,6 +16,7 @@ export interface ConfirmButtonItem {
 
 interface IProps {
   style?: CSSProperties;
+  disabled?: boolean;
   items: ConfirmButtonItem[];
   label: string;
 }
@@ -53,6 +54,7 @@ export class ConfirmButton extends React.Component<IProps> {
             variant={'outlined'}
             style={{boxShadow: 'none', textTransform: 'none', backgroundColor: '#F38A0C', borderColor: '#F38A0C', paddingLeft: 24, paddingRight: 24}}
             onClick={this.onButtonClick}
+            disabled={this.props.disabled}
             endIcon={this.renderIcon()}
           >
             {this.props.label}

@@ -19,8 +19,12 @@ export interface ButtonMenuItem {
 
 interface IProps {
   style?: CSSProperties;
+  variant?: 'text' | 'outlined' | 'contained';
   items: ButtonMenuItem[];
   children: any;
+  startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
+  menuMaxHeight?: number;
 }
 
 export class ButtonWithMenu extends React.Component<IProps> {
@@ -51,6 +55,7 @@ export class ButtonWithMenu extends React.Component<IProps> {
             {({TransitionProps}) => (
               <Fade {...TransitionProps} timeout={200}>
                 <Paper elevation={3}>
+                  <div style={{maxHeight: this.props.menuMaxHeight || 400, overflow: 'auto'}}>
                   <List>
                     {this.props.items.map((item, index) => {
                       return (
@@ -66,14 +71,17 @@ export class ButtonWithMenu extends React.Component<IProps> {
                       );
                     })}
                   </List>
+                  </div>
                 </Paper>
               </Fade>
             )}
           </Popper>
           <Button
-            variant={'outlined'}
+            variant={this.props.variant || 'outlined'}
             style={style}
             onClick={this.onButtonClick}
+            startIcon={this.props.startIcon}
+            endIcon={this.props.endIcon}
           >
             {this.props.children}
           </Button>

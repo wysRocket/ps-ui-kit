@@ -52,6 +52,8 @@ import DropSelector from "./components/DropSelector";
 import {ConfirmButton, ConfirmButtonItem as IConfirmButtonItem} from "./components/ConfirmButton";
 import {ButtonWithMenu, ButtonMenuItem as IButtonMenuItem} from "./components/ButtonWithMenu";
 import {IconButtonWithMenu} from "./components/IconButtonWithMenu";
+import AlignedHGroup from "./components/AlignedHGroup";
+import BulletItem from "./components/BulletItem";
 
 export type Service = IService;
 export type Identity = IIdentity;
@@ -89,10 +91,12 @@ export {
   Paginator,
   IconPreview,
   TabbedPanel,
+  BulletItem,
   Filter,
   PopUp,
   Tree,
   HGroup,
+  AlignedHGroup,
   Context,
   StubbedListApi,
   ListItemApi,

@@ -2,11 +2,13 @@ import React, {CSSProperties} from "react";
 import {Service, SideBar, HSplit, VSplit, AppHeader, UserRole, Panel, ContentHeader, DashboardFilter,
   DateFilter, DashboardChart, DonutChart, Paginator, SearchBar, TableLegend, DataTable,
   deleteColumn, editColumn, idColumn, RendererProps, SelectRenderer, SortDirection, TabbedPanel, PopUp,
-  Tree, idLink, ConfirmButton, DonutChartItem, ButtonMenuItem, HGroup} from "frontend-common";
+  Tree, idLink, ConfirmButton, DonutChartItem, ButtonMenuItem, HGroup, AlignedHGroup, BulletItem, ButtonWithMenu} from "frontend-common";
 import {Button} from "@material-ui/core";
 import EyeIcon from "@material-ui/icons/Visibility";
 import HideIcon from "@material-ui/icons/VisibilityOff";
 import MoveIcon from "@material-ui/icons/OpenWith";
+import ExpandIcon from "@material-ui/icons/ExpandMore";
+import CheckIcon from "@material-ui/icons/Check";
 
 const service: Service = {
   identity: 'myService',
@@ -68,6 +70,38 @@ const changeMenuItems: ButtonMenuItem[] = [
   {label: 'View action', icon: (<EyeIcon/>), onClick: () => console.log('view click')},
   {label: 'Hide chart', icon: (<HideIcon/>), onClick: () => console.log('hide click')},
   {label: 'Move chart', icon: (<MoveIcon/>), onClick: () => console.log('move click')},
+];
+
+const roomItems: ButtonMenuItem[] = [
+  {label: 'Room 1', icon: (<CheckIcon style={{color: '#FF0000'}}/>), onClick: () => console.log('view click')},
+  {label: 'Room 2', icon: (<CheckIcon style={{color: '#FFFFFF', opacity: 0}}/>), onClick: () => console.log('hide click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+  {label: 'Room 3', icon: (<CheckIcon style={{color: '#00FFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
 ];
 
 const onSort = (s: any) => {
@@ -209,6 +243,25 @@ export class Main extends React.Component<IProps> {
                 disableLinks={true}
                 onTabChange={this.onTabChange}
               >
+                <ContentHeader>
+                  <AlignedHGroup>
+                    <BulletItem label={'First (31)'} bulletColor={'#FF0000'}/>
+                    <BulletItem label={'Second (12)'} bulletColor={'#00FF00'} style={{paddingLeft: 16}}/>
+                    <BulletItem label={'Third (7)'} style={{paddingLeft: 16}}/>
+                  </AlignedHGroup>
+                  <div style={{paddingRight: 16}}>
+                    <ButtonWithMenu
+                      style={{textTransform: 'none'}}
+                      items={roomItems}
+                      menuMaxHeight={200}
+                      variant={'text'}
+                      endIcon={<ExpandIcon/>}
+                    >
+                      Select room
+                    </ButtonWithMenu>
+                  </div>
+                  <SearchBar onTextFilterChange={this.onTextFilterChange}/>
+                </ContentHeader>
                 Content
               </TabbedPanel>
               <TableLegend items={[{name: 'Total', value: '68'}, {name: 'Issued', value: '14'}, {name: 'Draft', value: '14'}]}/>

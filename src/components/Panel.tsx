@@ -50,7 +50,7 @@ export default class Panel extends React.Component<IProps> {
 
   renderContent() {
     const style: CSSProperties = this.props.style || {};
-    let height: number|string = '100%';
+    let height: any = '100%';
     if (style && style.height) {
       if (typeof style.height === 'number') {
         height = style.height - this.toolsHeight;

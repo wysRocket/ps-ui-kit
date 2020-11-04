@@ -1,8 +1,10 @@
 import React, {CSSProperties} from "react";
 import {Service, SideBar, HSplit, VSplit, AppHeader, UserRole, Panel, ContentHeader, DashboardFilter,
-  DateFilter, DashboardChart, DonutChart, Paginator, SearchBar, TableLegend, DataTable,
+  DateFilterButton, DashboardChart, DonutChart, Paginator, SearchBar, TableLegend, DataTable,
   deleteColumn, editColumn, idColumn, RendererProps, SelectRenderer, SortDirection, TabbedPanel, PopUp,
-  Tree, idLink, ConfirmButton, DonutChartItem, ButtonMenuItem, HGroup, AlignedHGroup, BulletItem, ButtonWithMenu} from "frontend-common";
+  Tree, idLink, ConfirmButton, DonutChartItem, ButtonMenuItem, HGroup, AlignedHGroup, BulletItem, ButtonWithMenu,
+  DateRange
+} from "frontend-common";
 import {Button} from "@material-ui/core";
 import EyeIcon from "@material-ui/icons/Visibility";
 import HideIcon from "@material-ui/icons/VisibilityOff";
@@ -72,6 +74,12 @@ const changeMenuItems: ButtonMenuItem[] = [
   {label: 'Move chart', icon: (<MoveIcon/>), onClick: () => console.log('move click')},
 ];
 
+const filterMenuItems: ButtonMenuItem[] = [
+  {label: 'Ok',icon: (<CheckIcon style={{color: '#FF0000'}}/>), onClick: () => console.log('view click')},
+  {label: 'H1: 0', icon: (<CheckIcon style={{color: '#FFFFFF', opacity: 0}}/>), onClick: () => console.log('hide click')},
+  {label: 'Some', icon: (<CheckIcon style={{color: '#FFFFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
+];
+
 const roomItems: ButtonMenuItem[] = [
   {label: 'Room 1', icon: (<CheckIcon style={{color: '#FF0000'}}/>), onClick: () => console.log('view click')},
   {label: 'Room 2', icon: (<CheckIcon style={{color: '#FFFFFF', opacity: 0}}/>), onClick: () => console.log('hide click')},
@@ -108,6 +116,28 @@ const onSort = (s: any) => {
   console.log('sorted', s);
 };
 
+const randomizeArray = (arg: any[]) => {
+  const array = arg.slice();
+  let currentIndex = array.length;
+  let temporaryValue;
+  let randomIndex;
+
+  while (0 !== currentIndex) {
+
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+};
+
+const yLabels = [...Array(24).keys()].map((n) => `2018-09-0${n + 1}`);
+const sparklineData = [47, 45, 54, 38, 56, 24, 65, 31, 37, 39, 62, 51, 35,
+  41, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46];
 
 interface IProps {
   style?: CSSProperties
@@ -158,7 +188,11 @@ export class Main extends React.Component<IProps> {
   onTextFilterChange = (f: string) => {
     console.log('filter', f);
     this.setState({textFilter: f});
-}
+  };
+
+  onDateRangeChange = (prop: string, range: DateRange) => {
+    console.log('date range changed', range);
+  };
 
   render() {
     const height = document.documentElement.clientHeight - 65;
@@ -166,7 +200,7 @@ export class Main extends React.Component<IProps> {
       <VSplit size={200} style={{height: '100%'}}>
         <SideBar service={service} onSelect={onSideSelect} items={items} selected={'Dashboard'}/>
         <HSplit size={64}>
-          <AppHeader user={{login: 'admin', role: UserRole.SERVICE_OWNER}} menuItems={appMenuItems}/>
+          <AppHeader user={{login: 'admin', role: UserRole.SERVICE_OWNER}} menuItems={appMenuItems} notifications={3}/>
           <Panel style={{height}}>
             <PopUp title={'Parameters and instances'} opened={this.state.popupOpened} onClose={this.onPopupClose}>
               <Tree elements={[
@@ -203,7 +237,7 @@ export class Main extends React.Component<IProps> {
                 <h3>Text</h3>
                 Here
                 <div>Hell hello</div>
-                <DateFilter/>
+                <DateFilterButton items={[{label: 'one', value: '1'}, {label: 'two', value: 2}]} onRangeChanged={this.onDateRangeChange}/>
                 <DashboardFilter topList={topItems} bottomList={bottomItems}/>
                 <ConfirmButton items={[
                   {label: 'Save', onClick: this.onSave},
@@ -212,8 +246,8 @@ export class Main extends React.Component<IProps> {
               </ContentHeader>
               <div>
                 <HGroup>
-                  <DashboardChart/>
-                  <DonutChart totalLabel={'Interactions'} items={chartItems} menuItems={changeMenuItems} title={'Sign Up'} subtitle={'Button'}/>
+                  <DashboardChart title={'Onboards'} subtitle={'percent'} data={{xAxisType: 'datetime', xData: randomizeArray(sparklineData), yLabels}} filterItems={filterMenuItems}/>
+                  <DonutChart totalLabel={'Interactions'} items={chartItems} menuItems={changeMenuItems} filterItems={filterMenuItems} title={'Sign Up'} subtitle={'Button'}/>
                 </HGroup>
                 Hello
               </div>

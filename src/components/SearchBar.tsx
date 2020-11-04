@@ -1,14 +1,15 @@
 import {CSSProperties, default as React} from "react";
 import {IconButton, InputAdornment, TextField} from "@material-ui/core";
-import DropSelector, {DropSelectorItem} from "./DropSelector";
+import DropSelector from "./DropSelector";
 import ClearIcon from "@material-ui/icons/Clear";
+import {LabeledItem} from "../domain/Item";
 
 const ENTER = 13;
 const ESC = 27;
 
 export interface SearchFilter {
   id: string;
-  items: DropSelectorItem[];
+  items: LabeledItem[];
   selected?: any;
 }
 

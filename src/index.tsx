@@ -9,8 +9,8 @@ import AppHeader from "./components/AppHeader";
 import ContentHeader from "./components/ContentHeader";
 import Panel from "./components/Panel";
 import DashboardFilter from "./components/DashboardFilter";
-import DateFilter from "./components/DateFilter";
-import DashboardChart from "./components/DashboardChart";
+import {DateFilterButton} from "./components/DateFilterButton";
+import DashboardChart, {DashboardChartData as IDashboardChartData} from "./components/DashboardChart";
 import DonutChart, {DonutChartItem as IDonutChartItem} from "./components/DonutChart";
 import Paginator from "./components/Paginator";
 import SearchBar from "./components/SearchBar";
@@ -54,6 +54,8 @@ import {ButtonWithMenu, ButtonMenuItem as IButtonMenuItem} from "./components/Bu
 import {IconButtonWithMenu} from "./components/IconButtonWithMenu";
 import AlignedHGroup from "./components/AlignedHGroup";
 import BulletItem from "./components/BulletItem";
+import {LabeledItem as ILabeledItem} from "./domain/Item";
+import {DateRange as IDateRange} from "@matharumanpreet00/react-daterange-picker";
 
 export type Service = IService;
 export type Identity = IIdentity;
@@ -75,6 +77,10 @@ export type TreeContent = ITreeContent;
 export type ConfirmButtonItem = IConfirmButtonItem;
 export type ButtonMenuItem = IButtonMenuItem;
 export type DonutChartItem = IDonutChartItem;
+export type DropSelectorItem = ILabeledItem;
+export type LabeledItem = ILabeledItem;
+export type DateRange = IDateRange;
+export type DashboardChartData = IDashboardChartData;
 
 const Constants = {
   H_PADDING: 32
@@ -82,7 +88,7 @@ const Constants = {
 export {
   ContentHeader,
   DashboardFilter,
-  DateFilter,
+  DateFilterButton,
   DashboardChart,
   DonutChart,
   TableLegend,

@@ -2,7 +2,9 @@ import {CSSProperties, default as React} from "react";
 import Chart from 'react-apexcharts';
 import {Button, Card, CardContent, CardHeader, IconButton} from "@material-ui/core";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import FilterIcon from '@material-ui/icons/FilterList';
 import {ButtonMenuItem, ButtonWithMenu} from "./ButtonWithMenu";
+import {HGroup} from "./Group";
 
 export interface DonutChartItem {
   label: string;
@@ -17,6 +19,7 @@ interface IProps {
   title: string;
   subtitle?: string;
   menuItems: ButtonMenuItem[];
+  filterItems?: ButtonMenuItem[];
 }
 
 export default class DonutChart extends React.Component<IProps> {
@@ -80,9 +83,10 @@ export default class DonutChart extends React.Component<IProps> {
       <Card style={{boxShadow: 'none', border: '1px solid #C7C7C7'}}>
         <CardHeader
           action={
-            <ButtonWithMenu items={this.props.menuItems}>
-              <MoreVertIcon />
-            </ButtonWithMenu>
+            <HGroup>
+              {this.renderFilterButton()}
+              {this.renderMenuButton()}
+            </HGroup>
           }
           title={this.props.title}
           subheader={this.props.subtitle}
@@ -91,6 +95,29 @@ export default class DonutChart extends React.Component<IProps> {
           <Chart type={'donut'} width={width} options={options} series={options.series}/>
         </CardContent>
       </Card>
+    );
+  }
+
+  renderMenuButton() {
+    return (
+      <ButtonWithMenu items={this.props.menuItems}>
+        <MoreVertIcon />
+      </ButtonWithMenu>
+    );
+  }
+
+  renderFilterButton() {
+    const items = this.props.filterItems;
+    if (!items || !items.length) {
+      return '';
+    }
+
+    return (
+      <div style={{paddingRight: 5}}>
+        <ButtonWithMenu items={items}>
+          <FilterIcon />
+        </ButtonWithMenu>
+      </div>
     );
   }
 }

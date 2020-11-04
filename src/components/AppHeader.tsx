@@ -15,6 +15,7 @@ interface IProps {
   style?: CSSProperties;
   user: User;
   menuItems: ButtonMenuItem[];
+  notifications?: number;
 }
 
 export default class AppHeader extends React.Component<IProps> {
@@ -33,7 +34,7 @@ export default class AppHeader extends React.Component<IProps> {
         <Filter filter={(f: string) => console.log('f')}/>
         <div style={{paddingLeft: 100}}/>
         <IconButton aria-label="show 17 new notifications" color="inherit">
-          <Badge badgeContent={17} color="secondary">
+          <Badge badgeContent={this.props.notifications || 0} color="secondary">
             <NotificationsIcon style={{color: '#A7A7A7'}}/>
           </Badge>
         </IconButton>

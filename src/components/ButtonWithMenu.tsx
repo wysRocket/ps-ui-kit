@@ -13,7 +13,7 @@ import {
 
 export interface ButtonMenuItem {
   onClick: () => void;
-  label: string;
+  label: React.ReactNode;
   icon?: any;
 }
 

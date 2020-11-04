@@ -1,13 +1,10 @@
 import {CSSProperties, default as React} from "react";
 import {FormControl, NativeSelect} from "@material-ui/core";
+import {LabeledItem} from "../domain/Item";
 
-export interface DropSelectorItem {
-  label: string;
-  value: any;
-}
 interface IProps {
   style?: CSSProperties;
-  items: DropSelectorItem[];
+  items: LabeledItem[];
   selected?: any;
   onChange: (value: any) => void;
 }

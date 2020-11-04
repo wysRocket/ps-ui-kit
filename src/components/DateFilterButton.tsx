@@ -3,18 +3,21 @@ import {CSSProperties} from "react";
 import {DateRange, DateRangePicker} from "@matharumanpreet00/react-daterange-picker";
 import FilterIcon from '@material-ui/icons/FilterList';
 import {
-  Button,
-  Fade,
+  Button, Dialog,
+  Fade, IconButton,
   Paper,
-  Popper
+  Popper, Typography
 } from "@material-ui/core";
 import {LabeledItem} from "../domain/Item";
 import ContentHeader from "./ContentHeader";
 import DropSelector from "./DropSelector";
+import CloseIcon from "@material-ui/core/SvgIcon/SvgIcon";
 
 interface IProps {
   style?: CSSProperties;
   menuMaxHeight?: number;
+  minDate?: Date;
+  maxDate?: Date;
   items: LabeledItem[];
   selectedProp?: string;
   selectedRange?: DateRange;
@@ -23,7 +26,6 @@ interface IProps {
 
 interface IState {
   opened: boolean;
-  anchorEl: any;
   property?: string;
   range?: DateRange;
 }
@@ -31,7 +33,6 @@ interface IState {
 export class DateFilterButton extends React.Component<IProps> {
   state: IState = {
     opened: false,
-    anchorEl: undefined,
     property: 'startedAt',
   };
 
@@ -48,9 +49,8 @@ export class DateFilterButton extends React.Component<IProps> {
     this.setStateFromProps(nextProps);
   }
 
-  onButtonClick = (evt: any) => {
-    const opened = !this.state.opened;
-    this.setState({opened, anchorEl: evt.currentTarget});
+  onButtonClick = () => {
+    this.setState({opened: true});
   }
 
   onPropertyChange = (v: string) => {
@@ -64,38 +64,36 @@ export class DateFilterButton extends React.Component<IProps> {
   onSubmit = () => {
     const {property, range} = this.state;
     if (property && range) {
-      this.setState({opened: false}, () => this.props.onRangeChanged(property, range));
+      this.setState({opened: false, range: undefined}, () => this.props.onRangeChanged(property, range));
     }
   }
 
   onCancel = () => {
-    this.setState({opened: false});
+    this.setState({opened: false, range: undefined});
   }
 
   render() {
     const style: CSSProperties = this.props.style || {width: 32, height: 32, minWidth: 32};
     return (
       <div>
-        <Popper open={this.state.opened} anchorEl={this.state.anchorEl} placement={'bottom-end'} transition>
-          {({TransitionProps}) => (
-            <Fade {...TransitionProps} timeout={200}>
-              <Paper elevation={3}>
-                <div style={{maxHeight: this.props.menuMaxHeight || 600, overflow: 'auto'}}>
-                  <ContentHeader style={{paddingLeft: 32, paddingRight: 32, display: 'flex'}}>
-                    <DropSelector items={this.props.items} selected={this.state.property} onChange={this.onPropertyChange}/>
-                    <Button disabled={!this.state.property || !this.state.range} onClick={this.onSubmit}>Ok</Button>
-                    <Button onClick={this.onCancel}>Cancel</Button>
-                  </ContentHeader>
-                  <DateRangePicker
-                    open={true}
-                    maxDate={new Date()}
-                    onChange={this.onRangeChanged}
-                  />
-                </div>
-              </Paper>
-            </Fade>
-          )}
-        </Popper>
+        <Dialog maxWidth={false} PaperProps={{style: {borderRadius: 0}}} onClose={this.onCancel} open={this.state.opened}>
+          <Paper elevation={3}>
+            <div>
+            <ContentHeader style={{paddingLeft: 32, paddingRight: 32, display: 'flex'}}>
+              <DropSelector items={this.props.items} selected={this.state.property} onChange={this.onPropertyChange}/>
+              <Button disabled={!this.state.property || !this.state.range} onClick={this.onSubmit}>Ok</Button>
+              <Button onClick={this.onCancel}>Cancel</Button>
+            </ContentHeader>
+            <DateRangePicker
+              open={true}
+              initialDateRange={this.state.range || {}}
+              maxDate={this.props.maxDate || new Date()}
+              minDate={this.props.minDate}
+              onChange={this.onRangeChanged}
+            />
+          </div>
+          </Paper>
+        </Dialog>
         <Button disabled={!this.props.items.length} variant={'outlined'} style={{width: 32, height: 32, minWidth: 32}} onClick={this.onButtonClick}>
           <FilterIcon style={{color: '#999999'}}/>
         </Button>

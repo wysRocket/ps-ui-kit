@@ -37,7 +37,8 @@ export class DateFilterButton extends React.Component<IProps> {
   };
 
   setStateFromProps = (props: IProps) => {
-    const newState = {property: props.selectedProp || props.items[0], range: props.selectedRange};
+    const first = props.items[0];
+    const newState = {property: props.selectedProp || first ? first.value : undefined, range: props.selectedRange};
     this.setState(newState);
   }
 

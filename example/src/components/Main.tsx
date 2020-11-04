@@ -191,7 +191,7 @@ export class Main extends React.Component<IProps> {
   };
 
   onDateRangeChange = (prop: string, range: DateRange) => {
-    console.log('date range changed', range);
+    console.log('date range changed', prop, range);
   };
 
   render() {

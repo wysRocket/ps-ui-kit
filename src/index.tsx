@@ -56,6 +56,7 @@ import AlignedHGroup from "./components/AlignedHGroup";
 import BulletItem from "./components/BulletItem";
 import {LabeledItem as ILabeledItem} from "./domain/Item";
 import {DateRange as IDateRange} from "@matharumanpreet00/react-daterange-picker";
+import {DraggableList} from "./components/DraggableList";
 
 export type Service = IService;
 export type Identity = IIdentity;
@@ -87,6 +88,7 @@ const Constants = {
 };
 export {
   ContentHeader,
+  DraggableList,
   DashboardFilter,
   DateFilterButton,
   DashboardChart,

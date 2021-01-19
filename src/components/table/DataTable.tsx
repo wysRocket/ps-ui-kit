@@ -4,6 +4,10 @@ import {ColumnInfo} from "./column";
 import {Table, TableBody, TableCell, TableHead, TableRow, TableSortLabel} from "@material-ui/core";
 import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
 import {invertDirection, Sort, SortDirection} from "../../domain/Sort";
+import DraggableItem from "../DraggableItem";
+import {DndProvider} from "react-dnd";
+import {HTML5Backend} from "react-dnd-html5-backend";
+import DraggableRow from "./DraggableRow";
 
 interface IProps<T> {
   style?: CSSProperties;
@@ -13,13 +17,17 @@ interface IProps<T> {
   onSort?: (newSort: Sort) => void;
   columns: ColumnInfo[];
   data: T[];
+  idField?: string;
+  onSwitchItems?: (fromIndex: number, toIndex: number) => void;
   sort?: Sort;
 }
 
 export default class DataTable<T> extends React.Component<IProps<T>> {
   render() {
-    const {columns, data, sort} = this.props;
+    const {columns, data, sort, idField, onSwitchItems} = this.props;
+    const id = idField || 'identity';
     return (
+      <DndProvider backend={HTML5Backend}>
       <Table style={this.props.style}>
         <TableHead>
           <TableRow style={{height: 'auto', backgroundColor: '#F0F0F0'}}>
@@ -37,21 +45,44 @@ export default class DataTable<T> extends React.Component<IProps<T>> {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((item, index) => (
-            <TableRow
-              key={index}
-              style={{height: 'auto'}}
-              selected={false}
-            >
-              {columns.map((column, j) => (
-                <TableCell key={j}>
-                  {this.renderCell(item, column)}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
+          {data.map((item, index) => {
+            const itemId = (item as any)[id];
+            if (onSwitchItems !== undefined) {
+              return (
+                  <DraggableRow
+                    key={itemId}
+                    style={{height: 'auto'}}
+                    selected={false}
+                    move={onSwitchItems}
+                    type={'tableItem'}
+                    index={index}
+                    id={itemId}
+                  >
+                    {columns.map((column, i) => (
+                      <TableCell key={i}>
+                        {this.renderCell(item, column)}
+                      </TableCell>
+                    ))}
+                  </DraggableRow>
+                );
+            }
+            return (
+              <TableRow
+                key={index}
+                style={{height: 'auto'}}
+                selected={false}
+              >
+                {columns.map((column, i) => (
+                  <TableCell key={i}>
+                    {this.renderCell(item, column)}
+                  </TableCell>
+                ))}
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
+      </DndProvider>
     );
   }
 

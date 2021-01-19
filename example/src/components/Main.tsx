@@ -3,7 +3,7 @@ import {Service, SideBar, HSplit, VSplit, AppHeader, UserRole, Panel, ContentHea
   DateFilterButton, DashboardChart, DonutChart, Paginator, SearchBar, TableLegend, DataTable,
   deleteColumn, editColumn, idColumn, RendererProps, SelectRenderer, SortDirection, TabbedPanel, PopUp,
   Tree, idLink, ConfirmButton, DonutChartItem, ButtonMenuItem, HGroup, AlignedHGroup, BulletItem, ButtonWithMenu,
-  DateRange
+  DateRange, DraggableList
 } from "frontend-common";
 import {Button} from "@material-ui/core";
 import EyeIcon from "@material-ui/icons/Visibility";
@@ -11,6 +11,10 @@ import HideIcon from "@material-ui/icons/VisibilityOff";
 import MoveIcon from "@material-ui/icons/OpenWith";
 import ExpandIcon from "@material-ui/icons/ExpandMore";
 import CheckIcon from "@material-ui/icons/Check";
+import {cloneDeep} from "lodash";
+import {DndProvider} from "react-dnd";
+import {HTML5Backend} from "react-dnd-html5-backend";
+import {BrowserRouter as Router} from "react-router-dom";
 
 const service: Service = {
   identity: 'myService',
@@ -151,6 +155,7 @@ export class Main extends React.Component<IProps> {
     popupOpened: false,
     selected: ['pv2'],
     textFilter: '',
+    actions
   };
   onTabChange = (v: any) => {
     console.log('tab change', v);
@@ -192,6 +197,15 @@ export class Main extends React.Component<IProps> {
 
   onDateRangeChange = (prop: string, range: DateRange) => {
     console.log('date range changed', prop, range);
+  };
+
+  onSwitchActions = (fromIndex: number, toIndex: number) => {
+    const prevOrder = this.state.actions || [];
+    const actions = cloneDeep(prevOrder);
+    actions[fromIndex] = prevOrder[toIndex];
+    actions[toIndex] = prevOrder[fromIndex];
+    this.setState({actions});
+
   };
 
   render() {
@@ -247,10 +261,17 @@ export class Main extends React.Component<IProps> {
               <div>
                 <HGroup>
                   <DashboardChart title={'Onboards'} subtitle={'percent'} data={{xAxisType: 'datetime', xData: randomizeArray(sparklineData), yLabels}} filterItems={filterMenuItems}/>
+                  <DashboardChart title={'Fails'} subtitle={'percent'} data={{xAxisType: 'datetime', xData: randomizeArray(sparklineData), yLabels}} filterItems={filterMenuItems}/>
                   <DonutChart totalLabel={'Interactions'} items={chartItems} menuItems={changeMenuItems} filterItems={filterMenuItems} title={'Sign Up'} subtitle={'Button'}/>
                 </HGroup>
                 Hello
               </div>
+              <DraggableList
+                items={this.state.actions}
+                type={'action'}
+                move={this.onSwitchActions}
+                renderer={(item) => (<div>{item.identity} - {item.status}</div>)}
+              />
               <div>
                 <Paginator
                   currentPage={this.state.currentPage}
@@ -323,8 +344,9 @@ export class Main extends React.Component<IProps> {
                   editColumn(),
                   deleteColumn(),
                 ]}
-                data={actions}
+                data={this.state.actions}
                 onSort={onSort}
+                onSwitchItems={this.onSwitchActions}
                 sort={{direction: SortDirection.ASC, field: 'identity'}}
               />
             </div>

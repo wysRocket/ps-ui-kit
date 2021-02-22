@@ -3,7 +3,7 @@ import {Service, SideBar, HSplit, VSplit, AppHeader, UserRole, Panel, ContentHea
   DateFilterButton, DashboardChart, DonutChart, Paginator, SearchBar, TableLegend, DataTable,
   deleteColumn, editColumn, idColumn, RendererProps, SelectRenderer, SortDirection, TabbedPanel, PopUp,
   Tree, idLink, ConfirmButton, DonutChartItem, ButtonMenuItem, HGroup, AlignedHGroup, BulletItem, ButtonWithMenu,
-  DateRange, DraggableList
+  DateRange, DraggableList, Identity
 } from "frontend-common";
 import {Button} from "@material-ui/core";
 import EyeIcon from "@material-ui/icons/Visibility";
@@ -27,6 +27,10 @@ const service: Service = {
   keywords: [],
   endpoint: 'http://lala',
   lastTouch: ''
+};
+
+interface MyId extends Identity<string> {
+  name: string;
 };
 
 const onSideSelect = (value: any) => {

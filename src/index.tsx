@@ -59,7 +59,7 @@ import {DateRange as IDateRange} from "@matharumanpreet00/react-daterange-picker
 import {DraggableList} from "./components/DraggableList";
 
 export type Service = IService;
-export type Identity = IIdentity;
+export type Identity<T = string | number> = IIdentity<T>;
 export type ServiceAction = IServiceAction;
 export type User = IUser;
 export type DataSort = Sort;

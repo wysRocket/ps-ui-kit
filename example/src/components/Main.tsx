@@ -218,7 +218,9 @@ export class Main extends React.Component<IProps> {
       <VSplit size={200} style={{height: '100%'}}>
         <SideBar service={service} onSelect={onSideSelect} items={items} selected={'Dashboard'}/>
         <HSplit size={64}>
-          <AppHeader user={{login: 'admin', role: UserRole.SERVICE_OWNER}} menuItems={appMenuItems} notifications={3}/>
+          <AppHeader user={{login: 'admin', role: UserRole.SERVICE_OWNER}} menuItems={appMenuItems} notifications={3}>
+            Hello google
+          </AppHeader>
           <Panel style={{height}}>
             <PopUp title={'Parameters and instances'} opened={this.state.popupOpened} onClose={this.onPopupClose}>
               <Tree elements={[

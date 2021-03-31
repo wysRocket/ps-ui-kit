@@ -3,7 +3,8 @@ import {Service, SideBar, HSplit, VSplit, AppHeader, UserRole, Panel, ContentHea
   DateFilterButton, DashboardChart, DonutChart, Paginator, SearchBar, TableLegend, DataTable,
   deleteColumn, editColumn, idColumn, RendererProps, SelectRenderer, SortDirection, TabbedPanel, PopUp,
   Tree, idLink, ConfirmButton, DonutChartItem, ButtonMenuItem, HGroup, AlignedHGroup, BulletItem, ButtonWithMenu,
-  DateRange, DraggableList, Identity, Styles, TableWithPagination
+  DateRange, DraggableList, Identity, Styles, TableWithPagination, ButtonBasedDropSelector, NumberedContainer,
+  NameValueContainer, ActionInstanceContainer, Buttons,
 } from "frontend-common";
 import {Button} from "@material-ui/core";
 import EyeIcon from "@material-ui/icons/Visibility";
@@ -159,8 +160,14 @@ export class Main extends React.Component<IProps> {
     popupOpened: false,
     selected: ['pv2'],
     textFilter: '',
-    actions
+    actions,
+    instanceVisible: true
   };
+
+  onInstanceVisibleChange = () => {
+    this.setState({instanceVisible: !this.state.instanceVisible});
+  };
+
   onTabChange = (v: any) => {
     console.log('tab change', v);
     this.setState({tab: v});
@@ -252,7 +259,7 @@ export class Main extends React.Component<IProps> {
                 }
               ]} onSelect={this.onTreeSelect} expandSelected={true} selected={this.state.selected}/>
             </PopUp>
-            <div style={{paddingLeft: 24, paddingRight: 24}}>
+            <div style={{paddingLeft: Styles.Padding.L, paddingRight: Styles.Padding.L}}>
               <ContentHeader>
                 <h3>Text</h3>
                 Here
@@ -278,6 +285,41 @@ export class Main extends React.Component<IProps> {
                 move={this.onSwitchActions}
                 renderer={(item) => (<div>{item.identity} - {item.status}</div>)}
               />
+              <div>
+                <ButtonBasedDropSelector variant={'text'} items={topItems} onChange={(v) => console.log(v)}/>
+              </div>
+              <div>
+                <Buttons.Gray label={'My Gray Button'}/>
+              </div>
+              <div>
+                <Buttons.Orange label={'Issue'}/>
+              </div>
+              <div>
+                <Buttons.Red label={'Reject'}/>
+              </div>
+              <div>
+                <NumberedContainer number={1}>
+                  <div>Hello!</div>
+                </NumberedContainer>
+              </div>
+              <div style={{paddingTop: 24}}>
+                <NameValueContainer number={1} onChange={(n, v) => console.log('nme value change', n, v)} onRemove={() => console.log('name value remove')}/>
+              </div>
+              <div style={{paddingTop: 24}}>
+                <ActionInstanceContainer
+                  number={1}
+                  parameters={[
+                    {name: 'Lection', value: 'Mathematic Analyse and Something else, i event do not know'},
+                    {name: 'Professor', value: 'Professor kislikh schei dr. Moriarty'},
+                    {name: 'Auditory', value: 'Big Queens Hall'},
+                    {name: 'Start date', value: '2021-03-21'},
+                    {name: 'End date', value: '2021-03-22'},
+                    ]}
+                  visible={this.state.instanceVisible}
+                  onEdit={() => console.log('aic edit')}
+                  onVisibilityChange={this.onInstanceVisibleChange}
+                />
+              </div>
               <div>
                 <Paginator
                   currentPage={this.state.currentPage}

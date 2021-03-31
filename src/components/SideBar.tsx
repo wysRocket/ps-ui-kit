@@ -110,7 +110,7 @@ export default class SideBar extends React.Component<IProps> {
     const {items, selected, service} = this.props;
     return (
       <Panel style={{backgroundColor: Styles.SideBar.Color.BG}}>
-        <div style={{borderRight: '1px solid rgba(199, 199, 199, 1.0', height: '100%', display: 'flex', flexDirection: 'column'}}>
+        <div style={{/*borderRight: '1px solid rgba(199, 199, 199, 1.0',*/ height: '100%', display: 'flex', flexDirection: 'column'}}>
           <div style={{height: 94, paddingLeft: this.props.minimized ? 8 : 16, paddingTop: 16, color: '#6C6C6C'}}>
             <div style={{float: 'left', minWidth: this.props.minimized ? 40 : 48}}>
               <div style={{width: 40, height: 40, backgroundColor: '#E7E7E7', border: '1px solid rgba(199, 199, 199, 1.0)', borderRadius: 3}}>

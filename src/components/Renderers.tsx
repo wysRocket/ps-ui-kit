@@ -6,6 +6,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import {Link} from "react-router-dom";
 import {ButtonMenuItem, ButtonWithMenu} from "./ButtonWithMenu";
 import ExpandIcon from "@material-ui/icons/ExpandMore";
+import * as Style from "./DefaultStyles";
 
 export interface RendererProps {
   item: any;
@@ -91,7 +92,7 @@ export class EditActionRenderer extends AbstractRenderer {
   render() {
     return (
       <IconButton onClick={this.props.onClick} disabled={this.props.disabled}>
-        <EditIcon />
+        <EditIcon style={{color: Style.Icon.Button.COLOR}} />
       </IconButton>
     );
   }
@@ -101,7 +102,7 @@ export class DeleteActionRenderer extends AbstractRenderer {
   render() {
     return (
       <IconButton onClick={this.props.onClick} disabled={this.props.disabled}>
-        <DeleteIcon />
+        <DeleteIcon style={{color: Style.Icon.Button.COLOR}} />
       </IconButton>
     );
   }

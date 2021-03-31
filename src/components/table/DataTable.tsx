@@ -16,7 +16,6 @@ const useStyles = makeStyles({
   activeSortIcon: {
     opacity: 1,
   },
-  // Half visible for inactive icons
   inactiveSortIcon: {
     opacity: 0.2,
   },
@@ -40,6 +39,10 @@ const SortableHeader: React.FC<{column: ColumnInfo, sort?: Sort, onSort?: (newSo
       }
     };
     const active = sort && sort.field === column.fieldId;
+    const hs: CSSProperties = {};
+    if (active) {
+      hs.fontWeight = 'bold';
+    }
     return (
       <TableSortLabel
         IconComponent={ArrowDropDown}
@@ -49,7 +52,7 @@ const SortableHeader: React.FC<{column: ColumnInfo, sort?: Sort, onSort?: (newSo
         classes={{icon: active ? classes.activeSortIcon : classes.inactiveSortIcon}}
         hideSortIcon={column.header.hideSortIcon}
       >
-        {column.header.title}
+        <div style={hs}>{column.header.title}</div>
       </TableSortLabel>
     );
   }
@@ -147,41 +150,10 @@ export default class DataTable<T> extends React.Component<IProps<T>> {
     );
   }
 
-  /*createSortHandler = (column: ColumnInfo) => () => {
-    const {sort, onSort} = this.props;
-    if  (onSort !== undefined) {
-      let newSort: Sort = {field: column.fieldId, direction: SortDirection.ASC};
-      if (sort && sort.field === column.fieldId) {
-        newSort = {field: sort.field, direction: invertDirection(sort.direction)};
-      }
-      onSort(newSort);
-    }
-  }*/
-
   renderHeaderCell(column: ColumnInfo) {
     return (
       <SortableHeader column={column} sort={this.props.sort} onSort={this.props.onSort}/>
     );
-    /*if (column.header !== undefined) {
-      if (column.header.sortable) {
-        const {sort} = this.props;
-        return (
-          <TableSortLabel
-            IconComponent={ArrowDropDown}
-            active={sort && sort.field === column.fieldId}
-            direction={sort ? sort.direction : 'asc'}
-            onClick={this.createSortHandler(column)}
-            hideSortIcon={column.header.hideSortIcon}
-          >
-            {column.header.title}
-          </TableSortLabel>
-        );
-      } else {
-        return column.header.title || '';
-      }
-    }
-
-    return ('');*/
   }
 
   createClickHandler = (item: T, column: ColumnInfo) => () => {

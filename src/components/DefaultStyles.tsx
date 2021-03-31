@@ -43,6 +43,9 @@ export const Icon = {
       WARNING: '#F39B31',
       ERROR: '#E51E13',
     }
+  },
+  Button: {
+    COLOR: '#BAB8B5'
   }
 };
 
@@ -50,5 +53,20 @@ export const Table = {
   Color: {
     HEADER_BACKGROUND: '#f8f8f8',
     BORDER: '#dadcdd'
+  }
+};
+
+export const Buttons = {
+  Orange: {
+    BG_COLOR: '#F39B31',
+    COLOR: '#FFFFFF'
+  },
+  Gray: {
+    BG_COLOR: '#E4E4E4',
+    COLOR: '#1F1F1F'
+  },
+  Red: {
+    BG_COLOR: '#F34040',
+    COLOR: '#F34444'
   }
 };

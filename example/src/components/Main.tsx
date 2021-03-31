@@ -3,7 +3,7 @@ import {Service, SideBar, HSplit, VSplit, AppHeader, UserRole, Panel, ContentHea
   DateFilterButton, DashboardChart, DonutChart, Paginator, SearchBar, TableLegend, DataTable,
   deleteColumn, editColumn, idColumn, RendererProps, SelectRenderer, SortDirection, TabbedPanel, PopUp,
   Tree, idLink, ConfirmButton, DonutChartItem, ButtonMenuItem, HGroup, AlignedHGroup, BulletItem, ButtonWithMenu,
-  DateRange, DraggableList, Identity
+  DateRange, DraggableList, Identity, Styles, TableWithPagination
 } from "frontend-common";
 import {Button} from "@material-ui/core";
 import EyeIcon from "@material-ui/icons/Visibility";
@@ -215,8 +215,8 @@ export class Main extends React.Component<IProps> {
   render() {
     const height = document.documentElement.clientHeight - 65;
     return (
-      <VSplit size={200} style={{height: '100%'}}>
-        <SideBar service={service} onSelect={onSideSelect} items={items} selected={'Dashboard'}/>
+      <VSplit size={Styles.SideBar.Size.WIDTH} style={{height: '100%'}}>
+        <SideBar service={service} onSelect={onSideSelect} items={items} selected={'Dashboard'} minimized={false}/>
         <HSplit size={64}>
           <AppHeader user={{login: 'admin', role: UserRole.SERVICE_OWNER}} menuItems={appMenuItems} notifications={3}>
             Hello google
@@ -335,6 +335,31 @@ export class Main extends React.Component<IProps> {
                 rightHint={'Total: 267'}
                 textFilter={this.state.textFilter}
                 onTextFilterChange={this.onTextFilterChange}
+              />
+              <TableWithPagination
+                columns={[
+                  idLink((item: any)=> item.identity, 'name'),
+                  idColumn('name'),
+                  {
+                    fieldId: 'status',
+                    enumValues: ['Active', 'Archived', 'Stopped', 'Paused'],
+                    header: {title: 'Status', sortable: true},
+                    align: 'center',
+                    renderer: (props: RendererProps) => (<SelectRenderer {...props}/>)
+                  },
+                  editColumn(),
+                  deleteColumn(),
+                ]}
+                data={this.state.actions}
+                onSort={onSort}
+                onSwitchItems={this.onSwitchActions}
+                sort={{direction: SortDirection.ASC, field: 'identity'}}
+                currentPage={this.state.currentPage}
+                itemsPerPage={this.state.itemsPerPage}
+                ranges={[10, 20, 30]}
+                itemsTotal={168}
+                onPageChange={this.onPageChange}
+                onPageSizeChange={this.onPageSizeChange}
               />
               <SearchBar onTextFilterChange={this.onTextFilterChange} textFilter={this.state.textFilter}/>
               <DataTable

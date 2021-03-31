@@ -57,6 +57,8 @@ import BulletItem from "./components/BulletItem";
 import {LabeledItem as ILabeledItem} from "./domain/Item";
 import {DateRange as IDateRange} from "@matharumanpreet00/react-daterange-picker";
 import {DraggableList} from "./components/DraggableList";
+import * as Styles from "./components/DefaultStyles";
+import TableWithPagination from "./components/table/TableWithPagination";
 
 export type Service = IService;
 export type Identity<T = string | number> = IIdentity<T>;
@@ -140,4 +142,6 @@ export {
   HSplit,
   isUserApproved,
   Constants,
+  Styles,
+  TableWithPagination,
 };

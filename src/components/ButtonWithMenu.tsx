@@ -48,6 +48,7 @@ export class ButtonWithMenu extends React.Component<IProps> {
 
   render() {
     const style: CSSProperties = this.props.style || {width: 32, height: 32, minWidth: 32};
+    const ws = style.width ? {width: style.width} : {};
     return (
       <ClickAwayListener onClickAway={this.onClickAway}>
         <div>
@@ -55,7 +56,7 @@ export class ButtonWithMenu extends React.Component<IProps> {
             {({TransitionProps}) => (
               <Fade {...TransitionProps} timeout={200}>
                 <Paper elevation={3}>
-                  <div style={{maxHeight: this.props.menuMaxHeight || 400, overflow: 'auto'}}>
+                  <div style={{...ws, maxHeight: this.props.menuMaxHeight || 400, overflow: 'auto'}}>
                   <List>
                     {this.props.items.map((item, index) => {
                       return (

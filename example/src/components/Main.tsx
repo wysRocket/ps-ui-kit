@@ -4,7 +4,7 @@ import {Service, SideBar, HSplit, VSplit, AppHeader, UserRole, Panel, ContentHea
   deleteColumn, editColumn, idColumn, RendererProps, SelectRenderer, SortDirection, TabbedPanel, PopUp,
   Tree, idLink, ConfirmButton, DonutChartItem, ButtonMenuItem, HGroup, AlignedHGroup, BulletItem, ButtonWithMenu,
   DateRange, DraggableList, Identity, Styles, TableWithPagination, ButtonBasedDropSelector, NumberedContainer,
-  NameValueContainer, ActionInstanceContainer, Buttons,
+  NameValueContainer, ActionInstanceContainer, Buttons, SchemaDomain, AttributeComponent, ExpandedAttributesList,
 } from "frontend-common";
 import {Button} from "@material-ui/core";
 import EyeIcon from "@material-ui/icons/Visibility";
@@ -304,6 +304,75 @@ export class Main extends React.Component<IProps> {
               </div>
               <div style={{paddingTop: 24}}>
                 <NameValueContainer number={1} onChange={(n, v) => console.log('nme value change', n, v)} onRemove={() => console.log('name value remove')}/>
+              </div>
+              <div style={{paddingTop: Styles.Padding.M}}>
+                <AttributeComponent.BoxedViewer
+                  attribute={{name: 'First Name', value: 'Arturito'}}
+                  schemaAttribute={{name: 'First Name', type: SchemaDomain.AttributeType.TEXT, description: 'Your first name'}}
+                />
+              </div>
+              <div style={{paddingTop: Styles.Padding.M}}>
+                <AttributeComponent.Viewer
+                  attribute={{name: 'First Name', value: 'Arturito'}}
+                  schemaAttribute={{name: 'First Name', type: SchemaDomain.AttributeType.TEXT, description: 'Your first name'}}
+                />
+              </div>
+              <div style={{paddingTop: Styles.Padding.M}}>
+                <AttributeComponent.Editor
+                  attribute={{name: 'First Name', value: 'Arturito'}}
+                  schemaAttribute={{name: 'First Name', type: SchemaDomain.AttributeType.TEXT, description: 'Your first name'}}
+                  onChange={(a) => console.log(a)}
+                />
+              </div>
+              <div style={{paddingTop: Styles.Padding.M}}>
+                <AttributeComponent.Editor
+                  attribute={{name: 'Age', value: '10'}}
+                  schemaAttribute={{name: 'Age', type: SchemaDomain.AttributeType.NUMBER, description: 'Your age'}}
+                  onChange={(a) => console.log(a)}
+                />
+              </div>
+              <div style={{paddingTop: Styles.Padding.M}}>
+                <AttributeComponent.Editor
+                  attribute={{name: 'Date of birth', value: '1000000'}}
+                  schemaAttribute={{name: 'Date of birth', type: SchemaDomain.AttributeType.DATE, description: 'Your dob'}}
+                  onChange={(a) => console.log(a)}
+                />
+              </div>
+              <div style={{paddingTop: Styles.Padding.M}}>
+                <AttributeComponent.Editor
+                  attribute={{name: 'Sex', value: '0'}}
+                  schemaAttribute={{
+                    name: 'Sex', type:
+                    SchemaDomain.AttributeType.CUSTOM_TYPE,
+                    enumValues: [
+                      {name: 'F', value: '0', description: 'Female'},
+                      {name: 'M', value: '1', description: 'Male'}
+                    ],
+                    description: 'Your sex'
+                  }}
+                  onChange={(a) => console.log(a)}
+                />
+              </div>
+              <div style={{paddingTop: 24}}>
+                <ExpandedAttributesList
+                  style={{width: 450}}
+                  icon={(<MoveIcon/>)}
+                  header={'Hunter Elementary School'}
+                  attributes={[
+                    {
+                      attribute: {name: 'First Name', value: 'Arturito'},
+                      schemaField: {name: 'First Name', type: SchemaDomain.AttributeType.TEXT, description: 'Your first name'}
+                    },
+                    {
+                      attribute: {name: 'Age', value: '10'},
+                      schemaField: {name: 'Age', type: SchemaDomain.AttributeType.NUMBER, description: 'Your age'}
+                    },
+                    {
+                      attribute: {name: 'Date of birth', value: '1000000'},
+                      schemaField: {name: 'Date of birth', type: SchemaDomain.AttributeType.DATE, description: 'Your dob'}
+                    },
+                  ]}
+                />
               </div>
               <div style={{paddingTop: 24}}>
                 <ActionInstanceContainer

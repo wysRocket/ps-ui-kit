@@ -64,6 +64,9 @@ import NumberedContainer from "./components/NumberedContainer";
 import NameValueContainer from "./components/NameValueContainer";
 import ActionInstanceContainer from "./components/ActionInstanceContainer";
 import * as Buttons from "./components/Buttons";
+import * as SchemaDomain from "./domain/SchemaDomain";
+import * as AttributeComponent from "./components/AttributeComponent";
+import ExpandedAttributesList from "./components/ExpandedAttributesList";
 
 export type Service = IService;
 export type Identity<T = string | number> = IIdentity<T>;
@@ -155,4 +158,7 @@ export {
   NameValueContainer,
   ActionInstanceContainer,
   Buttons,
+  SchemaDomain,
+  AttributeComponent,
+  ExpandedAttributesList,
 };

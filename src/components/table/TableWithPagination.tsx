@@ -28,8 +28,9 @@ interface IProps<T> {
 export default class TableWithPagination<T> extends React.Component<IProps<T>> {
   render() {
     return (
-      <div style={this.props.style || {border: `1px solid ${Styles.Table.Color.BORDER}`, borderRadius: 4}}>
+      <div style={{border: `1px solid ${Styles.Table.Color.BORDER}`, borderRadius: 4}}>
         <DataTable
+          style={this.props.style}
           columns={this.props.columns}
           data={this.props.data}
           onChange={this.props.onChange}

@@ -64,7 +64,7 @@ export class SelectRenderer extends AbstractRenderer {
         variant={'outlined'}
         endIcon={<ExpandIcon/>}
         items={items}>
-        {this.state.selected || 'Select'}
+        {this.state.selected !== undefined ? convert(this.state.selected, this.props.valueToView) : 'Select'}
       </ButtonWithMenu>
     );
   }

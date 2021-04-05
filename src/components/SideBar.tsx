@@ -14,7 +14,7 @@ import {makeStyles} from "@material-ui/core/styles";
 
 export interface SideBarItem {
   label: string;
-  icon?: any;
+  icon?: (p: {style?: CSSProperties}) => React.ReactNode;
   value: any;
   link: string;
 }
@@ -70,6 +70,7 @@ const ItemComponent: React.FC<ItemComponentProps> = (props) => {
   if (props.minimized) {
     iconStyle.minWidth = 0;
   }
+  const colorStyle = {color: props.selected ? Styles.SideBar.Color.ACTIVE_ICON : Styles.SideBar.Color.ICON};
   return (
     <ListItem
       button={true}
@@ -88,7 +89,7 @@ const ItemComponent: React.FC<ItemComponentProps> = (props) => {
           border: '1px solid rgba(199, 199, 199, 1.0)',
           borderRadius: 3*/
         }}>
-          {props.item.icon ? props.item.icon : (<DefaultIcon style={{color: props.selected ? Styles.SideBar.Color.ACTIVE_ICON : Styles.SideBar.Color.ICON}}/>)}
+          {props.item.icon !== undefined ? props.item.icon({style: colorStyle}) : (<DefaultIcon style={colorStyle}/>)}
         </div>
       </ListItemIcon>
       {renderText()}

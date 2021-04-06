@@ -16,7 +16,7 @@ export default class NumberedContainer extends React.Component<IProps> {
     const style = this.props.style || {width: 635, height: 136, backgroundColor: '#FAFAFA'};
     const divStyle: CSSProperties = {display: 'inline-flex'};
     return (
-      <div style={{...style, borderRadius: 4, border: '1px solid #E3E4E5'}}>
+      <div style={{borderRadius: 4, border: '1px solid #E3E4E5', ...style}}>
         <div style={{display: 'flex'}}>
           <div style={divStyle}>
             <div style={{

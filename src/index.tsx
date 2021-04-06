@@ -48,7 +48,7 @@ import PopUp from "./components/PopUp";
 import {Tree, TreeContent as ITreeContent, TreeElement as ITreeElement} from "./components/tree/Tree";
 import Filter from "./components/Filter";
 import {ActionWrapper} from "./actions/ActionWrapper";
-import DropSelector from "./components/DropSelector";
+import DropSelector, {PrettyDropSelector} from "./components/DropSelector";
 import {ConfirmButton, ConfirmButtonItem as IConfirmButtonItem} from "./components/ConfirmButton";
 import {ButtonWithMenu, ButtonMenuItem as IButtonMenuItem} from "./components/ButtonWithMenu";
 import {IconButtonWithMenu} from "./components/IconButtonWithMenu";
@@ -125,6 +125,7 @@ export {
   ActionWrapper,
   DropSelector,
   ButtonBasedDropSelector,
+  PrettyDropSelector,
   ConfirmButton,
   IconButtonWithMenu,
   ButtonWithMenu,

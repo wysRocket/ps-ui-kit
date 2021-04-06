@@ -9,7 +9,7 @@ interface IProps {
   opened: boolean;
   onClose: () => void;
   children?: any;
-  minWidth?: number
+  minWidth?: number;
 }
 
 export default class PopUp extends React.Component<IProps> {

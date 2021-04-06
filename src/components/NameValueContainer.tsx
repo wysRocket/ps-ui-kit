@@ -35,11 +35,10 @@ export default class NameValueContainer extends React.Component<IProps> {
             <TextField
               style={{width: 400}}
               inputProps={{style: {paddingTop: 0, paddingBottom: 0, height: Styles.Padding.L, backgroundColor: 'white'}}}
-              InputProps={{
-                style: {paddingTop: 0, paddingBottom: 0, height: Styles.Padding.L, backgroundColor: 'white'},
-                onChange: this.onNameChange,
-                defaultValue: this.props.name || ''}}
+              InputProps={{style: {paddingTop: 0, paddingBottom: 0, height: Styles.Padding.L, backgroundColor: 'white'}}}
               variant="outlined"
+              onChange={this.onNameChange}
+              value={this.props.name || ''}
             />
             <div>
               <IconButton>
@@ -54,10 +53,9 @@ export default class NameValueContainer extends React.Component<IProps> {
             <TextField
               style={{width: 400}}
               inputProps={{style: {paddingTop: 0, paddingBottom: 0, height: Styles.Padding.L, backgroundColor: 'white'}}}
-              InputProps={{
-                style: {paddingTop: 0, paddingBottom: 0, height: Styles.Padding.L, backgroundColor: 'white'},
-                onChange: this.onValueChange,
-                defaultValue: this.props.value || ''}}
+              InputProps={{style: {paddingTop: 0, paddingBottom: 0, height: Styles.Padding.L, backgroundColor: 'white'}}}
+              onChange={this.onValueChange}
+              value={this.props.value || ''}
               variant="outlined"
             />
             <div>

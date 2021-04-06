@@ -90,3 +90,26 @@ export class Red extends React.Component<IProps> {
     );
   }
 }
+
+export class Text extends React.Component<IProps> {
+  render() {
+    const s = this.props.style || {};
+    const style: CSSProperties = {
+      ...COMMON_STYLE,
+      ...s
+    };
+    return (
+      <Button
+        style={style}
+        variant={'text'}
+        onClick={this.props.onClick}
+        disabled={this.props.disabled}
+        startIcon={this.props.startIcon}
+        endIcon={this.props.endIcon}
+      >
+        {this.props.label}
+      </Button>
+    );
+  }
+
+}

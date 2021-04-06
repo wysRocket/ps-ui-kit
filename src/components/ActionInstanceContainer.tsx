@@ -9,21 +9,27 @@ import EditIcon from '@material-ui/icons/Edit';
 import VisibleIcon from "@material-ui/icons/Visibility";
 import InvisibleIcon from "@material-ui/icons/VisibilityOff";
 import {HGroup} from "./Group";
+import * as Buttons from "./Buttons";
 
 interface IProps {
   style?: CSSProperties;
   number: number;
   canvasId?: string;
   parameters: Attribute[];
+  selected?: boolean;
   visible: boolean;
   onVisibilityChange: () => void;
   onEdit: () => void;
+  onUpdate: () => void;
   onCanvasClick?: () => void;
 }
 
 export default class ActionInstanceContainer extends React.Component<IProps> {
   render() {
-    const style = this.props.style || {width: 546, backgroundColor: '#FAFAFA'};
+    const style: CSSProperties = this.props.style || {width: 546, backgroundColor: '#FAFAFA'};
+    if (this.props.selected) {
+      style.border = '2px solid #F39B31';
+    }
     return (
       <NumberedContainer style={style} number={this.props.number}>
         <div style={{paddingLeft: Styles.Padding.S}}>
@@ -46,25 +52,47 @@ export default class ActionInstanceContainer extends React.Component<IProps> {
               </div>
             </div>
             <div style={{display: 'inline-flex'}}>
-              <div>
-                <IconButton onClick={this.props.onEdit}>
-                  <EditIcon style={{color: Styles.Icon.Button.COLOR}}/>
-                </IconButton>
-              </div>
+              {this.renderEditButton()}
             </div>
             <div style={{display: 'inline-flex'}}>
-              <div>
-                <IconButton onClick={this.props.onVisibilityChange}>
-                  {this.props.visible ?
-                    (<VisibleIcon style={{color: Styles.Icon.Button.COLOR}}/>) :
-                    (<InvisibleIcon style={{color: Styles.Icon.Button.COLOR}}/>)
-                  }
-                </IconButton>
-              </div>
+              {this.renderVisibleButton()}
             </div>
           </div>
         </div>
       </NumberedContainer>
+    );
+  }
+
+  renderEditButton() {
+    if (this.props.selected) {
+      return (
+        <div>
+          <Buttons.Text label={'Done'} onClick={this.props.onUpdate}/>
+        </div>
+      );
+    }
+    return (
+      <div>
+        <IconButton onClick={this.props.onEdit}>
+          <EditIcon style={{color: Styles.Icon.Button.COLOR}}/>
+        </IconButton>
+      </div>
+    );
+  }
+
+  renderVisibleButton() {
+    if (this.props.selected) {
+      return '';
+    }
+    return (
+      <div>
+        <IconButton onClick={this.props.onVisibilityChange}>
+          {this.props.visible ?
+            (<VisibleIcon style={{color: Styles.Icon.Button.COLOR}}/>) :
+            (<InvisibleIcon style={{color: Styles.Icon.Button.COLOR}}/>)
+          }
+        </IconButton>
+      </div>
     );
   }
 

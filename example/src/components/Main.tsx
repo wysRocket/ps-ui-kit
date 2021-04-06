@@ -298,6 +298,9 @@ export class Main extends React.Component<IProps> {
                 <Buttons.Red label={'Reject'}/>
               </div>
               <div>
+                <Buttons.Text label={'Text'}/>
+              </div>
+              <div>
                 <NumberedContainer number={1}>
                   <div>Hello!</div>
                 </NumberedContainer>
@@ -386,7 +389,9 @@ export class Main extends React.Component<IProps> {
                     ]}
                   visible={this.state.instanceVisible}
                   onEdit={() => console.log('aic edit')}
+                  onUpdate={() => console.log('aic update')}
                   onVisibilityChange={this.onInstanceVisibleChange}
+                  selected={true}
                 />
               </div>
               <div>

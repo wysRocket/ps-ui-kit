@@ -15,32 +15,13 @@ interface IProps {
 }
 
 export default class NameValueContainer extends React.Component<IProps> {
-  state = {
-    name: '',
-    value: '',
-  };
 
-  setInitialState = (props: IProps) => {
-    this.setState({name: props.name || '', value: props.value || ''});
+  onNameChange = (evt: any) => {
+    this.props.onChange(evt.target.value, this.props.value || '');
   }
 
-  componentWillReceiveProps(nextProps: Readonly<IProps>, nextContext: any): void {
-    this.setInitialState(nextProps);
-  }
-
-  componentWillMount(): void {
-    this.setInitialState(this.props);
-  }
-
-  onPropertyChange = (prop: string, v: any) => {
-    this.setState({[prop]: v}, () => {
-      const {name, value} = this.state;
-      this.props.onChange(name, value);
-    });
-  }
-
-  createChangeHandler = (prop: string) => (evt: any) => {
-    this.onPropertyChange(prop, evt.target.value);
+  onValueChange = (evt: any) => {
+    this.props.onChange(this.props.name || '', evt.target.value);
   }
 
   render() {
@@ -56,8 +37,8 @@ export default class NameValueContainer extends React.Component<IProps> {
               inputProps={{style: {paddingTop: 0, paddingBottom: 0, height: Styles.Padding.L, backgroundColor: 'white'}}}
               InputProps={{
                 style: {paddingTop: 0, paddingBottom: 0, height: Styles.Padding.L, backgroundColor: 'white'},
-                onChange: this.createChangeHandler('name'),
-                defaultValue: this.state.name}}
+                onChange: this.onNameChange,
+                defaultValue: this.props.name || ''}}
               variant="outlined"
             />
             <div>
@@ -75,8 +56,8 @@ export default class NameValueContainer extends React.Component<IProps> {
               inputProps={{style: {paddingTop: 0, paddingBottom: 0, height: Styles.Padding.L, backgroundColor: 'white'}}}
               InputProps={{
                 style: {paddingTop: 0, paddingBottom: 0, height: Styles.Padding.L, backgroundColor: 'white'},
-                onChange: this.createChangeHandler('value'),
-                defaultValue: this.state.value}}
+                onChange: this.onValueChange,
+                defaultValue: this.props.value || ''}}
               variant="outlined"
             />
             <div>

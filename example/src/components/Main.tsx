@@ -377,6 +377,26 @@ export class Main extends React.Component<IProps> {
                   ]}
                 />
               </div>
+              <div style={{paddingTop: 24, paddingLeft: 40}}>
+                <ExpandedAttributesList
+                  style={{width: 450}}
+                  header={'Hunter Elementary School'}
+                  attributes={[
+                    {
+                      attribute: {name: 'First Name', value: 'Arturito'},
+                      schemaField: {name: 'First Name', type: SchemaDomain.AttributeType.TEXT, description: 'Your first name'}
+                    },
+                    {
+                      attribute: {name: 'Age', value: '10'},
+                      schemaField: {name: 'Age', type: SchemaDomain.AttributeType.NUMBER, description: 'Your age'}
+                    },
+                    {
+                      attribute: {name: 'Date of birth', value: '1000000'},
+                      schemaField: {name: 'Date of birth', type: SchemaDomain.AttributeType.DATE, description: 'Your dob'}
+                    },
+                  ]}
+                />
+              </div>
               <div style={{paddingTop: 24}}>
                 <ActionInstanceContainer
                   number={1}

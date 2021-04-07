@@ -30,12 +30,12 @@ export default class ExpandedAttributesList extends React.Component<IProps> {
     const style = this.props.style || {};
     return (
       <Accordion
-        style={{...style, boxShadow: 'none', border: `1px solid ${Style.Table.Color.BORDER}`, backgroundColor: '#FAFAFA'}}
+        style={{...style, paddingRight: Style.Padding.L, boxShadow: 'none', border: `1px solid ${Style.Table.Color.BORDER}`, backgroundColor: '#FAFAFA'}}
         expanded={this.state.expanded}
         onChange={this.onExpandChange}
       >
         <AccordionSummary style={{width: '100%'}} expandIcon={<ExpandMoreIcon />}>
-          <div style={{display: 'flex', alignItems: 'center', width: '100%', paddingLeft: Style.Padding.S, paddingRight: Style.Padding.S}}>
+          <div style={{display: 'flex', alignItems: 'center', width: '100%'}}>
             <div style={{display: 'inline-flex'}}>
               {this.renderIcon()}
             </div>
@@ -49,7 +49,7 @@ export default class ExpandedAttributesList extends React.Component<IProps> {
           </div>
         </AccordionSummary>
         <AccordionDetails style={{width: '100%'}}>
-          <div style={{width: '100%', paddingRight: Style.Padding.L}}>
+          <div style={{width: '100%'}}>
             {this.props.attributes.map((a, i) => {
               return (
                 <AttributeComponent.Viewer

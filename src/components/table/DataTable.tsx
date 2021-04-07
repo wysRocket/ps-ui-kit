@@ -1,4 +1,4 @@
-import {CSSProperties, default as React} from "react";
+import * as React from "react";
 import {Diff} from "../../domain/Diff";
 import {ColumnInfo} from "./column";
 import {Table, TableBody, TableCell, TableHead, TableRow, TableSortLabel} from "@material-ui/core";
@@ -8,6 +8,57 @@ import DraggableItem from "../DraggableItem";
 import {DndProvider} from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend";
 import DraggableRow from "./DraggableRow";
+import * as Styles from "../DefaultStyles";
+import {CSSProperties} from "react";
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  activeSortIcon: {
+    opacity: 1,
+  },
+  inactiveSortIcon: {
+    opacity: 0.2,
+  },
+});
+
+const SortableHeader: React.FC<{column: ColumnInfo, sort?: Sort, onSort?: (newSort: Sort) => void}> = (props) => {
+  const column = props.column;
+  if (!column.header) {
+    return (<div/>);
+  }
+  if (column.header.sortable) {
+    const classes = useStyles();
+    const {sort, onSort} = props;
+    const sortHandler = () => {
+      if  (onSort !== undefined) {
+        let newSort: Sort = {field: column.fieldId, direction: SortDirection.ASC};
+        if (sort && sort.field === column.fieldId) {
+          newSort = {field: sort.field, direction: invertDirection(sort.direction)};
+        }
+        onSort(newSort);
+      }
+    };
+    const active = sort && sort.field === column.fieldId;
+    const hs: CSSProperties = {};
+    if (active) {
+      hs.fontWeight = 'bold';
+    }
+    return (
+      <TableSortLabel
+        IconComponent={ArrowDropDown}
+        active={active}
+        direction={sort ? sort.direction : 'asc'}
+        onClick={sortHandler}
+        classes={{icon: active ? classes.activeSortIcon : classes.inactiveSortIcon}}
+        hideSortIcon={column.header.hideSortIcon}
+      >
+        <div style={hs}>{column.header.title}</div>
+      </TableSortLabel>
+    );
+  }
+
+  return (<div>{column.header.title || ''}</div>);
+};
 
 interface IProps<T> {
   style?: CSSProperties;
@@ -30,14 +81,19 @@ export default class DataTable<T> extends React.Component<IProps<T>> {
       <DndProvider backend={HTML5Backend}>
       <Table style={this.props.style}>
         <TableHead>
-          <TableRow style={{height: 'auto', backgroundColor: '#F0F0F0'}}>
+          <TableRow style={{height: Styles.Padding.XXL, backgroundColor: Styles.Table.Color.HEADER_BACKGROUND}}>
             {columns.map((column, index) => {
               const style: any = {padding: '4px 15px 4px'};
               /*if (column.width) {
                 style.width = column.width;
               }*/
               return (
-                <TableCell key={index} style={style} sortDirection={sort && sort.field === column.fieldId ? sort.direction : false}>
+                <TableCell
+                  key={index}
+                  style={style}
+                  sortDirection={sort && sort.field === column.fieldId ? sort.direction : false}
+                  align={column.align}
+                >
                   {this.renderHeaderCell(column)}
                 </TableCell>
               );
@@ -51,7 +107,7 @@ export default class DataTable<T> extends React.Component<IProps<T>> {
               return (
                   <DraggableRow
                     key={itemId}
-                    style={{height: 'auto'}}
+                    style={{height: Styles.Padding.XXL}}
                     selected={false}
                     move={onSwitchItems}
                     type={'tableItem'}
@@ -59,7 +115,11 @@ export default class DataTable<T> extends React.Component<IProps<T>> {
                     id={itemId}
                   >
                     {columns.map((column, i) => (
-                      <TableCell key={i}>
+                      <TableCell
+                        key={i}
+                        style={{paddingTop: Styles.Padding.XS, paddingBottom: Styles.Padding.XS}}
+                        align={column.align}
+                      >
                         {this.renderCell(item, column)}
                       </TableCell>
                     ))}
@@ -69,11 +129,15 @@ export default class DataTable<T> extends React.Component<IProps<T>> {
             return (
               <TableRow
                 key={index}
-                style={{height: 'auto'}}
+                style={{height: Styles.Padding.XXL}}
                 selected={false}
               >
                 {columns.map((column, i) => (
-                  <TableCell key={i}>
+                  <TableCell
+                    key={i}
+                    style={{paddingTop: Styles.Padding.XS, paddingBottom: Styles.Padding.XS}}
+                    align={column.align}
+                  >
                     {this.renderCell(item, column)}
                   </TableCell>
                 ))}
@@ -86,37 +150,10 @@ export default class DataTable<T> extends React.Component<IProps<T>> {
     );
   }
 
-  createSortHandler = (column: ColumnInfo) => () => {
-    const {sort, onSort} = this.props;
-    if  (onSort !== undefined) {
-      let newSort: Sort = {field: column.fieldId, direction: SortDirection.ASC};
-      if (sort && sort.field === column.fieldId) {
-        newSort = {field: sort.field, direction: invertDirection(sort.direction)};
-      }
-      onSort(newSort);
-    }
-  }
-
   renderHeaderCell(column: ColumnInfo) {
-    if (column.header !== undefined) {
-      if (column.header.sortable) {
-        const {sort} = this.props;
-        return (
-          <TableSortLabel
-            IconComponent={ArrowDropDown}
-            active={sort && sort.field === column.fieldId}
-            direction={sort ? sort.direction : 'asc'}
-            onClick={this.createSortHandler(column)}
-          >
-            {column.header.title}
-          </TableSortLabel>
-        );
-      } else {
-        return column.header.title || '';
-      }
-    }
-
-    return ('');
+    return (
+      <SortableHeader column={column} sort={this.props.sort} onSort={this.props.onSort}/>
+    );
   }
 
   createClickHandler = (item: T, column: ColumnInfo) => () => {

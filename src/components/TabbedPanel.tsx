@@ -30,7 +30,7 @@ export default class TabbedPanel extends React.Component<IProps> {
           <Tabs
             key={1}
             value={this.props.selectedTabValue}
-            TabIndicatorProps={{style: {backgroundColor: '#B3B3B3'}}}
+            TabIndicatorProps={{style: {backgroundColor: '#F39B31'}}}
             style={{borderBottom: '1px solid #C7C7C7', minHeight: 32, width: '100%', paddingLeft: 32}}
             onChange={this.onChange}
           >

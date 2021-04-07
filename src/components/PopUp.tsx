@@ -9,6 +9,7 @@ interface IProps {
   opened: boolean;
   onClose: () => void;
   children?: any;
+  minWidth?: number;
 }
 
 export default class PopUp extends React.Component<IProps> {
@@ -16,7 +17,7 @@ export default class PopUp extends React.Component<IProps> {
     return (
       <Dialog maxWidth={false} PaperProps={{style: {borderRadius: 0}}} onClose={this.props.onClose} open={this.props.opened}>
         <div style={{paddingLeft: 32, paddingRight: 32}}>
-          <ContentHeader style={{minWidth: 700}}>
+          <ContentHeader style={{minWidth: this.props.minWidth || 700}}>
             <Typography variant="h6">{this.props.title}</Typography>
             <IconButton onClick={this.props.onClose}>
               <CloseIcon />

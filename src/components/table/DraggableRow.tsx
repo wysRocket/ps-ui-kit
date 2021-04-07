@@ -18,7 +18,7 @@ interface IProps {
   children?: any;
 }
 
-const DraggableItem: React.FC<IProps> = ({ id, type, index, move, children, selected, style }) => {
+const DraggableRow: React.FC<IProps> = ({ id, type, index, move, children, selected, style }) => {
   const ref = useRef<HTMLTableRowElement>(null);
   const [, drop] = useDrop({
     accept: type,
@@ -67,4 +67,4 @@ const DraggableItem: React.FC<IProps> = ({ id, type, index, move, children, sele
   );
 };
 
-export default DraggableItem;
+export default DraggableRow;

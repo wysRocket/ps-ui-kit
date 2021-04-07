@@ -3,7 +3,8 @@ import {Service, SideBar, HSplit, VSplit, AppHeader, UserRole, Panel, ContentHea
   DateFilterButton, DashboardChart, DonutChart, Paginator, SearchBar, TableLegend, DataTable,
   deleteColumn, editColumn, idColumn, RendererProps, SelectRenderer, SortDirection, TabbedPanel, PopUp,
   Tree, idLink, ConfirmButton, DonutChartItem, ButtonMenuItem, HGroup, AlignedHGroup, BulletItem, ButtonWithMenu,
-  DateRange, DraggableList, Identity
+  DateRange, DraggableList, Identity, Styles, TableWithPagination, ButtonBasedDropSelector, NumberedContainer,
+  NameValueContainer, ActionInstanceContainer, Buttons, SchemaDomain, AttributeComponent, ExpandedAttributesList,
 } from "frontend-common";
 import {Button} from "@material-ui/core";
 import EyeIcon from "@material-ui/icons/Visibility";
@@ -159,8 +160,14 @@ export class Main extends React.Component<IProps> {
     popupOpened: false,
     selected: ['pv2'],
     textFilter: '',
-    actions
+    actions,
+    instanceVisible: true
   };
+
+  onInstanceVisibleChange = () => {
+    this.setState({instanceVisible: !this.state.instanceVisible});
+  };
+
   onTabChange = (v: any) => {
     console.log('tab change', v);
     this.setState({tab: v});
@@ -215,8 +222,8 @@ export class Main extends React.Component<IProps> {
   render() {
     const height = document.documentElement.clientHeight - 65;
     return (
-      <VSplit size={200} style={{height: '100%'}}>
-        <SideBar service={service} onSelect={onSideSelect} items={items} selected={'Dashboard'}/>
+      <VSplit size={Styles.SideBar.Size.WIDTH} style={{height: '100%'}}>
+        <SideBar service={service} onSelect={onSideSelect} items={items} selected={'Dashboard'} minimized={false}/>
         <HSplit size={64}>
           <AppHeader user={{login: 'admin', role: UserRole.SERVICE_OWNER}} menuItems={appMenuItems} notifications={3}>
             Hello google
@@ -252,7 +259,7 @@ export class Main extends React.Component<IProps> {
                 }
               ]} onSelect={this.onTreeSelect} expandSelected={true} selected={this.state.selected}/>
             </PopUp>
-            <div style={{paddingLeft: 24, paddingRight: 24}}>
+            <div style={{paddingLeft: Styles.Padding.L, paddingRight: Styles.Padding.L}}>
               <ContentHeader>
                 <h3>Text</h3>
                 Here
@@ -278,6 +285,135 @@ export class Main extends React.Component<IProps> {
                 move={this.onSwitchActions}
                 renderer={(item) => (<div>{item.identity} - {item.status}</div>)}
               />
+              <div>
+                <ButtonBasedDropSelector variant={'text'} items={topItems} onChange={(v) => console.log(v)}/>
+              </div>
+              <div>
+                <Buttons.Gray label={'My Gray Button'}/>
+              </div>
+              <div>
+                <Buttons.Orange label={'Issue'}/>
+              </div>
+              <div>
+                <Buttons.Red label={'Reject'}/>
+              </div>
+              <div>
+                <Buttons.Text label={'Text'}/>
+              </div>
+              <div>
+                <NumberedContainer number={1}>
+                  <div>Hello!</div>
+                </NumberedContainer>
+              </div>
+              <div style={{paddingTop: 24}}>
+                <NameValueContainer number={1} onChange={(n, v) => console.log('nme value change', n, v)} onRemove={() => console.log('name value remove')}/>
+              </div>
+              <div style={{paddingTop: Styles.Padding.M}}>
+                <AttributeComponent.BoxedViewer
+                  attribute={{name: 'First Name', value: 'Arturito'}}
+                  schemaAttribute={{name: 'First Name', type: SchemaDomain.AttributeType.TEXT, description: 'Your first name'}}
+                />
+              </div>
+              <div style={{paddingTop: Styles.Padding.M}}>
+                <AttributeComponent.Viewer
+                  attribute={{name: 'First Name', value: 'Arturito'}}
+                  schemaAttribute={{name: 'First Name', type: SchemaDomain.AttributeType.TEXT, description: 'Your first name'}}
+                />
+              </div>
+              <div style={{paddingTop: Styles.Padding.M}}>
+                <AttributeComponent.Editor
+                  attribute={{name: 'First Name', value: 'Arturito'}}
+                  schemaAttribute={{name: 'First Name', type: SchemaDomain.AttributeType.TEXT, description: 'Your first name'}}
+                  onChange={(a) => console.log(a)}
+                />
+              </div>
+              <div style={{paddingTop: Styles.Padding.M}}>
+                <AttributeComponent.Editor
+                  attribute={{name: 'Age', value: '10'}}
+                  schemaAttribute={{name: 'Age', type: SchemaDomain.AttributeType.NUMBER, description: 'Your age'}}
+                  onChange={(a) => console.log(a)}
+                />
+              </div>
+              <div style={{paddingTop: Styles.Padding.M}}>
+                <AttributeComponent.Editor
+                  attribute={{name: 'Date of birth', value: '1000000'}}
+                  schemaAttribute={{name: 'Date of birth', type: SchemaDomain.AttributeType.DATE, description: 'Your dob'}}
+                  onChange={(a) => console.log(a)}
+                />
+              </div>
+              <div style={{paddingTop: Styles.Padding.M}}>
+                <AttributeComponent.Editor
+                  attribute={{name: 'Sex', value: '0'}}
+                  schemaAttribute={{
+                    name: 'Sex', type:
+                    SchemaDomain.AttributeType.CUSTOM_TYPE,
+                    enumValues: [
+                      {name: 'F', value: '0', description: 'Female'},
+                      {name: 'M', value: '1', description: 'Male'}
+                    ],
+                    description: 'Your sex'
+                  }}
+                  onChange={(a) => console.log(a)}
+                />
+              </div>
+              <div style={{paddingTop: 24}}>
+                <ExpandedAttributesList
+                  style={{width: 450}}
+                  icon={(<MoveIcon/>)}
+                  header={'Hunter Elementary School'}
+                  attributes={[
+                    {
+                      attribute: {name: 'First Name', value: 'Arturito'},
+                      schemaField: {name: 'First Name', type: SchemaDomain.AttributeType.TEXT, description: 'Your first name'}
+                    },
+                    {
+                      attribute: {name: 'Age', value: '10'},
+                      schemaField: {name: 'Age', type: SchemaDomain.AttributeType.NUMBER, description: 'Your age'}
+                    },
+                    {
+                      attribute: {name: 'Date of birth', value: '1000000'},
+                      schemaField: {name: 'Date of birth', type: SchemaDomain.AttributeType.DATE, description: 'Your dob'}
+                    },
+                  ]}
+                />
+              </div>
+              <div style={{paddingTop: 24, paddingLeft: 40}}>
+                <ExpandedAttributesList
+                  style={{width: 450}}
+                  header={'Hunter Elementary School'}
+                  attributes={[
+                    {
+                      attribute: {name: 'First Name', value: 'Arturito'},
+                      schemaField: {name: 'First Name', type: SchemaDomain.AttributeType.TEXT, description: 'Your first name'}
+                    },
+                    {
+                      attribute: {name: 'Age', value: '10'},
+                      schemaField: {name: 'Age', type: SchemaDomain.AttributeType.NUMBER, description: 'Your age'}
+                    },
+                    {
+                      attribute: {name: 'Date of birth', value: '1000000'},
+                      schemaField: {name: 'Date of birth', type: SchemaDomain.AttributeType.DATE, description: 'Your dob'}
+                    },
+                  ]}
+                />
+              </div>
+              <div style={{paddingTop: 24}}>
+                <ActionInstanceContainer
+                  number={1}
+                  parameters={[
+                    {name: 'Lection', value: 'Mathematic Analyse and Something else, i event do not know'},
+                    {name: 'Professor', value: 'Professor kislikh schei dr. Moriarty'},
+                    {name: 'Auditory', value: 'Big Queens Hall'},
+                    {name: 'Start date', value: '2021-03-21'},
+                    {name: 'End date', value: '2021-03-22'},
+                    ]}
+                  visible={this.state.instanceVisible}
+                  onEdit={() => console.log('aic edit')}
+                  onUpdate={() => console.log('aic update')}
+                  onVisibilityChange={this.onInstanceVisibleChange}
+                  selected={true}
+                />
+              </div>
               <div>
                 <Paginator
                   currentPage={this.state.currentPage}
@@ -335,6 +471,31 @@ export class Main extends React.Component<IProps> {
                 rightHint={'Total: 267'}
                 textFilter={this.state.textFilter}
                 onTextFilterChange={this.onTextFilterChange}
+              />
+              <TableWithPagination
+                columns={[
+                  idLink((item: any)=> item.identity, 'name'),
+                  idColumn('name'),
+                  {
+                    fieldId: 'status',
+                    enumValues: ['Active', 'Archived', 'Stopped', 'Paused'],
+                    header: {title: 'Status', sortable: true},
+                    align: 'center',
+                    renderer: (props: RendererProps) => (<SelectRenderer {...props}/>)
+                  },
+                  editColumn(),
+                  deleteColumn(),
+                ]}
+                data={this.state.actions}
+                onSort={onSort}
+                onSwitchItems={this.onSwitchActions}
+                sort={{direction: SortDirection.ASC, field: 'identity'}}
+                currentPage={this.state.currentPage}
+                itemsPerPage={this.state.itemsPerPage}
+                ranges={[10, 20, 30]}
+                itemsTotal={168}
+                onPageChange={this.onPageChange}
+                onPageSizeChange={this.onPageSizeChange}
               />
               <SearchBar onTextFilterChange={this.onTextFilterChange} textFilter={this.state.textFilter}/>
               <DataTable

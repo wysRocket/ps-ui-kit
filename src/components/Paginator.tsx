@@ -1,6 +1,7 @@
 import {CSSProperties, default as React} from "react";
 import {Pagination} from "@material-ui/lab";
 import {FormControl, Select, TextField} from "@material-ui/core";
+import DropSelector from "./DropSelector";
 
 interface IProps {
   style?: CSSProperties;
@@ -17,8 +18,8 @@ export default class Paginator extends React.Component<IProps> {
     this.props.onPageChange(value);
   }
 
-  onSizeChange = (evt: any) => {
-    this.props.onPageSizeChange(evt.target.value);
+  onPageChange = (v: number) => {
+    this.props.onPageSizeChange(v);
   }
 
   render() {
@@ -30,22 +31,10 @@ export default class Paginator extends React.Component<IProps> {
       <div style={this.props.style}>
         <div style={{display: 'flex', position: 'relative', alignItems: 'center', height: 'auto'}}>
           <div style={{display: 'inline-flex', position: 'relative', flexDirection: 'column', alignItems: 'center', paddingRight: 32}}>
-            Showing {from}-{to} from {this.props.itemsTotal}
+            Showing {from}-{to} of {this.props.itemsTotal}
           </div>
           <div style={{display: 'inline-flex', position: 'relative', flexDirection: 'column', alignItems: 'center'}}>
-            <FormControl variant="outlined">
-              <Select
-                native
-                style={{height: 32, maxHeight: 32, marginTop: 0, marginBottom: 0}}
-                value={this.props.itemsPerPage}
-                onChange={this.onSizeChange}
-                inputProps={{style: {paddingTop: 0, paddingBottom: 0, height: 32}}}
-              >
-                {ranges.map((r, i) => {
-                  return this.renderOption(r, i);
-                })}
-              </Select>
-            </FormControl>
+            <DropSelector items={ranges.map((r) => ({label: `${r}`, value: r}))} onChange={this.onPageChange}/>
           </div>
           <div style={{flexGrow: 1}} />
           <div style={{display: 'inline-flex', position: 'relative', flexDirection: 'column', alignItems: 'center'}}>
@@ -53,8 +42,6 @@ export default class Paginator extends React.Component<IProps> {
               onChange={this.onChange}
               count={numPages}
               page={this.props.currentPage}
-              variant="outlined"
-              shape="rounded"
             />
           </div>
         </div>

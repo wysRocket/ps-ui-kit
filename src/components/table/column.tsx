@@ -7,6 +7,7 @@ export interface HeaderProps {
   icon?: any;
   sortable?: boolean;
   sortDirection?: SortDirection;
+  hideSortIcon?: boolean;
 }
 
 export interface ColumnInfo {
@@ -19,6 +20,7 @@ export interface ColumnInfo {
   isEdit?: boolean;
   isRemove?: boolean;
   onClick?: (item: any) => void;
+  align?: 'center' | 'inherit' | 'justify' | 'left'  | 'right';
 }
 
 export const textColumn = (title: string, fieldId: string, sortDirection?: SortDirection): ColumnInfo => {

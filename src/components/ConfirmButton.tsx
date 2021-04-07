@@ -2,6 +2,7 @@ import {CSSProperties, default as React} from "react";
 import {Button, ClickAwayListener, Fade, List, ListItem, ListItemText, Paper, Popper} from "@material-ui/core";
 import ExpandIcon from '@material-ui/icons/ExpandMore';
 import CollapseIcon from '@material-ui/icons/ExpandLess';
+import {Orange} from "./Buttons";
 
 export interface IConfirm {
   warning: string;
@@ -50,15 +51,12 @@ export class ConfirmButton extends React.Component<IProps> {
               </Fade>
             )}
           </Popper>
-          <Button
-            variant={'outlined'}
-            style={{boxShadow: 'none', textTransform: 'none', backgroundColor: '#F38A0C', borderColor: '#F38A0C', paddingLeft: 24, paddingRight: 24}}
+          <Orange
+            label={this.props.label}
             onClick={this.onButtonClick}
             disabled={this.props.disabled}
             endIcon={this.renderIcon()}
-          >
-            {this.props.label}
-          </Button>
+          />
         </div>
       </ClickAwayListener>
     );

@@ -34,7 +34,11 @@ export default class Paginator extends React.Component<IProps> {
             Showing {from}-{to} of {this.props.itemsTotal}
           </div>
           <div style={{display: 'inline-flex', position: 'relative', flexDirection: 'column', alignItems: 'center'}}>
-            <DropSelector items={ranges.map((r) => ({label: `${r}`, value: r}))} onChange={this.onPageChange}/>
+            <DropSelector
+              selected={this.props.itemsPerPage}
+              items={ranges.map((r) => ({label: `${r}`, value: r}))}
+              onChange={this.onPageChange}
+            />
           </div>
           <div style={{flexGrow: 1}} />
           <div style={{display: 'inline-flex', position: 'relative', flexDirection: 'column', alignItems: 'center'}}>

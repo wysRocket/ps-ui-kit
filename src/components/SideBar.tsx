@@ -19,7 +19,7 @@ export interface SideBarItem {
   link: string;
 }
 
-const useStyles = makeStyles({
+const useStyles = () => makeStyles({
   root: {
     '&$selected': {
       'backgroundColor': Styles.SideBar.Color.ACTIVE_ITEM_BG,
@@ -46,7 +46,7 @@ interface ItemComponentProps {
 const ItemComponent: React.FC<ItemComponentProps> = (props) => {
   const item = props.item;
   const style: CSSProperties = {padding: Styles.Padding.XS};
-  const classes = useStyles();
+  const classes = useStyles()();
   const onClick = () => {
     const handler = props.onClick;
     if (handler !== undefined) {

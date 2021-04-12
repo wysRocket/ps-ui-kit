@@ -67,6 +67,7 @@ import * as Buttons from "./components/Buttons";
 import * as SchemaDomain from "./domain/SchemaDomain";
 import * as AttributeComponent from "./components/AttributeComponent";
 import ExpandedAttributesList from "./components/ExpandedAttributesList";
+import * as Forms from "./components/Forms";
 
 export type Service = IService;
 export type Identity<T = string | number> = IIdentity<T>;
@@ -162,4 +163,5 @@ export {
   SchemaDomain,
   AttributeComponent,
   ExpandedAttributesList,
+  Forms,
 };

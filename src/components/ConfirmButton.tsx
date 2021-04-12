@@ -3,6 +3,7 @@ import {Button, ClickAwayListener, Fade, List, ListItem, ListItemText, Paper, Po
 import ExpandIcon from '@material-ui/icons/ExpandMore';
 import CollapseIcon from '@material-ui/icons/ExpandLess';
 import {Orange} from "./Buttons";
+import * as Styles from "./DefaultStyles";
 
 export interface IConfirm {
   warning: string;
@@ -93,7 +94,7 @@ export class ConfirmButton extends React.Component<IProps> {
           <div style={{paddingLeft: 10, paddingRight: 10}}>{item.confirm.warning}</div>
           <div style={{paddingTop: 10}}>
             <Button
-              style={{boxShadow: 'none', textTransform: 'none', color: '#F38A0C', paddingLeft: 10, paddingRight: 10}}
+              style={{boxShadow: 'none', textTransform: 'none', color: Styles.Forms.Item.COLOR, paddingLeft: 10, paddingRight: 10}}
               onClick={this.createConfirmClickHandler(item)}
             >
               {item.confirm.actionText}

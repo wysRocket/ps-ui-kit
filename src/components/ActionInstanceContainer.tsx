@@ -28,7 +28,7 @@ export default class ActionInstanceContainer extends React.Component<IProps> {
   render() {
     const style: CSSProperties = this.props.style || {width: 546, backgroundColor: '#FAFAFA'};
     if (this.props.selected) {
-      style.border = '2px solid #F39B31';
+      style.border = `2px solid ${Styles.Forms.Item.FOCUSED_COLOR}`;
     }
     return (
       <NumberedContainer style={style} number={this.props.number}>

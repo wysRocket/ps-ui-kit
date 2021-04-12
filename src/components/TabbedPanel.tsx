@@ -2,6 +2,7 @@ import {CSSProperties, default as React} from "react";
 import Panel from "./Panel";
 import {Tab, Tabs} from "@material-ui/core";
 import {Link} from "react-router-dom";
+import * as Styles from "./DefaultStyles";
 
 export interface TabItem {
   label: string;
@@ -30,7 +31,7 @@ export default class TabbedPanel extends React.Component<IProps> {
           <Tabs
             key={1}
             value={this.props.selectedTabValue}
-            TabIndicatorProps={{style: {backgroundColor: '#F39B31'}}}
+            TabIndicatorProps={{style: {backgroundColor: Styles.Forms.Item.TAB_INDICATOR_COLOR}}}
             style={{borderBottom: '1px solid #C7C7C7', minHeight: 32, width: '100%', paddingLeft: 32}}
             onChange={this.onChange}
           >

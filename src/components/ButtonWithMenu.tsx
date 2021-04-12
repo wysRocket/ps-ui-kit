@@ -25,6 +25,7 @@ interface IProps {
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
   menuMaxHeight?: number;
+  menuWidth?: number;
 }
 
 export class ButtonWithMenu extends React.Component<IProps> {
@@ -48,7 +49,9 @@ export class ButtonWithMenu extends React.Component<IProps> {
 
   render() {
     const style: CSSProperties = this.props.style || {width: 32, height: 32, minWidth: 32};
-    const ws = style.width ? {width: style.width} : {};
+    const s = this.props.style || {};
+    const menuWidth = this.props.menuWidth || s.width;
+    const ws = menuWidth ? {width: menuWidth} : {};
     return (
       <ClickAwayListener onClickAway={this.onClickAway}>
         <div>

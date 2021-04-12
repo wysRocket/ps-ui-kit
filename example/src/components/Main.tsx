@@ -4,9 +4,9 @@ import {Service, SideBar, HSplit, VSplit, AppHeader, UserRole, Panel, ContentHea
   deleteColumn, editColumn, idColumn, RendererProps, SelectRenderer, SortDirection, TabbedPanel, PopUp,
   Tree, idLink, ConfirmButton, DonutChartItem, ButtonMenuItem, HGroup, AlignedHGroup, BulletItem, ButtonWithMenu,
   DateRange, DraggableList, Identity, Styles, TableWithPagination, ButtonBasedDropSelector, NumberedContainer,
-  NameValueContainer, ActionInstanceContainer, Buttons, SchemaDomain, AttributeComponent, ExpandedAttributesList,
+  NameValueContainer, ActionInstanceContainer, Buttons, SchemaDomain, AttributeComponent, ExpandedAttributesList, Forms
 } from "frontend-common";
-import {Button} from "@material-ui/core";
+import {Button, FormGroup, RadioGroup} from "@material-ui/core";
 import EyeIcon from "@material-ui/icons/Visibility";
 import HideIcon from "@material-ui/icons/VisibilityOff";
 import MoveIcon from "@material-ui/icons/OpenWith";
@@ -161,8 +161,15 @@ export class Main extends React.Component<IProps> {
     selected: ['pv2'],
     textFilter: '',
     actions,
-    instanceVisible: true
+    instanceVisible: true,
+    flow: 's',
+    slow: 'one',
+    checked: false
   };
+
+  componentWillMount() {
+    Styles.initTheme(Styles.BlueTheme);
+  }
 
   onInstanceVisibleChange = () => {
     this.setState({instanceVisible: !this.state.instanceVisible});
@@ -219,8 +226,21 @@ export class Main extends React.Component<IProps> {
 
   };
 
+  onFlowChange = (evt: any) => {
+    console.log(evt.target.value, evt);
+    this.setState({flow: evt.target.value});
+  };
+
+  flowChange = (slow: string) => {
+    console.log('flow', slow);
+    this.setState({slow});
+  };
+
+  onCheckedChange = () => this.setState({checked: !this.state.checked});
+
   render() {
     const height = document.documentElement.clientHeight - 65;
+    console.log('f', this.state.flow);
     return (
       <VSplit size={Styles.SideBar.Size.WIDTH} style={{height: '100%'}}>
         <SideBar service={service} onSelect={onSideSelect} items={items} selected={'Dashboard'} minimized={false}/>
@@ -292,13 +312,44 @@ export class Main extends React.Component<IProps> {
                 <Buttons.Gray label={'My Gray Button'}/>
               </div>
               <div>
+                <Buttons.Gray disabled label={'My Gray Button'}/>
+              </div>
+              <div>
                 <Buttons.Orange label={'Issue'}/>
+              </div>
+              <div>
+                <Buttons.Orange disabled label={'Issue'}/>
               </div>
               <div>
                 <Buttons.Red label={'Reject'}/>
               </div>
               <div>
+                <Buttons.Red disabled label={'Reject'}/>
+              </div>
+              <div>
                 <Buttons.Text label={'Text'}/>
+              </div>
+              <div>
+                <Buttons.Text disabled label={'Text'}/>
+              </div>
+              <div>
+                <RadioGroup name="flow" value={this.state.flow} onChange={this.onFlowChange}>
+                  <Forms.RadioInGroup value={'s'} label={'Simple'}/>
+                  <Forms.RadioInGroup value={'p'} label={'Pin'}/>
+                </RadioGroup>
+              </div>
+              <div>
+                <Forms.RBGroup name={'SereFlow'} onChange={this.flowChange} value={this.state.slow} items={[
+                  {label: 'So simple', value: 'one'}, {label: 'So PIN', value: 'two'}
+                ]}/>
+              </div>
+              <div>
+                <Forms.SimpleCheckbox onChange={this.onCheckedChange} checked={this.state.checked}/>
+              </div>
+              <div>
+                <FormGroup>
+                  <Forms.CheckBoxInGroup onChange={this.onCheckedChange} checked={this.state.checked}/>
+                </FormGroup>
               </div>
               <div>
                 <NumberedContainer number={1}>

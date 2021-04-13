@@ -1,5 +1,5 @@
 import React, {CSSProperties} from "react";
-import {Service, SideBar, HSplit, VSplit, AppHeader, UserRole, Panel, ContentHeader, DashboardFilter,
+import {Service, SideBar, HSplit, VSplit, AppHeader, Auth, Panel, ContentHeader, DashboardFilter,
   DateFilterButton, DashboardChart, DonutChart, Paginator, SearchBar, TableLegend, DataTable,
   deleteColumn, editColumn, idColumn, RendererProps, SelectRenderer, SortDirection, TabbedPanel, PopUp,
   Tree, idLink, ConfirmButton, DonutChartItem, ButtonMenuItem, HGroup, AlignedHGroup, BulletItem, ButtonWithMenu,
@@ -245,7 +245,7 @@ export class Main extends React.Component<IProps> {
       <VSplit size={Styles.SideBar.Size.WIDTH} style={{height: '100%'}}>
         <SideBar service={service} onSelect={onSideSelect} items={items} selected={'Dashboard'} minimized={false}/>
         <HSplit size={64}>
-          <AppHeader user={{login: 'admin', role: UserRole.SERVICE_OWNER}} menuItems={appMenuItems} notifications={3}>
+          <AppHeader user={{login: 'admin', roles: [Auth.UserRole.SERVICE_ADMIN]}} menuItems={appMenuItems} notifications={3}>
             Hello google
           </AppHeader>
           <Panel style={{height}}>

@@ -4,7 +4,7 @@ import {HSplit, VSplit} from "./components/Split";
 import {Service as IService} from "./domain/Service";
 import {Identity as IIdentity} from "./domain/Identity";
 import {ServiceAction as IServiceAction, ServiceActionProps} from "./domain/ServiceAction";
-import {isUserApproved, User as IUser, UserRole} from "./domain/User";
+import * as Auth from "./domain/User";
 import AppHeader from "./components/AppHeader";
 import ContentHeader from "./components/ContentHeader";
 import Panel from "./components/Panel";
@@ -72,7 +72,6 @@ import * as Forms from "./components/Forms";
 export type Service = IService;
 export type Identity<T = string | number> = IIdentity<T>;
 export type ServiceAction = IServiceAction;
-export type User = IUser;
 export type DataSort = Sort;
 export type DataRange = IDataRange;
 export type ColumnInfo = IColumnInfo;
@@ -145,14 +144,13 @@ export {
   editColumn,
   deleteColumn,
   DataTable,
-  UserRole,
+  Auth,
   AppHeader,
   ServiceActionProps,
   Diff,
   SideBar,
   VSplit,
   HSplit,
-  isUserApproved,
   Constants,
   Styles,
   TableWithPagination,

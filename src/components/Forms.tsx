@@ -9,6 +9,7 @@ interface ICheckProps {
   checked?: boolean;
   style?: CSSProperties;
   onChange?: () => void;
+  label?: string;
 }
 
 export class CheckBoxInGroup extends React.Component<ICheckProps> {
@@ -23,7 +24,7 @@ export class CheckBoxInGroup extends React.Component<ICheckProps> {
           onChange={this.props.onChange}
           name={this.props.name}
         />}
-        label=""
+        label={this.props.label || ''}
       />
     );
   }

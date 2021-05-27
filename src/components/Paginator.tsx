@@ -11,6 +11,7 @@ interface IProps {
   ranges?: number[];
   onPageChange: (value: number) => void;
   onPageSizeChange: (value: number) => void;
+  showingLabelFunction?: (...args: any[]) => string;
 }
 
 export default class Paginator extends React.Component<IProps> {
@@ -27,11 +28,24 @@ export default class Paginator extends React.Component<IProps> {
     const numPages = Math.ceil(this.props.itemsTotal / this.props.itemsPerPage);
     const from = (this.props.currentPage - 1) * this.props.itemsPerPage + 1;
     const to = Math.min(this.props.itemsTotal, this.props.currentPage * this.props.itemsPerPage);
+    const lf = (...args: any[]) => {
+      if (this.props.showingLabelFunction !== undefined) {
+        return this.props.showingLabelFunction(...args);
+      }
+      let str = 'Showing {0}-{1} of {2}';
+      if (args && args.length) {
+        args.forEach((p, i) => {
+          str = str.replace(`{${i}}`, p);
+        });
+      }
+
+      return str;
+    };
     return(
       <div style={this.props.style}>
         <div style={{display: 'flex', position: 'relative', alignItems: 'center', height: 'auto'}}>
           <div style={{display: 'inline-flex', position: 'relative', flexDirection: 'column', alignItems: 'center', paddingRight: 32}}>
-            Showing {from}-{to} of {this.props.itemsTotal}
+            {lf(from, to, this.props.itemsTotal)}
           </div>
           <div style={{display: 'inline-flex', position: 'relative', flexDirection: 'column', alignItems: 'center'}}>
             <DropSelector

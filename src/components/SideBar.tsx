@@ -104,6 +104,8 @@ interface IProps {
   onSelect: (value: any) => void;
   minimized?: boolean;
   service: Service;
+  poweredByLabel?: string;
+  zakaLabel?: string;
 }
 
 export default class SideBar extends React.Component<IProps> {
@@ -157,8 +159,8 @@ export default class SideBar extends React.Component<IProps> {
     }
     return (
       <div style={{paddingLeft: Styles.Padding.M, paddingBottom: Styles.Padding.L}}>
-        <div style={{fontSize: 14, fontFamily: 'Helvetica', color: '#636363'}}>Powered by</div>
-        <div style={{fontSize: 24, fontWeight: 'bold', color: '#636363'}}>ZAKA</div>
+        <div style={{fontSize: 14, fontFamily: 'Helvetica', color: '#636363'}}>{this.props.poweredByLabel || 'Powered by'}</div>
+        <div style={{fontSize: 24, fontWeight: 'bold', color: '#636363'}}>{this.props.zakaLabel || 'ZAKA'}</div>
       </div>
     );
   }

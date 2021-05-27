@@ -18,12 +18,12 @@ interface IProps {
   notifications?: number;
   children?: any;
   onFilterChange?: (filter: string) => void;
+  filterPlaceholder?: string;
   onSwitchSidebarMode?: () => void;
 }
 
 export default class AppHeader extends React.Component<IProps> {
   render() {
-    const filterHandler = (f: string) => this.props.onFilterChange !== undefined ? this.props.onFilterChange(f) : console.log(f);
     return (
       <Toolbar style={{borderBottom: '1px solid rgba(199, 199, 199, 1.0'}}>
         <IconButton
@@ -36,7 +36,7 @@ export default class AppHeader extends React.Component<IProps> {
           <MenuIcon style={{color: '#A7A7A7'}}/>
         </IconButton>
         <div style={{flexGrow: 1}} />
-        <Filter filter={filterHandler}/>
+        {this.renderFilter()}
         <div style={{paddingLeft: 100}}/>
         {this.props.children}
         <IconButton aria-label="show 17 new notifications" color="inherit">
@@ -49,6 +49,16 @@ export default class AppHeader extends React.Component<IProps> {
           <AccountCircle style={{color: '#A7A7A7'}}/>
         </IconButtonWithMenu>
       </Toolbar>
+    );
+  }
+
+  renderFilter() {
+    if (this.props.onFilterChange === undefined) {
+      return '';
+    }
+    const filterHandler = (f: string) => this.props.onFilterChange !== undefined ? this.props.onFilterChange(f) : console.log(f);
+    return (
+      <Filter placeholder={this.props.filterPlaceholder} filter={filterHandler}/>
     );
   }
 }

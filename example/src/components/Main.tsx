@@ -4,7 +4,8 @@ import {Service, SideBar, HSplit, VSplit, AppHeader, Auth, Panel, ContentHeader,
   deleteColumn, editColumn, idColumn, RendererProps, SelectRenderer, SortDirection, TabbedPanel, PopUp,
   Tree, idLink, ConfirmButton, DonutChartItem, ButtonMenuItem, HGroup, AlignedHGroup, BulletItem, ButtonWithMenu,
   DateRange, DraggableList, Identity, Styles, TableWithPagination, ButtonBasedDropSelector, NumberedContainer,
-  NameValueContainer, ActionInstanceContainer, Buttons, SchemaDomain, AttributeComponent, ExpandedAttributesList, Forms
+  NameValueContainer, ActionInstanceContainer, Buttons, SchemaDomain, AttributeComponent, ExpandedAttributesList, Forms,
+  PrettyDropSelector
 } from "frontend-common";
 import {Button, FormGroup, RadioGroup} from "@material-ui/core";
 import EyeIcon from "@material-ui/icons/Visibility";
@@ -163,7 +164,7 @@ export class Main extends React.Component<IProps> {
     actions,
     instanceVisible: true,
     flow: 's',
-    slow: 'one',
+    slow: '',
     checked: false
   };
 
@@ -243,13 +244,13 @@ export class Main extends React.Component<IProps> {
     console.log('f', this.state.flow);
     return (
       <VSplit size={Styles.SideBar.Size.WIDTH} style={{height: '100%'}}>
-        <SideBar service={service} onSelect={onSideSelect} items={items} selected={'Dashboard'} minimized={false}/>
+        <SideBar service={service} onSelect={onSideSelect} items={items} selected={'Dashboard'} minimized={false} zakaLabel={'MyLife+'}/>
         <HSplit size={64}>
           <AppHeader user={{login: 'admin', roles: [Auth.UserRole.SERVICE_ADMIN]}} menuItems={appMenuItems} notifications={3}>
             Hello google
           </AppHeader>
           <Panel style={{height}}>
-            <PopUp title={'Parameters and instances'} opened={this.state.popupOpened} onClose={this.onPopupClose}>
+            <PopUp title={'Parameters and instances'} opened={this.state.popupOpened} onClose={this.onPopupClose} disableBackdropClick={true}>
               <Tree elements={[
                 {
                   content: {label: "rssh-ts", value: 'rssh-t4'},
@@ -357,7 +358,13 @@ export class Main extends React.Component<IProps> {
                 </NumberedContainer>
               </div>
               <div style={{paddingTop: 24}}>
-                <NameValueContainer number={1} onChange={(n, v) => console.log('nme value change', n, v)} onRemove={() => console.log('name value remove')}/>
+                <NameValueContainer
+                  number={1}
+                  onChange={(n, v) => console.log('nme value change', n, v)}
+                  onRemove={() => console.log('name value remove')}
+                  nameLabel={'Nimmen'}
+                  valueLabel={'Valuishen'}
+                />
               </div>
               <div style={{paddingTop: Styles.Padding.M}}>
                 <AttributeComponent.BoxedViewer
@@ -404,6 +411,18 @@ export class Main extends React.Component<IProps> {
                     ],
                     description: 'Your sex'
                   }}
+                  onChange={(a) => console.log(a)}
+                />
+              </div>
+              <div style={{paddingTop: Styles.Padding.M}}>
+                <PrettyDropSelector
+                  selected={'0'}
+                  items={[
+                    {label: 'Female', value: '0'},
+                    {label: 'Unknown', value: '-1'},
+                    'divider',
+                    {label: 'Male', value: '1'}
+                  ]}
                   onChange={(a) => console.log(a)}
                 />
               </div>
@@ -508,7 +527,7 @@ export class Main extends React.Component<IProps> {
                       Select room
                     </ButtonWithMenu>
                   </div>
-                  <SearchBar onTextFilterChange={this.onTextFilterChange}/>
+                  <SearchBar onTextFilterChange={this.onTextFilterChange} placeholder={'Serachische'}/>
                 </ContentHeader>
                 Content
               </TabbedPanel>
@@ -522,6 +541,7 @@ export class Main extends React.Component<IProps> {
                 rightHint={'Total: 267'}
                 textFilter={this.state.textFilter}
                 onTextFilterChange={this.onTextFilterChange}
+                placeholder={'Iskaitung'}
               />
               <TableWithPagination
                 columns={[

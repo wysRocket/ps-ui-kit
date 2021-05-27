@@ -44,6 +44,20 @@ export class SimpleCheckbox extends React.Component<ICheckProps> {
   }
 }
 
+export class SmallCheckbox extends React.Component<ICheckProps> {
+  render() {
+    return (
+      <Checkbox
+        checked={this.props.checked}
+        onChange={this.props.onChange}
+        style={{padding: 0, width: 32, height: 32}}
+        icon={<CheckBoxOutlineBlankIcon style={{ fontSize: 20, color: Styles.Forms.Item.COLOR}} />}
+        checkedIcon={<CheckBoxIcon style={{ fontSize: 20, color: Styles.Forms.Item.COLOR}} />}
+      />
+    );
+  }
+}
+
 interface IRadioProps {
   style?: CSSProperties;
   value: any;

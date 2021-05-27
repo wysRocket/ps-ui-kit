@@ -1,10 +1,12 @@
 import {CSSProperties, default as React} from "react";
-import {FormControl, NativeSelect, Select} from "@material-ui/core";
+import {Divider, FormControl, NativeSelect, Select} from "@material-ui/core";
 import {LabeledItem} from "../domain/Item";
+
+type DSItem = LabeledItem | 'divider';
 
 interface IProps {
   style?: CSSProperties;
-  items: LabeledItem[];
+  items: DSItem[];
   selected?: any;
   onChange: (value: any) => void;
 }
@@ -23,6 +25,19 @@ export default class DropSelector extends React.Component<IProps> {
           onChange={this.onChange}
         >
           {this.props.items.map((item, index) => {
+            if (item === 'divider') {
+              if (item === 'divider') {
+                if (index === this.props.items.length - 1) {
+                  return '';
+                }
+                return (
+                  <option disabled>-</option>
+                );
+                /*return (
+                  <Divider key={index}/>
+                );*/
+              }
+            }
             return (
               <option key={index} value={item.value}>{item.label}</option>
             );
@@ -51,6 +66,17 @@ export class PrettyDropSelector extends React.Component<IProps> {
           inputProps={{style: {paddingTop: 0, paddingBottom: 0, height: 32}}}
         >
           {this.props.items.map((item, index) => {
+            if (item === 'divider') {
+              if (index === this.props.items.length - 1) {
+                return '';
+              }
+              return (
+                <option disabled>-</option>
+              );
+              /*return (
+                <Divider key={index}/>
+              );*/
+            }
             return (
               <option key={index} value={item.value}>{item.label}</option>
             );

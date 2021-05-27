@@ -10,15 +10,24 @@ interface IProps {
   onClose: () => void;
   children?: any;
   minWidth?: number;
+  disableBackdropClick?: boolean;
+  headerChildren?: any;
 }
 
 export default class PopUp extends React.Component<IProps> {
   render() {
     return (
-      <Dialog maxWidth={false} PaperProps={{style: {borderRadius: 0}}} onClose={this.props.onClose} open={this.props.opened}>
+      <Dialog
+        maxWidth={false}
+        PaperProps={{style: {borderRadius: 5}}}
+        onClose={this.props.onClose}
+        open={this.props.opened}
+        disableBackdropClick={this.props.disableBackdropClick}
+      >
         <div style={{paddingLeft: 32, paddingRight: 32}}>
           <ContentHeader style={{minWidth: this.props.minWidth || 700}}>
             <Typography variant="h6">{this.props.title}</Typography>
+            {this.props.headerChildren}
             <IconButton onClick={this.props.onClose}>
               <CloseIcon />
             </IconButton>

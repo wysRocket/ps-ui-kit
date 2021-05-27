@@ -1,6 +1,6 @@
 import {CSSProperties, default as React} from "react";
 import {IconButton, InputAdornment, TextField} from "@material-ui/core";
-import DropSelector from "./DropSelector";
+import DropSelector, {PrettyDropSelector} from "./DropSelector";
 import ClearIcon from "@material-ui/icons/Clear";
 import {LabeledItem} from "../domain/Item";
 
@@ -11,6 +11,7 @@ export interface SearchFilter {
   id: string;
   items: LabeledItem[];
   selected?: any;
+  style?: CSSProperties;
 }
 
 interface IProps {
@@ -21,6 +22,7 @@ interface IProps {
   rightHint?: string;
   onSearchFilterChange?: (id: string, value: any) => void;
   onTextFilterChange: (filter: string) => void;
+  placeholder?: string;
 }
 
 export default class SearchBar extends React.Component<IProps> {
@@ -55,7 +57,8 @@ export default class SearchBar extends React.Component<IProps> {
           {filters.map((filter, index) => {
             return (
               <div key={index} style={{display: 'inline-flex', position: 'relative', flexDirection: 'column', alignItems: 'center', paddingLeft: 30}}>
-                <DropSelector
+                <PrettyDropSelector
+                  style={filter.style}
                   items={filter.items}
                   selected={filter.selected}
                   onChange={this.createFilterHandler(filter.id)}/>
@@ -88,7 +91,7 @@ export default class SearchBar extends React.Component<IProps> {
   renderSearchField() {
     return (
       <TextField
-        placeholder={'Search'}
+        placeholder={this.props.placeholder || 'Search'}
         style={{width: 270, height: 32, maxHeight: 32, marginTop: 0, marginBottom: 0}}
         inputProps={{style: {paddingTop: 0, paddingBottom: 0, height: 32}}}
         InputProps={{

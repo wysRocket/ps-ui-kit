@@ -24,6 +24,7 @@ interface IProps {
   style?: CSSProperties;
   topList: FilterItem[];
   bottomList: FilterItem[];
+  headerText?: string;
 }
 
 export default class DashboardFilter extends React.Component<IProps> {
@@ -49,8 +50,8 @@ export default class DashboardFilter extends React.Component<IProps> {
             <Fade {...TransitionProps} timeout={350}>
               <Paper elevation={3}>
                 <FormControl component="fieldset">
-                  <div style={{paddingTop: 10, paddingLeft: 10}}><strong>Charts visibility</strong></div>
                   <FormGroup>
+                    {this.renderHeader()}
                     <div style={{padding: 10}}>
                     {this.props.topList.map((item, index) => this.renderItem(item, index))}
                     </div>
@@ -68,6 +69,15 @@ export default class DashboardFilter extends React.Component<IProps> {
           <FilterIcon style={{color: '#999999'}}/>
         </Button>
       </div>
+    );
+  }
+
+  renderHeader() {
+    if (!this.props.headerText) {
+      return '';
+    }
+    return (
+      <div style={{paddingTop: 10, paddingLeft: 10}}><strong>{this.props.headerText}</strong></div>
     );
   }
 

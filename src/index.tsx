@@ -1,5 +1,5 @@
 import {Diff} from "./domain/Diff";
-import SideBar from "./components/SideBar";
+import SideBar, {SideBarItem as ISideBarItem} from "./components/SideBar";
 import {HSplit, VSplit} from "./components/Split";
 import {Service as IService} from "./domain/Service";
 import {Identity as IIdentity} from "./domain/Identity";
@@ -68,6 +68,7 @@ import * as SchemaDomain from "./domain/SchemaDomain";
 import * as AttributeComponent from "./components/AttributeComponent";
 import ExpandedAttributesList from "./components/ExpandedAttributesList";
 import * as Forms from "./components/Forms";
+import * as ItemGroup from "./components/ItemsGroup";
 
 export type Service = IService;
 export type Identity<T = string | number> = IIdentity<T>;
@@ -92,6 +93,7 @@ export type DropSelectorItem = ILabeledItem;
 export type LabeledItem = ILabeledItem;
 export type DateRange = IDateRange;
 export type DashboardChartData = IDashboardChartData;
+export type SideBarItem = ISideBarItem;
 
 const Constants = {
   H_PADDING: 32
@@ -162,4 +164,5 @@ export {
   AttributeComponent,
   ExpandedAttributesList,
   Forms,
+  ItemGroup,
 };

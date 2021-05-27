@@ -12,6 +12,8 @@ interface IProps {
   value?: string;
   onRemove: () => void;
   onChange: (name: string, value: string) => void;
+  nameLabel?: string;
+  valueLabel?: string;
 }
 
 export default class NameValueContainer extends React.Component<IProps> {
@@ -30,7 +32,7 @@ export default class NameValueContainer extends React.Component<IProps> {
         <div style={{padding: Styles.Padding.S}}>
           <AlignedHGroup>
             <div style={{width: 74}}>
-              Name:
+              {this.props.nameLabel || 'Name:'}
             </div>
             <TextField
               style={{width: 400}}
@@ -48,7 +50,7 @@ export default class NameValueContainer extends React.Component<IProps> {
           </AlignedHGroup>
           <AlignedHGroup style={{paddingTop: Styles.Padding.S}}>
             <div style={{width: 74}}>
-              Value:
+              {this.props.valueLabel || 'Value:'}
             </div>
             <TextField
               style={{width: 400}}

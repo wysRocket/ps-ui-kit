@@ -23,6 +23,7 @@ interface IProps<T> {
   ranges?: number[];
   onPageChange: (value: number) => void;
   onPageSizeChange: (value: number) => void;
+  showingLabelFunction?: (...args: any[]) => string;
 }
 
 export default class TableWithPagination<T> extends React.Component<IProps<T>> {
@@ -54,6 +55,7 @@ export default class TableWithPagination<T> extends React.Component<IProps<T>> {
             ranges={this.props.ranges}
             onPageChange={this.props.onPageChange}
             onPageSizeChange={this.props.onPageSizeChange}
+            showingLabelFunction={this.props.showingLabelFunction}
           />
         </div>
       </div>

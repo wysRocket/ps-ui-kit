@@ -22,6 +22,8 @@ interface IProps {
   selectedProp?: string;
   selectedRange?: DateRange;
   onRangeChanged: (property: string, range: DateRange) => void;
+  cancelLabel?: string;
+  okLabel?: string;
 }
 
 interface IState {
@@ -82,8 +84,8 @@ export class DateFilterButton extends React.Component<IProps> {
             <div>
             <ContentHeader style={{paddingLeft: 32, paddingRight: 32, display: 'flex'}}>
               <DropSelector items={this.props.items} selected={this.state.property} onChange={this.onPropertyChange}/>
-              <Button disabled={!this.state.property || !this.state.range} onClick={this.onSubmit}>Ok</Button>
-              <Button onClick={this.onCancel}>Cancel</Button>
+              <Button disabled={!this.state.property || !this.state.range} onClick={this.onSubmit}>{this.props.okLabel || 'Ok'}</Button>
+              <Button onClick={this.onCancel}>{this.props.cancelLabel || 'Cancel'}</Button>
             </ContentHeader>
             <DateRangePicker
               open={true}

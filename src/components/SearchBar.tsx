@@ -19,7 +19,7 @@ interface IProps {
   showBorder?: boolean;
   textFilter?: string;
   filters?: SearchFilter[];
-  rightHint?: string;
+  rightElement?: any;
   onSearchFilterChange?: (id: string, value: any) => void;
   onTextFilterChange: (filter: string) => void;
   placeholder?: string;
@@ -67,7 +67,7 @@ export default class SearchBar extends React.Component<IProps> {
           })}
           <div style={{flexGrow: 1}} />
             <div style={{display: 'inline-flex', position: 'relative', flexDirection: 'column', alignItems: 'center'}}>
-              {this.props.rightHint}
+              {this.props.rightElement}
             </div>
         </div>
       </div>

@@ -538,7 +538,7 @@ export class Main extends React.Component<IProps> {
                   {id: 'status', items: [{label: 'All', value: 'all'}, {label: 'Draft', value: 'draft'}]},
                   {id: 'interactions', items: [{label: 'All', value: 'all'}, {label: 'Success', value: 'success'}, {label: 'Fail', value: 'fail'}]},
                 ]}
-                rightHint={'Total: 267'}
+                rightElement={(<PrettyDropSelector selected={'1'} items={[{label: 'one', value: '1'}, {label: 'two', value: '2'}]} onChange={(v) => console.log(v)}/>)}
                 textFilter={this.state.textFilter}
                 onTextFilterChange={this.onTextFilterChange}
                 placeholder={'Iskaitung'}

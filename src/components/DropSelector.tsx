@@ -31,7 +31,7 @@ export default class DropSelector extends React.Component<IProps> {
                   return '';
                 }
                 return (
-                  <option disabled>-</option>
+                  <option key={index} disabled>-</option>
                 );
                 /*return (
                   <Divider key={index}/>
@@ -71,7 +71,7 @@ export class PrettyDropSelector extends React.Component<IProps> {
                 return '';
               }
               return (
-                <option disabled>-</option>
+                <option key={index} disabled>-</option>
               );
               /*return (
                 <Divider key={index}/>

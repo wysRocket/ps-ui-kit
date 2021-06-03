@@ -11,6 +11,7 @@ export interface GetCondition<P = undefined> {
   filters?: Attribute[];
   commonFilter?: string;
   range?: DataRange;
+  extended?: any;
 }
 
 export interface ChangeOptions<P = undefined> {

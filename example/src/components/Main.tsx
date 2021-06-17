@@ -5,7 +5,7 @@ import {Service, SideBar, HSplit, VSplit, AppHeader, Auth, Panel, ContentHeader,
   Tree, idLink, ConfirmButton, DonutChartItem, ButtonMenuItem, HGroup, AlignedHGroup, BulletItem, ButtonWithMenu,
   DateRange, DraggableList, Identity, Styles, TableWithPagination, ButtonBasedDropSelector, NumberedContainer,
   NameValueContainer, ActionInstanceContainer, Buttons, SchemaDomain, AttributeComponent, ExpandedAttributesList, Forms,
-  PrettyDropSelector
+  PrettyDropSelector, ItemGroup
 } from "frontend-common";
 import {Button, FormGroup, RadioGroup} from "@material-ui/core";
 import EyeIcon from "@material-ui/icons/Visibility";
@@ -424,6 +424,37 @@ export class Main extends React.Component<IProps> {
                     {label: 'Male', value: '1'}
                   ]}
                   onChange={(a) => console.log(a)}
+                />
+              </div>
+              <div>
+                <ItemGroup.ButtonWithCheckboxItems
+                  label={'+ Predicate'}
+                  onFilterChange={(t) => console.log(t)}
+                  items={[
+                    {label: 'First Name', value: 'name', extLabel: 'used in predicate'},
+                    {label: 'Second Name', value: 'Second Name'},
+                    {label: 'Birth Date', value: 'bd'},
+                    {label: 'Age', value: 'Age'},
+                    {label: 'Issue Date', value: 'issue date'},
+                    ]}
+                  selected={['name']}
+                  onSelectionChange={(c) => console.log('selection', c)}
+                />
+              </div>
+              <div style={{width: 500}}>
+                <ItemGroup.CheckboxItemsGroup
+                  filterStyle={{width: 450}}
+                  filter={'Hello'}
+                  onFilterChange={(t) => console.log(t)}
+                  items={[
+                    {label: 'First Name', value: 'name', extLabel: 'used in predicate'},
+                    {label: 'Second Name', value: 'Second Name'},
+                    {label: 'Birth Date', value: 'bd'},
+                    {label: 'Age', value: 'Age'},
+                    {label: 'Issue Date', value: 'issue date'},
+                  ]}
+                  selected={['name']}
+                  onSelectionChange={(c) => console.log('selection', c)}
                 />
               </div>
               <div style={{paddingTop: 24}}>

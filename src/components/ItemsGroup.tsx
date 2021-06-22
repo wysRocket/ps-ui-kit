@@ -19,6 +19,7 @@ export interface ItemInGroup extends LabeledItem {
 interface IProps {
   style?: CSSProperties;
   filterStyle?: CSSProperties;
+  paperStyle?: CSSProperties;
   headerElement?: React.ReactNode;
   filter?: string;
   filterPlaceholder?: string;
@@ -31,15 +32,25 @@ interface IProps {
 export class CheckboxItemsGroup extends React.Component<IProps> {
   render() {
     return (
-      <Paper>
+      <Paper style={this.props.paperStyle}>
         <div style={{padding: Styles.Padding.XS}}>
-        <ContentHeader style={{height: Styles.Padding.XL}}>
-          {this.renderFilter()}
-          {this.props.headerElement}
-        </ContentHeader>
-        {this.renderItems()}
+          {this.renderHeader()}
+          {this.renderItems()}
         </div>
       </Paper>
+    );
+  }
+
+  renderHeader() {
+    const handler = this.props.onFilterChange;
+    if (handler === undefined && !this.props.headerElement) {
+      return '';
+    }
+    return (
+      <ContentHeader style={{height: Styles.Padding.XL}}>
+        {this.renderFilter()}
+        {this.props.headerElement}
+      </ContentHeader>
     );
   }
 
@@ -68,7 +79,7 @@ export class CheckboxItemsGroup extends React.Component<IProps> {
       <Panel style={this.props.style}>
         {this.props.items.map((item, index) => {
           return (
-            <AlignedHGroup style={{width: '100%'}}>
+            <AlignedHGroup key={index} style={{width: '100%'}}>
               <CheckBoxInGroup
                 key={index}
                 disabled={item.disabled}

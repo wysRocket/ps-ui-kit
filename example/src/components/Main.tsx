@@ -445,7 +445,6 @@ export class Main extends React.Component<IProps> {
                 <ItemGroup.CheckboxItemsGroup
                   filterStyle={{width: 450}}
                   filter={'Hello'}
-                  onFilterChange={(t) => console.log(t)}
                   items={[
                     {label: 'First Name', value: 'name', extLabel: 'used in predicate'},
                     {label: 'Second Name', value: 'Second Name'},

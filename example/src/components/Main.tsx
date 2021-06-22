@@ -431,6 +431,21 @@ export class Main extends React.Component<IProps> {
                 />
               </div>
               <div style={{paddingTop: Styles.Padding.M}}>
+                <AttributeComponent.SimpleEditor
+                  attribute={{name: 'Sex', value: '0'}}
+                  schemaAttribute={{
+                    name: 'Sex', type:
+                    SchemaDomain.AttributeType.CUSTOM_TYPE,
+                    enumValues: [
+                      {name: 'F', value: '0', description: 'Female'},
+                      {name: 'M', value: '1', description: 'Male'}
+                    ],
+                    description: 'Your sex'
+                  }}
+                  onChange={(a) => console.log(a)}
+                />
+              </div>
+              <div style={{paddingTop: Styles.Padding.M}}>
                 <PrettyDropSelector
                   selected={'0'}
                   items={[

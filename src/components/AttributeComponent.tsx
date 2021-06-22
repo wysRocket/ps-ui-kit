@@ -65,19 +65,7 @@ interface IEditProps extends IViewProps {
   onChange: (attribute: Attribute) => void;
 }
 
-export class Editor extends React.Component<IEditProps> {
-  render() {
-    const attribute = this.props.attribute;
-    return (
-      <div>
-        <div style={{paddingBottom: Style.Padding.XS}}>{attribute.name}</div>
-        <div>
-          {this.renderValue()}
-        </div>
-      </div>
-    );
-  }
-
+export class SimpleEditor extends React.Component<IEditProps> {
   onChange = (value: string) => {
     this.props.onChange({name: this.props.attribute.name, value});
   }
@@ -94,7 +82,7 @@ export class Editor extends React.Component<IEditProps> {
     this.onChange(newVal);
   }
 
-  renderValue() {
+  render() {
     const style = this.props.style || {width: 360};
     const {attribute, schemaAttribute} = this.props;
     if (schemaAttribute.type === SchemaDomain.AttributeType.DATE) {
@@ -132,6 +120,24 @@ export class Editor extends React.Component<IEditProps> {
         InputProps={{style: {paddingTop: 0, paddingBottom: 0, height: 32}}}
         variant="outlined"
       />
+    );
+  }
+}
+
+export class Editor extends React.Component<IEditProps> {
+  render() {
+    const attribute = this.props.attribute;
+    return (
+      <div>
+        <div style={{paddingBottom: Style.Padding.XS}}>{attribute.name}</div>
+        <div>
+          <SimpleEditor
+            onChange={this.props.onChange}
+            attribute={this.props.attribute}
+            schemaAttribute={this.props.schemaAttribute}
+          />
+        </div>
+      </div>
     );
   }
 }

@@ -104,6 +104,7 @@ interface BtnProps extends IProps {
   placement?: PopperPlacementType;
   label: string;
   disabled?: boolean;
+  popperStyle?: CSSProperties;
 }
 
 export class ButtonWithCheckboxItems extends  React.Component<BtnProps> {
@@ -130,6 +131,7 @@ export class ButtonWithCheckboxItems extends  React.Component<BtnProps> {
       <ClickAwayListener onClickAway={this.onClickAway}>
         <div>
           <Popper
+            style={this.props.popperStyle}
             open={this.state.opened}
             anchorEl={this.state.anchorEl}
             placement={this.props.placement || 'top-start'}

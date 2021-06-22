@@ -279,6 +279,22 @@ export class Main extends React.Component<IProps> {
                   ]
                 }
               ]} onSelect={this.onTreeSelect} expandSelected={true} selected={this.state.selected}/>
+              <div>
+                <ItemGroup.ButtonWithCheckboxItems
+                  label={'+ Predicate'}
+                  onFilterChange={(t) => console.log(t)}
+                  items={[
+                    {label: 'First Name', value: 'name', extLabel: 'used in predicate'},
+                    {label: 'Second Name', value: 'Second Name'},
+                    {label: 'Birth Date', value: 'bd'},
+                    {label: 'Age', value: 'Age'},
+                    {label: 'Issue Date', value: 'issue date'},
+                  ]}
+                  selected={['name']}
+                  onSelectionChange={(c) => console.log('selection', c)}
+                  popperStyle={{zIndex: 5000}}
+                />
+              </div>
             </PopUp>
             <div style={{paddingLeft: Styles.Padding.L, paddingRight: Styles.Padding.L}}>
               <ContentHeader>

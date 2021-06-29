@@ -12,6 +12,10 @@ interface IProps {
   minWidth?: number;
   disableBackdropClick?: boolean;
   headerChildren?: any;
+  disableEscapeKeyDown?: boolean;
+  disableEnforceFocus?: boolean;
+  disableRestoreFocus?: boolean;
+  disableScrollLock?: boolean;
 }
 
 export default class PopUp extends React.Component<IProps> {
@@ -23,6 +27,10 @@ export default class PopUp extends React.Component<IProps> {
         onClose={this.props.onClose}
         open={this.props.opened}
         disableBackdropClick={this.props.disableBackdropClick}
+        disableEnforceFocus={this.props.disableEnforceFocus}
+        disableEscapeKeyDown={this.props.disableEscapeKeyDown}
+        disableRestoreFocus={this.props.disableRestoreFocus}
+        disableScrollLock={this.props.disableScrollLock}
       >
         <div style={{paddingLeft: 32, paddingRight: 32}}>
           <ContentHeader style={{minWidth: this.props.minWidth || 700}}>

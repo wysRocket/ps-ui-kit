@@ -1,10 +1,16 @@
-import {cloneDeep} from "lodash";
+import {cloneDeep, filter} from "lodash";
 import {ActionCreator} from "./ActionCreator";
 import {Identity} from "../domain/Identity";
 import {GetCondition, ListItemApi} from "../api/ListItemApi";
 import {Context} from "./Context";
 import {Attribute} from "../domain/Attribute";
 import {Sort} from "../domain/Sort";
+
+export interface DropFilterOptions {
+  leaveAsIs?: boolean;
+  filtersToDrop?: string[];
+  filtersToSave?: string[];
+}
 
 export class ActionWrapper<T extends Identity, P = undefined> {
   constructor(
@@ -61,10 +67,10 @@ export class ActionWrapper<T extends Identity, P = undefined> {
     };
   }
 
-  setCommonFilter(filter?: string, parent?: P) {
+  setCommonFilter(textFilter?: string, parent?: P) {
     return async (dispatch: any) => {
       this.context.setPage(1);
-      this.context.setFilter(filter);
+      this.context.setFilter(textFilter);
       await this.getList(parent)(dispatch);
     };
   }
@@ -121,13 +127,19 @@ export class ActionWrapper<T extends Identity, P = undefined> {
     };
   }
 
-  goToBegin(dropFilters: boolean = true, parent?: P) {
+  goToBegin(opt: DropFilterOptions = {}, parent?: P) {
     return async (dispatch: any) => {
       this.context.setPage(1);
       this.context.setSort();
-      if (dropFilters) {
+      if (!opt.leaveAsIs) {
         this.context.setFilter();
-        this.context.setExtendedFilters();
+        const dropSet = new Set<string>(opt.filtersToDrop);
+        const saveSet = new Set<string>(opt.filtersToSave);
+        const filters = filter(
+          this.context.getExtendedFilters(),
+          (f) => dropSet.size > 0 && !dropSet.has(f.name) || saveSet.has(f.name)
+        );
+        this.context.setExtendedFilters(filters);
       }
       await this.getList(parent)(dispatch);
       dispatch(this.ACTIONS.newItemsShowed());

@@ -87,11 +87,16 @@ class TreeNodeItem extends React.Component<ITreeItemProps> {
     }
   }
 
+  onClick = () => {
+    this.onSelectionChange(!this.props.selected);
+  }
+
   render() {
     const element = this.props.element;
     const content = element.content;
     return (
       <TreeItem
+        onClick={this.onClick}
         nodeId={content.value.toString()}
         label={content.label}
         collapseIcon={<MinusSquare/>}

@@ -20,13 +20,73 @@ interface IProps {
   style?: CSSProperties;
   filterStyle?: CSSProperties;
   paperStyle?: CSSProperties;
+  mainHeaderElement?: React.ReactNode;
   headerElement?: React.ReactNode;
   filter?: string;
   filterPlaceholder?: string;
   onFilterChange?: (filter: string) => void;
   items: ItemInGroup[];
-  selected: any[];
-  onSelectionChange: (value: any) => void;
+  itemRenderer?: (item: ItemInGroup, index?: number) => React.ReactNode;
+  selected?: any[];
+  onSelectionChange?: (value: any) => void;
+}
+
+export class ItemsGroup extends React.Component<IProps> {
+  render() {
+    return (
+      <Paper style={this.props.paperStyle}>
+        <div style={{padding: Styles.Padding.XS}}>
+          {this.props.mainHeaderElement}
+          {this.renderHeader()}
+          {this.renderItems()}
+        </div>
+      </Paper>
+    );
+  }
+
+  renderHeader() {
+    const handler = this.props.onFilterChange;
+    if (handler === undefined && !this.props.headerElement) {
+      return '';
+    }
+    return (
+      <ContentHeader style={{height: Styles.Padding.XL}}>
+        {this.renderFilter()}
+        {this.props.headerElement}
+      </ContentHeader>
+    );
+  }
+
+  renderFilter() {
+    const handler = this.props.onFilterChange;
+    if (handler === undefined) {
+      return (<div/>);
+    }
+    return (
+      <div>
+        <Filter
+          style={this.props.filterStyle}
+          filterText={this.props.filter}
+          filter={handler}
+          placeholder={this.props.filterPlaceholder}
+        />
+      </div>
+    );
+  }
+
+  renderItems() {
+    return (
+      <Panel style={this.props.style}>
+        {this.props.items.map((item, index) => {
+          const renderer = this.props.itemRenderer;
+          if (renderer === undefined) {
+            return '';
+          }
+          return renderer(item, index);
+        })}
+      </Panel>
+    );
+  }
 }
 
 export class CheckboxItemsGroup extends React.Component<IProps> {
@@ -71,7 +131,13 @@ export class CheckboxItemsGroup extends React.Component<IProps> {
     );
   }
 
-  createSelectionHandler = (value: any) => () => this.props.onSelectionChange(value);
+  createSelectionHandler = (value: any) => () => {
+    const handler = this.props.onSelectionChange;
+    if (handler === undefined) {
+      return;
+    }
+    handler(value);
+  }
 
   renderItems() {
     const selectedSet = new Set(this.props.selected);

@@ -296,6 +296,20 @@ export class Main extends React.Component<IProps> {
                 />
               </div>
             </PopUp>
+            <div>
+              <ItemGroup.ItemsGroup
+                onFilterChange={(t) => console.log(t)}
+                items={[
+                  {label: 'First Name', value: 'name', extLabel: 'used in predicate'},
+                  {label: 'Second Name', value: 'Second Name'},
+                  {label: 'Birth Date', value: 'bd'},
+                  {label: 'Age', value: 'Age'},
+                  {label: 'Issue Date', value: 'issue date'},
+                ]}
+                itemRenderer={(item, index) => (<div key={index}>{item.label}</div>)}
+                mainHeaderElement={(<ContentHeader style={{height: 32}}><div>130</div><div>Select</div></ContentHeader>)}
+              />
+            </div>
             <div style={{paddingLeft: Styles.Padding.L, paddingRight: Styles.Padding.L}}>
               <ContentHeader>
                 <h3>Text</h3>

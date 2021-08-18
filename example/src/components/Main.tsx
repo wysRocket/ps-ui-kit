@@ -411,7 +411,7 @@ export class Main extends React.Component<IProps> {
               <div style={{paddingTop: Styles.Padding.M}}>
                 <AttributeComponent.Editor
                   attribute={{name: 'First Name', value: 'Arturito'}}
-                  schemaAttribute={{name: 'First Name', type: SchemaDomain.AttributeType.TEXT, description: 'Your first name'}}
+                  schemaAttribute={{name: 'First Name', type: SchemaDomain.AttributeType.TEXT, description: 'Your first name', valueSources: ['QR']}}
                   onChange={(a) => console.log(a)}
                 />
               </div>

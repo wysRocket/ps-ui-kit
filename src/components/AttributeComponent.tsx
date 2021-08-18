@@ -8,6 +8,7 @@ import DateFnsUtils from "@date-io/date-fns";
 import {LabeledItem} from "../domain/Item";
 import {PrettyDropSelector} from "./DropSelector";
 import {TextField} from "@material-ui/core";
+import {QREditor} from "./QREditor";
 
 interface IViewProps {
   style?: CSSProperties;
@@ -62,6 +63,7 @@ const labelFunc = (date: any, invalidLabel: string) => {
 };
 
 interface IEditProps extends IViewProps {
+  disableQrText?: boolean;
   onChange: (attribute: Attribute) => void;
 }
 
@@ -108,6 +110,11 @@ export class SimpleEditor extends React.Component<IEditProps> {
       const selected = attribute.value;
       return (
         <PrettyDropSelector style={style} items={items} onChange={this.onDropDownChange} selected={selected}/>
+      );
+    }
+    if (schemaAttribute.valueSources && schemaAttribute.valueSources.indexOf('QR') >= 0) {
+      return (
+        <QREditor attribute={attribute} onChange={this.props.onChange} textEditable={!this.props.disableQrText}/>
       );
     }
     return (

@@ -69,6 +69,7 @@ import * as AttributeComponent from "./components/AttributeComponent";
 import ExpandedAttributesList from "./components/ExpandedAttributesList";
 import * as Forms from "./components/Forms";
 import * as ItemGroup from "./components/ItemsGroup";
+import {QREditor} from "./components/QREditor";
 
 export type Service = IService;
 export type Identity<T = string | number> = IIdentity<T>;
@@ -98,7 +99,6 @@ export type SideBarItem = ISideBarItem;
 const Constants = {
   H_PADDING: 32
 };
-
 export {
   ContentHeader,
   DraggableList,
@@ -165,4 +165,5 @@ export {
   ExpandedAttributesList,
   Forms,
   ItemGroup,
+  QREditor,
 };

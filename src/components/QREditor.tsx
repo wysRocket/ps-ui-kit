@@ -171,7 +171,8 @@ export class QREditor extends React.Component<IProps> {
 
   render() {
     const style = this.props.style || {width: 360};
-    const tfWidth = typeof style.width === 'number' ? style.width - 80 : `calc(${style.width}-80)`;
+    const width: any = style.width || '100%';
+    const tfWidth = typeof width === 'number' ? width - 80 : `calc(${width}-80)`;
     const attribute = this.props.attribute;
     return (
       <div>

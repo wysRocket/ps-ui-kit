@@ -10,6 +10,7 @@ import * as SchemaDomain from "../domain/SchemaDomain";
 import {HGroup} from "./Group";
 
 interface IQRProps {
+  mediaId: string;
   opened: boolean;
   onClose: () => void;
   onResult: (code: string) => void;
@@ -52,17 +53,21 @@ class QRScanner extends React.Component<IQRProps> {
       return;
     }
     try {
-      await this.codeReader.decodeFromVideoDevice(this.state.selectedCamera, 'qr-video', (result, err) => {
-        if (result) {
-          console.log(result);
-          this.codeReader.reset();
-          this.props.onResult(result.getText());
+      await this.codeReader.decodeFromVideoDevice(
+        this.state.selectedCamera,
+        `qr-video-${this.props.mediaId}`,
+        (result, err) => {
+          if (result) {
+            console.log(result);
+            this.codeReader.reset();
+            this.props.onResult(result.getText());
+          }
+          if (err && !(err instanceof NotFoundException)) {
+            console.error(err);
+            this.codeReader.reset();
+          }
         }
-        if (err && !(err instanceof NotFoundException)) {
-          console.error(err);
-          this.codeReader.reset();
-        }
-      });
+      );
     } catch (err) {
       console.log(err);
       this.codeReader.reset();
@@ -79,6 +84,7 @@ class QRScanner extends React.Component<IQRProps> {
   }
 
   onClose = () => {
+    console.log('close swipeable Drawer');
     this.codeReader.reset();
     this.props.onClose();
   }
@@ -103,7 +109,7 @@ class QRScanner extends React.Component<IQRProps> {
           <div style={{paddingLeft: 32, paddingTop: 32, paddingRight: 32, width: width - 64, height: height - 64}}>
             <div>
               <video
-                id="qr-video"
+                id={`qr-video-${this.props.mediaId}`}
                 width={width - 64}
                 height={height - 120}
                 style={{border: "1px solid gray"}}
@@ -176,7 +182,12 @@ export class QREditor extends React.Component<IProps> {
     const attribute = this.props.attribute;
     return (
       <div>
-        <QRScanner opened={this.state.popUpOpened} onClose={this.onPopUpClose} onResult={this.onResult}/>
+        <QRScanner
+          mediaId={attribute.name.split(' ').join('-')}
+          opened={this.state.popUpOpened}
+          onClose={this.onPopUpClose}
+          onResult={this.onResult}
+        />
         <div style={style}>
           <HGroup style={{display: 'flex'}}>
             <div>

@@ -417,6 +417,14 @@ export class Main extends React.Component<IProps> {
               </div>
               <div style={{paddingTop: Styles.Padding.M}}>
                 <AttributeComponent.Editor
+                  attribute={{name: 'Status', value: 'May be\nor not'}}
+                  numRows={3}
+                  schemaAttribute={{name: 'Status', type: SchemaDomain.AttributeType.TEXT, multiline: true, description: 'Your status'}}
+                  onChange={(a) => console.log(a)}
+                />
+              </div>
+              <div style={{paddingTop: Styles.Padding.M}}>
+                <AttributeComponent.Editor
                   attribute={{name: 'Age', value: '10'}}
                   schemaAttribute={{name: 'Age', type: SchemaDomain.AttributeType.NUMBER, description: 'Your age'}}
                   onChange={(a) => console.log(a)}

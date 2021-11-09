@@ -63,6 +63,7 @@ const labelFunc = (date: any, invalidLabel: string) => {
 };
 
 interface IEditProps extends IViewProps {
+  numRows?: number;
   disableQrText?: boolean;
   onChange: (attribute: Attribute) => void;
 }
@@ -117,14 +118,19 @@ export class SimpleEditor extends React.Component<IEditProps> {
         <QREditor attribute={attribute} onChange={this.props.onChange} textEditable={!this.props.disableQrText}/>
       );
     }
+    const multiline = schemaAttribute.type === SchemaDomain.AttributeType.TEXT && schemaAttribute.multiline;
+    const inputStyle = multiline ? {paddingTop: 4, paddingBottom: 4} : {paddingTop: 0, paddingBottom: 0, height: 32};
+    const numRows = multiline ? (this.props.numRows || 10) : 1;
     return (
       <TextField
         type={schemaAttribute.type === SchemaDomain.AttributeType.NUMBER ? 'number' : 'text'}
         style={style}
+        multiline={multiline}
+        rows={numRows}
         value={attribute.value}
         onChange={this.onTextChange}
-        inputProps={{style: {paddingTop: 0, paddingBottom: 0, height: 32}}}
-        InputProps={{style: {paddingTop: 0, paddingBottom: 0, height: 32}}}
+        inputProps={{style: inputStyle}}
+        InputProps={{style: inputStyle}}
         variant="outlined"
       />
     );
@@ -139,6 +145,7 @@ export class Editor extends React.Component<IEditProps> {
         <div style={{paddingBottom: Style.Padding.XS}}>{attribute.name}</div>
         <div>
           <SimpleEditor
+            numRows={this.props.numRows}
             onChange={this.props.onChange}
             attribute={this.props.attribute}
             schemaAttribute={this.props.schemaAttribute}

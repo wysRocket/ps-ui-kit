@@ -6,7 +6,7 @@ export enum AttributeType {
   DATE = 'date',
   PHONE = 'phone',
   NUMBER = 'number',
-  FILE = 'file',
+  // FILE = 'file',
   CUSTOM_TYPE = 'custom enum',
 }
 
@@ -32,12 +32,19 @@ export interface AttributeEnumValue extends Attribute {
   description?: string;
 }
 
-export interface SchemaAttribute {
+export interface AttributeMeta {
   name: string;
-  type: AttributeType;
   description: string;
   valueSources?: AttributeSource[];
   enumValues?: AttributeEnumValue[];
+  multiline?: boolean;
+  validatorRegexpr?: string;
+  contextUri?: string;
+  isIndexed?: string;
+}
+
+export interface SchemaAttribute extends AttributeMeta {
+  type: AttributeType;
 }
 
 export const attributeValueToDate = (value: string, type: AttributeType) => {

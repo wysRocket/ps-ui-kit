@@ -536,7 +536,7 @@ export class Main extends React.Component<IProps> {
                   header={'Hunter Elementary School'}
                   attributes={[
                     {
-                      attribute: {name: 'First Name', value: 'Arturito'},
+                      attribute: {name: 'First Name', value: 'Arturito!\nYou are bandito!\nGangsterito!'},
                       schemaField: {name: 'First Name', type: SchemaDomain.AttributeType.TEXT, description: 'Your first name'}
                     },
                     {

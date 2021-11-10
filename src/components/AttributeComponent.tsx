@@ -25,7 +25,12 @@ const getAttributeValue = (props: IViewProps) => {
   if (schemaAttribute.enumValues && schemaAttribute.enumValues.length) {
     result = SchemaDomain.enumAttributeToString(schemaAttribute, result);
   }
-  return result;
+  const parts = result.split(/\r?\n/g);
+  return (
+    <div>
+      {parts.map((p) => (<div>{p}</div>))}
+    </div>
+  );
 };
 
 export class Viewer extends React.Component<IViewProps> {

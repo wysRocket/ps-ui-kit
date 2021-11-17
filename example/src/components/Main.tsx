@@ -550,6 +550,40 @@ export class Main extends React.Component<IProps> {
                   ]}
                 />
               </div>
+              <div style={{paddingTop: 24, paddingLeft: 40}}>
+                <ExpandedAttributesList
+                  style={{width: 450}}
+                  attributeNameStyle={{maxWidth: 200, color: '#8B8B8B'}}
+                  attributeValueStyle={{maxWidth: 200}}
+                  header={'Med 2.0 strange case'}
+                  attributes={[
+                    {
+                      attribute: {
+                        name: 'Some strange attribute with very very very long name or and some question why? Because f#ck you, that because',
+                        value: 'let\'s imagine that you can use the same time right now because this video is not available for remote playback of new Hunter service\nArturito!\nYou are bandito!\nGangsterito!'},
+                      schemaField: {
+                        name: 'Some strange attribute with very very very long name or and some question why? Because f#ck you, that because',
+                        type: SchemaDomain.AttributeType.TEXT, description: 'Your first name'}
+                    },
+                    {
+                      attribute: {
+                        name: 'Yet anotner question about, hm, about what? May be about your life?',
+                        value: 'from your message is not open app after the same time right in front of new posts via email or call me at the moment and I will check it on the other side'},
+                      schemaField: {
+                        name: 'Yet anotner question about, hm, about what? May be about your life?',
+                        type: SchemaDomain.AttributeType.TEXT, description: 'Your age'}
+                    },
+                    {
+                      attribute: {
+                        name: 'Somtimes i think, that we are on the wrong way, May be we need more motivation stimulaition and suceed success? Or common and dance? Or somesthing like what?',
+                        value: 'some people have recommended for remote playback you mean the same time as the moment and tube ids in the other hand if you have any questions'},
+                      schemaField: {
+                        name: 'Somtimes i think, that we are on the wrong way, May be we need more motivation stimulaition and suceed success? Or common and dance? Or somesthing like what?',
+                        type: SchemaDomain.AttributeType.TEXT, description: 'Your dob'}
+                    },
+                  ]}
+                />
+              </div>
               <div style={{paddingTop: 24}}>
                 <ActionInstanceContainer
                   number={1}

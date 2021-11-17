@@ -13,6 +13,9 @@ export interface AttributeFieldValue {
 
 interface IProps {
   style?: CSSProperties;
+  attributeNameStyle?: CSSProperties;
+  attributeValueStyle?: CSSProperties;
+  useColon?: boolean;
   attributes: AttributeFieldValue[];
   header: string;
   icon?: React.ReactNode;
@@ -54,6 +57,9 @@ export default class ExpandedAttributesList extends React.Component<IProps> {
               return (
                 <AttributeComponent.Viewer
                   style={{paddingTop : i > 0 ? Style.Padding.S : 0}}
+                  nameStyle={this.props.attributeNameStyle}
+                  valueStyle={this.props.attributeValueStyle}
+                  useColon={this.props.useColon}
                   key={i}
                   attribute={a.attribute}
                   schemaAttribute={a.schemaField}

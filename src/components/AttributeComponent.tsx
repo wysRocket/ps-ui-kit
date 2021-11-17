@@ -12,6 +12,9 @@ import {QREditor} from "./QREditor";
 
 interface IViewProps {
   style?: CSSProperties;
+  nameStyle?: CSSProperties;
+  valueStyle?: CSSProperties;
+  useColon?: boolean;
   attribute: Attribute;
   schemaAttribute: SchemaDomain.SchemaAttribute;
 }
@@ -26,8 +29,9 @@ const getAttributeValue = (props: IViewProps) => {
     result = SchemaDomain.enumAttributeToString(schemaAttribute, result);
   }
   const parts = result.split(/\r?\n/g);
+  const style = props.valueStyle || {};
   return (
-    <div>
+    <div style={{...style}}>
       {parts.map((p) => (<div>{p}</div>))}
     </div>
   );
@@ -40,7 +44,9 @@ export class Viewer extends React.Component<IViewProps> {
     return (
       <div style={{...style, display: 'flex'}}>
         <div style={{display: 'inline-flex'}}>
-          {this.props.attribute.name}:
+          <div style={this.props.nameStyle}>
+            {this.props.attribute.name}{this.props.useColon ? ':' : ''}
+          </div>
         </div>
         <div style={{flexGrow: 1}} />
         <div style={{display: 'inline-flex'}}>

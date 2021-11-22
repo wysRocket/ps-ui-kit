@@ -20,6 +20,9 @@ export const attributeTypeToString = (type: AttributeType) => {
   if (type === AttributeType.NUMBER) {
     return 'Number';
   }
+  if (type === AttributeType.PHONE) {
+    return 'Phone';
+  }
   if (type === AttributeType.CUSTOM_TYPE) {
     return 'Custom type';
   }

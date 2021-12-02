@@ -165,6 +165,7 @@ export class Main extends React.Component<IProps> {
     instanceVisible: true,
     flow: 's',
     slow: '',
+    plow: '',
     checked: false
   };
 
@@ -235,6 +236,11 @@ export class Main extends React.Component<IProps> {
   flowChange = (slow: string) => {
     console.log('flow', slow);
     this.setState({slow});
+  };
+
+  plowChange = (plow?: string) => {
+    console.log('plow', plow);
+    this.setState({plow});
   };
 
   onCheckedChange = () => this.setState({checked: !this.state.checked});
@@ -368,6 +374,25 @@ export class Main extends React.Component<IProps> {
                   <Forms.RadioInGroup value={'s'} label={'Simple'}/>
                   <Forms.RadioInGroup value={'p'} label={'Pin'}/>
                 </RadioGroup>
+              </div>
+              <div>
+                <div>
+                  <Forms.StandaloneRadioButton
+                    name={'plow'}
+                    value={'pp'}
+                    checked={this.state.plow === 'pp'}
+                    onChange={this.plowChange}
+                  /> Plow PIN
+                </div>
+                <div>
+                  <Forms.StandaloneRadioButton
+                    name={'plow'}
+                    value={'ps'}
+                    checked={this.state.plow === 'ps'}
+                    onChange={this.plowChange}
+                    disabled={true}
+                  /> Plow Simple
+                </div>
               </div>
               <div>
                 <Forms.RBGroup name={'SereFlow'} onChange={this.flowChange} value={this.state.slow} items={[

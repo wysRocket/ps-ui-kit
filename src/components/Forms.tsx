@@ -40,7 +40,7 @@ export class SimpleCheckbox extends React.Component<ICheckProps> {
         checked={this.props.checked}
         disabled={this.props.disabled}
         onChange={this.props.onChange}
-        style={{padding: 0, width: 32, height: 32}}
+        style={{padding: 0, width: 32, height: 32, opacity: this.props.disabled ? 0.5 : 1}}
         icon={<CheckBoxOutlineBlankIcon style={{ fontSize: 24, color: Styles.Forms.Item.COLOR}} />}
         checkedIcon={<CheckBoxIcon style={{ fontSize: 24, color: Styles.Forms.Item.COLOR}} />}
       />
@@ -55,7 +55,7 @@ export class SmallCheckbox extends React.Component<ICheckProps> {
         checked={this.props.checked}
         disabled={this.props.disabled}
         onChange={this.props.onChange}
-        style={{padding: 0, width: 32, height: 32}}
+        style={{padding: 0, width: 32, height: 32, opacity: this.props.disabled ? 0.5 : 1}}
         icon={<CheckBoxOutlineBlankIcon style={{ fontSize: 20, color: Styles.Forms.Item.COLOR}} />}
         checkedIcon={<CheckBoxIcon style={{ fontSize: 20, color: Styles.Forms.Item.COLOR}} />}
       />
@@ -80,6 +80,37 @@ export class RadioInGroup extends React.Component<IRadioProps> {
         disabled={this.props.disabled}
         control={<Radio style={{color: Styles.Forms.Item.COLOR, ...s}} />}
         label={this.props.label} />
+    );
+  }
+}
+
+interface IStandaloneRadioProps<T = string> {
+  name?: string;
+  value?: T;
+  checked?: boolean;
+  disabled?: boolean;
+  style?: CSSProperties;
+  onChange?: (v?: T) => void;
+  label?: string;
+}
+
+export class StandaloneRadioButton extends React.Component<IStandaloneRadioProps> {
+  onChange = () => {
+    const handler = this.props.onChange;
+    if (handler !== undefined) {
+      handler(this.props.value);
+    }
+  }
+  render() {
+    return (
+      <Radio
+        checked={this.props.checked}
+        disabled={this.props.disabled}
+        onChange={this.onChange}
+        name={this.props.name}
+        value={this.props.value}
+        style={{padding: 0, width: 32, height: 32, color: Styles.Forms.Item.COLOR, opacity: this.props.disabled ? 0.5 : 1}}
+      />
     );
   }
 }

@@ -23,7 +23,10 @@ export class ActionWrapper<T extends Identity, P = undefined> {
     return async (dispatch: any) => {
       dispatch(this.ACTIONS.getList());
       const limit = this.context.perPage();
-      const offset = (this.context.page() - 1) * limit;
+      let offset = (this.context.page() - 1) * limit;
+      if (offset < 0) {
+        offset = 0;
+      }
       const resp = await this.api.list(this.extendCondition(this.ACTIONS.GET_LIST, {
         parent,
         range: {limit, offset},

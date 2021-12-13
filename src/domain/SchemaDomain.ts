@@ -24,7 +24,7 @@ export const attributeTypeToString = (type: AttributeType) => {
     return 'Phone';
   }
   if (type === AttributeType.CUSTOM_TYPE) {
-    return 'Custom type';
+    return 'Enumerated type (E-num)';
   }
   return type;
 };

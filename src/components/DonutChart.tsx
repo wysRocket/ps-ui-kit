@@ -18,7 +18,7 @@ interface IProps {
   items: DonutChartItem[];
   title: string;
   subtitle?: string;
-  menuItems: ButtonMenuItem[];
+  menuItems?: ButtonMenuItem[];
   filterItems?: ButtonMenuItem[];
 }
 
@@ -99,8 +99,12 @@ export default class DonutChart extends React.Component<IProps> {
   }
 
   renderMenuButton() {
+    const items = this.props.menuItems;
+    if (!items || !items.length) {
+      return '';
+    }
     return (
-      <ButtonWithMenu items={this.props.menuItems}>
+      <ButtonWithMenu items={items}>
         <MoreVertIcon />
       </ButtonWithMenu>
     );

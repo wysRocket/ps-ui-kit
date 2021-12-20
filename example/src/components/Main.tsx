@@ -17,6 +17,7 @@ import {cloneDeep} from "lodash";
 import {DndProvider} from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend";
 import {BrowserRouter as Router} from "react-router-dom";
+import InfoIcon from '@material-ui/icons/Info';
 
 const service: Service = {
   identity: 'myService',
@@ -342,6 +343,13 @@ export class Main extends React.Component<IProps> {
                 move={this.onSwitchActions}
                 renderer={(item) => (<div>{item.identity} - {item.status}</div>)}
               />
+              <div>
+                <Buttons.IconButtonWithPopper
+                  popperContent={(<div>Hello, this is info message for... For hz</div>)}
+                >
+                  <InfoIcon/>
+                </Buttons.IconButtonWithPopper>
+              </div>
               <div>
                 <ButtonBasedDropSelector variant={'text'} items={topItems} onChange={(v) => console.log(v)}/>
               </div>

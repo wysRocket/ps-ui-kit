@@ -1,7 +1,8 @@
 import {CSSProperties, default as React} from "react";
-import {Button} from "@material-ui/core";
+import {Button, ClickAwayListener, Fade, IconButton, Paper, Popper} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import * as Styles from "./DefaultStyles";
+import {PopperPlacementType} from "@material-ui/core/Popper/Popper";
 
 interface IProps {
   style?: CSSProperties;
@@ -91,6 +92,68 @@ export class Text extends React.Component<IProps> {
       >
         {this.props.label}
       </Button>
+    );
+  }
+}
+
+interface IIBWPProps {
+  style?: CSSProperties;
+  disabled?: boolean;
+  children: any;
+  popperContent: any;
+  placement?: PopperPlacementType;
+  popperMaxHeight?: number;
+  popperWidth?: number;
+}
+
+export class IconButtonWithPopper extends React.Component<IIBWPProps> {
+  state = {
+    opened: false,
+    anchorEl: undefined
+  };
+
+  onButtonClick = (evt: any) => {
+    const opened = !this.state.opened;
+    this.setState({opened, anchorEl: evt.currentTarget});
+  }
+
+  onClickAway = () => {
+    this.setState({opened: false});
+  }
+
+  render() {
+    const style: CSSProperties = this.props.style || {};
+    const s = this.props.style || {};
+    const popperWidth = this.props.popperWidth || s.width;
+    const ws = popperWidth ? {width: popperWidth} : {};
+    return (
+      <ClickAwayListener onClickAway={this.onClickAway}>
+        <div>
+          <Popper
+            open={this.state.opened}
+            anchorEl={this.state.anchorEl}
+            placement={this.props.placement || 'right-start'}
+            transition
+          >
+            {({TransitionProps}) => (
+              <Fade {...TransitionProps} timeout={200}>
+                <Paper elevation={3}>
+                  <div style={{...ws, maxHeight: this.props.popperMaxHeight || 400, overflow: 'auto'}}>
+                    {this.props.popperContent}
+                  </div>
+                </Paper>
+              </Fade>
+            )}
+          </Popper>
+          <IconButton
+            style={style}
+            disabled={this.props.disabled}
+            onClick={this.onButtonClick}
+          >
+            {this.props.children}
+          </IconButton>
+        </div>
+      </ClickAwayListener>
     );
   }
 }

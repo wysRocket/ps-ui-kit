@@ -98,6 +98,7 @@ export class Text extends React.Component<IProps> {
 
 interface IIBWPProps {
   style?: CSSProperties;
+  popperStyle?: CSSProperties;
   disabled?: boolean;
   children: any;
   popperContent: any;
@@ -130,6 +131,7 @@ export class IconButtonWithPopper extends React.Component<IIBWPProps> {
       <ClickAwayListener onClickAway={this.onClickAway}>
         <div>
           <Popper
+            style={this.props.popperStyle}
             open={this.state.opened}
             anchorEl={this.state.anchorEl}
             placement={this.props.placement || 'right-start'}

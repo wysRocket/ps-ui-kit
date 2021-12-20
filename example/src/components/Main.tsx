@@ -258,6 +258,14 @@ export class Main extends React.Component<IProps> {
           </AppHeader>
           <Panel style={{height}}>
             <PopUp title={'Parameters and instances'} opened={this.state.popupOpened} onClose={this.onPopupClose} disableBackdropClick={true}>
+              <div>
+                <Buttons.IconButtonWithPopper
+                  popperStyle={{zIndex: 5000}}
+                  popperContent={(<div>Hello, this is info message from popUp</div>)}
+                >
+                  <InfoIcon/>
+                </Buttons.IconButtonWithPopper>
+              </div>
               <Tree elements={[
                 {
                   content: {label: "rssh-ts", value: 'rssh-t4'},

@@ -105,6 +105,7 @@ interface IProps {
   minimized?: boolean;
   service: Service;
   poweredByLabel?: string;
+  poweredByElement?: any;
   zakaLabel?: string;
 }
 
@@ -160,8 +161,18 @@ export default class SideBar extends React.Component<IProps> {
     return (
       <div style={{paddingLeft: Styles.Padding.M, paddingBottom: Styles.Padding.L}}>
         <div style={{fontSize: 14, fontFamily: 'Helvetica', color: '#636363'}}>{this.props.poweredByLabel || 'Powered by'}</div>
-        <div style={{fontSize: 24, fontWeight: 'bold', color: '#636363'}}>{this.props.zakaLabel || 'ZAKA'}</div>
+        {this.renderPoweredByChild()}
       </div>
+    );
+  }
+
+  renderPoweredByChild() {
+    if (this.props.poweredByElement) {
+      return this.props.poweredByElement;
+    }
+
+    return (
+      <div style={{fontSize: 24, fontWeight: 'bold', color: '#636363'}}>{this.props.zakaLabel || 'ZAKA'}</div>
     );
   }
 }

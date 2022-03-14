@@ -14,6 +14,8 @@ interface IProps {
   onChange: (name: string, value: string) => void;
   nameLabel?: string;
   valueLabel?: string;
+  nameHint: any;
+  valueHint: any;
 }
 
 export default class NameValueContainer extends React.Component<IProps> {
@@ -42,11 +44,7 @@ export default class NameValueContainer extends React.Component<IProps> {
               onChange={this.onNameChange}
               value={this.props.name || ''}
             />
-            <div>
-              <IconButton>
-                <InfoIcon style={{color: Styles.Icon.Button.COLOR}}/>
-              </IconButton>
-            </div>
+            {this.props.nameHint}
           </AlignedHGroup>
           <AlignedHGroup style={{paddingTop: Styles.Padding.S}}>
             <div style={{width: 74}}>
@@ -60,11 +58,7 @@ export default class NameValueContainer extends React.Component<IProps> {
               value={this.props.value || ''}
               variant="outlined"
             />
-            <div>
-              <IconButton>
-                <InfoIcon style={{color: Styles.Icon.Button.COLOR}}/>
-              </IconButton>
-            </div>
+            {this.props.valueHint}
           </AlignedHGroup>
         </div>
       </NumberedContainer>

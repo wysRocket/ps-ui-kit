@@ -34,7 +34,7 @@ const service: Service = {
 
 interface MyId extends Identity<string> {
   name: string;
-};
+}
 
 const onSideSelect = (value: any) => {
   console.log(value, 'selected');
@@ -87,7 +87,7 @@ const changeMenuItems: ButtonMenuItem[] = [
 ];
 
 const filterMenuItems: ButtonMenuItem[] = [
-  {label: 'Ok',icon: (<CheckIcon style={{color: '#FF0000'}}/>), onClick: () => console.log('view click')},
+  {label: 'Ok', icon: (<CheckIcon style={{color: '#FF0000'}}/>), onClick: () => console.log('view click')},
   {label: 'H1: 0', icon: (<CheckIcon style={{color: '#FFFFFF', opacity: 0}}/>), onClick: () => console.log('hide click')},
   {label: 'Some', icon: (<CheckIcon style={{color: '#FFFFFF', opacity: 0}}/>), onClick: () => console.log('move click')},
 ];
@@ -152,7 +152,7 @@ const sparklineData = [47, 45, 54, 38, 56, 24, 65, 31, 37, 39, 62, 51, 35,
   41, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46];
 
 interface IProps {
-  style?: CSSProperties
+  style?: CSSProperties;
 }
 
 export class Main extends React.Component<IProps> {
@@ -177,73 +177,73 @@ export class Main extends React.Component<IProps> {
 
   onInstanceVisibleChange = () => {
     this.setState({instanceVisible: !this.state.instanceVisible});
-  };
+  }
 
   onTabChange = (v: any) => {
     console.log('tab change', v);
     this.setState({tab: v});
-  };
+  }
   onPageChange = (v: number) => {
-    this.setState({currentPage: v})
-  };
+    this.setState({currentPage: v});
+  }
 
   onPageSizeChange = (v: number) => {
     this.setState({itemsPerPage: v});
-  };
+  }
 
   onPopupOpen = () => {
     this.setState({popupOpened: true});
-  };
+  }
 
   onPopupClose = () => {
     this.setState({popupOpened: false});
-  };
+  }
 
   onTreeSelect = (selected: any) => {
     console.log('selected', selected);
     this.setState({selected});
-  };
+  }
 
   onSave = () => {
-    console.log('save')
-  };
+    console.log('save');
+  }
 
   onPublish = () => {
-    console.log('publish')
-  };
+    console.log('publish');
+  }
 
   onTextFilterChange = (f: string) => {
     console.log('filter', f);
     this.setState({textFilter: f});
-  };
+  }
 
   onDateRangeChange = (prop: string, range: DateRange) => {
     console.log('date range changed', prop, range);
-  };
+  }
 
   onSwitchActions = (fromIndex: number, toIndex: number) => {
     const prevOrder = this.state.actions || [];
-    const actions = cloneDeep(prevOrder);
-    actions[fromIndex] = prevOrder[toIndex];
-    actions[toIndex] = prevOrder[fromIndex];
-    this.setState({actions});
+    const actions1 = cloneDeep(prevOrder);
+    actions1[fromIndex] = prevOrder[toIndex];
+    actions1[toIndex] = prevOrder[fromIndex];
+    this.setState({actions: actions1});
 
-  };
+  }
 
   onFlowChange = (evt: any) => {
     console.log(evt.target.value, evt);
     this.setState({flow: evt.target.value});
-  };
+  }
 
   flowChange = (slow: string) => {
     console.log('flow', slow);
     this.setState({slow});
-  };
+  }
 
   plowChange = (plow?: string) => {
     console.log('plow', plow);
     this.setState({plow});
-  };
+  }
 
   onCheckedChange = () => this.setState({checked: !this.state.checked});
 
@@ -444,6 +444,8 @@ export class Main extends React.Component<IProps> {
                   onRemove={() => console.log('name value remove')}
                   nameLabel={'Nimmen'}
                   valueLabel={'Valuishen'}
+                  nameHint={undefined}
+                  valueHint={undefined}
                 />
               </div>
               <div style={{paddingTop: Styles.Padding.M}}>
@@ -712,7 +714,7 @@ export class Main extends React.Component<IProps> {
               />
               <TableWithPagination
                 columns={[
-                  idLink((item: any)=> item.identity, 'name'),
+                  idLink((item: any) => item.identity, 'name'),
                   idColumn('name'),
                   {
                     fieldId: 'status',
@@ -738,7 +740,7 @@ export class Main extends React.Component<IProps> {
               <SearchBar onTextFilterChange={this.onTextFilterChange} textFilter={this.state.textFilter}/>
               <DataTable
                 columns={[
-                  idLink((item: any)=> item.identity, 'name'),
+                  idLink((item: any) => item.identity, 'name'),
                   idColumn('name'),
                   {
                     fieldId: 'status',

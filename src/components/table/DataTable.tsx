@@ -11,6 +11,7 @@ import DraggableRow from "./DraggableRow";
 import * as Styles from "../DefaultStyles";
 import {CSSProperties} from "react";
 import {makeStyles} from "@material-ui/core/styles";
+import {DndHacked} from "../DndHacked";
 
 const useStyles = makeStyles({
   activeSortIcon: {
@@ -78,7 +79,7 @@ export default class DataTable<T> extends React.Component<IProps<T>> {
     const {columns, data, sort, idField, onSwitchItems} = this.props;
     const id = idField || 'identity';
     return (
-      <DndProvider backend={HTML5Backend}>
+      <DndHacked backend={HTML5Backend}>
       <Table style={this.props.style}>
         <TableHead>
           <TableRow style={{height: Styles.Padding.XXL, backgroundColor: Styles.Table.Color.HEADER_BACKGROUND}}>
@@ -146,7 +147,7 @@ export default class DataTable<T> extends React.Component<IProps<T>> {
           })}
         </TableBody>
       </Table>
-      </DndProvider>
+      </DndHacked>
     );
   }
 

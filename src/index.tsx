@@ -70,6 +70,7 @@ import ExpandedAttributesList from "./components/ExpandedAttributesList";
 import * as Forms from "./components/Forms";
 import * as ItemGroup from "./components/ItemsGroup";
 import {QREditor} from "./components/QREditor";
+import {DndHacked} from "./components/DndHacked";
 
 export type Service = IService;
 export type Identity<T = string | number> = IIdentity<T>;
@@ -166,4 +167,5 @@ export {
   Forms,
   ItemGroup,
   QREditor,
+  DndHacked,
 };

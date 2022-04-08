@@ -17,6 +17,7 @@ export interface SideBarItem {
   icon?: (p: {style?: CSSProperties}) => React.ReactNode;
   value: any;
   link: string;
+  isExternalLink?: boolean;
 }
 
 const useStyles = () => makeStyles({
@@ -71,6 +72,7 @@ const ItemComponent: React.FC<ItemComponentProps> = (props) => {
     iconStyle.minWidth = 0;
   }
   const colorStyle = {color: props.selected ? Styles.SideBar.Color.ACTIVE_ICON : Styles.SideBar.Color.ICON};
+  const cProps = item.isExternalLink ? {component: 'a', href: item.link, target: '_blank'} : {component: Link, to: item.link};
   return (
     <ListItem
       button={true}
@@ -78,8 +80,7 @@ const ItemComponent: React.FC<ItemComponentProps> = (props) => {
       classes={{root: classes.root, selected: classes.selected}}
       selected={props.selected}
       onClick={onClick}
-      component={Link}
-      to={item.link}
+      {...cProps}
     >
       <ListItemIcon style={iconStyle}>
         <div style={{
@@ -99,6 +100,7 @@ const ItemComponent: React.FC<ItemComponentProps> = (props) => {
 
 interface IProps {
   style?: CSSProperties;
+  logoBarStyle?: CSSProperties;
   items: SideBarItem[];
   selected?: any;
   onSelect: (value: any) => void;
@@ -115,7 +117,7 @@ export default class SideBar extends React.Component<IProps> {
     return (
       <Panel style={{backgroundColor: Styles.SideBar.Color.BG}}>
         <div style={{/*borderRight: '1px solid rgba(199, 199, 199, 1.0',*/ height: '100%', display: 'flex', flexDirection: 'column'}}>
-          <div style={{height: 94, paddingLeft: this.props.minimized ? 8 : 16, paddingTop: 16, color: '#6C6C6C'}}>
+          <div style={{height: 94, paddingLeft: this.props.minimized ? 8 : 16, paddingTop: 16, color: '#6C6C6C', ...this.props.logoBarStyle}}>
             <div style={{float: 'left', minWidth: this.props.minimized ? 40 : 48}}>
               <div style={{width: 40, height: 40, backgroundColor: '#E7E7E7', border: '1px solid rgba(199, 199, 199, 1.0)', borderRadius: 3}}>
                 {this.renderLogo(service.logo)}

@@ -48,6 +48,7 @@ const items = [
   {label: 'Archive', value: 'Archive', link: 'ar'},
   {label: 'Service Info', value: 'Service Info', link: 'si'},
   {label: 'Pin', value: 'Pin', link: 'pin'},
+  {label: 'Knowledge base', value: 'kbase', link: 'http://google.com', isExternalLink: true},
 ];
 
 const topItems = [
@@ -251,7 +252,15 @@ export class Main extends React.Component<IProps> {
     console.log('f', this.state.flow);
     return (
       <VSplit size={Styles.SideBar.Size.WIDTH} style={{height: '100%'}}>
-        <SideBar service={service} onSelect={onSideSelect} items={items} selected={'Dashboard'} minimized={false} zakaLabel={'MyLife+'}/>
+        <SideBar
+            logoBarStyle={{height: 64}}
+            service={service}
+            onSelect={onSideSelect}
+            items={items}
+            selected={'Dashboard'}
+            minimized={false}
+            zakaLabel={'MyLife+'}
+        />
         <HSplit size={64}>
           <AppHeader user={{login: 'admin', roles: [Auth.UserRole.SERVICE_ADMIN]}} menuItems={appMenuItems} notifications={3}>
             Hello google

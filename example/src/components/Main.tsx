@@ -254,6 +254,7 @@ export class Main extends React.Component<IProps> {
       <VSplit size={Styles.SideBar.Size.WIDTH} style={{height: '100%'}}>
         <SideBar
             logoBarStyle={{height: 64}}
+            menuItemsStyle={{height: 200, borderBottom: '1px solid'}}
             service={service}
             onSelect={onSideSelect}
             items={items}

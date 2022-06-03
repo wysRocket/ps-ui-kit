@@ -100,6 +100,7 @@ const ItemComponent: React.FC<ItemComponentProps> = (props) => {
 
 interface IProps {
   style?: CSSProperties;
+  menuItemsStyle?: CSSProperties;
   logoBarStyle?: CSSProperties;
   items: SideBarItem[];
   selected?: any;
@@ -127,17 +128,19 @@ export default class SideBar extends React.Component<IProps> {
               {this.props.minimized ? '' : service.identity}
             </div>
           </div>
-          <List style={{paddingRight: Styles.Padding.XS, paddingLeft: Styles.Padding.XS}}>
-            {items.map((item, index) => (
-              <ItemComponent
-                key={index}
-                item={item}
-                onClick={this.props.onSelect}
-                selected={selected && selected === item.value}
-                minimized={this.props.minimized}
-              />
-            ))}
-          </List>
+          <Panel style={this.props.menuItemsStyle}>
+            <List style={{paddingRight: Styles.Padding.XS, paddingLeft: Styles.Padding.XS}}>
+              {items.map((item, index) => (
+                <ItemComponent
+                  key={index}
+                  item={item}
+                  onClick={this.props.onSelect}
+                  selected={selected && selected === item.value}
+                  minimized={this.props.minimized}
+                />
+              ))}
+            </List>
+          </Panel>
           <div style={{flexGrow: 1}}/>
           {this.renderCopyright()}
         </div>

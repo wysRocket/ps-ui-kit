@@ -102,7 +102,7 @@ export class ValueViewer extends React.Component<IValueViewProps> {
     }
     return (
       <div style={{...style}}>
-        {parts.map((p) => (<div>{p}</div>))}
+        {parts.map((p, i) => (<div key={i}>{p}</div>))}
       </div>
     );
 

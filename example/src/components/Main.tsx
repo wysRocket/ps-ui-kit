@@ -634,6 +634,14 @@ export class Main extends React.Component<IProps> {
                         name: 'Somtimes i think, that we are on the wrong way, May be we need more motivation stimulaition and suceed success? Or common and dance? Or somesthing like what?',
                         type: SchemaDomain.AttributeType.TEXT, description: 'Your dob'}
                     },
+                    {
+                      attribute: {
+                        name: 'Prism DID',
+                        value: 'fg58fdgN56786jktyuitui45uiuyifghjdfdhlfj34523452ljlertnsdfkjglsadfghskdfjgskdfjg4352345fgkljsdfhgkdjfgkhsg345325'},
+                      schemaField: {
+                        name: 'Prism DID',
+                        type: SchemaDomain.AttributeType.TEXT, description: 'Your dob'}
+                    },
                   ]}
                 />
               </div>

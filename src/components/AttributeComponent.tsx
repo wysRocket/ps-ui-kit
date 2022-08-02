@@ -1,3 +1,4 @@
+import {maxBy} from "lodash";
 import {CSSProperties, default as React} from "react";
 import * as Style from "./DefaultStyles";
 import {Attribute} from "../domain/Attribute";
@@ -7,8 +8,106 @@ import {DateTimePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import {LabeledItem} from "../domain/Item";
 import {PrettyDropSelector} from "./DropSelector";
-import {TextField} from "@material-ui/core";
 import {QREditor} from "./QREditor";
+import {HGroup} from "./Group";
+import {IconButton, TextField} from "@material-ui/core";
+import CloseIcon from '@material-ui/icons/Close';
+
+interface ILTVProps {
+  style?: CSSProperties;
+  value: string;
+  maxLength: number;
+  numRows?: number;
+}
+
+export class LongTextViewer extends React.Component<ILTVProps> {
+  state = {
+    opened: false
+  };
+
+  open = () => this.setState({opened: true});
+  close = () => this.setState({opened: false});
+
+  render() {
+    const value = this.props.value || '';
+    const style = this.props.style || {width: 200, maxWidth: 200};
+    const maxWidth = style.maxWidth as number || 200;
+    if (this.state.opened) {
+      const inputStyle = {paddingTop: 4, paddingBottom: 4};
+      return (
+        <HGroup style={{maxWidth, ...style}}>
+          <div style={{width: maxWidth - 24}}>
+            <TextField
+              style={{width: maxWidth - 32}}
+              multiline={true}
+              rows={this.props.numRows || 8}
+              value={value}
+              contentEditable={false}
+              inputProps={{style: inputStyle}}
+              InputProps={{style: inputStyle, readOnly: true}}
+              variant="outlined"
+            />
+          </div>
+          <div>
+            <IconButton style={{width: 24, height: 24}} onClick={this.close}>
+              <CloseIcon style={{width: 16, height: 16}} />
+            </IconButton>
+          </div>
+        </HGroup>
+      );
+    }
+    const preview = value.substr(0, this.props.maxLength);
+    return (
+      <div style={{cursor: 'pointer', ...style}} onClick={this.open}>
+        {value.length > this.props.maxLength ? `${preview}...` : preview}
+      </div>
+    );
+  }
+}
+
+interface IValueViewProps {
+  style?: CSSProperties;
+  schemaAttribute?: SchemaDomain.SchemaAttribute;
+  value: string;
+  maxLength?: number;
+  numRows?: number;
+}
+
+export class ValueViewer extends React.Component<IValueViewProps> {
+
+  render() {
+    const schemaAttribute: SchemaDomain.SchemaAttribute = this.props.schemaAttribute ||
+      {name: '', type: SchemaDomain.AttributeType.TEXT, description: ''};
+    let result = this.props.value;
+    if (schemaAttribute.type === SchemaDomain.AttributeType.DATE && result && !isNaN(parseInt(result, 10))) {
+      result = dateFormat(SchemaDomain.attributeValueToDate(result, schemaAttribute.type), 'yyyy-mm-dd\'T\'HH:MM:ss');
+    }
+    if (schemaAttribute.enumValues && schemaAttribute.enumValues.length) {
+      result = SchemaDomain.enumAttributeToString(schemaAttribute, result);
+    }
+    const sbParts =  result.split(/\r?\n?\s/g);
+    const parts = result.split(/\r?\n/g);
+    const longest = maxBy(sbParts, (p) => p.length);
+    const maxLength = this.props.maxLength || 25;
+    const style = this.props.style || {};
+    if (longest && longest.length > maxLength) {
+      return (
+        <LongTextViewer
+          value={this.props.value}
+          maxLength={maxLength}
+          style={this.props.style}
+          numRows={this.props.numRows}
+        />
+      );
+    }
+    return (
+      <div style={{...style}}>
+        {parts.map((p) => (<div>{p}</div>))}
+      </div>
+    );
+
+  }
+}
 
 interface IViewProps {
   style?: CSSProperties;
@@ -17,9 +116,11 @@ interface IViewProps {
   useColon?: boolean;
   attribute: Attribute;
   schemaAttribute: SchemaDomain.SchemaAttribute;
+  numRows?: number;
+  maxLength?: number;
 }
 
-const getAttributeValue = (props: IViewProps) => {
+/*const getAttributeValue = (props: IViewProps) => {
   const schemaAttribute = props.schemaAttribute;
   let result = props.attribute.value;
   if (schemaAttribute.type === SchemaDomain.AttributeType.DATE && result && !isNaN(parseInt(result, 10))) {
@@ -35,7 +136,7 @@ const getAttributeValue = (props: IViewProps) => {
       {parts.map((p) => (<div>{p}</div>))}
     </div>
   );
-};
+};*/
 
 export class Viewer extends React.Component<IViewProps> {
 
@@ -50,7 +151,13 @@ export class Viewer extends React.Component<IViewProps> {
         </div>
         <div style={{flexGrow: 1}} />
         <div style={{display: 'inline-flex'}}>
-          {getAttributeValue(this.props)}
+          <ValueViewer
+            value={this.props.attribute.value}
+            schemaAttribute={this.props.schemaAttribute}
+            numRows={this.props.numRows}
+            maxLength={this.props.maxLength}
+            style={this.props.valueStyle}
+          />
         </div>
       </div>
     );

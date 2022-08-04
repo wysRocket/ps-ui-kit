@@ -723,8 +723,18 @@ export class Main extends React.Component<IProps> {
               />
               <TableWithPagination
                 columns={[
-                  idLink((item: any) => item.identity, 'name'),
-                  idColumn('name'),
+                  idLink((item: any) => item.identity, {title: 'name', styleSource: (item: any) => {
+                    if (item.identity === 'checkin') {
+                      return {color: '#FF0000'};
+                    }
+                    return undefined;
+                  }}),
+                  idColumn({title: 'name', styleSource: (item: any) => {
+                      if (item.identity === 'checkin') {
+                        return {color: '#FF00FF'};
+                      }
+                      return undefined;
+                  }}),
                   {
                     fieldId: 'status',
                     enumValues: ['Active', 'Archived', 'Stopped', 'Paused'],

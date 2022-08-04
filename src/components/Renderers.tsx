@@ -72,7 +72,9 @@ export class SelectRenderer extends AbstractRenderer {
 
 export class StaticRenderer extends AbstractRenderer {
   render() {
-    return convert(this.props.value, this.props.valueToView);
+    return (
+      <div style={this.props.style}>{convert(this.props.value, this.props.valueToView)}</div>
+    );
   }
 }
 
@@ -80,7 +82,7 @@ export class LinkRenderer extends AbstractRenderer {
   render() {
     return (
       <Link to={this.props.link || ''} style={{ textDecoration: 'none', color: 'inherit' }}>
-        <div>
+        <div style={this.props.style}>
           <strong>{convert(this.props.value, this.props.valueToView)}</strong>
         </div>
       </Link>

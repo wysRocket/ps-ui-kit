@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {DeleteActionRenderer, EditActionRenderer, LinkRenderer, RendererProps, StaticRenderer} from "../Renderers";
 import {SortDirection} from "../../domain/Sort";
+import {CSSProperties} from "react";
 
 export interface HeaderProps {
   title?: string;
@@ -23,34 +24,52 @@ export interface ColumnInfo {
   align?: 'center' | 'inherit' | 'justify' | 'left'  | 'right';
 }
 
-export const textColumn = (title: string, fieldId: string, sortDirection?: SortDirection): ColumnInfo => {
+export interface TextColumnProps {
+  title: string;
+  styleSource: (item: any) => CSSProperties | undefined;
+}
+
+type TCType = TextColumnProps | string;
+
+export const textColumn = (title: TCType, fieldId: string, sortDirection?: SortDirection): ColumnInfo => {
   return {
-    header: {title, sortable: true, sortDirection},
+    header: {title: (typeof title === 'string') ? title : title.title, sortable: true, sortDirection},
     fieldId,
     valueToView: (value: any) => value ? value.toString() : '',
     renderer: (props: RendererProps) => (
-      <StaticRenderer item={props.item} value={props.value} valueToView={(value: any) => value ? value.toString() : ''}/>
+      <StaticRenderer
+        style={(typeof title === 'string') ? undefined : title.styleSource(props.item)}
+        item={props.item}
+        value={props.value}
+        valueToView={(value: any) => value ? value.toString() : ''}
+      />
     )
   };
 };
 
-export const textLink = (linkSource: (item: any) => string, title: string, fieldId: string, sortDirection?: SortDirection): ColumnInfo => {
+export const textLink = (linkSource: (item: any) => string, title: TCType, fieldId: string, sortDirection?: SortDirection): ColumnInfo => {
   return {
-    header: {title, sortable: true, sortDirection},
+    header: {title: (typeof title === 'string') ? title : title.title, sortable: true, sortDirection},
     fieldId,
     linkSource,
     valueToView: (value: any) => value ? value.toString() : '',
     renderer: (props: RendererProps) => (
-      <LinkRenderer item={props.item} value={props.value} link={props.link} valueToView={(value: any) => value ? value.toString() : ''}/>
+      <LinkRenderer
+        style={(typeof title === 'string') ? undefined : title.styleSource(props.item)}
+        item={props.item}
+        value={props.value}
+        link={props.link}
+        valueToView={(value: any) => value ? value.toString() : ''}
+      />
     )
   };
 };
 
-export const idColumn = (title: string, sortDirection?: SortDirection): ColumnInfo => {
+export const idColumn = (title: TCType, sortDirection?: SortDirection): ColumnInfo => {
   return textColumn(title, 'identity', sortDirection);
 };
 
-export const idLink = (linkSource: (item: any) => string, title: string, sortDirection?: SortDirection): ColumnInfo => {
+export const idLink = (linkSource: (item: any) => string, title: TCType, sortDirection?: SortDirection): ColumnInfo => {
   return textLink(linkSource, title, 'identity', sortDirection);
 };
 

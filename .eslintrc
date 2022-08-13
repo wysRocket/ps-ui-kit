@@ -1,0 +1,35 @@
+{
+  "extends": ["react-app", "plugin:jsx-a11y/recommended", "prettier"],
+  "plugins": ["jsx-a11y", "prettier", "only-warn"],
+  "ignorePatterns": ["/src/vendors/**/*.js", "node_modules/", "/src/**/*.test.js", "/cypress/"],
+  "rules": {
+    // "no-useless-computed-key" :"off",
+    // "react/no-unescaped-entities": "off",
+    // "no-useless-catch": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "import/no-named-as-default": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "import/no-extraneous-dependencies": "off",
+    "jsx-a11y/no-noninteractive-tabindex": "off",
+    "react/function-component-definition": "off",
+    // we are using React 17 so we can disable this rules
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.stories.*"],
+      "rules": {
+        "import/no-anonymous-default-export": "off"
+      }
+    }
+  ]
+}

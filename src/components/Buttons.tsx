@@ -1,20 +1,25 @@
-import {CSSProperties, default as React} from "react";
-import {Button, ClickAwayListener, Fade, IconButton, Paper, Popper} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
-import * as Styles from "./DefaultStyles";
-import {PopperPlacementType} from "@material-ui/core/Popper/Popper";
+import { CSSProperties, FC, Component } from 'react'
+import { Button, ClickAwayListener, Fade, IconButton, Paper, Popper } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import * as Styles from './DefaultStyles'
+import { PopperPlacementType } from '@material-ui/core/Popper/Popper'
 
 interface IProps {
-  style?: CSSProperties;
-  disabled?: boolean;
-  endIcon?: React.ReactNode;
-  startIcon?: React.ReactNode;
-  label: string;
-  component?: any;
-  onClick?: (evt?: any) => void;
+  style?: CSSProperties
+  disabled?: boolean
+  endIcon?: React.ReactNode
+  startIcon?: React.ReactNode
+  label: string
+  component?: any
+  onClick?: (evt?: any) => void
 }
 
-const COMMON_STYLE: CSSProperties = {boxShadow: 'none', textTransform: 'none', paddingLeft: Styles.Padding.M, paddingRight: Styles.Padding.M};
+const COMMON_STYLE: CSSProperties = {
+  boxShadow: 'none',
+  textTransform: 'none',
+  paddingLeft: Styles.Padding.M,
+  paddingRight: Styles.Padding.M,
+}
 
 const useStyles = makeStyles({
   /*root: {
@@ -28,10 +33,8 @@ const useStyles = makeStyles({
       color: c.HOVERED_COLOR
     }
   },*/
-  disabled: {
-    opacity: 0.3
-  },
-});
+  disabled: { opacity: 0.3 },
+})
 
 const createStyle = (c: Styles.ButtonColors, style: CSSProperties): CSSProperties => {
   return {
@@ -39,23 +42,23 @@ const createStyle = (c: Styles.ButtonColors, style: CSSProperties): CSSPropertie
     backgroundColor: c.BG_COLOR,
     borderColor: c.BG_COLOR,
     color: c.COLOR,
-    ...style
-  };
-};
+    ...style,
+  }
+}
 
 export const ButtonsFactory = (
   c: () => Styles.ButtonColors,
   style: CSSProperties,
-  variant?: 'text' | 'outlined' | 'contained'
-): React.FC<IProps> => {
+  variant?: 'text' | 'outlined' | 'contained',
+): FC<IProps> => {
   return (props) => {
-    const s = props.style || {};
-    const classes = useStyles();
+    const s = props.style || {}
+    const classes = useStyles()
     return (
       <Button
-        style={createStyle(c(), {...style, ...s})}
+        style={createStyle(c(), { ...style, ...s })}
         variant={variant}
-        classes={{disabled: classes.disabled}}
+        classes={{ disabled: classes.disabled }}
         component={props.component}
         onClick={props.onClick}
         disabled={props.disabled}
@@ -64,23 +67,27 @@ export const ButtonsFactory = (
       >
         {props.label}
       </Button>
-    );
-  };
-};
+    )
+  }
+}
 
-export const Orange: React.FC<IProps> = ButtonsFactory(() => Styles.Buttons.Orange, {}, 'outlined');
+export const Orange: FC<IProps> = ButtonsFactory(() => Styles.Buttons.Orange, {}, 'outlined')
 
-export const Gray: React.FC<IProps> = ButtonsFactory(() => Styles.Buttons.Gray, {}, 'outlined');
+export const Gray: FC<IProps> = ButtonsFactory(() => Styles.Buttons.Gray, {}, 'outlined')
 
-export const Red: React.FC<IProps> = ButtonsFactory(() => Styles.Buttons.Red, {backgroundColor: '#FFFFFF'}, 'outlined');
+export const Red: FC<IProps> = ButtonsFactory(
+  () => Styles.Buttons.Red,
+  { backgroundColor: '#FFFFFF' },
+  'outlined',
+)
 
-export class Text extends React.Component<IProps> {
+export class Text extends Component<IProps> {
   render() {
-    const s = this.props.style || {};
+    const s = this.props.style || {}
     const style: CSSProperties = {
       ...COMMON_STYLE,
-      ...s
-    };
+      ...s,
+    }
     return (
       <Button
         style={style}
@@ -92,41 +99,36 @@ export class Text extends React.Component<IProps> {
       >
         {this.props.label}
       </Button>
-    );
+    )
   }
 }
 
 interface IIBWPProps {
-  style?: CSSProperties;
-  popperStyle?: CSSProperties;
-  disabled?: boolean;
-  children: any;
-  popperContent: any;
-  placement?: PopperPlacementType;
-  popperMaxHeight?: number;
-  popperWidth?: number;
+  style?: CSSProperties
+  popperStyle?: CSSProperties
+  disabled?: boolean
+  children: any
+  popperContent: any
+  placement?: PopperPlacementType
+  popperMaxHeight?: number
+  popperWidth?: number
 }
 
-export class IconButtonWithPopper extends React.Component<IIBWPProps> {
-  state = {
-    opened: false,
-    anchorEl: undefined
-  };
+export class IconButtonWithPopper extends Component<IIBWPProps> {
+  state = { opened: false, anchorEl: undefined }
 
   onButtonClick = (evt: any) => {
-    const opened = !this.state.opened;
-    this.setState({opened, anchorEl: evt.currentTarget});
+    const opened = !this.state.opened
+    this.setState({ opened, anchorEl: evt.currentTarget })
   }
 
-  onClickAway = () => {
-    this.setState({opened: false});
-  }
+  onClickAway = () => this.setState({ opened: false })
 
   render() {
-    const style: CSSProperties = this.props.style || {};
-    const s = this.props.style || {};
-    const popperWidth = this.props.popperWidth || s.width;
-    const ws = popperWidth ? {width: popperWidth} : {};
+    const style: CSSProperties = this.props.style || {}
+    const s = this.props.style || {}
+    const popperWidth = this.props.popperWidth || s.width
+    const ws = popperWidth ? { width: popperWidth } : {}
     return (
       <ClickAwayListener onClickAway={this.onClickAway}>
         <div>
@@ -137,25 +139,27 @@ export class IconButtonWithPopper extends React.Component<IIBWPProps> {
             placement={this.props.placement || 'right-start'}
             transition
           >
-            {({TransitionProps}) => (
+            {({ TransitionProps }) => (
               <Fade {...TransitionProps} timeout={200}>
                 <Paper elevation={3}>
-                  <div style={{...ws, maxHeight: this.props.popperMaxHeight || 400, overflow: 'auto'}}>
+                  <div
+                    style={{
+                      ...ws,
+                      maxHeight: this.props.popperMaxHeight || 400,
+                      overflow: 'auto',
+                    }}
+                  >
                     {this.props.popperContent}
                   </div>
                 </Paper>
               </Fade>
             )}
           </Popper>
-          <IconButton
-            style={style}
-            disabled={this.props.disabled}
-            onClick={this.onButtonClick}
-          >
+          <IconButton style={style} disabled={this.props.disabled} onClick={this.onButtonClick}>
             {this.props.children}
           </IconButton>
         </div>
       </ClickAwayListener>
-    );
+    )
   }
 }

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {CSSProperties, Component} from "react";
 import Chart from "react-apexcharts";
 import {Card, CardContent, CardHeader} from "@material-ui/core";
@@ -71,7 +72,7 @@ export default class DashboardChart extends Component<IProps> {
           subheader={this.props.subtitle}
         />
         <CardContent>
-          <Chart type={"area"} options={spark1} series={spark1.series} width={width} />
+          <Chart type="area" options={spark1} series={spark1.series} width={width} />
         </CardContent>
       </Card>
     );

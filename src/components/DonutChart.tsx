@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {CSSProperties, Component} from "react";
 import Chart from "react-apexcharts";
 import {Card, CardContent, CardHeader} from "@material-ui/core";
@@ -80,7 +81,7 @@ export default class DonutChart extends Component<IProps> {
           subheader={subtitle}
         />
         <CardContent>
-          <Chart type={"donut"} width={width} options={options} series={options.series} />
+          <Chart type="donut" width={width} options={options} series={options.series} />
         </CardContent>
       </Card>
     );

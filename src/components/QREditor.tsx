@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {CSSProperties, Component} from "react";
 import {Button, SwipeableDrawer, TextField} from "@material-ui/core";
 

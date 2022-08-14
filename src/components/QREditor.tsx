@@ -1,56 +1,56 @@
-import { CSSProperties, Component } from 'react'
-import { Button, SwipeableDrawer, TextField } from '@material-ui/core'
+import {CSSProperties, Component} from "react";
+import {Button, SwipeableDrawer, TextField} from "@material-ui/core";
 
-import QRIcon from '@material-ui/icons/AspectRatio'
-import { BrowserMultiFormatReader, NotFoundException } from '@zxing/library'
-import { wait } from '../utils/TimeUtils'
-import Panel from './Panel'
-import { Attribute } from '../domain/Attribute'
-import * as SchemaDomain from '../domain/SchemaDomain'
-import { HGroup } from './Group'
+import QRIcon from "@material-ui/icons/AspectRatio";
+import {BrowserMultiFormatReader, NotFoundException} from "@zxing/library";
+import {wait} from "../utils/TimeUtils";
+import Panel from "./Panel";
+import {Attribute} from "../domain/Attribute";
+import * as SchemaDomain from "../domain/SchemaDomain";
+import {HGroup} from "./Group";
 
 interface IQRProps {
-  mediaId: string
-  opened: boolean
-  onClose: () => void
-  onResult: (code: string) => void
+  mediaId: string;
+  opened: boolean;
+  onClose: () => void;
+  onResult: (code: string) => void;
 }
 
 class QRScanner extends Component<IQRProps> {
   state = {
-    selectedCamera: '',
-    cameras: [],
-  }
+    selectedCamera: "",
+    cameras: []
+  };
 
-  private codeReader: BrowserMultiFormatReader = new BrowserMultiFormatReader()
+  private codeReader: BrowserMultiFormatReader = new BrowserMultiFormatReader();
 
   async componentWillMount() {
-    await this.initCameras(this.props)
+    await this.initCameras(this.props);
   }
 
   async componentWillReceiveProps(nextProps: Readonly<IQRProps>, nextContext: any) {
-    await this.initCameras(nextProps)
+    await this.initCameras(nextProps);
   }
 
   async initCameras(props: IQRProps) {
     if (!props.opened) {
-      return
+      return;
     }
 
     try {
-      const cameras = await this.codeReader.listVideoInputDevices()
-      const selectedCamera = cameras.length ? cameras[0].deviceId : ''
-      this.setState({ cameras, selectedCamera }, () => this.startScanning())
+      const cameras = await this.codeReader.listVideoInputDevices();
+      const selectedCamera = cameras.length ? cameras[0].deviceId : "";
+      this.setState({cameras, selectedCamera}, () => this.startScanning());
     } catch (err: any) {
-      alert(`Error! ${err?.message}`)
+      alert(`Error! ${err?.message}`);
     }
   }
 
   async startScanning() {
-    this.codeReader.reset()
-    await wait(1000)
+    this.codeReader.reset();
+    await wait(1000);
     if (!this.props.opened) {
-      return
+      return;
     }
     try {
       await this.codeReader.decodeFromVideoDevice(
@@ -58,19 +58,19 @@ class QRScanner extends Component<IQRProps> {
         `qr-video-${this.props.mediaId}`,
         (result, err) => {
           if (result) {
-            console.log(result)
-            this.codeReader.reset()
-            this.props.onResult(result.getText())
+            console.log(result);
+            this.codeReader.reset();
+            this.props.onResult(result.getText());
           }
           if (err && !(err instanceof NotFoundException)) {
-            console.error(err)
-            this.codeReader.reset()
+            console.error(err);
+            this.codeReader.reset();
           }
-        },
-      )
+        }
+      );
     } catch (err) {
-      console.log(err)
-      this.codeReader.reset()
+      console.log(err);
+      this.codeReader.reset();
     }
     /*const result = await this.codeReader.decodeOnceFromVideoDevice(this.state.selectedCamera, 'qr-video');
     this.props.onResult(result.getText());*/
@@ -78,49 +78,49 @@ class QRScanner extends Component<IQRProps> {
 
   onCameraChange = (evt: any) => {
     const sourceSelect: HTMLSelectElement | null = document.getElementById(
-      'sourceSelect',
-    ) as HTMLSelectElement
+      "sourceSelect"
+    ) as HTMLSelectElement;
     if (sourceSelect) {
-      this.setState({ selectedCamera: sourceSelect.value }, () => this.startScanning())
+      this.setState({selectedCamera: sourceSelect.value}, () => this.startScanning());
     }
-  }
+  };
 
   onClose = () => {
-    console.log('close swipeable Drawer')
-    this.codeReader.reset()
-    this.props.onClose()
-  }
+    console.log("close swipeable Drawer");
+    this.codeReader.reset();
+    this.props.onClose();
+  };
 
   onOpen = () => {
-    console.log('opened')
-  }
+    console.log("opened");
+  };
 
   render() {
     const width =
       Math.min(document.documentElement.clientWidth, window.innerWidth, window.screen.availWidth) -
-      100
+      100;
     const height = Math.min(
       document.documentElement.clientHeight,
       window.innerHeight,
-      window.screen.availHeight - 100,
-    )
+      window.screen.availHeight - 100
+    );
     return (
       <SwipeableDrawer
-        anchor={'left'}
+        anchor={"left"}
         open={this.props.opened}
         onClose={this.onClose}
         onOpen={this.onOpen}
         disableSwipeToOpen={true}
-        SwipeAreaProps={{ width, height }}
+        SwipeAreaProps={{width, height}}
       >
-        <Panel style={{ width, height }}>
+        <Panel style={{width, height}}>
           <div
             style={{
               paddingLeft: 32,
               paddingTop: 32,
               paddingRight: 32,
               width: width - 64,
-              height: height - 64,
+              height: height - 64
             }}
           >
             <div>
@@ -128,42 +128,42 @@ class QRScanner extends Component<IQRProps> {
                 id={`qr-video-${this.props.mediaId}`}
                 width={width - 64}
                 height={height - 120}
-                style={{ border: '1px solid gray' }}
+                style={{border: "1px solid gray"}}
               />
             </div>
             <div>
-              <select id="sourceSelect" style={{ maxWidth: 400 }} onChange={this.onCameraChange}>
+              <select id="sourceSelect" style={{maxWidth: 400}} onChange={this.onCameraChange}>
                 {this.state.cameras.map((c: any, i) => {
                   return (
                     <option key={i} value={c.deviceId}>
                       {c.label}
                     </option>
-                  )
+                  );
                 })}
               </select>
             </div>
           </div>
         </Panel>
       </SwipeableDrawer>
-    )
+    );
   }
 }
 
 interface IProps {
-  key?: any
-  style?: CSSProperties
-  attribute: Attribute
-  type?: SchemaDomain.AttributeType
-  disabled?: boolean
-  onChange: (newAttr: Attribute) => void
-  textEditable?: boolean
+  key?: any;
+  style?: CSSProperties;
+  attribute: Attribute;
+  type?: SchemaDomain.AttributeType;
+  disabled?: boolean;
+  onChange: (newAttr: Attribute) => void;
+  textEditable?: boolean;
 }
 
 export class QREditor extends Component<IProps> {
   state = {
     // value: '',
-    popUpOpened: false,
-  }
+    popUpOpened: false
+  };
 
   /*componentWillMount(): void {
     this.setState({value: this.props.attribute.value});
@@ -173,57 +173,57 @@ export class QREditor extends Component<IProps> {
     this.setState({value: nextProps.attribute.value});
   }*/
 
-  onPopUpOpen = () => this.setState({ popUpOpened: true })
+  onPopUpOpen = () => this.setState({popUpOpened: true});
 
-  onPopUpClose = () => this.setState({ popUpOpened: false })
+  onPopUpClose = () => this.setState({popUpOpened: false});
 
   onResult = (value: string) =>
-    this.setState({ popUpOpened: false }, () =>
-      this.props.onChange({ name: this.props.attribute.name, value }),
-    )
+    this.setState({popUpOpened: false}, () =>
+      this.props.onChange({name: this.props.attribute.name, value})
+    );
 
   onTextChange = (evt: any) => {
     if (!this.props.textEditable) {
-      return
+      return;
     }
-    const value = evt.target.value
-    this.props.onChange({ name: this.props.attribute.name, value })
+    const value = evt.target.value;
+    this.props.onChange({name: this.props.attribute.name, value});
     // this.setState({value}, () => this.props.onChange({name: this.props.attribute.name, value}));
-  }
+  };
 
   render() {
-    const style = this.props.style || { width: 360 }
-    const width: any = style.width || '100%'
-    const tfWidth = typeof width === 'number' ? width - 80 : `calc(${width}-80)`
-    const attribute = this.props.attribute
+    const style = this.props.style || {width: 360};
+    const width: any = style.width || "100%";
+    const tfWidth = typeof width === "number" ? width - 80 : `calc(${width}-80)`;
+    const attribute = this.props.attribute;
     return (
       <div>
         <QRScanner
-          mediaId={attribute.name.split(' ').join('-')}
+          mediaId={attribute.name.split(" ").join("-")}
           opened={this.state.popUpOpened}
           onClose={this.onPopUpClose}
           onResult={this.onResult}
         />
         <div style={style}>
-          <HGroup style={{ display: 'flex' }}>
+          <HGroup style={{display: "flex"}}>
             <div>
               <TextField
-                type={'text'}
-                style={{ width: tfWidth }}
+                type={"text"}
+                style={{width: tfWidth}}
                 value={attribute.value}
-                inputProps={{ style: { paddingTop: 0, paddingBottom: 0, height: 32 } }}
-                InputLabelProps={{ style: { paddingTop: 0, paddingBottom: 0, height: 32 } }}
+                inputProps={{style: {paddingTop: 0, paddingBottom: 0, height: 32}}}
+                InputLabelProps={{style: {paddingTop: 0, paddingBottom: 0, height: 32}}}
                 onChange={this.props.textEditable ? this.onTextChange : undefined}
                 variant="outlined"
                 contentEditable={!!this.props.textEditable}
               />
             </div>
-            <div style={{ paddingLeft: 16 }}>
+            <div style={{paddingLeft: 16}}>
               <Button
                 onClick={this.onPopUpOpen}
-                style={{ paddingTop: 3, paddingBottom: 3 }}
+                style={{paddingTop: 3, paddingBottom: 3}}
                 disabled={this.props.disabled}
-                variant={'outlined'}
+                variant={"outlined"}
               >
                 <QRIcon />
               </Button>
@@ -231,6 +231,6 @@ export class QREditor extends Component<IProps> {
           </HGroup>
         </div>
       </div>
-    )
+    );
   }
 }

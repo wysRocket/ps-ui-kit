@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "src/",
+    "baseUrl": "src",
     "target": "esnext",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -18,9 +18,8 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "noFallthroughCasesInSwitch": true,
-    "isolatedModules": false,
-    "noEmit": true
+    "isolatedModules": false
   },
   "include": ["src", "global.d.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }

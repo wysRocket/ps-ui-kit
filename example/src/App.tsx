@@ -1,5 +1,5 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 import {Main} from "./components/Main";
 import {BrowserRouter as Router, Route, Switch, useLocation, useParams} from "react-router-dom";
 import {HTML5Backend} from "react-dnd-html5-backend";
@@ -9,9 +9,11 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <Router>
-        <DndProvider backend={HTML5Backend} debugMode={true}>
-          <MainContent/>
-        </DndProvider>
+        <Switch>
+          <Route path={`*:serviceDid`}>
+            <MainContent />
+          </Route>
+        </Switch>
       </Router>
     </div>
   );
@@ -19,7 +21,9 @@ const App: React.FC = () => {
 
 function MainContent() {
   return (
-    <Main/>
+    <DndProvider backend={HTML5Backend} debugMode={true}>
+      <Main />
+    </DndProvider>
   );
 }
 

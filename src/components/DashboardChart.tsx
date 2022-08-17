@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {CSSProperties, Component} from "react";
 import Chart from "react-apexcharts";
 import {Card, CardContent, CardHeader} from "@material-ui/core";

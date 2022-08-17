@@ -4,13 +4,12 @@ import {TreeItem, TreeView} from "@material-ui/lab";
 import {Checkbox, Collapse, SvgIcon, SvgIconProps} from "@material-ui/core";
 import {TransitionProps} from "@material-ui/core/transitions";
 import {useSpring, animated} from "react-spring";
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@material-ui/icons/CheckBox";
 
 function MinusSquare(props: SvgIconProps) {
   return (
-    <SvgIcon fontSize="inherit" style={{ width: 14, height: 14 }} {...props}>
-      {/* tslint:disable-next-line: max-line-length */}
+    <SvgIcon fontSize="inherit" style={{width: 14, height: 14}} {...props}>
       <path d="M22.047 22.074v0 0-20.147 0h-20.12v0 20.147 0h20.12zM22.047 24h-20.12q-.803 0-1.365-.562t-.562-1.365v-20.147q0-.776.562-1.351t1.365-.575h20.147q.776 0 1.351.575t.575 1.351v20.147q0 .803-.575 1.365t-1.378.562v0zM17.873 11.023h-11.826q-.375 0-.669.281t-.294.682v0q0 .401.294 .682t.669.281h11.826q.375 0 .669-.281t.294-.682v0q0-.401-.294-.682t-.669-.281z" />
     </SvgIcon>
   );
@@ -18,8 +17,7 @@ function MinusSquare(props: SvgIconProps) {
 
 function PlusSquare(props: SvgIconProps) {
   return (
-    <SvgIcon fontSize="inherit" style={{ width: 14, height: 14 }} {...props}>
-      {/* tslint:disable-next-line: max-line-length */}
+    <SvgIcon fontSize="inherit" style={{width: 14, height: 14}} {...props}>
       <path d="M22.047 22.074v0 0-20.147 0h-20.12v0 20.147 0h20.12zM22.047 24h-20.12q-.803 0-1.365-.562t-.562-1.365v-20.147q0-.776.562-1.351t1.365-.575h20.147q.776 0 1.351.575t.575 1.351v20.147q0 .803-.575 1.365t-1.378.562v0zM17.873 12.977h-4.923v4.896q0 .401-.281.682t-.682.281v0q-.375 0-.669-.281t-.294-.682v-4.896h-4.923q-.401 0-.682-.294t-.281-.669v0q0-.401.281-.682t.682-.281h4.923v-4.896q0-.401.294-.682t.669-.281v0q.401 0 .682.281t.281.682v4.896h4.923q.401 0 .682.281t.281.682v0q0 .375-.281.669t-.682.294z" />
     </SvgIcon>
   );
@@ -27,8 +25,8 @@ function PlusSquare(props: SvgIconProps) {
 
 function TransitionComponent(props: TransitionProps) {
   const style = useSpring({
-    from: { opacity: 0, transform: 'translate3d(20px,0,0)' },
-    to: { opacity: props.in ? 1 : 0, transform: `translate3d(${props.in ? 0 : 20}px,0,0)` },
+    from: {opacity: 0, transform: "translate3d(20px,0,0)"},
+    to: {opacity: props.in ? 1 : 0, transform: `translate3d(${props.in ? 0 : 20}px,0,0)`}
   });
 
   return (
@@ -46,7 +44,7 @@ interface TreeCheckBoxProps {
 class TreeCheckbox extends React.Component<TreeCheckBoxProps> {
   checkboxHandler = () => {
     this.props.onSelectionChange(!this.props.selected);
-  }
+  };
 
   render() {
     return (
@@ -54,8 +52,8 @@ class TreeCheckbox extends React.Component<TreeCheckBoxProps> {
         checked={this.props.selected}
         onChange={this.checkboxHandler}
         style={{padding: 0, width: 32, height: 32}}
-        icon={<CheckBoxOutlineBlankIcon style={{ fontSize: 20, color: 'rgba(158, 158, 158, 1)'}} />}
-        checkedIcon={<CheckBoxIcon style={{ fontSize: 20, color: 'rgba(158, 158, 158, 1)'}} />}
+        icon={<CheckBoxOutlineBlankIcon style={{fontSize: 20, color: "rgba(158, 158, 158, 1)"}} />}
+        checkedIcon={<CheckBoxIcon style={{fontSize: 20, color: "rgba(158, 158, 158, 1)"}} />}
       />
     );
   }
@@ -85,11 +83,11 @@ class TreeNodeItem extends React.Component<ITreeItemProps> {
     if (this.props.onSelectionChange !== undefined) {
       this.props.onSelectionChange(this.props.element.content.value, selected);
     }
-  }
+  };
 
   onClick = () => {
     this.onSelectionChange(!this.props.selected);
-  }
+  };
 
   render() {
     const element = this.props.element;
@@ -99,10 +97,13 @@ class TreeNodeItem extends React.Component<ITreeItemProps> {
         onClick={this.onClick}
         nodeId={content.value.toString()}
         label={content.label}
-        collapseIcon={<MinusSquare/>}
-        expandIcon={<PlusSquare/>}
-        endIcon={(<TreeCheckbox selected={this.props.selected} onSelectionChange={this.onSelectionChange}/>)}
-        TransitionComponent={TransitionComponent}/>
+        collapseIcon={<MinusSquare />}
+        expandIcon={<PlusSquare />}
+        endIcon={
+          <TreeCheckbox selected={this.props.selected} onSelectionChange={this.onSelectionChange} />
+        }
+        TransitionComponent={TransitionComponent}
+      />
     );
   }
 }
@@ -144,7 +145,6 @@ interface IState {
 }
 
 export class Tree extends React.Component<IProps, IState> {
-
   state = {
     selected: [],
     defaultExpanded: []
@@ -172,12 +172,13 @@ export class Tree extends React.Component<IProps, IState> {
     });
     const newState: any = {selected: [...selectedSet.keys()]};
     if (!isEqual(this.state.selected, props.selected)) {
-      const defaultExpanded = props.expandSelected ?
-        getExpandedValues(props.elements, selectedSet).map((v) => v.toString()) : [];
+      const defaultExpanded = props.expandSelected
+        ? getExpandedValues(props.elements, selectedSet).map((v) => v.toString())
+        : [];
       newState.defaultExpanded = defaultExpanded;
     }
     this.setState(newState);
-  }
+  };
 
   componentWillMount(): void {
     this.createMapFromProps(this.props);
@@ -192,7 +193,7 @@ export class Tree extends React.Component<IProps, IState> {
     const selectedSet = new Set<TValue>(this.state.selected);
     return (
       <TreeView
-        style={{textAlign: 'left'}}
+        style={{textAlign: "left"}}
         defaultExpanded={this.state.defaultExpanded}
         defaultCollapseIcon={<MinusSquare />}
         defaultExpandIcon={<PlusSquare />}
@@ -213,13 +214,18 @@ export class Tree extends React.Component<IProps, IState> {
     }
     const selected = [...selectedSet.keys()];
     this.setState({selected}, () => this.props.onSelect(selected));
-  }
+  };
 
-  renderElement(element: TreeElement, selectedSet: Set<string|number>, key: any) {
+  renderElement(element: TreeElement, selectedSet: Set<string | number>, key: any) {
     const content = element.content;
     if (!element.children) {
       return (
-        <TreeNodeItem key={key} selected={selectedSet.has(content.value)} element={element} onSelectionChange={this.onSelectionChange}/>
+        <TreeNodeItem
+          key={key}
+          selected={selectedSet.has(content.value)}
+          element={element}
+          onSelectionChange={this.onSelectionChange}
+        />
       );
     } else {
       return (

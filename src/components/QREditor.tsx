@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {CSSProperties, Component} from "react";
 import {Button, SwipeableDrawer, TextField} from "@material-ui/core";
 
@@ -18,10 +17,7 @@ interface IQRProps {
 }
 
 class QRScanner extends Component<IQRProps> {
-  state = {
-    selectedCamera: "",
-    cameras: []
-  };
+  state = {selectedCamera: "", cameras: []};
 
   private codeReader: BrowserMultiFormatReader = new BrowserMultiFormatReader();
 
@@ -34,47 +30,45 @@ class QRScanner extends Component<IQRProps> {
   }
 
   async initCameras(props: IQRProps) {
-    if (!props.opened) {
-      return;
-    }
-
-    try {
-      const cameras = await this.codeReader.listVideoInputDevices();
-      const selectedCamera = cameras.length ? cameras[0].deviceId : "";
-      this.setState({cameras, selectedCamera}, () => this.startScanning());
-    } catch (err: any) {
-      alert(`Error! ${err?.message}`);
+    if (props.opened) {
+      try {
+        const cameras = await this.codeReader.listVideoInputDevices();
+        const selectedCamera = cameras.length ? cameras[0].deviceId : "";
+        this.setState({cameras, selectedCamera}, () => this.startScanning());
+      } catch (err: any) {
+        alert(`Error! ${err?.message}`);
+      }
     }
   }
 
   async startScanning() {
     this.codeReader.reset();
     await wait(1000);
-    if (!this.props.opened) {
-      return;
-    }
-    try {
-      await this.codeReader.decodeFromVideoDevice(
-        this.state.selectedCamera,
-        `qr-video-${this.props.mediaId}`,
-        (result, err) => {
-          if (result) {
-            console.log(result);
-            this.codeReader.reset();
-            this.props.onResult(result.getText());
+
+    if (this.props.opened) {
+      try {
+        await this.codeReader.decodeFromVideoDevice(
+          this.state.selectedCamera,
+          `qr-video-${this.props.mediaId}`,
+          (result, err) => {
+            if (result) {
+              console.log(result);
+              this.codeReader.reset();
+              this.props.onResult(result.getText());
+            }
+            if (err && !(err instanceof NotFoundException)) {
+              console.error(err);
+              this.codeReader.reset();
+            }
           }
-          if (err && !(err instanceof NotFoundException)) {
-            console.error(err);
-            this.codeReader.reset();
-          }
-        }
-      );
-    } catch (err) {
-      console.log(err);
-      this.codeReader.reset();
-    }
-    /*const result = await this.codeReader.decodeOnceFromVideoDevice(this.state.selectedCamera, 'qr-video');
+        );
+      } catch (err) {
+        console.log(err);
+        this.codeReader.reset();
+      }
+      /*const result = await this.codeReader.decodeOnceFromVideoDevice(this.state.selectedCamera, 'qr-video');
     this.props.onResult(result.getText());*/
+    }
   }
 
   onCameraChange = (evt: any) => {
@@ -92,9 +86,7 @@ class QRScanner extends Component<IQRProps> {
     this.props.onClose();
   };
 
-  onOpen = () => {
-    console.log("opened");
-  };
+  onOpen = () => console.log("opened");
 
   render() {
     const width =
@@ -134,13 +126,11 @@ class QRScanner extends Component<IQRProps> {
             </div>
             <div>
               <select id="sourceSelect" style={{maxWidth: 400}} onChange={this.onCameraChange}>
-                {this.state.cameras.map((c: any, i) => {
-                  return (
-                    <option key={i} value={c.deviceId}>
-                      {c.label}
-                    </option>
-                  );
-                })}
+                {this.state.cameras.map((c: any, i) => (
+                  <option key={i} value={c.deviceId}>
+                    {c.label}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -161,18 +151,7 @@ interface IProps {
 }
 
 export class QREditor extends Component<IProps> {
-  state = {
-    // value: '',
-    popUpOpened: false
-  };
-
-  /*componentWillMount(): void {
-    this.setState({value: this.props.attribute.value});
-  }
-
-  componentWillReceiveProps(nextProps: Readonly<IProps>, nextContext: any): void {
-    this.setState({value: nextProps.attribute.value});
-  }*/
+  state = {popUpOpened: false};
 
   onPopUpOpen = () => this.setState({popUpOpened: true});
 
@@ -183,14 +162,9 @@ export class QREditor extends Component<IProps> {
       this.props.onChange({name: this.props.attribute.name, value})
     );
 
-  onTextChange = (evt: any) => {
-    if (!this.props.textEditable) {
-      return;
-    }
-    const value = evt.target.value;
-    this.props.onChange({name: this.props.attribute.name, value});
-    // this.setState({value}, () => this.props.onChange({name: this.props.attribute.name, value}));
-  };
+  onTextChange = (evt: any) =>
+    this.props.textEditable &&
+    this.props.onChange({name: this.props.attribute.name, value: evt.target.value});
 
   render() {
     const style = this.props.style || {width: 360};

@@ -7,7 +7,7 @@ import {LabeledItem} from "../domain/Item";
 import ContentHeader from "./ContentHeader";
 import DropSelector from "./DropSelector";
 
-interface IProps {
+export interface IProps {
   style?: CSSProperties;
   menuMaxHeight?: number;
   minDate?: Date;

@@ -443,7 +443,6 @@ export class Main extends React.Component<IProps> {
               title={"Parameters and instances"}
               opened={this.state.popupOpened}
               onClose={this.onPopupClose}
-              disableBackdropClick={true}
             >
               <div>
                 <Buttons.IconButtonWithPopper

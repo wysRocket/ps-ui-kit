@@ -191,6 +191,7 @@ export class QREditor extends Component<IProps> {
                 onChange={this.props.textEditable ? this.onTextChange : undefined}
                 variant="outlined"
                 contentEditable={!!this.props.textEditable}
+                suppressContentEditableWarning={!!this.props.textEditable}
               />
             </div>
             <div style={{paddingLeft: 16}}>

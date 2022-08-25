@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@mantine/dates": "^5.1.6",
+    "@matharumanpreet00/react-daterange-picker": "^1.0.5",
     "apexcharts": "^3.35.4",
     "dateformat": "^4.5.1",
     "react-apexcharts": "^1.4.0",

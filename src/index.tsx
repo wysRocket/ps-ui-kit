@@ -10,7 +10,9 @@ import ContentHeader from "./components/ContentHeader";
 import Panel from "./components/Panel";
 import DashboardFilter from "./components/DashboardFilter";
 import {DateFilterButton} from "./components/DateFilterButton";
-import DashboardChart, {DashboardChartData as IDashboardChartData} from "./components/DashboardChart";
+import DashboardChart, {
+  DashboardChartData as IDashboardChartData
+} from "./components/DashboardChart";
 import DonutChart, {DonutChartItem as IDonutChartItem} from "./components/DonutChart";
 import Paginator from "./components/Paginator";
 import SearchBar from "./components/SearchBar";
@@ -20,18 +22,28 @@ import {
   ColumnInfo as IColumnInfo,
   deleteColumn,
   editColumn,
-  idColumn, idLink,
-  textColumn, textLink
+  idColumn,
+  idLink,
+  textColumn,
+  textLink
 } from "./components/table/column";
 import {
-  AbstractRenderer, DeleteActionRenderer, EditActionRenderer, LinkRenderer,
+  AbstractRenderer,
+  DeleteActionRenderer,
+  EditActionRenderer,
+  LinkRenderer,
   RendererProps as IRendererProps,
   SelectRenderer,
   StaticRenderer
 } from "./components/Renderers";
 import {Context} from "./actions/Context";
 import {Converter} from "./api/Converter";
-import {ChangeOptions as IChangeOptions, GetCondition as IGetCondition, ListItemApi, StubbedListApi} from "./api/ListItemApi";
+import {
+  ChangeOptions as IChangeOptions,
+  GetCondition as IGetCondition,
+  ListItemApi,
+  StubbedListApi
+} from "./api/ListItemApi";
 import {createReducer} from "./reducers/ReducerFactory";
 import {
   ActionCreator,
@@ -45,7 +57,11 @@ import {Sort, SortDirection, DataRange as IDataRange, invertDirection} from "./d
 import {Attribute as IAttribute} from "./domain/Attribute";
 import {HGroup} from "./components/Group";
 import PopUp from "./components/PopUp";
-import {Tree, TreeContent as ITreeContent, TreeElement as ITreeElement} from "./components/tree/Tree";
+import {
+  Tree,
+  TreeContent as ITreeContent,
+  TreeElement as ITreeElement
+} from "./components/tree/Tree";
 import Filter from "./components/Filter";
 import {ActionWrapper} from "./actions/ActionWrapper";
 import DropSelector, {PrettyDropSelector} from "./components/DropSelector";
@@ -55,7 +71,7 @@ import {IconButtonWithMenu} from "./components/IconButtonWithMenu";
 import AlignedHGroup from "./components/AlignedHGroup";
 import BulletItem from "./components/BulletItem";
 import {LabeledItem as ILabeledItem} from "./domain/Item";
-import {DateRange as IDateRange} from "@matharumanpreet00/react-daterange-picker";
+import {DateRangePickerValue as IDateRange} from "@mantine/dates";
 import {DraggableList} from "./components/DraggableList";
 import * as Styles from "./components/DefaultStyles";
 import TableWithPagination from "./components/table/TableWithPagination";
@@ -97,9 +113,8 @@ export type DateRange = IDateRange;
 export type DashboardChartData = IDashboardChartData;
 export type SideBarItem = ISideBarItem;
 
-const Constants = {
-  H_PADDING: 32
-};
+const Constants = {H_PADDING: 32};
+
 export {
   ContentHeader,
   DraggableList,
@@ -167,5 +182,5 @@ export {
   Forms,
   ItemGroup,
   QREditor,
-  DndHacked,
+  DndHacked
 };

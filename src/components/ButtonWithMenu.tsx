@@ -1,4 +1,4 @@
-import {CSSProperties, default as React} from "react";
+import {CSSProperties, Component, ReactNode} from "react";
 import {
   Button,
   ClickAwayListener,
@@ -13,22 +13,22 @@ import {
 
 export interface ButtonMenuItem {
   onClick: () => void;
-  label: React.ReactNode;
+  label: ReactNode;
   icon?: any;
 }
 
 interface IProps {
   style?: CSSProperties;
-  variant?: 'text' | 'outlined' | 'contained';
+  variant?: "text" | "outlined" | "contained";
   items: ButtonMenuItem[];
   children: any;
-  startIcon?: React.ReactNode;
-  endIcon?: React.ReactNode;
+  startIcon?: ReactNode;
+  endIcon?: ReactNode;
   menuMaxHeight?: number;
   menuWidth?: number;
 }
 
-export class ButtonWithMenu extends React.Component<IProps> {
+export class ButtonWithMenu extends Component<IProps> {
   state = {
     opened: false,
     anchorEl: undefined
@@ -37,15 +37,12 @@ export class ButtonWithMenu extends React.Component<IProps> {
   onButtonClick = (evt: any) => {
     const opened = !this.state.opened;
     this.setState({opened, anchorEl: evt.currentTarget});
-  }
+  };
 
-  onClickAway = () => {
-    this.setState({opened: false});
-  }
+  onClickAway = () => this.setState({opened: false});
 
-  createItemClickHandler = (item: ButtonMenuItem) => () => {
+  createItemClickHandler = (item: ButtonMenuItem) => () =>
     this.setState({opened: false}, () => item.onClick());
-  }
 
   render() {
     const style: CSSProperties = this.props.style || {width: 32, height: 32, minWidth: 32};
@@ -55,33 +52,40 @@ export class ButtonWithMenu extends React.Component<IProps> {
     return (
       <ClickAwayListener onClickAway={this.onClickAway}>
         <div>
-          <Popper open={this.state.opened} anchorEl={this.state.anchorEl} placement={'bottom-end'} transition>
+          <Popper
+            open={this.state.opened}
+            anchorEl={this.state.anchorEl}
+            placement={"bottom-end"}
+            transition
+          >
             {({TransitionProps}) => (
               <Fade {...TransitionProps} timeout={200}>
                 <Paper elevation={3}>
-                  <div style={{...ws, maxHeight: this.props.menuMaxHeight || 400, overflow: 'auto'}}>
-                  <List>
-                    {this.props.items.map((item, index) => {
-                      return (
-                        <ListItem
-                          key={index}
-                          style={{display: 'flex', paddingLeft: 16, paddingRight: 16}}
-                          button={true}
-                          onClick={this.createItemClickHandler(item)}
-                        >
-                          {this.renderIcon(item)}
-                          <ListItemText primary={item.label} />
-                        </ListItem>
-                      );
-                    })}
-                  </List>
+                  <div
+                    style={{...ws, maxHeight: this.props.menuMaxHeight || 400, overflow: "auto"}}
+                  >
+                    <List>
+                      {this.props.items.map((item, index) => {
+                        return (
+                          <ListItem
+                            key={index}
+                            style={{display: "flex", paddingLeft: 16, paddingRight: 16}}
+                            button={true}
+                            onClick={this.createItemClickHandler(item)}
+                          >
+                            {this.renderIcon(item)}
+                            <ListItemText primary={item.label} />
+                          </ListItem>
+                        );
+                      })}
+                    </List>
                   </div>
                 </Paper>
               </Fade>
             )}
           </Popper>
           <Button
-            variant={this.props.variant || 'outlined'}
+            variant={this.props.variant || "outlined"}
             style={style}
             onClick={this.onButtonClick}
             startIcon={this.props.startIcon}
@@ -95,13 +99,6 @@ export class ButtonWithMenu extends React.Component<IProps> {
   }
 
   renderIcon(item: ButtonMenuItem) {
-    if (!item.icon) {
-      return '';
-    }
-    return (
-      <ListItemIcon style={{minWidth: 32}}>
-        {item.icon}
-      </ListItemIcon>
-    );
+    return item.icon ? <ListItemIcon style={{minWidth: 32}}>{item.icon}</ListItemIcon> : "";
   }
 }

@@ -1,16 +1,16 @@
-import React from 'react';
-import './App.css';
+import {FC} from "react";
+import "./App.css";
 import {Main} from "./components/Main";
-import {BrowserRouter as Router, Route, Switch, useLocation, useParams} from "react-router-dom";
+import {BrowserRouter as Router} from "react-router-dom";
 import {HTML5Backend} from "react-dnd-html5-backend";
 import {DndProvider} from "react-dnd";
 
-const App: React.FC = () => {
+const App: FC = () => {
   return (
     <div className="App">
       <Router>
         <DndProvider backend={HTML5Backend} debugMode={true}>
-          <MainContent/>
+          <MainContent />
         </DndProvider>
       </Router>
     </div>
@@ -18,9 +18,7 @@ const App: React.FC = () => {
 };
 
 function MainContent() {
-  return (
-    <Main/>
-  );
+  return <Main />;
 }
 
 function NoService() {

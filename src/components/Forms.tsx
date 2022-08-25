@@ -1,8 +1,9 @@
-import {CSSProperties, default as React} from "react";
+import {CSSProperties, Component} from "react";
 import {Checkbox, FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
-import * as Styles from "./DefaultStyles";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
+
+import * as Styles from "./DefaultStyles";
 
 interface ICheckProps {
   name?: string;
@@ -13,27 +14,29 @@ interface ICheckProps {
   label?: string;
 }
 
-export class CheckBoxInGroup extends React.Component<ICheckProps> {
+export class CheckBoxInGroup extends Component<ICheckProps> {
   render() {
-    const s = this.props.style || {};
+    const {style, disabled, checked, onChange, name, label} = this.props || {};
     return (
       <FormControlLabel
-        style={{display: 'block', margin: 0}}
-        disabled={this.props.disabled}
-        control={<Checkbox
-          checked={this.props.checked}
-          style={{color: Styles.Forms.Item.COLOR, ...s}}
-          onChange={this.props.onChange}
-          name={this.props.name}
-          disabled={this.props.disabled}
-        />}
-        label={this.props.label || ''}
+        style={{display: "block", margin: 0}}
+        disabled={disabled}
+        control={
+          <Checkbox
+            checked={checked}
+            style={{color: Styles.Forms.Item.COLOR, ...style}}
+            onChange={onChange}
+            name={name}
+            disabled={disabled}
+          />
+        }
+        label={label || ""}
       />
     );
   }
 }
 
-export class SimpleCheckbox extends React.Component<ICheckProps> {
+export class SimpleCheckbox extends Component<ICheckProps> {
   render() {
     return (
       <Checkbox
@@ -41,14 +44,14 @@ export class SimpleCheckbox extends React.Component<ICheckProps> {
         disabled={this.props.disabled}
         onChange={this.props.onChange}
         style={{padding: 0, width: 32, height: 32, opacity: this.props.disabled ? 0.5 : 1}}
-        icon={<CheckBoxOutlineBlankIcon style={{ fontSize: 24, color: Styles.Forms.Item.COLOR}} />}
-        checkedIcon={<CheckBoxIcon style={{ fontSize: 24, color: Styles.Forms.Item.COLOR}} />}
+        icon={<CheckBoxOutlineBlankIcon style={{fontSize: 24, color: Styles.Forms.Item.COLOR}} />}
+        checkedIcon={<CheckBoxIcon style={{fontSize: 24, color: Styles.Forms.Item.COLOR}} />}
       />
     );
   }
 }
 
-export class SmallCheckbox extends React.Component<ICheckProps> {
+export class SmallCheckbox extends Component<ICheckProps> {
   render() {
     return (
       <Checkbox
@@ -56,8 +59,8 @@ export class SmallCheckbox extends React.Component<ICheckProps> {
         disabled={this.props.disabled}
         onChange={this.props.onChange}
         style={{padding: 0, width: 32, height: 32, opacity: this.props.disabled ? 0.5 : 1}}
-        icon={<CheckBoxOutlineBlankIcon style={{ fontSize: 20, color: Styles.Forms.Item.COLOR}} />}
-        checkedIcon={<CheckBoxIcon style={{ fontSize: 20, color: Styles.Forms.Item.COLOR}} />}
+        icon={<CheckBoxOutlineBlankIcon style={{fontSize: 20, color: Styles.Forms.Item.COLOR}} />}
+        checkedIcon={<CheckBoxIcon style={{fontSize: 20, color: Styles.Forms.Item.COLOR}} />}
       />
     );
   }
@@ -70,16 +73,17 @@ interface IRadioProps {
   disabled?: boolean;
 }
 
-export class RadioInGroup extends React.Component<IRadioProps> {
+export class RadioInGroup extends Component<IRadioProps> {
   render() {
-    const s = this.props.style || {};
+    const {style, value, disabled, label} = this.props || {};
     return (
       <FormControlLabel
-        style={{display: 'block'}}
-        value={this.props.value}
-        disabled={this.props.disabled}
-        control={<Radio style={{color: Styles.Forms.Item.COLOR, ...s}} />}
-        label={this.props.label} />
+        style={{display: "block"}}
+        value={value}
+        disabled={disabled}
+        control={<Radio style={{color: Styles.Forms.Item.COLOR, ...style}} />}
+        label={label}
+      />
     );
   }
 }
@@ -94,22 +98,26 @@ interface IStandaloneRadioProps<T = string> {
   label?: string;
 }
 
-export class StandaloneRadioButton extends React.Component<IStandaloneRadioProps> {
-  onChange = () => {
-    const handler = this.props.onChange;
-    if (handler !== undefined) {
-      handler(this.props.value);
-    }
-  }
+export class StandaloneRadioButton extends Component<IStandaloneRadioProps> {
+  onChange = () => this.props.onChange?.(this.props.value);
+
   render() {
+    const {name, disabled, checked, value} = this.props || {};
+
     return (
       <Radio
-        checked={this.props.checked}
-        disabled={this.props.disabled}
-        onChange={this.onChange}
-        name={this.props.name}
-        value={this.props.value}
-        style={{padding: 0, width: 32, height: 32, color: Styles.Forms.Item.COLOR, opacity: this.props.disabled ? 0.5 : 1}}
+        checked={checked}
+        disabled={disabled}
+        onChange={this.onChange || undefined}
+        name={name}
+        value={value}
+        style={{
+          padding: 0,
+          width: 32,
+          height: 32,
+          color: Styles.Forms.Item.COLOR,
+          opacity: disabled ? 0.5 : 1
+        }}
       />
     );
   }
@@ -117,30 +125,29 @@ export class StandaloneRadioButton extends React.Component<IStandaloneRadioProps
 
 interface RBGroupProps<T = string> {
   style?: CSSProperties;
-  items: Array<{label: string, value: T, disabled?: boolean}>;
+  items: any;
   value: T;
   name: string;
   onChange: (value: T) => void;
 }
 
-export class RBGroup<T = string> extends React.Component<RBGroupProps<T>> {
-  onChange = (evt: any) => {
-    this.props.onChange(evt.target.value);
-  }
+export class RBGroup<T = string> extends Component<RBGroupProps<T>> {
+  onChange = (evt: any) => this.props.onChange(evt.target.value);
 
   render() {
-    const s = this.props.style || {};
+    const {style: s, items, name, value} = this.props || {};
     return (
-      <RadioGroup name={this.props.name} value={this.props.value} onChange={this.onChange}>
-        {this.props.items.map((item, i) => {
+      <RadioGroup name={name} value={value} onChange={this.onChange}>
+        {items.map((item: any, i: number) => {
           return (
             <FormControlLabel
               key={i}
-              style={{display: 'block'}}
+              style={{display: "block"}}
               value={item.value}
               disabled={item.disabled}
               control={<Radio style={{color: Styles.Forms.Item.COLOR, ...s}} />}
-              label={item.label} />
+              label={item.label}
+            />
           );
         })}
       </RadioGroup>

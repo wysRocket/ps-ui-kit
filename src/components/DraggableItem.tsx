@@ -1,4 +1,4 @@
-import {CSSProperties, default as React, useRef} from "react";
+import {CSSProperties, useRef, FC} from "react";
 import {DropTargetMonitor, useDrag, useDrop, XYCoord} from "react-dnd";
 
 interface DragItem {
@@ -16,11 +16,11 @@ interface IProps {
   children?: any;
 }
 
-const DraggableItem: React.FC<IProps> = ({ id, type, index, move, children, style }) => {
+const DraggableItem: FC<IProps> = ({id, type, index, move, children, style}) => {
   const ref = useRef<HTMLDivElement>(null);
   const [, drop] = useDrop({
     accept: type,
-    hover(item: DragItem, monitor: DropTargetMonitor) {
+    hover: (item: DragItem, monitor: DropTargetMonitor) => {
       if (!ref.current) {
         return;
       }
@@ -49,17 +49,17 @@ const DraggableItem: React.FC<IProps> = ({ id, type, index, move, children, styl
     },
   });
 
-  const [{ isDragging }, drag] = useDrag({
-    item: { type, id, index },
-    collect: (monitor: any) => ({
-      isDragging: monitor.isDragging(),
-    }),
+  const [{isDragging}, drag] = useDrag({
+    item: {type, id, index},
+    type,
+    collect: (monitor: any) => ({isDragging: monitor.isDragging()}),
   });
 
   const opacity = isDragging ? 0 : 1;
   drag(drop(ref));
+
   return (
-    <div ref={ref} style={{ ...style, opacity }}>
+    <div ref={ref} style={{...style, opacity}}>
       {children}
     </div>
   );

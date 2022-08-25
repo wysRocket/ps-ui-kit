@@ -1,4 +1,4 @@
-import {CSSProperties, default as React, useRef} from "react";
+import {CSSProperties, useRef, FC} from "react";
 import {DropTargetMonitor, useDrag, useDrop, XYCoord} from "react-dnd";
 import {TableRow} from "@material-ui/core";
 
@@ -18,11 +18,11 @@ interface IProps {
   children?: any;
 }
 
-const DraggableRow: React.FC<IProps> = ({ id, type, index, move, children, selected, style }) => {
+const DraggableRow: FC<IProps> = ({id, type, index, move, children, selected, style}) => {
   const ref = useRef<HTMLTableRowElement>(null);
   const [, drop] = useDrop({
     accept: type,
-    hover(item: DragItem, monitor: DropTargetMonitor) {
+    hover: (item: DragItem, monitor: DropTargetMonitor) => {
       if (!ref.current) {
         return;
       }
@@ -48,20 +48,19 @@ const DraggableRow: React.FC<IProps> = ({ id, type, index, move, children, selec
 
       move(dragIndex, hoverIndex);
       item.index = hoverIndex;
-    },
+    }
   });
 
-  const [{ isDragging }, drag] = useDrag({
-    item: { type, id, index },
-    collect: (monitor: any) => ({
-      isDragging: monitor.isDragging(),
-    }),
+  const [{isDragging}, drag] = useDrag({
+    item: {type, id, index},
+    type,
+    collect: (monitor: any) => ({isDragging: monitor.isDragging()})
   });
 
   const opacity = isDragging ? 0 : 1;
   drag(drop(ref));
   return (
-    <TableRow selected={selected} ref={ref} style={{ ...style, opacity }}>
+    <TableRow selected={selected} ref={ref} style={{...style, opacity}}>
       {children}
     </TableRow>
   );

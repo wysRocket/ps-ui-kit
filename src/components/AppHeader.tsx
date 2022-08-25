@@ -40,7 +40,7 @@ export default class AppHeader extends React.Component<IProps> {
         <div style={{paddingLeft: 100}}/>
         {this.props.children}
         <IconButton aria-label="show 17 new notifications" color="inherit">
-          <Badge badgeContent={this.props.notifications || 0} color="secondary">
+          <Badge badgeContent={this.props.notifications || 0} overlap="rectangular" color="secondary">
             <NotificationsIcon style={{color: '#A7A7A7'}}/>
           </Badge>
         </IconButton>

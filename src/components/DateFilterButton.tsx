@@ -1,5 +1,5 @@
 import {CSSProperties, FC, useState} from "react";
-import {DateRangePicker, DateRangePickerValue} from "@mantine/dates";
+import {DateRangePickerValue, RangeCalendar} from "@mantine/dates";
 import FilterIcon from "@material-ui/icons/FilterList";
 import {Button, Dialog, Paper} from "@material-ui/core";
 
@@ -14,7 +14,7 @@ export interface IProps {
   maxDate?: Date;
   items: LabeledItem[];
   selectedProp?: string;
-  selectedRange?: DateRangePickerValue;
+  selectedRange?: typeof RangeCalendar;
   onRangeChanged?: (property: string, range: DateRangePickerValue) => void;
   cancelLabel?: string;
   okLabel?: string;
@@ -30,19 +30,22 @@ export const DateFilterButton: FC<IProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [property, setProperty] = useState(selectedProp || items[0] ? items[0].value : undefined);
-  const [range, setRange] = useState(selectedRange);
+  const [range, setRange] = useState<[Date | null, Date | null]>([
+    new Date(2021, 11, 1),
+    new Date(2021, 11, 5),
+  ]);
 
   const onSubmit = () => {
     if (property && range) {
       setIsOpen(false);
-      setRange(undefined);
+      setRange([null, null]);
     }
     setProperty(property); // or onRangeChanged(range)???
   };
 
   const onCancel = () => {
     setIsOpen(false);
-    setRange(undefined);
+    setRange([null, null]);
   };
 
   return (
@@ -62,7 +65,7 @@ export const DateFilterButton: FC<IProps> = ({
               </Button>
               <Button>{cancelLabel || "Cancel"}</Button>
             </ContentHeader>
-            <DateRangePicker value={range} onChange={setRange} />
+            <RangeCalendar amountOfMonths={2} value={range} onChange={setRange} />
           </div>
         </Paper>
       </Dialog>
@@ -70,7 +73,8 @@ export const DateFilterButton: FC<IProps> = ({
         disabled={!items.length}
         variant={"outlined"}
         style={style || {width: 32, height: 32, minWidth: 32}}
-      >
+        onClick={() => setIsOpen(true)}
+        >
         <FilterIcon style={{color: "#999999"}} />
       </Button>
     </div>

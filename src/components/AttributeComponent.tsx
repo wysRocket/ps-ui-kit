@@ -40,7 +40,7 @@ export class LongTextViewer extends React.Component<ILTVProps> {
             <TextField
               style={{width: maxWidth - 32}}
               multiline={true}
-              rows={this.props.numRows || 8}
+              minRows={this.props.numRows || 8}
               value={value}
               contentEditable={false}
               inputProps={{style: inputStyle}}
@@ -244,7 +244,7 @@ export class SimpleEditor extends React.Component<IEditProps> {
         type={schemaAttribute.type === SchemaDomain.AttributeType.NUMBER ? 'number' : 'text'}
         style={style}
         multiline={multiline}
-        rows={numRows}
+        minRows={numRows}
         value={attribute.value}
         onChange={this.onTextChange}
         inputProps={{style: inputStyle}}

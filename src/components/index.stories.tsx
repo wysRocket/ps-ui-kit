@@ -14,7 +14,7 @@ DateFilterButton.args = {
   onRangeChanged: (prop: string, range: DateRange) =>
     console.log("date range changed", prop, range),
   items: [
-    {label: "one", value: "1"},
+    {label: "started at", value: "1"},
     {label: "two", value: 2}
   ]
 };

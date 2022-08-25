@@ -24,9 +24,14 @@ export default class PopUp extends React.Component<IProps> {
       <Dialog
         maxWidth={false}
         PaperProps={{style: {borderRadius: 5}}}
-        onClose={this.props.onClose}
+        // onClose={this.props.onClose}
+        onClose={(event, reason) => {
+          if (reason !== 'backdropClick') {
+            this.props.onClose()
+          }
+      }}
         open={this.props.opened}
-        disableBackdropClick={this.props.disableBackdropClick}
+        // disableBackdropClick={this.props.disableBackdropClick}
         disableEnforceFocus={this.props.disableEnforceFocus}
         disableEscapeKeyDown={this.props.disableEscapeKeyDown}
         disableRestoreFocus={this.props.disableRestoreFocus}

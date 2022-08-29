@@ -1,4 +1,4 @@
-import {CSSProperties, FC, useState} from "react";
+import {CSSProperties, FC, useEffect, useState} from "react";
 import {DateRangePickerValue, RangeCalendar} from "@mantine/dates";
 import FilterIcon from "@material-ui/icons/FilterList";
 import {Button, Dialog, Paper} from "@material-ui/core";
@@ -14,8 +14,8 @@ export interface IProps {
   maxDate?: Date;
   items: LabeledItem[];
   selectedProp?: string;
-  selectedRange?: typeof RangeCalendar;
-  onRangeChanged?: (property: string, range: DateRangePickerValue) => void;
+  selectedRange?: [Date | null, Date | null];
+  onRangeChanged?: (property: string, range: [Date | null, Date | null]) => void;
   cancelLabel?: string;
   okLabel?: string;
 }
@@ -26,21 +26,25 @@ export const DateFilterButton: FC<IProps> = ({
   items,
   okLabel,
   cancelLabel,
-  style
+  style,
+  onRangeChanged,
+  minDate,
+  maxDate
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [property, setProperty] = useState(selectedProp || items[0] ? items[0].value : undefined);
-  const [range, setRange] = useState<[Date | null, Date | null]>([
-    new Date(2021, 11, 1),
-    new Date(2021, 11, 5),
-  ]);
+  const [property, setProperty] = useState('startedAt');
+  const [range, setRange] = useState<[Date | null, Date | null]>([null, null]);
+
+  useEffect(() => {
+    setProperty(selectedProp || items[0] ? items[0].value : undefined)
+  }, []);
 
   const onSubmit = () => {
-    if (property && range) {
+    if (property && range[0] && range[1]) {
       setIsOpen(false);
       setRange([null, null]);
+      onRangeChanged?.(property, range)
     }
-    setProperty(property); // or onRangeChanged(range)???
   };
 
   const onCancel = () => {
@@ -60,12 +64,12 @@ export const DateFilterButton: FC<IProps> = ({
           <div>
             <ContentHeader style={{paddingLeft: 32, paddingRight: 32, display: "flex"}}>
               <DropSelector items={items} selected={property} onChange={setProperty} />
-              <Button disabled={!property || !range} onClick={onSubmit}>
+              <Button disabled={!property || !range[0] || !range[1]} onClick={onSubmit}>
                 {okLabel || "Ok"}
               </Button>
-              <Button>{cancelLabel || "Cancel"}</Button>
+              <Button onClick={()=>onCancel()}>{cancelLabel || "Cancel"}</Button>
             </ContentHeader>
-            <RangeCalendar amountOfMonths={2} value={range} onChange={setRange} />
+            <RangeCalendar amountOfMonths={2} value={range} onChange={setRange} minDate={minDate} maxDate={maxDate || new Date()}/>
           </div>
         </Paper>
       </Dialog>

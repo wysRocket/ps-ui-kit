@@ -1,6 +1,6 @@
 {
   "name": "frontend-common",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "",
   "author": "hodkov",
   "license": "MIT",
@@ -67,6 +67,7 @@
     "cross-env": "^7.0.3",
     "date-fns": "^2.16.1",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-only-warn": "^1.0.3",
     "eslint-plugin-prettier": "^4.2.1",
     "lodash": "^4.17.15",

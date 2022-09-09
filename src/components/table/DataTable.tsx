@@ -61,7 +61,7 @@ const SortableHeader: React.FC<{column: ColumnInfo, sort?: Sort, onSort?: (newSo
   return (<div>{column.header.title || ''}</div>);
 };
 
-interface IProps<T> {
+export interface IProps<T> {
   style?: CSSProperties;
   onEdit?: (item: T) => void;
   onDelete?: (item: T) => void;

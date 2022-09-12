@@ -1,6 +1,6 @@
 import {ComponentMeta, ComponentStory} from "@storybook/react";
 import {UserRole} from "../../domain/User";
-import {AppHeader as AHeader, IProps} from "./AppHeader";
+import {AppHeader as AHeader} from ".";
 
 export default {
   title: "Components/AppHeader",

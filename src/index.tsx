@@ -5,7 +5,7 @@ import {Service as IService} from "./domain/Service";
 import {Identity as IIdentity} from "./domain/Identity";
 import {ServiceAction as IServiceAction, ServiceActionProps} from "./domain/ServiceAction";
 import * as Auth from "./domain/User";
-import AppHeader from "./components/AppHeader";
+import {AppHeader} from "./components/AppHeader";
 import ContentHeader from "./components/ContentHeader";
 import Panel from "./components/Panel";
 import DashboardFilter from "./components/DashboardFilter";

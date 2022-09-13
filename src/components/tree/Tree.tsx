@@ -36,7 +36,7 @@ function TransitionComponent(props: TransitionProps) {
   );
 }
 
-interface TreeCheckBoxProps {
+export interface TreeCheckBoxProps {
   selected: boolean;
   onSelectionChange: (selected: boolean) => void;
 }
@@ -130,7 +130,7 @@ function getExpandedValues(elements: TreeElement[], selectedSet: Set<TValue>): T
   return [...resultSet.keys()];
 }
 
-interface IProps {
+export interface IProps {
   style?: CSSProperties;
   selected?: TValue[];
   expandSelected?: boolean;
@@ -139,7 +139,7 @@ interface IProps {
   onSelect: (terminalIds: TValue[]) => void;
 }
 
-interface IState {
+export interface IState {
   selected?: TValue[];
   defaultExpanded: string[];
 }
@@ -199,7 +199,7 @@ export class Tree extends React.Component<IProps, IState> {
         defaultExpandIcon={<PlusSquare />}
       >
         {elements.map((e, i) => {
-          return this.renderElement(e, selectedSet, i);
+          return this.renderElement(e, selectedSet, e.content.label);
         })}
       </TreeView>
     );
@@ -229,9 +229,9 @@ export class Tree extends React.Component<IProps, IState> {
       );
     } else {
       return (
-        <TreeItem key={key} nodeId={content.value.toString()} label={content.label}>
+        <TreeItem key={key} nodeId={`${key}-${content.value.toString()}`} label={content.label}>
           {element.children.map((e, index) => {
-            return this.renderElement(e, selectedSet, index);
+            return this.renderElement(e, selectedSet, `${key}-${index}`);
           })}
         </TreeItem>
       );

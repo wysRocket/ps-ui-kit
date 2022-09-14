@@ -22,26 +22,34 @@ interface IProps {
 export default class TabbedPanel extends React.Component<IProps> {
   onChange = (_: any, value: any) => {
     this.props.onTabChange(value);
-  }
+  };
 
   render() {
     return (
-      <Panel style={this.props.style} toolbarProps={{
-        children: [(
-          <Tabs
-            key={1}
-            value={this.props.selectedTabValue}
-            TabIndicatorProps={{style: {backgroundColor: Styles.Forms.Item.TAB_INDICATOR_COLOR}}}
-            style={{borderBottom: '1px solid #C7C7C7', minHeight: 32, width: '100%', paddingLeft: 32}}
-            onChange={this.onChange}
-          >
-            {this.props.tabItems.map((item, index) => {
-              return this.renderTab(item, index);
-            })}
-          </Tabs>
-        )],
-        style: {height: 36}
-      }}>
+      <Panel
+        style={this.props.style}
+        toolbarProps={{
+          children: [
+            <Tabs
+              key={1}
+              value={this.props.selectedTabValue}
+              TabIndicatorProps={{style: {backgroundColor: Styles.Forms.Item.TAB_INDICATOR_COLOR}}}
+              style={{
+                borderBottom: "1px solid #C7C7C7",
+                minHeight: 32,
+                width: "100%",
+                paddingLeft: 32
+              }}
+              onChange={this.onChange}
+            >
+              {this.props.tabItems.map((item, index) => {
+                return this.renderTab(item, index);
+              })}
+            </Tabs>
+          ],
+          style: {height: 36}
+        }}
+      >
         {this.props.children}
       </Panel>
     );
@@ -54,7 +62,7 @@ export default class TabbedPanel extends React.Component<IProps> {
           key={key}
           value={item.value}
           label={item.label}
-          style={{minWidth: 10, padding: 0, minHeight: 32, marginRight: 32, textTransform: 'none'}}
+          style={{minWidth: 10, padding: 0, minHeight: 32, marginRight: 32, textTransform: "none"}}
         />
       );
     }
@@ -66,7 +74,7 @@ export default class TabbedPanel extends React.Component<IProps> {
         to={item.link}
         value={item.value}
         label={item.label}
-        style={{minWidth: 10, padding: 0, minHeight: 32, marginRight: 32, textTransform: 'none'}}
+        style={{minWidth: 10, padding: 0, minHeight: 32, marginRight: 32, textTransform: "none"}}
       />
     );
   }

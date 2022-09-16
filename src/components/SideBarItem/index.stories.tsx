@@ -1,5 +1,6 @@
 import {ComponentMeta, ComponentStory} from "@storybook/react";
 import {BrowserRouter as Router} from "react-router-dom";
+
 import {SideBarItem as SBItem} from ".";
 
 import DashboardIcon from "@material-ui/icons/Dashboard";
@@ -10,10 +11,9 @@ import SchemasIcon from "@material-ui/icons/Transform";
 export default {
   title: "Components/SideBarItem",
   component: SBItem
-} as ComponentMeta<any>;
+} as ComponentMeta<typeof SBItem>;
 
-const Template: ComponentStory<any> = (args) => {
-  console.log(args);
+const Template: ComponentStory<typeof SBItem> = (args) => {
   return (
     <Router>
       <div style={{width: "200px"}}>
@@ -30,24 +30,24 @@ export const SideBarItemInterActions = Template.bind({});
 SideBarItemDashboard.args = {
   title: "Dashboard",
   icon: <DashboardIcon />,
-  link: "/link-one",
+  to: "/link-one",
   isMinimized: false
 };
 SideBarItemClients.args = {
   title: "Clients",
   icon: <ClientsIcon />,
-  link: "/link-two",
+  to: "/link-two",
   isMinimized: false
 };
 SideBarItemSchemas.args = {
   title: "Schemas",
   icon: <SchemasIcon />,
-  link: "/link-three",
+  to: "/link-three",
   isMinimized: false
 };
 SideBarItemInterActions.args = {
   title: "Schemas",
   icon: <ActionsIcon />,
-  link: "/link-four",
+  to: "/link-four",
   isMinimized: true
 };

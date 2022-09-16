@@ -2,27 +2,35 @@ import {ReactNode} from "react";
 
 import DefaultIcon from "@material-ui/icons/InsertPhoto";
 
-import {Link, NavLinkProps, useMatch} from "react-router-dom";
+import {NavLink, NavLinkProps, useMatch} from "react-router-dom";
 
 import {useStyles} from "./styles";
-
 export interface SidebarItemProps extends NavLinkProps {
   title: string;
   icon?: ReactNode;
-  link: string;
   isMinimized?: boolean;
 }
 
-export const SideBarItem: React.FC<SidebarItemProps> = ({title, icon, link, isMinimized}) => {
+export const SideBarItem: React.FC<SidebarItemProps> = ({
+  title,
+  icon,
+  to,
+  isMinimized = false,
+  ...props
+}) => {
   const classes = useStyles();
-  const match = useMatch(link);
+  const match = useMatch(to as string);
 
   return (
-    <Link className={match ? classes.activeItem : classes.defaultItem} to={link}>
-      <div className={match ? classes.activeIcon : classes.defaultIcon}>
-        {icon ? icon : <DefaultIcon />}
+    <NavLink
+      className={`${classes.defaultItem} ${match ? classes.activeItem : ""}`}
+      to={to}
+      {...props}
+    >
+      <div className={`${classes.defaultIcon} ${match ? classes.activeIcon : ""}`}>
+        {icon || <DefaultIcon />}
       </div>
-      {!isMinimized && <p className={match ? classes.activeText : classes.defaultText}>{title}</p>}
-    </Link>
+      {!isMinimized && <p>{title}</p>}
+    </NavLink>
   );
 };

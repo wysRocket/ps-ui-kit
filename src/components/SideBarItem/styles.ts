@@ -3,7 +3,7 @@ import {makeStyles} from "@material-ui/core/styles";
 export const useStyles = makeStyles({
   defaultItem: {
     display: "flex",
-    justifyContent: "space-around",
+    justifyContent: "start",
     alignItems: "center",
     borderRadius: 4,
     color: "rgb(113, 113, 113)",

@@ -8,9 +8,14 @@ export const useStyles = makeStyles({
     position: "sticky",
     top: 0,
     left: 0,
-    background: "#f8f8f8"
+    background: "#f8f8f8",
+    display: "flex",
+    flexDirection: "column"
   },
   sideBarWrapperMinimized: {
     width: "40px"
+  },
+  sideBarFooter: {
+    marginTop: "auto"
   }
 });

@@ -3,13 +3,14 @@ import {BrowserRouter as Router} from "react-router-dom";
 
 import {SideBar as SB} from "./index";
 import {sideBarData} from "./sideBarData";
+import * as logo from "./PSLogoSmall.png"; // should be deleted
 
 export default {
   title: "Components/SideBar",
   component: SB
-} as ComponentMeta<any>;
+} as ComponentMeta<typeof SB>;
 
-const Template: ComponentStory<any> = (args) => {
+const Template: ComponentStory<typeof SB> = (args) => {
   console.log("args", args);
   return (
     <Router>
@@ -38,7 +39,8 @@ SideBar.args = {
     identity: "Identity One",
     logo: "https://test.proofspace.id/zaka/partner-services/did/JZcdvnYnLtCt1MP82Lxfw2/logo"
   },
-  minimized: false
+  minimized: false,
+  logo: logo
 };
 SideBarMinimized.args = {
   items: sideBarData,
@@ -57,5 +59,6 @@ SideBarMinimized.args = {
     identity: "Identity One",
     logo: "https://test.proofspace.id/zaka/partner-services/did/JZcdvnYnLtCt1MP82Lxfw2/logo"
   },
-  minimized: true
+  minimized: true,
+  logo: logo
 };

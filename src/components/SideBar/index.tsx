@@ -4,23 +4,18 @@ import {Service} from "../../domain/Service";
 
 import {useStyles} from "./styles";
 
-import {SideBarItem} from "../SideBarItem";
+import {SideBarItem, SideBarItemProps} from "../SideBarItem";
 import {SideBarHeader} from "../SideBarHeader/index";
-// import {SideBarFooter} from "../SideBarFooter/SideBarFooter";
+import {SideBarFooter} from "../SideBarFooter/SideBarFooter";
 
-export interface SideBarItemProps {
-  label: string;
-  icon?: React.ReactNode;
-  link: string;
-}
-
-interface IProps {
+export interface IProps {
   items: SideBarItemProps[];
   minimized?: boolean;
   service: Service;
+  logo?: string;
 }
 
-export const SideBar: FC<IProps> = ({items, service, minimized = false, ...props}) => {
+export const SideBar: FC<IProps> = ({items, service, logo, minimized = false}) => {
   const classes = useStyles();
   return (
     <div
@@ -28,17 +23,21 @@ export const SideBar: FC<IProps> = ({items, service, minimized = false, ...props
     >
       <SideBarHeader userName={service.identity} isMinimized={minimized} logo={service.logo} />
       <div>
-        {items.map((item: SideBarItemProps, index: number) => (
+        {items.map((item, index) => (
           <SideBarItem
             key={index}
-            title={item.label}
-            to={item.link}
+            title={item.title}
+            to={item.to}
             icon={item.icon}
             isMinimized={minimized}
           />
         ))}
-        {/* <SideBarFooter /> */}
       </div>
+      {!minimized && (
+        <div className={classes.sideBarFooter}>
+          <SideBarFooter logo={logo} />
+        </div>
+      )}
     </div>
   );
 };

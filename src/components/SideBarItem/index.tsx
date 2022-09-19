@@ -5,13 +5,13 @@ import DefaultIcon from "@material-ui/icons/InsertPhoto";
 import {NavLink, NavLinkProps, useMatch} from "react-router-dom";
 
 import {useStyles} from "./styles";
-export interface SidebarItemProps extends NavLinkProps {
+export interface SideBarItemProps extends NavLinkProps {
   title: string;
   icon?: ReactNode;
   isMinimized?: boolean;
 }
 
-export const SideBarItem: React.FC<SidebarItemProps> = ({
+export const SideBarItem: React.FC<SideBarItemProps> = ({
   title,
   icon,
   to,

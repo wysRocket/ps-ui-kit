@@ -11,7 +11,6 @@ import KeysIcon from "@material-ui/icons/Https";
 import KnowledgeBaseIcon from "@material-ui/icons/LiveHelp";
 
 export const sideBarData = [
-<<<<<<< HEAD
   {title: "Dashboard", to: "/2RjEBo9zXkJByXm14xQHtg", icon: <DashboardIcon />},
   {title: "Clients", to: "/2RjEBo9zXkJByXm14xQHtg/clients", icon: <ClientsIcon />},
   {title: "Schemas", to: "/2RjEBo9zXkJByXm14xQHtg/schemas", icon: <SchemasIcon />},
@@ -27,21 +26,4 @@ export const sideBarData = [
   {title: "SSI OAuth", to: "/2RjEBo9zXkJByXm14xQHtg/oauth", icon: <SSAOAuthIcon />},
   {title: "Service Info", to: "/2RjEBo9zXkJByXm14xQHtg/service", icon: <InfoIcon />},
   {title: "Knowledge Base", to: "", icon: <KnowledgeBaseIcon />}
-=======
-  {label: "Dashboard", link: "/2RjEBo9zXkJByXm14xQHtg", icon: <DashboardIcon />},
-  {label: "Clients", link: "/2RjEBo9zXkJByXm14xQHtg/clients", icon: <ClientsIcon />},
-  {label: "Schemas", link: "/2RjEBo9zXkJByXm14xQHtg/schemas", icon: <SchemasIcon />},
-  {label: "Interactions", link: "/2RjEBo9zXkJByXm14xQHtg/actions", icon: <ActionsIcon />},
-  {label: "Custom Profiles", link: "/2RjEBo9zXkJByXm14xQHtg/profiles", icon: <ProfileIcon />},
-  {label: "Roles & Access", link: "/2RjEBo9zXkJByXm14xQHtg/users", icon: <UsersIcon />},
-  {
-    label: "Integrations",
-    link: "/2RjEBo9zXkJByXm14xQHtg/integrations",
-    icon: <IntegrationsIcon />
-  },
-  {label: "Keys", link: "/2RjEBo9zXkJByXm14xQHtg/keys", icon: <KeysIcon />},
-  {label: "SSI OAuth", link: "/2RjEBo9zXkJByXm14xQHtg/oauth", icon: <SSAOAuthIcon />},
-  {label: "Service Info", link: "/2RjEBo9zXkJByXm14xQHtg/service", icon: <InfoIcon />},
-  {label: "Knowledge Base", link: "", icon: <KnowledgeBaseIcon />}
->>>>>>> d3cde16 (refactor: added refactored sidebar component)
 ];

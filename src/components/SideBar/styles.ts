@@ -8,7 +8,6 @@ export const useStyles = makeStyles({
     position: "sticky",
     top: 0,
     left: 0,
-<<<<<<< HEAD
     background: "#f8f8f8",
     display: "flex",
     flexDirection: "column"
@@ -18,11 +17,5 @@ export const useStyles = makeStyles({
   },
   sideBarFooter: {
     marginTop: "auto"
-=======
-    background: "#f8f8f8"
-  },
-  sideBarWrapperMinimized: {
-    width: "40px"
->>>>>>> d3cde16 (refactor: added refactored sidebar component)
   }
 });

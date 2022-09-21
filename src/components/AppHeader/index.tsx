@@ -5,7 +5,6 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
-// import {User} from "../../domain/User";
 import {User} from "../../domain/User";
 import {Badge, IconButton, InputBase, Toolbar, Typography} from "@material-ui/core";
 import Filter from "../Filter";

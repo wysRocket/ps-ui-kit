@@ -8,10 +8,9 @@ const useStyles = makeStyles(() => ({
   tabs: {
     "&.MuiTabs-root": {
       minWidth: 10,
-      padding: 0,
+      paddingLeft: 32,
       minHeight: 32,
-      marginRight: 32,
-      textTransform: "none"
+      borderBottom: "1px solid #c7c7c7"
     }
   }
 }));

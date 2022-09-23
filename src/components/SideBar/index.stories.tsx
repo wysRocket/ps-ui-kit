@@ -24,41 +24,15 @@ export const SideBarMinimized = Template.bind({});
 
 SideBar.args = {
   items: sideBarData,
-  service: {
-    description: "Test service from the creator of The Dashboard",
-    shortDescription:
-      "Dolorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non tempus mi",
-    did: "2RjEBo9zXkJByXm14xQHtg",
-    enabled: true,
-    categories: ["one category", "two categories", "three categories"],
-    countries: ["UK", "USA"],
-    keywords: ["keyword1", "keyword2"],
-    endpoint: "https://test.proofspace.id/zaka/partner-services/did/JZcdvnYnLtCt1MP82Lxfw2",
-    lastTouch: "2022-09-12T12:21:34.251Z",
-    name: "hodkov-test",
-    identity: "Identity One",
-    logo: "https://test.proofspace.id/zaka/partner-services/did/JZcdvnYnLtCt1MP82Lxfw2/logo"
-  },
+  serviceLogo: "https://test.proofspace.id/zaka/partner-services/did/JZcdvnYnLtCt1MP82Lxfw2/logo",
+  serviceIdentity: "Identity One",
   minimized: false,
   logo: logo
 };
 SideBarMinimized.args = {
   items: sideBarData,
-  service: {
-    description: "Test service from the creator of The Dashboard",
-    shortDescription:
-      "Dolorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non tempus mi",
-    did: "2RjEBo9zXkJByXm14xQHtg",
-    enabled: true,
-    categories: ["one category", "two categories", "three categories"],
-    countries: ["UK", "USA"],
-    keywords: ["keyword1", "keyword2"],
-    endpoint: "https://test.zaka.io/service-dashboard-backend//service/JZcdvnYnLtCt1MP82Lxfw2",
-    lastTouch: "2022-09-12T12:21:34.251Z",
-    name: "hodkov-test",
-    identity: "Identity One",
-    logo: "https://test.proofspace.id/zaka/partner-services/did/JZcdvnYnLtCt1MP82Lxfw2/logo"
-  },
+  serviceLogo: "https://test.proofspace.id/zaka/partner-services/did/JZcdvnYnLtCt1MP82Lxfw2/logo",
+  serviceIdentity: "Identity One",
   minimized: true,
   logo: logo
 };

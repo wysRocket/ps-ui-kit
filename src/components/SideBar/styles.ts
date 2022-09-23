@@ -1,9 +1,9 @@
 import {makeStyles} from "@material-ui/core/styles";
+import {Padding} from "components/DefaultStyles";
 
 export const useStyles = makeStyles({
   sideBarWrapper: {
-    width: "184px",
-    padding: "8px",
+    width: "200px",
     height: "100vh",
     position: "sticky",
     top: 0,
@@ -13,9 +13,6 @@ export const useStyles = makeStyles({
     flexDirection: "column"
   },
   sideBarWrapperMinimized: {
-    width: "40px"
-  },
-  sideBarFooter: {
-    marginTop: "auto"
+    width: "56px"
   }
 });

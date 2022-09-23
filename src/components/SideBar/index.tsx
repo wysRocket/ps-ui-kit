@@ -1,6 +1,7 @@
 import {FC} from "react";
 
 import {Service} from "../../domain/Service";
+import {Box} from "@material-ui/core";
 
 import {useStyles} from "./styles";
 
@@ -12,17 +13,25 @@ export interface IProps {
   items: SideBarItemProps[];
   minimized?: boolean;
   service: Service;
+  serviceIdentity: string;
+  serviceLogo?: string;
   logo?: string;
 }
 
-export const SideBar: FC<IProps> = ({items, service, logo, minimized = false}) => {
+export const SideBar: FC<IProps> = ({
+  items,
+  serviceIdentity,
+  serviceLogo,
+  logo,
+  minimized = false
+}) => {
   const classes = useStyles();
   return (
     <div
       className={`${classes.sideBarWrapper} ${minimized ? classes.sideBarWrapperMinimized : ""}`}
     >
-      <SideBarHeader userName={service.identity} isMinimized={minimized} logo={service.logo} />
-      <div>
+      <SideBarHeader userName={serviceIdentity} isMinimized={minimized} logo={serviceLogo} />
+      <Box p={1}>
         {items.map((item, index) => (
           <SideBarItem
             key={index}
@@ -32,11 +41,11 @@ export const SideBar: FC<IProps> = ({items, service, logo, minimized = false}) =
             isMinimized={minimized}
           />
         ))}
-      </div>
+      </Box>
       {!minimized && (
-        <div className={classes.sideBarFooter}>
+        <Box mt="auto">
           <SideBarFooter logo={logo} />
-        </div>
+        </Box>
       )}
     </div>
   );

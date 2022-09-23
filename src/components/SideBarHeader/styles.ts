@@ -11,7 +11,7 @@ export const useStyles = makeStyles({
     columnGap: 6
   },
   headerMinimizedWrapper: {
-    paddingLeft: 0
+    paddingLeft: 8
   },
   logoWrapper: {
     width: 40,

@@ -21,9 +21,9 @@ export const useStyles = makeStyles({
     color: "#5D4AEE"
   },
   defaultIcon: {
-    minWidth: 40,
     color: "rgb(205, 198, 191)",
-    padding: "8px"
+    padding: "8px",
+    justifyContent: "center"
   },
   activeIcon: {
     color: "rgb(93, 74, 238)"

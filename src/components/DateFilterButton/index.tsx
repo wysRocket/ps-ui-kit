@@ -1,11 +1,11 @@
 import {CSSProperties, FC, useEffect, useState} from "react";
-import {DateRangePickerValue, RangeCalendar} from "@mantine/dates";
+import {RangeCalendar} from "@mantine/dates";
 import FilterIcon from "@material-ui/icons/FilterList";
 import {Button, Dialog, Paper} from "@material-ui/core";
 
-import {LabeledItem} from "../domain/Item";
-import ContentHeader from "./ContentHeader";
-import DropSelector from "./DropSelector";
+import {LabeledItem} from "domain/Item";
+import ContentHeader from "../ContentHeader";
+import DropSelector from "../DropSelector";
 
 export interface IProps {
   style?: CSSProperties;
@@ -32,18 +32,18 @@ export const DateFilterButton: FC<IProps> = ({
   maxDate
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [property, setProperty] = useState('startedAt');
+  const [property, setProperty] = useState("startedAt");
   const [range, setRange] = useState<[Date | null, Date | null]>([null, null]);
 
   useEffect(() => {
-    setProperty(selectedProp || items[0] ? items[0].value : undefined)
+    setProperty(selectedProp || items[0] ? items[0].value : undefined);
   }, []);
 
   const onSubmit = () => {
     if (property && range[0] && range[1]) {
       setIsOpen(false);
       setRange([null, null]);
-      onRangeChanged?.(property, range)
+      onRangeChanged?.(property, range);
     }
   };
 
@@ -67,9 +67,15 @@ export const DateFilterButton: FC<IProps> = ({
               <Button disabled={!property || !range[0] || !range[1]} onClick={onSubmit}>
                 {okLabel || "Ok"}
               </Button>
-              <Button onClick={()=>onCancel()}>{cancelLabel || "Cancel"}</Button>
+              <Button onClick={() => onCancel()}>{cancelLabel || "Cancel"}</Button>
             </ContentHeader>
-            <RangeCalendar amountOfMonths={2} value={range} onChange={setRange} minDate={minDate} maxDate={maxDate || new Date()}/>
+            <RangeCalendar
+              amountOfMonths={2}
+              value={range}
+              onChange={setRange}
+              minDate={minDate}
+              maxDate={maxDate || new Date()}
+            />
           </div>
         </Paper>
       </Dialog>
@@ -78,7 +84,7 @@ export const DateFilterButton: FC<IProps> = ({
         variant={"outlined"}
         style={style || {width: 32, height: 32, minWidth: 32}}
         onClick={() => setIsOpen(true)}
-        >
+      >
         <FilterIcon style={{color: "#999999"}} />
       </Button>
     </div>

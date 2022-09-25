@@ -2,30 +2,27 @@ import {FC} from "react";
 
 import Pagination from "@material-ui/lab/Pagination";
 import {FormControl, NativeSelect, Box} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
+import {v4 as uuidv4} from "uuid";
 
-export interface PaginationIProps {
+import useStyles from "./styles";
+
+export interface IPagination {
   itemsPerPage: number;
   itemsTotal: number;
   currentPage: number;
   ranges: number[];
-  onPageChange: (event: React.ChangeEvent<unknown>, page: number) => void;
-  onChangeSizePage: (value: string) => void;
 }
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    padding: "8px 32px"
-  }
-}));
+interface CustomPaginationProps extends IPagination {
+  setPagination: React.Dispatch<React.SetStateAction<IPagination>>;
+}
 
-const CustomPagination: FC<PaginationIProps> = ({
+const CustomPagination: FC<CustomPaginationProps> = ({
   itemsPerPage,
   itemsTotal,
   currentPage,
   ranges,
-  onPageChange,
-  onChangeSizePage
+  setPagination
 }) => {
   const classes = useStyles();
 
@@ -33,14 +30,23 @@ const CustomPagination: FC<PaginationIProps> = ({
   const from = (currentPage - 1) * itemsPerPage + 1;
   const to = Math.min(itemsTotal, currentPage * itemsPerPage);
 
-  const strRange = (...props: any[]) => {
+  const strRange = (...args: any[]) => {
     let str = "Showing {0}-{1} of {2}";
-    if (props && props.length) {
-      props.forEach((p, i) => {
-        str = str.replace(`{${i}}`, p);
+
+    if (args.length) {
+      args.forEach((arg, index) => {
+        str = str.replace(`{${index}}`, arg);
       });
     }
     return str;
+  };
+
+  const onPageChange = (currentPage: number) => {
+    setPagination((state) => ({...state, currentPage}));
+  };
+
+  const onSizePageChange = (value: string) => {
+    setPagination((state) => ({...state, itemsPerPage: +value, currentPage: 1}));
   };
 
   return (
@@ -49,19 +55,18 @@ const CustomPagination: FC<PaginationIProps> = ({
       <FormControl className={classes.formControl}>
         <NativeSelect
           value={itemsPerPage}
-          onChange={(e) => onChangeSizePage(e.target.value)}
+          onChange={(e) => onSizePageChange(e.target.value)}
           name="pages"
         >
-          {ranges &&
-            ranges.map((row, i) => (
-              <option value={row} key={i}>
-                {row}
-              </option>
-            ))}
+          {ranges.map((row) => (
+            <option value={row} key={uuidv4()}>
+              {row}
+            </option>
+          ))}
         </NativeSelect>
       </FormControl>
-      <Box sx={{flexGrow: 1}} />
-      <Pagination count={numPages} onChange={onPageChange} page={currentPage} />
+      <Box flexGrow={1} />
+      <Pagination count={numPages} onChange={(_e, page) => onPageChange(page)} page={currentPage} />
     </Box>
   );
 };

@@ -1,12 +1,9 @@
-import React, {CSSProperties, FC} from "react";
+import {CSSProperties, FC} from "react";
 import MenuIcon from "@material-ui/icons/Menu";
-import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import MoreIcon from "@material-ui/icons/MoreVert";
 import {User} from "../../domain/User";
-import {Badge, IconButton, InputBase, Toolbar, Typography} from "@material-ui/core";
+import {Badge, IconButton, Toolbar} from "@material-ui/core";
 import Filter from "../Filter";
 import {ButtonMenuItem} from "../ButtonWithMenu";
 import {IconButtonWithMenu} from "../IconButtonWithMenu";

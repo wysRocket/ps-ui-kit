@@ -1,16 +1,16 @@
 import {ComponentMeta, ComponentStory} from "@storybook/react";
 
-import {SideBarHeader as SBHeader} from ".";
+import SideBarHeader from ".";
 
 export default {
   title: "Components/SideBarHeader",
-  component: SBHeader
-} as ComponentMeta<typeof SBHeader>;
+  component: SideBarHeader
+} as ComponentMeta<typeof SideBarHeader>;
 
-const Template: ComponentStory<typeof SBHeader> = (args) => {
+const Template: ComponentStory<typeof SideBarHeader> = (args) => {
   return (
     <div style={{width: "200px"}}>
-      <SBHeader {...args} />
+      <SideBarHeader {...args} />
     </div>
   );
 };

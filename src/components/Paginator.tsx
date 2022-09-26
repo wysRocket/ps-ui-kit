@@ -1,6 +1,5 @@
 import {CSSProperties, default as React} from "react";
 import {Pagination} from "@material-ui/lab";
-import {FormControl, Select, TextField} from "@material-ui/core";
 import DropSelector from "./DropSelector";
 
 interface IProps {
@@ -17,11 +16,11 @@ interface IProps {
 export default class Paginator extends React.Component<IProps> {
   onChange = (_: any, value: number) => {
     this.props.onPageChange(value);
-  }
+  };
 
   onPageChange = (v: number) => {
     this.props.onPageSizeChange(v);
-  }
+  };
 
   render() {
     const ranges = this.props.ranges || [10, 20, 30];
@@ -32,7 +31,7 @@ export default class Paginator extends React.Component<IProps> {
       if (this.props.showingLabelFunction !== undefined) {
         return this.props.showingLabelFunction(...args);
       }
-      let str = 'Showing {0}-{1} of {2}';
+      let str = "Showing {0}-{1} of {2}";
       if (args && args.length) {
         args.forEach((p, i) => {
           str = str.replace(`{${i}}`, p);
@@ -41,13 +40,28 @@ export default class Paginator extends React.Component<IProps> {
 
       return str;
     };
-    return(
+    return (
       <div style={this.props.style}>
-        <div style={{display: 'flex', position: 'relative', alignItems: 'center', height: 'auto'}}>
-          <div style={{display: 'inline-flex', position: 'relative', flexDirection: 'column', alignItems: 'center', paddingRight: 32}}>
+        <div style={{display: "flex", position: "relative", alignItems: "center", height: "auto"}}>
+          <div
+            style={{
+              display: "inline-flex",
+              position: "relative",
+              flexDirection: "column",
+              alignItems: "center",
+              paddingRight: 32
+            }}
+          >
             {lf(from, to, this.props.itemsTotal)}
           </div>
-          <div style={{display: 'inline-flex', position: 'relative', flexDirection: 'column', alignItems: 'center'}}>
+          <div
+            style={{
+              display: "inline-flex",
+              position: "relative",
+              flexDirection: "column",
+              alignItems: "center"
+            }}
+          >
             <DropSelector
               selected={this.props.itemsPerPage}
               items={ranges.map((r) => ({label: `${r}`, value: r}))}
@@ -55,12 +69,15 @@ export default class Paginator extends React.Component<IProps> {
             />
           </div>
           <div style={{flexGrow: 1}} />
-          <div style={{display: 'inline-flex', position: 'relative', flexDirection: 'column', alignItems: 'center'}}>
-            <Pagination
-              onChange={this.onChange}
-              count={numPages}
-              page={this.props.currentPage}
-            />
+          <div
+            style={{
+              display: "inline-flex",
+              position: "relative",
+              flexDirection: "column",
+              alignItems: "center"
+            }}
+          >
+            <Pagination onChange={this.onChange} count={numPages} page={this.props.currentPage} />
           </div>
         </div>
       </div>
@@ -69,7 +86,9 @@ export default class Paginator extends React.Component<IProps> {
 
   renderOption(range: number, key: any) {
     return (
-      <option key={key} value={range}>{range} per page</option>
+      <option key={key} value={range}>
+        {range} per page
+      </option>
     );
   }
 }

@@ -1,8 +1,8 @@
 import {CSSProperties, default as React} from "react";
 import {
-  Button,
   ClickAwayListener,
-  Fade, IconButton,
+  Fade,
+  IconButton,
   List,
   ListItem,
   ListItemIcon,
@@ -13,7 +13,7 @@ import {
 import {ButtonMenuItem} from "./ButtonWithMenu";
 
 interface IProps {
-  edge?: 'start' |'end';
+  edge?: "start" | "end";
   style?: CSSProperties;
   items: ButtonMenuItem[];
   children: any;
@@ -28,21 +28,26 @@ export class IconButtonWithMenu extends React.Component<IProps> {
   onButtonClick = (evt: any) => {
     const opened = !this.state.opened;
     this.setState({opened, anchorEl: evt.currentTarget});
-  }
+  };
 
   onClickAway = () => {
     this.setState({opened: false});
-  }
+  };
 
   createItemClickHandler = (item: ButtonMenuItem) => () => {
     this.setState({opened: false}, () => item.onClick());
-  }
+  };
 
   render() {
     return (
       <ClickAwayListener onClickAway={this.onClickAway}>
         <div>
-          <Popper open={this.state.opened} anchorEl={this.state.anchorEl} placement={'bottom-end'} transition>
+          <Popper
+            open={this.state.opened}
+            anchorEl={this.state.anchorEl}
+            placement={"bottom-end"}
+            transition
+          >
             {({TransitionProps}) => (
               <Fade {...TransitionProps} timeout={200}>
                 <Paper elevation={3}>
@@ -51,7 +56,7 @@ export class IconButtonWithMenu extends React.Component<IProps> {
                       return (
                         <ListItem
                           key={index}
-                          style={{display: 'flex', paddingLeft: 16, paddingRight: 16}}
+                          style={{display: "flex", paddingLeft: 16, paddingRight: 16}}
                           button={true}
                           onClick={this.createItemClickHandler(item)}
                         >
@@ -79,12 +84,8 @@ export class IconButtonWithMenu extends React.Component<IProps> {
 
   renderIcon(item: ButtonMenuItem) {
     if (!item.icon) {
-      return '';
+      return "";
     }
-    return (
-      <ListItemIcon style={{minWidth: 32}}>
-        {item.icon}
-      </ListItemIcon>
-    );
+    return <ListItemIcon style={{minWidth: 32}}>{item.icon}</ListItemIcon>;
   }
 }

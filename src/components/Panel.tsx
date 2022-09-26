@@ -1,10 +1,5 @@
 import {CSSProperties, Component, createRef} from "react";
 
-const defaultToolbarStyle: CSSProperties = {
-  height: 32,
-  minHeight: 32
-};
-
 export interface ToolbarProps {
   style?: CSSProperties;
   children?: any;

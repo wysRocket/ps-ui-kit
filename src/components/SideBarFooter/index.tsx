@@ -4,7 +4,7 @@ export interface SidebarFooterProps {
   logo?: string;
 }
 
-export const SideBarFooter: React.FC<SidebarFooterProps> = ({logo}) => {
+const SideBarFooter: React.FC<SidebarFooterProps> = ({logo}) => {
   const classes = useStyles();
 
   return (
@@ -21,3 +21,5 @@ export const SideBarFooter: React.FC<SidebarFooterProps> = ({logo}) => {
     </div>
   );
 };
+
+export default SideBarFooter;

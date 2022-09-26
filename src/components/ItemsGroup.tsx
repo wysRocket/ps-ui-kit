@@ -1,10 +1,9 @@
 import {CSSProperties, default as React} from "react";
-import {Button, ClickAwayListener, Fade, List, ListItem, ListItemText, Paper, Popper} from "@material-ui/core";
+import {ClickAwayListener, Fade, Paper, Popper} from "@material-ui/core";
 import ContentHeader from "./ContentHeader";
 import Filter from "./Filter";
 import {LabeledItem} from "../domain/Item";
 import {CheckBoxInGroup} from "./Forms";
-import {ButtonMenuItem} from "./ButtonWithMenu";
 import {PopperPlacementType} from "@material-ui/core/Popper/Popper";
 import * as Buttons from "./Buttons";
 import * as Styles from "./DefaultStyles";
@@ -47,7 +46,7 @@ export class ItemsGroup extends React.Component<IProps> {
   renderHeader() {
     const handler = this.props.onFilterChange;
     if (handler === undefined && !this.props.headerElement) {
-      return '';
+      return "";
     }
     return (
       <ContentHeader style={{height: Styles.Padding.XL}}>
@@ -60,7 +59,7 @@ export class ItemsGroup extends React.Component<IProps> {
   renderFilter() {
     const handler = this.props.onFilterChange;
     if (handler === undefined) {
-      return (<div/>);
+      return <div />;
     }
     return (
       <div>
@@ -80,7 +79,7 @@ export class ItemsGroup extends React.Component<IProps> {
         {this.props.items.map((item, index) => {
           const renderer = this.props.itemRenderer;
           if (renderer === undefined) {
-            return '';
+            return "";
           }
           return renderer(item, index);
         })}
@@ -104,7 +103,7 @@ export class CheckboxItemsGroup extends React.Component<IProps> {
   renderHeader() {
     const handler = this.props.onFilterChange;
     if (handler === undefined && !this.props.headerElement) {
-      return '';
+      return "";
     }
     return (
       <ContentHeader style={{height: Styles.Padding.XL}}>
@@ -117,7 +116,7 @@ export class CheckboxItemsGroup extends React.Component<IProps> {
   renderFilter() {
     const handler = this.props.onFilterChange;
     if (handler === undefined) {
-      return (<div/>);
+      return <div />;
     }
     return (
       <div>
@@ -137,7 +136,7 @@ export class CheckboxItemsGroup extends React.Component<IProps> {
       return;
     }
     handler(value);
-  }
+  };
 
   renderItems() {
     const selectedSet = new Set(this.props.selected);
@@ -145,7 +144,7 @@ export class CheckboxItemsGroup extends React.Component<IProps> {
       <Panel style={this.props.style}>
         {this.props.items.map((item, index) => {
           return (
-            <AlignedHGroup key={index} style={{width: '100%'}}>
+            <AlignedHGroup key={index} style={{width: "100%"}}>
               <CheckBoxInGroup
                 key={index}
                 disabled={item.disabled}
@@ -173,7 +172,7 @@ interface BtnProps extends IProps {
   popperStyle?: CSSProperties;
 }
 
-export class ButtonWithCheckboxItems extends  React.Component<BtnProps> {
+export class ButtonWithCheckboxItems extends React.Component<BtnProps> {
   state = {
     opened: false,
     anchorEl: undefined
@@ -182,11 +181,11 @@ export class ButtonWithCheckboxItems extends  React.Component<BtnProps> {
   onButtonClick = (evt: any) => {
     const opened = !this.state.opened;
     this.setState({opened, anchorEl: evt.currentTarget});
-  }
+  };
 
   onClickAway = () => {
     this.setState({opened: false});
-  }
+  };
 
   render() {
     const style: CSSProperties = this.props.style || {};
@@ -200,7 +199,7 @@ export class ButtonWithCheckboxItems extends  React.Component<BtnProps> {
             style={this.props.popperStyle}
             open={this.state.opened}
             anchorEl={this.state.anchorEl}
-            placement={this.props.placement || 'top-start'}
+            placement={this.props.placement || "top-start"}
             transition
           >
             {({TransitionProps}) => (

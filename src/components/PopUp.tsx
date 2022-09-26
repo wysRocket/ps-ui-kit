@@ -1,6 +1,6 @@
-import {CSSProperties, default as React} from "react";
-import {Dialog, DialogTitle, IconButton, Typography} from "@material-ui/core";
-import CloseIcon from '@material-ui/icons/Close';
+import React, {CSSProperties} from "react";
+import {Dialog, IconButton, Typography} from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 import ContentHeader from "./ContentHeader";
 
 interface IProps {
@@ -26,10 +26,10 @@ export default class PopUp extends React.Component<IProps> {
         PaperProps={{style: {borderRadius: 5}}}
         // onClose={this.props.onClose}
         onClose={(event, reason) => {
-          if (reason !== 'backdropClick') {
-            this.props.onClose()
+          if (reason !== "backdropClick") {
+            this.props.onClose();
           }
-      }}
+        }}
         open={this.props.opened}
         // disableBackdropClick={this.props.disableBackdropClick}
         disableEnforceFocus={this.props.disableEnforceFocus}
@@ -46,9 +46,7 @@ export default class PopUp extends React.Component<IProps> {
             </IconButton>
           </ContentHeader>
         </div>
-        <div>
-          {this.props.children}
-        </div>
+        <div>{this.props.children}</div>
       </Dialog>
     );
   }

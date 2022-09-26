@@ -1,7 +1,7 @@
 import {ComponentMeta, ComponentStory} from "@storybook/react";
 import {BrowserRouter as Router} from "react-router-dom";
 
-import {SideBarItem as SBItem} from ".";
+import SideBarItem from ".";
 
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import ActionsIcon from "@material-ui/icons/CheckCircle";
@@ -10,14 +10,14 @@ import SchemasIcon from "@material-ui/icons/Transform";
 
 export default {
   title: "Components/SideBarItem",
-  component: SBItem
-} as ComponentMeta<typeof SBItem>;
+  component: SideBarItem
+} as ComponentMeta<typeof SideBarItem>;
 
-const Template: ComponentStory<typeof SBItem> = (args) => {
+const Template: ComponentStory<typeof SideBarItem> = (args) => {
   return (
     <Router>
       <div style={{width: "200px"}}>
-        <SBItem {...args} />
+        <SideBarItem {...args} />
       </div>
     </Router>
   );

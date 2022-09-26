@@ -1,5 +1,8 @@
 import {Diff} from "./domain/Diff";
-import SideBar, {SideBarItem as ISideBarItem} from "./components/SideBar";
+import SideBar from "./components/SideBar";
+import SideBarFooter from "components/SideBarFooter";
+import SideBarHeader from "components/SideBarHeader";
+import SideBarItem from "components/SideBarItem";
 import {HSplit, VSplit} from "./components/Split";
 import {Service as IService} from "./domain/Service";
 import {Identity as IIdentity} from "./domain/Identity";
@@ -18,6 +21,8 @@ import Paginator from "./components/Paginator";
 import SearchBar from "./components/SearchBar";
 import TableLegend from "./components/TableLegend";
 import DataTable from "./components/table/DataTable";
+import CustomPagination from "./components/CustomPagination";
+import TableData from "./components/TableData";
 import {
   ColumnInfo as IColumnInfo,
   deleteColumn,
@@ -111,11 +116,16 @@ export type DropSelectorItem = ILabeledItem;
 export type LabeledItem = ILabeledItem;
 export type DateRange = IDateRange;
 export type DashboardChartData = IDashboardChartData;
-export type SideBarItem = ISideBarItem;
 
 const Constants = {H_PADDING: 32};
 
 export {
+  CustomPagination,
+  SideBar,
+  SideBarFooter,
+  SideBarHeader,
+  SideBarItem,
+  TableData,
   ContentHeader,
   DraggableList,
   DashboardFilter,
@@ -166,7 +176,6 @@ export {
   AppHeader,
   ServiceActionProps,
   Diff,
-  SideBar,
   VSplit,
   HSplit,
   Constants,

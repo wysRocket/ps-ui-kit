@@ -1,8 +1,8 @@
-import {CSSProperties, default as React} from "react";
-import {Divider, FormControl, NativeSelect, Select} from "@material-ui/core";
+import React, {CSSProperties} from "react";
+import {FormControl, NativeSelect, Select} from "@material-ui/core";
 import {LabeledItem} from "../domain/Item";
 
-type DSItem = LabeledItem | 'divider';
+type DSItem = LabeledItem | "divider";
 
 interface IProps {
   style?: CSSProperties;
@@ -12,26 +12,24 @@ interface IProps {
 }
 
 export default class DropSelector extends React.Component<IProps> {
-
   onChange = (evt: any) => {
     this.props.onChange(evt.target.value);
-  }
+  };
 
   render() {
     return (
       <FormControl>
-        <NativeSelect
-          value={this.props.selected}
-          onChange={this.onChange}
-        >
+        <NativeSelect value={this.props.selected} onChange={this.onChange}>
           {this.props.items.map((item, index) => {
-            if (item === 'divider') {
-              if (item === 'divider') {
+            if (item === "divider") {
+              if (item === "divider") {
                 if (index === this.props.items.length - 1) {
-                  return '';
+                  return "";
                 }
                 return (
-                  <option key={index} disabled>-</option>
+                  <option key={index} disabled>
+                    -
+                  </option>
                 );
                 /*return (
                   <Divider key={index}/>
@@ -39,21 +37,21 @@ export default class DropSelector extends React.Component<IProps> {
               }
             }
             return (
-              <option key={index} value={item.value}>{item.label}</option>
+              <option key={index} value={item.value}>
+                {item.label}
+              </option>
             );
           })}
         </NativeSelect>
       </FormControl>
     );
-
   }
 }
 
 export class PrettyDropSelector extends React.Component<IProps> {
-
   onChange = (evt: any) => {
     this.props.onChange(evt.target.value);
-  }
+  };
 
   render() {
     return (
@@ -66,19 +64,23 @@ export class PrettyDropSelector extends React.Component<IProps> {
           inputProps={{style: {paddingTop: 0, paddingBottom: 0, height: 32}}}
         >
           {this.props.items.map((item, index) => {
-            if (item === 'divider') {
+            if (item === "divider") {
               if (index === this.props.items.length - 1) {
-                return '';
+                return "";
               }
               return (
-                <option key={index} disabled>-</option>
+                <option key={index} disabled>
+                  -
+                </option>
               );
               /*return (
                 <Divider key={index}/>
               );*/
             }
             return (
-              <option key={index} value={item.value}>{item.label}</option>
+              <option key={index} value={item.value}>
+                {item.label}
+              </option>
             );
           })}
         </Select>

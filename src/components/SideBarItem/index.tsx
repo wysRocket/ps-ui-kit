@@ -11,7 +11,7 @@ export interface SideBarItemProps extends NavLinkProps {
   isMinimized?: boolean;
 }
 
-export const SideBarItem: React.FC<SideBarItemProps> = ({
+const SideBarItem: React.FC<SideBarItemProps> = ({
   title,
   icon,
   to,
@@ -34,3 +34,5 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
     </NavLink>
   );
 };
+
+export default SideBarItem;

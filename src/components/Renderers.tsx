@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 import {CSSProperties} from "react";
-import {FormControl, IconButton, NativeSelect} from "@material-ui/core";
+import {IconButton} from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import {Link} from "react-router-dom";
@@ -48,7 +48,7 @@ export class SelectRenderer extends AbstractRenderer {
     if (onChange !== undefined) {
       this.setState({selected: v}, () => onChange(v));
     }
-  }
+  };
 
   render() {
     const enumValues = this.props.enumValues || [];
@@ -59,12 +59,15 @@ export class SelectRenderer extends AbstractRenderer {
     const style = this.props.style || {width: 150};
     return (
       <ButtonWithMenu
-        style={{...style, textTransform: 'none'}}
+        style={{...style, textTransform: "none"}}
         menuMaxHeight={200}
-        variant={'outlined'}
-        endIcon={<ExpandIcon/>}
-        items={items}>
-        {this.state.selected !== undefined ? convert(this.state.selected, this.props.valueToView) : 'Select'}
+        variant={"outlined"}
+        endIcon={<ExpandIcon />}
+        items={items}
+      >
+        {this.state.selected !== undefined
+          ? convert(this.state.selected, this.props.valueToView)
+          : "Select"}
       </ButtonWithMenu>
     );
   }
@@ -72,16 +75,14 @@ export class SelectRenderer extends AbstractRenderer {
 
 export class StaticRenderer extends AbstractRenderer {
   render() {
-    return (
-      <div style={this.props.style}>{convert(this.props.value, this.props.valueToView)}</div>
-    );
+    return <div style={this.props.style}>{convert(this.props.value, this.props.valueToView)}</div>;
   }
 }
 
 export class LinkRenderer extends AbstractRenderer {
   render() {
     return (
-      <Link to={this.props.link || ''} style={{ textDecoration: 'none', color: 'inherit' }}>
+      <Link to={this.props.link || ""} style={{textDecoration: "none", color: "inherit"}}>
         <div style={this.props.style}>
           <strong>{convert(this.props.value, this.props.valueToView)}</strong>
         </div>

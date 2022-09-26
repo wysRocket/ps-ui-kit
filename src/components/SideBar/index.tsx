@@ -5,11 +5,11 @@ import {Box} from "@material-ui/core";
 
 import {useStyles} from "./styles";
 
-import {SideBarItem, SideBarItemProps} from "../SideBarItem";
-import {SideBarHeader} from "../SideBarHeader/index";
-import {SideBarFooter} from "../SideBarFooter/SideBarFooter";
+import SideBarItem, {SideBarItemProps} from "../SideBarItem";
+import SideBarHeader from "../SideBarHeader";
+import SideBarFooter from "../SideBarFooter";
 
-export interface IProps {
+export interface ISideBar {
   items: SideBarItemProps[];
   minimized?: boolean;
   service: Service;
@@ -18,13 +18,7 @@ export interface IProps {
   logo?: string;
 }
 
-export const SideBar: FC<IProps> = ({
-  items,
-  serviceIdentity,
-  serviceLogo,
-  logo,
-  minimized = false
-}) => {
+const SideBar: FC<ISideBar> = ({items, serviceIdentity, serviceLogo, logo, minimized = false}) => {
   const classes = useStyles();
   return (
     <div
@@ -50,3 +44,5 @@ export const SideBar: FC<IProps> = ({
     </div>
   );
 };
+
+export default SideBar;

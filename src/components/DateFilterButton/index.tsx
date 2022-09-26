@@ -3,7 +3,7 @@ import {RangeCalendar} from "@mantine/dates";
 import FilterIcon from "@material-ui/icons/FilterList";
 import {Button, Dialog, Paper} from "@material-ui/core";
 
-import {LabeledItem} from "domain/Item";
+import {LabeledItem} from "../../domain/Item";
 import ContentHeader from "../ContentHeader";
 import DropSelector from "../DropSelector";
 

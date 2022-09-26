@@ -1,6 +1,6 @@
-import {useStyles} from "./styles";
-
 import DefaultIcon from "@material-ui/icons/InsertPhoto";
+
+import {useStyles} from "./styles";
 
 export interface SidebarHeaderProps {
   userName: string;

@@ -1,8 +1,8 @@
 import {Diff} from "./domain/Diff";
-import SideBar from "./components/SideBar";
-import SideBarFooter from "components/SideBarFooter";
-import SideBarHeader from "components/SideBarHeader";
-import SideBarItem from "components/SideBarItem";
+import SideBar, {ISideBar} from "./components/SideBar";
+import SideBarFooter from "./components/SideBarFooter";
+import SideBarHeader from "./components/SideBarHeader";
+import SideBarItem, {SideBarItemProps} from "./components/SideBarItem";
 import {HSplit, VSplit} from "./components/Split";
 import {Service as IService} from "./domain/Service";
 import {Identity as IIdentity} from "./domain/Identity";
@@ -116,6 +116,8 @@ export type DropSelectorItem = ILabeledItem;
 export type LabeledItem = ILabeledItem;
 export type DateRange = IDateRange;
 export type DashboardChartData = IDashboardChartData;
+export type Sidebar = ISideBar;
+export type SidebarItem = SideBarItemProps;
 
 const Constants = {H_PADDING: 32};
 

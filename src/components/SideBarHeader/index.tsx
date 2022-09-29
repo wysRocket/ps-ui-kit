@@ -1,6 +1,6 @@
-import {useStyles} from "./styles";
-
 import DefaultIcon from "@material-ui/icons/InsertPhoto";
+
+import {useStyles} from "./styles";
 
 export interface SidebarHeaderProps {
   userName: string;
@@ -8,11 +8,7 @@ export interface SidebarHeaderProps {
   isMinimized?: boolean;
 }
 
-export const SideBarHeader: React.FC<SidebarHeaderProps> = ({
-  userName,
-  logo,
-  isMinimized = false
-}) => {
+const SideBarHeader: React.FC<SidebarHeaderProps> = ({userName, logo, isMinimized = false}) => {
   const classes = useStyles();
 
   return (
@@ -32,3 +28,5 @@ export const SideBarHeader: React.FC<SidebarHeaderProps> = ({
     </div>
   );
 };
+
+export default SideBarHeader;

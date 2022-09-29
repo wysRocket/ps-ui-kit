@@ -5,7 +5,7 @@ import {DataRange, Sort} from "../domain/Sort";
 import {Attribute} from "../domain/Attribute";
 
 export interface GetCondition<P = undefined> {
-  identity?: string|number;
+  identity?: string | number;
   parent?: P;
   sort?: Sort;
   filters?: Attribute[];
@@ -38,7 +38,7 @@ export abstract class ListItemApi<T extends Identity, A, P = undefined> {
   }
 
   async save(item: T, opt?: ChangeOptions<P>) {
-    const id = opt && opt.prevIdentity ? opt.prevIdentity : item.identity;
+    // const id = opt && opt.prevIdentity ? opt.prevIdentity : item.identity;
     await this.fetchSave(this.converter.itemToApiObject(item), opt);
   }
 
@@ -53,13 +53,19 @@ export abstract class ListItemApi<T extends Identity, A, P = undefined> {
   }
 
   protected abstract fetchOne(condition?: GetCondition<P>): Promise<A>;
-  protected abstract fetchList(condition?: GetCondition<P>): Promise<{items: A[], itemsTotal: number}>;
+  protected abstract fetchList(
+    condition?: GetCondition<P>
+  ): Promise<{items: A[]; itemsTotal: number}>;
   protected abstract fetchSave(item: A, opt?: ChangeOptions<P>): Promise<void>;
   protected abstract fetchCreate(item: A, opt?: ChangeOptions<P>): Promise<A>;
   protected abstract fetchDelete(item: A, opt?: ChangeOptions<P>): Promise<void>;
 }
 
-export abstract class StubbedListApi<T extends Identity, P = undefined> extends ListItemApi<T, T, P> {
+export abstract class StubbedListApi<T extends Identity, P = undefined> extends ListItemApi<
+  T,
+  T,
+  P
+> {
   protected constructor() {
     super(new StubConverter<T>());
   }

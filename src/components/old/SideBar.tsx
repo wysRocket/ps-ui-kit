@@ -5,11 +5,11 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import List from "@material-ui/core/List";
-import Panel from "./Panel";
-import {Service} from "../domain/Service";
-import IconPreview from "./IconPreview";
+import Panel from "../Panel";
+import {Service} from "../../domain/Service";
+import IconPreview from "../IconPreview";
 import {Link} from "react-router-dom";
-import * as Styles from "./DefaultStyles";
+import * as Styles from "../DefaultStyles";
 import {makeStyles} from "@material-ui/core/styles";
 
 export interface SideBarItem {

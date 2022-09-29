@@ -1,6 +1,6 @@
 import {Story} from "@storybook/react";
 import {DateRangePickerValue as DateRange} from "@mantine/dates";
-import {DateFilterButton as DFButton, IProps} from "./DateFilterButton";
+import {DateFilterButton as DFButton, IProps} from ".";
 
 export default {
   title: "Components/DateFilterButton",

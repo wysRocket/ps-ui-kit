@@ -1,8 +1,7 @@
 import {ReactNode} from "react";
 
-import DefaultIcon from "@material-ui/icons/InsertPhoto";
-
 import {NavLink, NavLinkProps, useMatch} from "react-router-dom";
+import DefaultIcon from "@material-ui/icons/InsertPhoto";
 
 import {useStyles} from "./styles";
 export interface SideBarItemProps extends NavLinkProps {
@@ -11,7 +10,7 @@ export interface SideBarItemProps extends NavLinkProps {
   isMinimized?: boolean;
 }
 
-export const SideBarItem: React.FC<SideBarItemProps> = ({
+const SideBarItem: React.FC<SideBarItemProps> = ({
   title,
   icon,
   to,
@@ -34,3 +33,5 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
     </NavLink>
   );
 };
+
+export default SideBarItem;

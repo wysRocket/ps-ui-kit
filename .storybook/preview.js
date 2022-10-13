@@ -1,4 +1,4 @@
-import {ThemeProvider} from "@material-ui/core";
+import {ThemeProvider} from "@mui/material";
 import theme from "../src/common/theme";
 
 const withThemeProvider = (Story, context) => (

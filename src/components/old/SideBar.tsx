@@ -1,16 +1,16 @@
 import * as React from "react";
 import {CSSProperties} from "react";
-import DefaultIcon from "@material-ui/icons/InsertPhoto";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import List from "@material-ui/core/List";
+import DefaultIcon from "@mui/icons-material/InsertPhoto";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import List from "@mui/material/List";
 import Panel from "../Panel";
 import {Service} from "../../domain/Service";
 import IconPreview from "../IconPreview";
 import {Link} from "react-router-dom";
 import * as Styles from "../DefaultStyles";
-import {makeStyles} from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 
 export interface SideBarItem {
   label: string;

@@ -1,6 +1,6 @@
 import {CSSProperties, default as React} from "react";
 import Panel from "./Panel";
-import {Tab, Tabs} from "@material-ui/core";
+import {Tab, Tabs} from "@mui/material";
 import {Link} from "react-router-dom";
 import * as Styles from "./DefaultStyles";
 

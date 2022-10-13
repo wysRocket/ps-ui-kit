@@ -1,7 +1,7 @@
 import {FC} from "react";
 
-import Pagination from "@material-ui/lab/Pagination";
-import {FormControl, NativeSelect, Box} from "@material-ui/core";
+import Pagination from '@mui/material/Pagination';
+import {FormControl, NativeSelect, Box} from "@mui/material";
 import {v4 as uuidv4} from "uuid";
 
 import useStyles from "./styles";

@@ -1,5 +1,5 @@
 import React, {CSSProperties} from "react";
-import {FormControl, NativeSelect, Select} from "@material-ui/core";
+import {FormControl, NativeSelect, Select} from "@mui/material";
 import {LabeledItem} from "../domain/Item";
 
 type DSItem = LabeledItem | "divider";

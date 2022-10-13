@@ -1,4 +1,4 @@
-import Button from "@material-ui/core/Button/Button";
+import Button from "@mui/material/Button";
 
 export const btn =
   (size: number) => (handler: () => void, icon: any, disabled: boolean, key?: any) => {

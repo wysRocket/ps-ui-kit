@@ -9,7 +9,7 @@ import {
   ListItemText,
   Paper,
   Popper
-} from "@material-ui/core";
+} from "@mui/material";
 
 export interface ButtonMenuItem {
   onClick: () => void;

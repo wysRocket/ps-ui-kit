@@ -1,7 +1,7 @@
 import {CSSProperties, default as React} from "react";
 import * as Styles from "./DefaultStyles";
-import {IconButton} from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
+import {IconButton} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface IProps {
   style?: CSSProperties;
@@ -51,7 +51,7 @@ export default class NumberedContainer extends React.Component<IProps> {
     }
     return (
       <div>
-        <IconButton onClick={this.props.onRemove}>
+        <IconButton onClick={this.props.onRemove} size="large">
           <CloseIcon style={{color: Styles.Icon.Button.COLOR}}/>
         </IconButton>
       </div>

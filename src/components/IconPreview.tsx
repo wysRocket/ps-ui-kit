@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PreviewIcon from '@material-ui/icons/InsertPhoto';
+import PreviewIcon from '@mui/icons-material/InsertPhoto';
 
 interface IProps {
   icon?: string;

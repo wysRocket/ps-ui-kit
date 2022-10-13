@@ -8,8 +8,8 @@ import {
   TableRow,
   TableSortLabel,
   Box
-} from "@material-ui/core";
-import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
+} from "@mui/material";
+import ArrowDropDown from "@mui/icons-material/ArrowDropDown";
 
 import CustomPagination, {IPagination} from "../CustomPagination";
 import {Data, HeaderColumn, SortOrder} from "./types";

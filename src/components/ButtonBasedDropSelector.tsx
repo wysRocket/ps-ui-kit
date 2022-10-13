@@ -2,7 +2,7 @@ import {find} from "lodash";
 import {CSSProperties, default as React} from "react";
 import {LabeledItem} from "../domain/Item";
 import {ButtonMenuItem, ButtonWithMenu} from "./ButtonWithMenu";
-import ExpandIcon from "@material-ui/icons/ExpandMore";
+import ExpandIcon from "@mui/icons-material/ExpandMore";
 
 interface IProps {
   style?: CSSProperties;

@@ -1,20 +1,26 @@
-import {createTheme} from "@material-ui/core/styles";
+import {createTheme} from "@mui/material/styles";
 
 const theme = createTheme({
-  overrides: {
+  components: {
     MuiPaper: {
-      root: {
-        borderRadius: 4
+      styleOverrides: {
+        root: {
+          borderRadius: 4
+        }
       }
     },
     MuiTableRow: {
-      head: {
-        background: "#f8f8f8"
+      styleOverrides: {
+        head: {
+          background: "#f8f8f8"
+        }
       }
     },
     MuiTableCell: {
-      head: {
-        borderRadius: 4
+      styleOverrides: {
+        head: {
+          borderRadius: 4
+        }
       }
     }
   }

@@ -1,10 +1,10 @@
 // @ts-nocheck
 import {CSSProperties, Component} from "react";
 import Chart from "react-apexcharts";
-import {Card, CardContent, CardHeader} from "@material-ui/core";
+import {Card, CardContent, CardHeader} from "@mui/material";
 
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import FilterIcon from "@material-ui/icons/FilterList";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import FilterIcon from "@mui/icons-material/FilterList";
 import {ButtonMenuItem, ButtonWithMenu} from "./ButtonWithMenu";
 import {HGroup} from "./Group";
 

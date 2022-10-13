@@ -1,6 +1,6 @@
 import React, {CSSProperties} from "react";
-import {Dialog, IconButton, Typography} from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
+import {Dialog, IconButton, Typography} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import ContentHeader from "./ContentHeader";
 
 interface IProps {
@@ -41,7 +41,7 @@ export default class PopUp extends React.Component<IProps> {
           <ContentHeader style={{minWidth: this.props.minWidth || 700}}>
             <Typography variant="h6">{this.props.title}</Typography>
             {this.props.headerChildren}
-            <IconButton onClick={this.props.onClose}>
+            <IconButton onClick={this.props.onClose} size="large">
               <CloseIcon />
             </IconButton>
           </ContentHeader>

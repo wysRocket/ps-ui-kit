@@ -1,4 +1,4 @@
-import DefaultIcon from "@material-ui/icons/InsertPhoto";
+import DefaultIcon from "@mui/icons-material/InsertPhoto";
 
 import {useStyles} from "./styles";
 

@@ -3,10 +3,10 @@ import {BrowserRouter as Router} from "react-router-dom";
 
 import SideBarItem from ".";
 
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import ActionsIcon from "@material-ui/icons/CheckCircle";
-import ClientsIcon from "@material-ui/icons/People";
-import SchemasIcon from "@material-ui/icons/Transform";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import ActionsIcon from "@mui/icons-material/CheckCircle";
+import ClientsIcon from "@mui/icons-material/People";
+import SchemasIcon from "@mui/icons-material/Transform";
 
 export default {
   title: "Components/SideBarItem",

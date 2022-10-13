@@ -1,14 +1,14 @@
 import * as React from "react";
 import {Diff} from "../../domain/Diff";
 import {ColumnInfo} from "./column";
-import {Table, TableBody, TableCell, TableHead, TableRow, TableSortLabel} from "@material-ui/core";
-import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
+import {Table, TableBody, TableCell, TableHead, TableRow, TableSortLabel} from "@mui/material";
+import ArrowDropDown from "@mui/icons-material/ArrowDropDown";
 import {invertDirection, Sort, SortDirection} from "../../domain/Sort";
 import {HTML5Backend} from "react-dnd-html5-backend";
 import DraggableRow from "./DraggableRow";
 import * as Styles from "../DefaultStyles";
 import {CSSProperties} from "react";
-import {makeStyles} from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 import {DndHacked} from "../DndHacked";
 
 const useStyles = makeStyles({

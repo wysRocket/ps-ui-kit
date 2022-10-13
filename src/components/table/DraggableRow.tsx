@@ -1,6 +1,6 @@
 import {CSSProperties, useRef, FC} from "react";
 import {DropTargetMonitor, useDrag, useDrop, XYCoord} from "react-dnd";
-import {TableRow} from "@material-ui/core";
+import {TableRow} from "@mui/material";
 
 interface DragItem {
   index: number;

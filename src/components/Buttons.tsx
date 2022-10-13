@@ -1,7 +1,7 @@
 import {CSSProperties, FC, Component} from "react";
-import {Button, ClickAwayListener, Fade, IconButton, Paper, Popper} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
-import {PopperPlacementType} from "@material-ui/core/Popper/Popper";
+import {Button, ClickAwayListener, Fade, IconButton, Paper, Popper, PopperPlacementType} from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+
 
 import * as Styles from "./DefaultStyles";
 
@@ -156,7 +156,11 @@ export class IconButtonWithPopper extends Component<IIBWPProps> {
               </Fade>
             )}
           </Popper>
-          <IconButton style={style} disabled={this.props.disabled} onClick={this.onButtonClick}>
+          <IconButton
+            style={style}
+            disabled={this.props.disabled}
+            onClick={this.onButtonClick}
+            size="large">
             {this.props.children}
           </IconButton>
         </div>

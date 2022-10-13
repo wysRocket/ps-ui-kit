@@ -1,7 +1,7 @@
 import {CSSProperties, Component} from "react";
-import {Button, SwipeableDrawer, TextField} from "@material-ui/core";
+import {Button, SwipeableDrawer, TextField} from "@mui/material";
 
-import QRIcon from "@material-ui/icons/AspectRatio";
+import QRIcon from "@mui/icons-material/AspectRatio";
 import {BrowserMultiFormatReader, NotFoundException} from "@zxing/library";
 import {wait} from "../utils/TimeUtils";
 import Panel from "./Panel";

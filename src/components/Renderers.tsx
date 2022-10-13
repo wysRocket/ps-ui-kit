@@ -1,11 +1,11 @@
 import * as React from "react";
 import {CSSProperties} from "react";
-import {IconButton} from "@material-ui/core";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
+import {IconButton} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import {Link} from "react-router-dom";
 import {ButtonMenuItem, ButtonWithMenu} from "./ButtonWithMenu";
-import ExpandIcon from "@material-ui/icons/ExpandMore";
+import ExpandIcon from "@mui/icons-material/ExpandMore";
 import * as Style from "./DefaultStyles";
 
 export interface RendererProps {
@@ -94,7 +94,7 @@ export class LinkRenderer extends AbstractRenderer {
 export class EditActionRenderer extends AbstractRenderer {
   render() {
     return (
-      <IconButton onClick={this.props.onClick} disabled={this.props.disabled}>
+      <IconButton onClick={this.props.onClick} disabled={this.props.disabled} size="large">
         <EditIcon style={{color: Style.Icon.Button.COLOR}} />
       </IconButton>
     );
@@ -104,7 +104,7 @@ export class EditActionRenderer extends AbstractRenderer {
 export class DeleteActionRenderer extends AbstractRenderer {
   render() {
     return (
-      <IconButton onClick={this.props.onClick} disabled={this.props.disabled}>
+      <IconButton onClick={this.props.onClick} disabled={this.props.disabled} size="large">
         <DeleteIcon style={{color: Style.Icon.Button.COLOR}} />
       </IconButton>
     );

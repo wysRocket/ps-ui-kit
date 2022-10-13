@@ -1,9 +1,9 @@
 import {CSSProperties, default as React} from "react";
-import MenuIcon from "@material-ui/icons/Menu";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import NotificationsIcon from "@material-ui/icons/Notifications";
+import MenuIcon from "@mui/icons-material/Menu";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import {User} from "../../domain/User";
-import {Badge, IconButton, Toolbar} from "@material-ui/core";
+import {Badge, IconButton, Toolbar} from "@mui/material";
 import Filter from "../Filter";
 import {ButtonMenuItem} from "../ButtonWithMenu";
 import {IconButtonWithMenu} from "../IconButtonWithMenu";
@@ -29,14 +29,14 @@ export default class AppHeader extends React.Component<IProps> {
           color="inherit"
           aria-label="open drawer"
           onClick={this.props.onSwitchSidebarMode}
-        >
+          size="large">
           <MenuIcon style={{color: "#A7A7A7"}} />
         </IconButton>
         <div style={{flexGrow: 1}} />
         {this.renderFilter()}
         <div style={{paddingLeft: 100}} />
         {this.props.children}
-        <IconButton aria-label="show 17 new notifications" color="inherit">
+        <IconButton aria-label="show 17 new notifications" color="inherit" size="large">
           <Badge
             badgeContent={this.props.notifications || 0}
             overlap="rectangular"

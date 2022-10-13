@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {Tab as BaseTab, TabProps as BaseTabProps} from "@material-ui/core";
+import {Tab as BaseTab, TabProps as BaseTabProps} from "@mui/material";
 
 import useStyles from "./styles";
 

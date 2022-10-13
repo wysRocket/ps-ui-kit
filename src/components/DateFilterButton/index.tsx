@@ -1,7 +1,7 @@
 import {CSSProperties, FC, useEffect, useState} from "react";
 import {RangeCalendar} from "@mantine/dates";
-import FilterIcon from "@material-ui/icons/FilterList";
-import {Button, Dialog, Paper} from "@material-ui/core";
+import FilterIcon from "@mui/icons-material/FilterList";
+import {Button, Dialog, Paper} from "@mui/material";
 
 import {LabeledItem} from "../../domain/Item";
 import ContentHeader from "../ContentHeader";

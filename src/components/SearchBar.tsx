@@ -1,7 +1,7 @@
 import {CSSProperties, default as React} from "react";
-import {IconButton, InputAdornment, TextField} from "@material-ui/core";
+import {IconButton, InputAdornment, TextField} from "@mui/material";
 import {PrettyDropSelector} from "./DropSelector";
-import ClearIcon from "@material-ui/icons/Clear";
+import ClearIcon from "@mui/icons-material/Clear";
 import {LabeledItem} from "../domain/Item";
 
 const ENTER = 13;
@@ -128,7 +128,7 @@ export default class SearchBar extends React.Component<IProps> {
                 onClick={this.onDropTextFilter}
                 disabled={!this.state.textFilter}
                 style={{padding: 0, borderRadius: "none"}}
-              >
+                size="large">
                 <ClearIcon />
               </IconButton>
             </InputAdornment>

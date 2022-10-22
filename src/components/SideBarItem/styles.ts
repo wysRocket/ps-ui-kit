@@ -1,4 +1,6 @@
-export const styles = {
+import makeStyles from "@mui/styles/makeStyles";
+
+export const useStyles = makeStyles({
   defaultItem: {
     display: "flex",
     justifyContent: "start",
@@ -26,4 +28,4 @@ export const styles = {
   activeIcon: {
     color: "rgb(93, 74, 238)"
   }
-};
+});

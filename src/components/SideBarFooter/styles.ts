@@ -1,4 +1,6 @@
-export const styles = {
+import makeStyles from "@mui/styles/makeStyles";
+
+export const useStyles = makeStyles({
   footerWrapper: {
     paddingLeft: 24,
     paddingBottom: 32
@@ -21,4 +23,4 @@ export const styles = {
     color: "#636363",
     width: 80
   }
-};
+});

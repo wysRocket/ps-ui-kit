@@ -1,6 +1,6 @@
 import DefaultIcon from "@mui/icons-material/InsertPhoto";
+import Box from "@mui/material/Box";
 import {FC} from "react";
-import useClasses from "utils/useClasses";
 
 import {styles} from "./styles";
 
@@ -11,23 +11,20 @@ export interface SidebarHeaderProps {
 }
 
 const SideBarHeader: FC<SidebarHeaderProps> = ({userName, logo, isMinimized = false}) => {
-  const classes = useClasses(styles);
+  const {headerDefaultWrapper, headerMinimizedWrapper, logoWrapper, logoStyle, defaultLogoStyle} =
+    styles;
 
   return (
-    <div
-      className={`${classes.headerDefaultWrapper} ${
-        isMinimized ? classes.headerMinimizedWrapper : ""
-      }`}
-    >
-      <div className={classes.logoWrapper}>
+    <Box sx={{...headerDefaultWrapper, ...(isMinimized ? headerMinimizedWrapper : {})}}>
+      <div style={logoWrapper}>
         {logo ? (
-          <img className={classes.logoStyle} src={logo} alt={""} />
+          <img style={logoStyle} src={logo} alt={""} />
         ) : (
-          <DefaultIcon className={`${classes.logoStyle} ${classes.defaultLogoStyle}`} />
+          <DefaultIcon className={`${logoStyle} ${defaultLogoStyle}`} />
         )}
       </div>
-      {!isMinimized && <div className={classes.userName}>{userName}</div>}
-    </div>
+      {!isMinimized && <div className={userName}>{userName}</div>}
+    </Box>
   );
 };
 

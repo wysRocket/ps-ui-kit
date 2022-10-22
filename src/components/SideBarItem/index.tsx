@@ -1,10 +1,9 @@
 import {ReactNode} from "react";
 
-import {NavLink, NavLinkProps, useMatch} from "react-router-dom";
+import {NavLink, NavLinkProps, useRouteMatch} from "react-router-dom";
 import DefaultIcon from "@mui/icons-material/InsertPhoto";
 
-import {styles} from "./styles";
-import useClasses from "utils/useClasses";
+import {useStyles} from "./styles";
 export interface SideBarItemProps extends NavLinkProps {
   title: string;
   icon?: ReactNode;
@@ -18,8 +17,8 @@ const SideBarItem: React.FC<SideBarItemProps> = ({
   isMinimized = false,
   ...props
 }) => {
-  const classes = useClasses(styles);
-  const match = useMatch(to as string);
+  const classes = useStyles();
+  const match = useRouteMatch(to as string);
 
   return (
     <NavLink

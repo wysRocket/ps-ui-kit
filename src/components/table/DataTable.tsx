@@ -1,4 +1,4 @@
-import * as React from "react";
+import {Component, FC} from "react";
 import {Diff} from "../../domain/Diff";
 import {ColumnInfo} from "./column";
 import {Table, TableBody, TableCell, TableHead, TableRow, TableSortLabel} from "@mui/material";
@@ -10,29 +10,24 @@ import * as Styles from "../DefaultStyles";
 import {CSSProperties} from "react";
 
 import {DndHacked} from "../DndHacked";
-import useClasses from "utils/useClasses";
+import {makeStyles} from "@mui/styles";
 
-const styles = {
-  activeSortIcon: {
-    opacity: 1
-  },
-  inactiveSortIcon: {
-    opacity: 0.2
-  }
-};
+const useStyles = makeStyles({
+  activeSortIcon: {opacity: 1},
+  inactiveSortIcon: {opacity: 0.2}
+});
 
-const SortableHeader: React.FC<{
+const SortableHeader: FC<{
   column: ColumnInfo;
   sort?: Sort;
   onSort?: (newSort: Sort) => void;
-}> = (props) => {
-  const classes = useClasses(styles);
-  const column = props.column;
+}> = ({column, sort, onSort}) => {
+  const classes = useStyles();
+
   if (!column.header) {
     return <div />;
   }
   if (column.header.sortable) {
-    const {sort, onSort} = props;
     const sortHandler = () => {
       if (onSort !== undefined) {
         let newSort: Sort = {field: column.fieldId, direction: SortDirection.ASC};
@@ -77,7 +72,7 @@ export interface IProps<T> {
   sort?: Sort;
 }
 
-export default class DataTable<T> extends React.Component<IProps<T>> {
+export default class DataTable<T> extends Component<IProps<T>> {
   render() {
     const {columns, data, sort, idField, onSwitchItems} = this.props;
     const id = idField || "identity";

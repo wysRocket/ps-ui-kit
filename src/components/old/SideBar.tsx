@@ -9,7 +9,7 @@ import {Service} from "../../domain/Service";
 import IconPreview from "../IconPreview";
 import {Link} from "react-router-dom";
 import * as Styles from "../DefaultStyles";
-import useClasses from "utils/useClasses";
+import {makeStyles} from "@mui/styles";
 
 export interface SideBarItem {
   label: string;
@@ -19,22 +19,23 @@ export interface SideBarItem {
   isExternalLink?: boolean;
 }
 
-const styles = {
-  root: {
-    "&$selected": {
-      backgroundColor: Styles.SideBar.Color.ACTIVE_ITEM_BG,
-      borderRadius: 4,
+const useStyles = () =>
+  makeStyles({
+    root: {
+      "&$selected": {
+        backgroundColor: Styles.SideBar.Color.ACTIVE_ITEM_BG,
+        borderRadius: 4,
+        "&:hover": {
+          backgroundColor: Styles.SideBar.Color.HOVERED
+        }
+      },
       "&:hover": {
-        backgroundColor: Styles.SideBar.Color.HOVERED
+        backgroundColor: Styles.SideBar.Color.HOVERED,
+        borderRadius: 4
       }
     },
-    "&:hover": {
-      backgroundColor: Styles.SideBar.Color.HOVERED,
-      borderRadius: 4
-    }
-  },
-  selected: {}
-};
+    selected: {}
+  });
 
 interface ItemComponentProps {
   item: SideBarItem;
@@ -45,7 +46,7 @@ interface ItemComponentProps {
 
 const ItemComponent: FC<ItemComponentProps> = ({item, minimized, selected, onClick}) => {
   const style: CSSProperties = {padding: Styles.Padding.XS};
-  const classes = useClasses(styles);
+  const classes = useStyles();
 
   const renderText = () =>
     !minimized ? (
@@ -77,7 +78,7 @@ const ItemComponent: FC<ItemComponentProps> = ({item, minimized, selected, onCli
     <ListItem
       button={true}
       style={style}
-      classes={{root: classes.root, selected: classes.selected}}
+      //    classes={{root: classes.root, selected: classes.selected}}
       selected={selected}
       onClick={() => onClick?.(item.value)}
       {...cProps}

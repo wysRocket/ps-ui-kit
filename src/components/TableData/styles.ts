@@ -1,4 +1,6 @@
-export const styles = {
+import makeStyles from "@mui/styles/makeStyles";
+
+export const useStyles = makeStyles({
   container: {
     border: "1px solid #dadcdd",
     borderRadius: 4,
@@ -9,10 +11,6 @@ export const styles = {
     fontWeight: 500,
     letterSpacing: "0.05em"
   },
-  activeSortIcon: {
-    opacity: 1
-  },
-  inactiveSortIcon: {
-    opacity: 0.2
-  }
-};
+  activeSortIcon: {opacity: 1},
+  inactiveSortIcon: {opacity: 0.2}
+});

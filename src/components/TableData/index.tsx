@@ -5,8 +5,8 @@ import ArrowDropDown from "@mui/icons-material/ArrowDropDown";
 
 import CustomPagination, {IPagination} from "../CustomPagination";
 import {Data, HeaderColumn, SortOrder} from "./types";
-import {styles} from "./styles";
-import useClasses from "utils/useClasses";
+
+import {useStyles} from "./styles";
 
 export interface TableProps {
   data: Data[];
@@ -23,11 +23,8 @@ const TableData: FC<TableProps> = ({
   sortHandler,
   setPagination
 }) => {
-  const classes = useClasses(styles);
-  const [sort, setSort] = useState({
-    by: "",
-    order: SortOrder.DESC
-  });
+  const classes = useStyles();
+  const [sort, setSort] = useState({by: "", order: SortOrder.DESC});
 
   const onSort = (column: HeaderColumn) => {
     setSort((state) => ({

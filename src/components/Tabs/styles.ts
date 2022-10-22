@@ -1,4 +1,6 @@
-export const styles = {
+import makeStyles from "@mui/styles/makeStyles";
+
+const useStyles = makeStyles(() => ({
   indicator: {
     backgroundColor: "rgb(93, 74, 238)",
     height: "2px"
@@ -11,4 +13,6 @@ export const styles = {
       borderBottom: "1px solid #c7c7c7"
     }
   }
-};
+}));
+
+export default useStyles;

@@ -1,14 +1,14 @@
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import ActionsIcon from "@material-ui/icons/CheckCircle";
-import ClientsIcon from "@material-ui/icons/People";
-import SchemasIcon from "@material-ui/icons/Transform";
-import InfoIcon from "@material-ui/icons/Info";
-import ProfileIcon from "@material-ui/icons/SettingsCell";
-import UsersIcon from "@material-ui/icons/Accessibility";
-import IntegrationsIcon from "@material-ui/icons/Category";
-import SSAOAuthIcon from "@material-ui/icons/VpnKey";
-import KeysIcon from "@material-ui/icons/Https";
-import KnowledgeBaseIcon from "@material-ui/icons/LiveHelp";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import ActionsIcon from "@mui/icons-material/CheckCircle";
+import ClientsIcon from "@mui/icons-material/People";
+import SchemasIcon from "@mui/icons-material/Transform";
+import InfoIcon from "@mui/icons-material/Info";
+import ProfileIcon from "@mui/icons-material/SettingsCell";
+import UsersIcon from "@mui/icons-material/Accessibility";
+import IntegrationsIcon from "@mui/icons-material/Category";
+import SSAOAuthIcon from "@mui/icons-material/VpnKey";
+import KeysIcon from "@mui/icons-material/Https";
+import KnowledgeBaseIcon from "@mui/icons-material/LiveHelp";
 
 export const sideBarData = [
   {title: "Dashboard", to: "/2RjEBo9zXkJByXm14xQHtg", icon: <DashboardIcon />},

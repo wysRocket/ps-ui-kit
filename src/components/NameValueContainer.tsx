@@ -1,7 +1,7 @@
 import {CSSProperties, default as React} from "react";
 import NumberedContainer from "./NumberedContainer";
 import AlignedHGroup from "./AlignedHGroup";
-import {TextField} from "@material-ui/core";
+import {TextField} from "@mui/material";
 import * as Styles from "./DefaultStyles";
 
 interface IProps {

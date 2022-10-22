@@ -1,5 +1,5 @@
 import {CSSProperties, default as React} from "react";
-import {Pagination} from "@material-ui/lab";
+import { Pagination } from '@mui/material';
 import DropSelector from "./DropSelector";
 
 interface IProps {

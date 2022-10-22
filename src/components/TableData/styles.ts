@@ -1,4 +1,4 @@
-import {makeStyles} from "@material-ui/core/styles";
+import makeStyles from "@mui/styles/makeStyles";
 
 export const useStyles = makeStyles({
   container: {
@@ -11,10 +11,6 @@ export const useStyles = makeStyles({
     fontWeight: 500,
     letterSpacing: "0.05em"
   },
-  activeSortIcon: {
-    opacity: 1
-  },
-  inactiveSortIcon: {
-    opacity: 0.2
-  }
+  activeSortIcon: {opacity: 1},
+  inactiveSortIcon: {opacity: 0.2}
 });

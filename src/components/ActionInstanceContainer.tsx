@@ -1,11 +1,11 @@
 import React, {CSSProperties} from "react";
 import NumberedContainer from "./NumberedContainer";
-import {IconButton} from "@material-ui/core";
+import {IconButton} from "@mui/material";
 import * as Styles from "./DefaultStyles";
 import {Attribute} from "../domain/Attribute";
-import EditIcon from "@material-ui/icons/Edit";
-import VisibleIcon from "@material-ui/icons/Visibility";
-import InvisibleIcon from "@material-ui/icons/VisibilityOff";
+import EditIcon from "@mui/icons-material/Edit";
+import VisibleIcon from "@mui/icons-material/Visibility";
+import InvisibleIcon from "@mui/icons-material/VisibilityOff";
 import {HGroup} from "./Group";
 import * as Buttons from "./Buttons";
 
@@ -70,7 +70,7 @@ export default class ActionInstanceContainer extends React.Component<IProps> {
     }
     return (
       <div>
-        <IconButton onClick={this.props.onEdit}>
+        <IconButton onClick={this.props.onEdit} size="large">
           <EditIcon style={{color: Styles.Icon.Button.COLOR}} />
         </IconButton>
       </div>
@@ -83,7 +83,7 @@ export default class ActionInstanceContainer extends React.Component<IProps> {
     }
     return (
       <div>
-        <IconButton onClick={this.props.onVisibilityChange}>
+        <IconButton onClick={this.props.onVisibilityChange} size="large">
           {this.props.visible ? (
             <VisibleIcon style={{color: Styles.Icon.Button.COLOR}} />
           ) : (

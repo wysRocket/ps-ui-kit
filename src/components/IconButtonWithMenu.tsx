@@ -9,7 +9,7 @@ import {
   ListItemText,
   Paper,
   Popper
-} from "@material-ui/core";
+} from "@mui/material";
 import {ButtonMenuItem} from "./ButtonWithMenu";
 
 interface IProps {
@@ -74,7 +74,7 @@ export class IconButtonWithMenu extends React.Component<IProps> {
             edge={this.props.edge || false}
             style={this.props.style}
             onClick={this.onButtonClick}
-          >
+            size="large">
             {this.props.children}
           </IconButton>
         </div>

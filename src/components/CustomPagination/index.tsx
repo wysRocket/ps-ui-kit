@@ -1,10 +1,10 @@
 import {FC} from "react";
 
-import Pagination from "@material-ui/lab/Pagination";
-import {FormControl, NativeSelect, Box} from "@material-ui/core";
+import Pagination from "@mui/material/Pagination";
+import {FormControl, NativeSelect, Box} from "@mui/material";
 import {v4 as uuidv4} from "uuid";
 
-import useStyles from "./styles";
+import {styles} from "./styles";
 
 export interface IPagination {
   itemsPerPage: number;
@@ -24,8 +24,6 @@ const CustomPagination: FC<CustomPaginationProps> = ({
   ranges,
   setPagination
 }) => {
-  const classes = useStyles();
-
   const numPages = Math.ceil(itemsTotal / itemsPerPage);
   const from = (currentPage - 1) * itemsPerPage + 1;
   const to = Math.min(itemsTotal, currentPage * itemsPerPage);
@@ -41,18 +39,15 @@ const CustomPagination: FC<CustomPaginationProps> = ({
     return str;
   };
 
-  const onPageChange = (currentPage: number) => {
-    setPagination((state) => ({...state, currentPage}));
-  };
+  const onPageChange = (currentPage: number) => setPagination((state) => ({...state, currentPage}));
 
-  const onSizePageChange = (value: string) => {
+  const onSizePageChange = (value: string) =>
     setPagination((state) => ({...state, itemsPerPage: +value, currentPage: 1}));
-  };
 
   return (
     <Box display="flex" alignItems="center">
       <Box sx={{paddingLeft: "15px"}}>{strRange(from, to, itemsTotal)}</Box>
-      <FormControl className={classes.formControl}>
+      <FormControl style={styles.formControl}>
         <NativeSelect
           value={itemsPerPage}
           onChange={(e) => onSizePageChange(e.target.value)}

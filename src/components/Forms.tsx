@@ -1,7 +1,7 @@
 import {CSSProperties, Component} from "react";
-import {Checkbox, FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
-import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
-import CheckBoxIcon from "@material-ui/icons/CheckBox";
+import {Checkbox, FormControlLabel, Radio, RadioGroup} from "@mui/material";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
 import * as Styles from "./DefaultStyles";
 

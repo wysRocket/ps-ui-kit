@@ -1,11 +1,11 @@
 import {isEqual} from "lodash";
 import {CSSProperties, default as React} from "react";
-import {TreeItem, TreeView} from "@material-ui/lab";
-import {Checkbox, Collapse, SvgIcon, SvgIconProps} from "@material-ui/core";
-import {TransitionProps} from "@material-ui/core/transitions";
+import {TreeItem, TreeView} from "@mui/lab";
+import {Checkbox, Collapse, SvgIcon, SvgIconProps} from "@mui/material";
+import {TransitionProps} from "@mui/material/transitions";
 import {useSpring, animated} from "react-spring";
-import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
-import CheckBoxIcon from "@material-ui/icons/CheckBox";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
 function MinusSquare(props: SvgIconProps) {
   return (

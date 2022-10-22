@@ -9,10 +9,10 @@ import {
   FormGroup,
   Paper,
   Popper
-} from "@material-ui/core";
-import FilterIcon from "@material-ui/icons/FilterList";
-import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
-import CheckBoxIcon from "@material-ui/icons/CheckBox";
+} from "@mui/material";
+import FilterIcon from "@mui/icons-material/FilterList";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
 export interface FilterItem {
   value: any;

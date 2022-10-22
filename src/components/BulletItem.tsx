@@ -1,4 +1,5 @@
-import {CSSProperties, default as React} from "react";
+import Box from "@mui/material/Box";
+import {Component, CSSProperties} from "react";
 
 interface IProps {
   style?: CSSProperties;
@@ -6,13 +7,27 @@ interface IProps {
   bulletColor?: string;
 }
 
-export default class BulletItem extends React.Component<IProps> {
+export default class BulletItem extends Component<IProps> {
   render() {
-    const style = this.props.style || {};
+    const {style, bulletColor, label} = this.props;
     return (
-      <div style={{...style, display: 'flex', position: 'relative', alignItems: 'center', height: 'auto'}}>
-        <span style={{fontSize: 30, paddingRight: 5, paddingBottom: 3, color: this.props.bulletColor || '#000000'}}>&bull;</span>{this.props.label}
-      </div>
+      <Box
+        sx={{
+          ...style,
+          display: "flex",
+          position: "relative",
+          alignItems: "center",
+          height: "auto"
+        }}
+      >
+        <Box
+          component="span"
+          sx={{fontSize: 30, paddingRight: 5, paddingBottom: 3, color: bulletColor || "#000000"}}
+        >
+          &bull;
+        </Box>
+        {label}
+      </Box>
     );
   }
 }

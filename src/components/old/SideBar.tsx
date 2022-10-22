@@ -1,20 +1,19 @@
-import * as React from "react";
-import {CSSProperties} from "react";
-import DefaultIcon from "@material-ui/icons/InsertPhoto";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import List from "@material-ui/core/List";
+import {Component, CSSProperties, FC, ReactNode} from "react";
+import DefaultIcon from "@mui/icons-material/InsertPhoto";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import List from "@mui/material/List";
 import Panel from "../Panel";
 import {Service} from "../../domain/Service";
 import IconPreview from "../IconPreview";
 import {Link} from "react-router-dom";
 import * as Styles from "../DefaultStyles";
-import {makeStyles} from "@material-ui/core/styles";
+import {makeStyles} from "@mui/styles";
 
 export interface SideBarItem {
   label: string;
-  icon?: (p: {style?: CSSProperties}) => React.ReactNode;
+  icon?: (p: {style?: CSSProperties}) => ReactNode;
   value: any;
   link: string;
   isExternalLink?: boolean;
@@ -45,24 +44,15 @@ interface ItemComponentProps {
   minimized?: boolean;
 }
 
-const ItemComponent: React.FC<ItemComponentProps> = (props) => {
-  const item = props.item;
+const ItemComponent: FC<ItemComponentProps> = ({item, minimized, selected, onClick}) => {
   const style: CSSProperties = {padding: Styles.Padding.XS};
-  const classes = useStyles()();
-  const onClick = () => {
-    const handler = props.onClick;
-    if (handler !== undefined) {
-      handler(props.item.value);
-    }
-  };
-  const renderText = () => {
-    if (props.minimized) {
-      return "";
-    }
-    return (
+  const classes = useStyles();
+
+  const renderText = () =>
+    !minimized ? (
       <ListItemText
         style={{
-          color: props.selected ? Styles.SideBar.Color.ACTIVE_TEXT : Styles.SideBar.Color.TEXT
+          color: selected ? Styles.SideBar.Color.ACTIVE_TEXT : Styles.SideBar.Color.TEXT
         }}
         primary={
           <span style={{fontWeight: 600, fontSize: Styles.SideBar.Size.FONT_SIZE}}>
@@ -70,14 +60,16 @@ const ItemComponent: React.FC<ItemComponentProps> = (props) => {
           </span>
         }
       />
+    ) : (
+      ""
     );
-  };
+
   const iconStyle: CSSProperties = {minWidth: 40};
-  if (props.minimized) {
+  if (minimized) {
     iconStyle.minWidth = 0;
   }
   const colorStyle = {
-    color: props.selected ? Styles.SideBar.Color.ACTIVE_ICON : Styles.SideBar.Color.ICON
+    color: selected ? Styles.SideBar.Color.ACTIVE_ICON : Styles.SideBar.Color.ICON
   };
   const cProps = item.isExternalLink
     ? {component: "a", href: item.link, target: "_blank"}
@@ -86,9 +78,9 @@ const ItemComponent: React.FC<ItemComponentProps> = (props) => {
     <ListItem
       button={true}
       style={style}
-      classes={{root: classes.root, selected: classes.selected}}
-      selected={props.selected}
-      onClick={onClick}
+      //    classes={{root: classes.root, selected: classes.selected}}
+      selected={selected}
+      onClick={() => onClick?.(item.value)}
       {...cProps}
     >
       <ListItemIcon style={iconStyle}>
@@ -101,11 +93,7 @@ const ItemComponent: React.FC<ItemComponentProps> = (props) => {
           borderRadius: 3*/
           }}
         >
-          {props.item.icon !== undefined ? (
-            props.item.icon({style: colorStyle})
-          ) : (
-            <DefaultIcon style={colorStyle} />
-          )}
+          {item.icon ? item.icon({style: colorStyle}) : <DefaultIcon style={colorStyle} />}
         </div>
       </ListItemIcon>
       {renderText()}
@@ -127,7 +115,7 @@ export interface IProps {
   zakaLabel?: string;
 }
 
-export default class SideBar extends React.Component<IProps> {
+export default class SideBar extends Component<IProps> {
   render() {
     const {items, selected, service} = this.props;
     return (

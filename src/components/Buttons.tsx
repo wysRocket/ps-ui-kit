@@ -1,7 +1,13 @@
 import {CSSProperties, FC, Component} from "react";
-import {Button, ClickAwayListener, Fade, IconButton, Paper, Popper} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
-import {PopperPlacementType} from "@material-ui/core/Popper/Popper";
+import {
+  Button,
+  ClickAwayListener,
+  Fade,
+  IconButton,
+  Paper,
+  Popper,
+  PopperPlacementType
+} from "@mui/material";
 
 import * as Styles from "./DefaultStyles";
 
@@ -22,21 +28,6 @@ const COMMON_STYLE: CSSProperties = {
   paddingRight: Styles.Padding.M
 };
 
-const useStyles = makeStyles({
-  /*root: {
-    ...COMMON_STYLE,
-    'backgroundColor': forcedBgColor || c.BG_COLOR,
-    'borderColor': c.BG_COLOR,
-    'color': c.COLOR,
-    '&:hover': {
-      backgroundColor: forcedBgColor || c.HOVERED_BG_COLOR,
-      borderColor: c.HOVERED_BG_COLOR,
-      color: c.HOVERED_COLOR
-    }
-  },*/
-  disabled: {opacity: 0.3}
-});
-
 const createStyle = (c: Styles.ButtonColors, style: CSSProperties): CSSProperties => {
   return {
     ...COMMON_STYLE,
@@ -54,12 +45,11 @@ export const ButtonsFactory = (
 ): FC<IProps> => {
   return (props) => {
     const s = props.style || {};
-    const classes = useStyles();
+
     return (
       <Button
         style={createStyle(c(), {...style, ...s})}
         variant={variant}
-        classes={{disabled: classes.disabled}}
         component={props.component}
         onClick={props.onClick}
         disabled={props.disabled}
@@ -156,7 +146,12 @@ export class IconButtonWithPopper extends Component<IIBWPProps> {
               </Fade>
             )}
           </Popper>
-          <IconButton style={style} disabled={this.props.disabled} onClick={this.onButtonClick}>
+          <IconButton
+            style={style}
+            disabled={this.props.disabled}
+            onClick={this.onButtonClick}
+            size="large"
+          >
             {this.props.children}
           </IconButton>
         </div>

@@ -1,10 +1,10 @@
 import {CSSProperties, default as React} from "react";
-import {ClickAwayListener, Fade, Paper, Popper} from "@material-ui/core";
+import {ClickAwayListener, Fade, Paper, Popper, PopperPlacementType} from "@mui/material";
 import ContentHeader from "./ContentHeader";
 import Filter from "./Filter";
 import {LabeledItem} from "../domain/Item";
 import {CheckBoxInGroup} from "./Forms";
-import {PopperPlacementType} from "@material-ui/core/Popper/Popper";
+
 import * as Buttons from "./Buttons";
 import * as Styles from "./DefaultStyles";
 import Panel from "./Panel";

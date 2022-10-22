@@ -2,8 +2,8 @@ import {CSSProperties, default as React} from "react";
 import * as Style from "./DefaultStyles";
 import {Attribute} from "../domain/Attribute";
 import * as SchemaDomain from "../domain/SchemaDomain";
-import {Accordion, AccordionDetails, AccordionSummary} from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import * as AttributeComponent from "./AttributeComponent";
 
 export interface AttributeFieldValue {

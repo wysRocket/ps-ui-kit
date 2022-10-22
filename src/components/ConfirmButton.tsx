@@ -1,7 +1,7 @@
 import {CSSProperties, default as React} from "react";
-import {Button, ClickAwayListener, Fade, List, ListItem, ListItemText, Paper, Popper} from "@material-ui/core";
-import ExpandIcon from '@material-ui/icons/ExpandMore';
-import CollapseIcon from '@material-ui/icons/ExpandLess';
+import {Button, ClickAwayListener, Fade, List, ListItem, ListItemText, Paper, Popper} from "@mui/material";
+import ExpandIcon from '@mui/icons-material/ExpandMore';
+import CollapseIcon from '@mui/icons-material/ExpandLess';
 import {Orange} from "./Buttons";
 import * as Styles from "./DefaultStyles";
 

@@ -1,8 +1,8 @@
 import {CSSProperties, Component} from "react";
 import Chart from "react-apexcharts";
-import {Card, CardContent, CardHeader} from "@material-ui/core";
+import {Card, CardContent, CardHeader} from "@mui/material";
 import {ButtonMenuItem, ButtonWithMenu} from "./ButtonWithMenu";
-import FilterIcon from "@material-ui/icons/FilterList";
+import FilterIcon from "@mui/icons-material/FilterList";
 import {HGroup} from "./Group";
 
 export interface DashboardChartData {

@@ -1,6 +1,4 @@
-import {makeStyles} from "@material-ui/core/styles";
-
-export const useStyles = makeStyles({
+export const styles = {
   headerDefaultWrapper: {
     height: 64,
     paddingLeft: 16,
@@ -32,4 +30,4 @@ export const useStyles = makeStyles({
     fontFamily:
       "Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif"
   }
-});
+};

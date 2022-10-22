@@ -1,7 +1,7 @@
 import {ReactNode} from "react";
 
 import {NavLink, NavLinkProps, useMatch} from "react-router-dom";
-import DefaultIcon from "@material-ui/icons/InsertPhoto";
+import DefaultIcon from "@mui/icons-material/InsertPhoto";
 
 import {useStyles} from "./styles";
 export interface SideBarItemProps extends NavLinkProps {

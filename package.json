@@ -1,7 +1,7 @@
 {
   "name": "@wysrocket/ps-ui-kit",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "@wysrocket:registry=https://npm.pkg.github.com"
   },
   "version": "0.3.4",
   "description": "ui-kit",

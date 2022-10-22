@@ -1,13 +1,16 @@
 {
-  "name": "frontend-common",
-  "version": "0.3.3",
-  "description": "",
+  "name": "@wysrocket/ps-ui-kit",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "version": "0.3.4",
+  "description": "ui-kit",
   "author": "hodkov",
   "license": "MIT",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "module": "dist/ps-ui-kit.es.js",
+  "main": "dist/ps-ui-kit.umd.js",
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha -r ts-node/register ./src/test/**/*.test.ts  --exit",

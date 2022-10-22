@@ -1,6 +1,6 @@
 import {ReactNode} from "react";
 
-import {NavLink, NavLinkProps, useRouteMatch} from "react-router-dom";
+import {NavLink, NavLinkProps, useMatch} from "react-router-dom";
 import DefaultIcon from "@mui/icons-material/InsertPhoto";
 
 import {useStyles} from "./styles";
@@ -18,7 +18,7 @@ const SideBarItem: React.FC<SideBarItemProps> = ({
   ...props
 }) => {
   const classes = useStyles();
-  const match = useRouteMatch(to as string);
+  const match = useMatch(to as string);
 
   return (
     <NavLink

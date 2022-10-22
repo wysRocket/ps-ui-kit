@@ -1,11 +1,12 @@
-import {useStyles} from "./styles";
+import useClasses from "utils/useClasses";
+import {styles} from "./styles";
 
 export interface SidebarFooterProps {
   logo?: string;
 }
 
 const SideBarFooter: React.FC<SidebarFooterProps> = ({logo}) => {
-  const classes = useStyles();
+  const classes = useClasses(styles);
 
   return (
     <div className={classes.footerWrapper}>

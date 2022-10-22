@@ -1,10 +1,11 @@
 import {FC} from "react";
 
-import Pagination from '@mui/material/Pagination';
+import Pagination from "@mui/material/Pagination";
 import {FormControl, NativeSelect, Box} from "@mui/material";
 import {v4 as uuidv4} from "uuid";
 
-import useStyles from "./styles";
+import {styles} from "./styles";
+import useClasses from "utils/useClasses";
 
 export interface IPagination {
   itemsPerPage: number;
@@ -24,7 +25,7 @@ const CustomPagination: FC<CustomPaginationProps> = ({
   ranges,
   setPagination
 }) => {
-  const classes = useStyles();
+  const classes = useClasses(styles);
 
   const numPages = Math.ceil(itemsTotal / itemsPerPage);
   const from = (currentPage - 1) * itemsPerPage + 1;

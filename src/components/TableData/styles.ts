@@ -1,6 +1,4 @@
-import makeStyles from '@mui/styles/makeStyles';
-
-export const useStyles = makeStyles({
+export const styles = {
   container: {
     border: "1px solid #dadcdd",
     borderRadius: 4,
@@ -17,4 +15,4 @@ export const useStyles = makeStyles({
   inactiveSortIcon: {
     opacity: 0.2
   }
-});
+};

@@ -1,6 +1,8 @@
 import DefaultIcon from "@mui/icons-material/InsertPhoto";
+import {FC} from "react";
+import useClasses from "utils/useClasses";
 
-import {useStyles} from "./styles";
+import {styles} from "./styles";
 
 export interface SidebarHeaderProps {
   userName: string;
@@ -8,8 +10,8 @@ export interface SidebarHeaderProps {
   isMinimized?: boolean;
 }
 
-const SideBarHeader: React.FC<SidebarHeaderProps> = ({userName, logo, isMinimized = false}) => {
-  const classes = useStyles();
+const SideBarHeader: FC<SidebarHeaderProps> = ({userName, logo, isMinimized = false}) => {
+  const classes = useClasses(styles);
 
   return (
     <div

@@ -1,6 +1,8 @@
 import {Tabs as BaseTabs, TabsProps as BaseTabsProps} from "@mui/material";
+import {FC} from "react";
+import useClasses from "utils/useClasses";
 
-import useStyles from "./styles";
+import {styles} from "./styles";
 
 export type TabsProps = Omit<BaseTabsProps, "onChange">;
 
@@ -8,8 +10,8 @@ export interface Props extends TabsProps {
   onChange?: (event: React.ChangeEvent<{}>, value: any) => void;
 }
 
-export const Tabs: React.FC<Props> = (props) => {
-  const classes = useStyles();
+export const Tabs: FC<Props> = (props) => {
+  const classes = useClasses(styles);
 
   return (
     <BaseTabs

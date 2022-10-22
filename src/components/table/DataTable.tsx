@@ -8,24 +8,25 @@ import {HTML5Backend} from "react-dnd-html5-backend";
 import DraggableRow from "./DraggableRow";
 import * as Styles from "../DefaultStyles";
 import {CSSProperties} from "react";
-import makeStyles from '@mui/styles/makeStyles';
-import {DndHacked} from "../DndHacked";
 
-const useStyles = makeStyles({
+import {DndHacked} from "../DndHacked";
+import useClasses from "utils/useClasses";
+
+const styles = {
   activeSortIcon: {
     opacity: 1
   },
   inactiveSortIcon: {
     opacity: 0.2
   }
-});
+};
 
 const SortableHeader: React.FC<{
   column: ColumnInfo;
   sort?: Sort;
   onSort?: (newSort: Sort) => void;
 }> = (props) => {
-  const classes = useStyles();
+  const classes = useClasses(styles);
   const column = props.column;
   if (!column.header) {
     return <div />;

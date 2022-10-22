@@ -1,6 +1,4 @@
-import makeStyles from '@mui/styles/makeStyles';
-
-export const useStyles = makeStyles({
+export const styles = {
   sideBarWrapper: {
     width: "200px",
     height: "100vh",
@@ -14,4 +12,4 @@ export const useStyles = makeStyles({
   sideBarWrapperMinimized: {
     width: "56px"
   }
-});
+};

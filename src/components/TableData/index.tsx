@@ -1,25 +1,18 @@
-import {FC, useState} from "react";
+import {Dispatch, FC, SetStateAction, useState} from "react";
 import {v4 as uuidv4} from "uuid";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  TableSortLabel,
-  Box
-} from "@mui/material";
+import {Table, TableBody, TableCell, TableHead, TableRow, TableSortLabel, Box} from "@mui/material";
 import ArrowDropDown from "@mui/icons-material/ArrowDropDown";
 
 import CustomPagination, {IPagination} from "../CustomPagination";
 import {Data, HeaderColumn, SortOrder} from "./types";
-import {useStyles} from "./styles";
+import {styles} from "./styles";
+import useClasses from "utils/useClasses";
 
 export interface TableProps {
   data: Data[];
   headerColumns: HeaderColumn[];
   pagination: IPagination;
-  setPagination: React.Dispatch<React.SetStateAction<IPagination>>;
+  setPagination: Dispatch<SetStateAction<IPagination>>;
   sortHandler: (columnName: string, direction: SortOrder) => void;
 }
 
@@ -30,7 +23,7 @@ const TableData: FC<TableProps> = ({
   sortHandler,
   setPagination
 }) => {
-  const classes = useStyles();
+  const classes = useClasses(styles);
   const [sort, setSort] = useState({
     by: "",
     order: SortOrder.DESC

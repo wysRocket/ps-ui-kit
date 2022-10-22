@@ -5,7 +5,8 @@ import SideBarItem, {SideBarItemProps} from "../SideBarItem";
 import SideBarHeader from "../SideBarHeader";
 import SideBarFooter from "../SideBarFooter";
 
-import {useStyles} from "./styles";
+import {styles} from "./styles";
+import useClasses from "utils/useClasses";
 
 export interface ISideBar {
   items: SideBarItemProps[];
@@ -16,7 +17,7 @@ export interface ISideBar {
 }
 
 const SideBar: FC<ISideBar> = ({items, serviceIdentity, serviceLogo, logo, minimized = false}) => {
-  const classes = useStyles();
+  const classes = useClasses(styles);
   return (
     <div
       className={`${classes.sideBarWrapper} ${minimized ? classes.sideBarWrapperMinimized : ""}`}

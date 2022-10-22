@@ -22,6 +22,13 @@ const theme = createTheme({
           borderRadius: 4
         }
       }
+    },
+    MuiButton: {
+      styleOverrides: {
+        disabled: {
+          opacity: 0.3
+        }
+      }
     }
   }
 });

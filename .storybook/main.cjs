@@ -1,5 +1,3 @@
-const {mergeConfig} = require("vite");
-
 module.exports = {
   core: {builder: "@storybook/builder-vite"},
   stories: ["../src/**/*.stories.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
@@ -9,9 +7,9 @@ module.exports = {
     "@storybook/addon-interactions"
   ],
   framework: "@storybook/react",
-  async viteFinal(config: any) {
-    // Add your configuration here
 
+  async viteFinal(config) {
+    // customize the Vite config here
     return config;
   }
 };

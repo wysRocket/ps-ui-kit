@@ -12,23 +12,9 @@ export default defineConfig({
       fileName: (format) => `ps-ui-kit.${format}.js`
     },
     rollupOptions: {
-      // externalize deps that shouldn't be bundled
-      // into your library
-      external: [""],
-      output: {
-        // Provide global variables to use in the UMD build
-        // for externalized deps
-        globals: {react: "React"}
-      }
+      external: ["react", "react-dom", "@storybook/client-api"],
+      output: {globals: {react: "React"}}
     }
   },
-  plugins: [
-    react(),
-    tsconfigPaths(),
-    svgr({
-      svgrOptions: {
-        icon: true
-      }
-    })
-  ]
+  plugins: [react(), tsconfigPaths(), svgr({svgrOptions: {icon: true}})]
 });

@@ -3,14 +3,17 @@
   "publishConfig": {
     "registry": "@wysrocket:registry=https://npm.pkg.github.com"
   },
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "ui-kit",
   "author": "hodkov",
   "license": "MIT",
   "module": "dist/ps-ui-kit.es.js",
   "main": "dist/ps-ui-kit.umd.js",
-  "engines": {
-    "node": ">=14"
+  "exports": {
+    ".": {
+      "import": "./dist/ps-ui-kit.es.js",
+      "require": "./dist/ps-ui-kit.umd.js"
+    }
   },
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha -r ts-node/register ./src/test/**/*.test.ts  --exit",
@@ -19,8 +22,8 @@
     "build": "npm run lint && tsc --outDir dist",
     "prepare": "vite build",
     "preview": "vite preview",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
     "@emotion/css": "^11.10.0",
@@ -40,10 +43,10 @@
   },
   "peerDependencies": {
     "lodash": "^4.17.15",
-    "react": "^18.2.0",
+    "react": "^17.0.2",
     "react-dnd": "^15.1.2",
     "react-dnd-html5-backend": "^15.1.2",
-    "react-dom": "^18.2.0",
+    "react-dom": "^17.0.2",
     "react-redux": "^7.1.3",
     "react-router-dom": "^6.3.0",
     "redux": "^4.2.0",
@@ -53,19 +56,23 @@
     "@babel/core": "^7.18.13",
     "@mantine/core": "^5.6.1",
     "@mantine/hooks": "^5.6.1",
-    "@storybook/addon-actions": "^6.4.1",
-    "@storybook/addon-essentials": "^6.4.1",
-    "@storybook/addon-interactions": "^6.4.1",
-    "@storybook/addon-links": "^6.4.1",
+    "@storybook/addon-actions": "^6.5.10",
+    "@storybook/addon-backgrounds": "^6.5.12",
+    "@storybook/addon-essentials": "^6.5.10",
+    "@storybook/addon-interactions": "^6.5.10",
+    "@storybook/addon-links": "^6.5.10",
+    "@storybook/addon-measure": "^6.5.12",
+    "@storybook/addon-outline": "^6.5.12",
     "@storybook/builder-vite": "^0.2.4",
-    "@storybook/react": "^6.4.1",
+    "@storybook/client-api": "^6.5.12",
+    "@storybook/react": "^6.5.10",
     "@storybook/testing-library": "^0.0.13",
     "@types/dateformat": "^3.0.1",
     "@types/jest": "^26.0.24",
     "@types/lodash": "^4.14.182",
     "@types/node": "^16.0.0",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
+    "@types/react": "^17.0.13",
+    "@types/react-dom": "^17.0.8",
     "@types/react-redux": "^7.1.17",
     "@types/react-router-dom": "^5.3.3",
     "@types/uuid": "^8.3.4",
@@ -79,10 +86,10 @@
     "eslint-plugin-only-warn": "^1.0.3",
     "eslint-plugin-prettier": "^4.2.1",
     "lodash": "^4.17.15",
-    "react": "^18.2.0",
-    "react-dnd": "^16.0.1",
-    "react-dnd-html5-backend": "^16.0.1",
-    "react-dom": "^18.2.0",
+    "react": "^17.0.2",
+    "react-dnd": "^15.1.2",
+    "react-dnd-html5-backend": "^15.1.2",
+    "react-dom": "^17.0.2",
     "react-router-dom": "^6.4.2",
     "redux-thunk": "^2.3.0",
     "ts-node": "^10.9.1",
